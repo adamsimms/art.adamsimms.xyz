@@ -5,10 +5,16 @@ import '../styles/global.css';
 interface Props {
 	title?: string;
 	description?: string;
+	variant?: 'default' | 'home';
 }
 
-const { title = 'Adam Simms', description = 'Photography and art by Adam Simms' } = Astro.props;
+const {
+	title = 'Adam Simms',
+	description = 'Photography and art by Adam Simms',
+	variant = 'default',
+} = Astro.props;
 const pageTitle = title === 'Adam Simms' ? title : `${title} — Adam Simms`;
+const isHome = variant === 'home';
 ---
 
 <!doctype html>
@@ -20,14 +26,26 @@ const pageTitle = title === 'Adam Simms' ? title : `${title} — Adam Simms`;
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://media.adamsimms.xyz" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+			rel="stylesheet"
+		/>
 		<title>{pageTitle}</title>
 		<!-- umami-analytics:start -->
-		<script defer src="https://cloud.umami.is/script.js" data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33" data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz" data-do-not-track="true"></script>
-				<!-- umami-analytics:end -->
+		<script
+			defer
+			src="https://cloud.umami.is/script.js"
+			data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33"
+			data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz"
+			data-do-not-track="true"></script>
+		<!-- umami-analytics:end -->
 	</head>
-	<body>
+	<body class:list={[isHome && 'body--home']}>
 		<Nav />
-		<main>
+		<main class:list={[isHome && 'main--home']}>
 			<slot />
 		</main>
 	</body>

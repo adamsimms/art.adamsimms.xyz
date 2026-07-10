@@ -5,6 +5,8 @@
 	--bg: #fafafa;
 	--border: #e5e5e5;
 	--link: #1a1a1a;
+	--font-display: 'Google Sans Flex', system-ui, sans-serif;
+	--font-body: Inter, system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,7 +25,8 @@
 
 body {
 	margin: 0;
-	font-family: Georgia, 'Times New Roman', serif;
+	font-family: var(--font-body);
+	font-optical-sizing: auto;
 	line-height: 1.6;
 	color: var(--text);
 	background: var(--bg);
@@ -50,10 +53,12 @@ main {
 }
 
 .site-title {
+	font-family: var(--font-display);
 	font-size: 1.125rem;
-	font-weight: 600;
+	font-weight: 400;
 	text-decoration: none;
-	letter-spacing: 0.02em;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
 }
 
 .site-header nav ul {
@@ -66,9 +71,61 @@ main {
 	font-size: 0.95rem;
 }
 
+.site-header nav a {
+	text-decoration: none;
+}
+
 .site-header a[aria-current='page'] {
 	text-decoration: underline;
 	text-underline-offset: 0.2em;
+}
+
+/* Home — same top nav, overlaid on full-bleed hero */
+.body--home {
+	background: #000;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+.body--home .site-header {
+	position: fixed;
+	inset: 0 0 auto;
+	z-index: 10;
+	border-bottom: none;
+	background: transparent;
+	color: #f2f2f2;
+}
+
+.body--home .site-header a {
+	color: #f2f2f2;
+}
+
+.main--home {
+	max-width: none;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+}
+
+.home-hero {
+	position: relative;
+	min-height: 100vh;
+	min-height: 100dvh;
+	background: #000;
+}
+
+.home-hero__media,
+.home-hero__media img {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.home-hero__media img {
+	object-fit: cover;
+	object-position: center;
 }
 
 .page-header {
@@ -77,8 +134,12 @@ main {
 
 .page-header h1 {
 	margin: 0 0 0.5rem;
-	font-size: clamp(1.75rem, 4vw, 2.5rem);
-	font-weight: 500;
+	font-family: var(--font-display);
+	font-size: clamp(2.75rem, 9vw, 5rem);
+	font-weight: 200;
+	font-optical-sizing: auto;
+	letter-spacing: -0.03em;
+	line-height: 1.05;
 }
 
 .lead,
@@ -161,4 +222,188 @@ main {
 
 .prose p {
 	margin: 0 0 1rem;
+}
+
+.prose h2 {
+	margin: 2rem 0 0.75rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.prose h2:first-of-type {
+	margin-top: 0;
+}
+
+.cv ul {
+	margin: 0.25rem 0 1rem 1.5rem;
+	padding: 0;
+}
+
+.cv li {
+	margin: 0.15rem 0;
+}
+
+.cv p {
+	margin-bottom: 0.75rem;
+}
+
+.about {
+	max-width: 48rem;
+}
+
+.about-statement {
+	margin: 0 0 2rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid var(--border);
+	font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+	font-style: italic;
+	font-weight: 600;
+	line-height: 1.55;
+}
+
+.about-bio {
+	max-width: none;
+	overflow: auto;
+}
+
+.about-portrait {
+	float: right;
+	width: min(48%, 18rem);
+	margin: 0 0 1.25rem 1.5rem;
+}
+
+.about-portrait img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.contact {
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--border);
+	max-width: 28rem;
+}
+
+.contact h2 {
+	margin: 0 0 1.25rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.contact-form {
+	display: grid;
+	gap: 1rem;
+}
+
+.contact-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.contact-form label {
+	display: grid;
+	gap: 0.35rem;
+}
+
+.contact-form label span {
+	font-size: 0.85rem;
+	color: var(--muted);
+}
+
+.contact-form input,
+.contact-form textarea {
+	width: 100%;
+	padding: 0.6rem 0.7rem;
+	border: 1px solid var(--border);
+	border-radius: 0;
+	background: transparent;
+	color: var(--text);
+	font: inherit;
+}
+
+.contact-form textarea {
+	resize: vertical;
+	min-height: 8rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+	outline: 1px solid var(--text);
+	outline-offset: 1px;
+}
+
+.contact-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
+.contact-form button {
+	padding: 0.55rem 1.25rem;
+	border: 1px solid var(--text);
+	background: var(--text);
+	color: var(--bg);
+	font: inherit;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.contact-form button:hover {
+	opacity: 0.88;
+}
+
+.contact-form button:disabled {
+	opacity: 0.55;
+	cursor: wait;
+}
+
+.contact-status {
+	margin: 0;
+	font-size: 0.9rem;
+	color: var(--muted);
+}
+
+.contact-status[data-state='success'] {
+	color: var(--text);
+}
+
+.contact-status[data-state='error'] {
+	color: #b33;
+}
+
+.contact-honey {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+@media (max-width: 40rem) {
+	.about-portrait {
+		float: none;
+		width: 100%;
+		max-width: 22rem;
+		margin: 0 0 1.5rem;
+	}
+
+	.contact-row {
+		grid-template-columns: 1fr;
+	}
+
+	.contact-actions {
+		justify-content: stretch;
+	}
+
+	.contact-form button {
+		width: 100%;
+	}
 }

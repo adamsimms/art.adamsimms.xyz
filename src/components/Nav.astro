@@ -1,11 +1,12 @@
 ---
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+
 const links = [
-	{ href: '/', label: 'Work' },
+	{ href: '/work', label: 'Work' },
 	{ href: '/about', label: 'About' },
-	{ href: '/resume', label: 'Resume' },
+	{ href: '/cv', label: 'CV' },
 	{ href: '/blog', label: 'Blog' },
 ];
-const current = Astro.url.pathname;
 ---
 
 <header class="site-header">
