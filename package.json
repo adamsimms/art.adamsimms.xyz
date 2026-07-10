@@ -17,8 +17,8 @@
     "migrate:validate": "node scripts/validate-migration.mjs",
     "migrate": "npm run migrate:scrape && npm run migrate:content && npm run migrate:images && npm run migrate:validate",
     "analytics:sync": "node scripts/sync-analytics.mjs",
-    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=adamsimms-xyz-art",
-    "deploy:preview": "npm run build && npx wrangler pages deploy dist --project-name=adamsimms-xyz-art --branch=preview",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz",
+    "deploy:preview": "npm run build && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz --branch=preview",
     "upload:media": "node scripts/upload-r2.mjs"
   },
   "repository": {

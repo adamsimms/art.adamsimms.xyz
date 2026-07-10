@@ -5,15 +5,15 @@
 | Resource | Name / value |
 | --- | --- |
 | GitHub repo | `adamsimms/art.adamsimms.xyz` |
-| Pages project | `adamsimms-xyz-art` |
+| Pages project | `art-adamsimms-xyz` |
 | Custom domain | `art.adamsimms.xyz` |
-| R2 bucket | `adamsimms-xyz-art` |
+| R2 bucket | `art-adamsimms-xyz` |
 | R2 public domain | `media.adamsimms.xyz` |
 
 ## Initial setup
 
 1. Create the Pages project and connect the `adamsimms/art.adamsimms.xyz` GitHub repo.
-2. Create R2 bucket `adamsimms-xyz-art` and enable public access at `media.adamsimms.xyz`.
+2. Create R2 bucket `art-adamsimms-xyz` and enable public access at `media.adamsimms.xyz`.
 3. Add DNS CNAME records:
    - `art` → Pages project
    - `media` → R2 public bucket domain

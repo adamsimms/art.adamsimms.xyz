@@ -37,7 +37,7 @@ async function main() {
 		const contentType = CONTENT_TYPES[ext] || 'application/octet-stream';
 		console.log(`Uploading ${key} (${contentType})...`);
 		execSync(
-			`npx wrangler r2 object put adamsimms-xyz-art/${key} --remote --file="${file}" --content-type=${contentType}`,
+			`npx wrangler r2 object put art-adamsimms-xyz/${key} --remote --file="${file}" --content-type=${contentType}`,
 			{ stdio: 'inherit' },
 		);
 	}
