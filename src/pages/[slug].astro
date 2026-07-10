@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkGallery from '../components/WorkGallery.astro';
+import { getCollection } from 'astro:content';
+
+const galleries = import.meta.glob('../content/work/*.json', { eager: true, import: 'default' });
+
+export async function getStaticPaths() {
+	const work = await getCollection('work');
+	return work.map((entry) => ({
+		params: { slug: entry.data.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const gallery = galleries[`../content/work/${entry.data.galleryFile}`];
+if (!gallery) throw new Error(`Gallery not found: ${entry.data.galleryFile}`);
+---
+
+<Base title={entry.data.title} description={entry.data.description}>
+	<article>
+		<header class="page-header">
+			<h1>{entry.data.title}</h1>
+			{entry.data.description ? <p class="lead">{entry.data.description}</p> : null}
+		</header>
+
+		{entry.data.statement ? <div class="statement prose"><p>{entry.data.statement}</p></div> : null}
+
+		<WorkGallery images={gallery.images} />
+	</article>
+</Base>

@@ -1,0 +1,164 @@
+:root {
+	color-scheme: light dark;
+	--text: #1a1a1a;
+	--muted: #666;
+	--bg: #fafafa;
+	--border: #e5e5e5;
+	--link: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--text: #f2f2f2;
+		--muted: #aaa;
+		--bg: #111;
+		--border: #333;
+		--link: #f2f2f2;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Georgia, 'Times New Roman', serif;
+	line-height: 1.6;
+	color: var(--text);
+	background: var(--bg);
+}
+
+a {
+	color: var(--link);
+}
+
+main {
+	max-width: 72rem;
+	margin: 0 auto;
+	padding: 2rem 1.5rem 4rem;
+}
+
+.site-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	text-decoration: none;
+	letter-spacing: 0.02em;
+}
+
+.site-header nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.95rem;
+}
+
+.site-header a[aria-current='page'] {
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+.page-header {
+	margin-bottom: 2rem;
+}
+
+.page-header h1 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+	font-weight: 500;
+}
+
+.lead,
+.statement {
+	color: var(--muted);
+	max-width: 42rem;
+}
+
+.work-index {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.work-index a {
+	display: block;
+	text-decoration: none;
+}
+
+.work-index img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: var(--border);
+}
+
+.work-index span {
+	display: block;
+	margin-top: 0.5rem;
+}
+
+.gallery {
+	display: grid;
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.gallery img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.gallery figcaption {
+	margin-top: 0.5rem;
+	font-size: 0.9rem;
+	color: var(--muted);
+}
+
+.blog-list {
+	list-style: none;
+	padding: 0;
+	margin: 2rem 0 0;
+}
+
+.blog-list li {
+	padding: 1rem 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.blog-list a {
+	text-decoration: none;
+	font-size: 1.125rem;
+}
+
+.blog-list time {
+	display: block;
+	margin-top: 0.25rem;
+	font-size: 0.875rem;
+	color: var(--muted);
+}
+
+.prose {
+	max-width: 42rem;
+}
+
+.prose p {
+	margin: 0 0 1rem;
+}

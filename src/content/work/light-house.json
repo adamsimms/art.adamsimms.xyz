@@ -1,0 +1,11 @@
+{
+  "images": [
+    {
+      "src": "https://media.adamsimms.xyz/work/light-house/01.avif",
+      "fallback": "https://media.adamsimms.xyz/work/light-house/01.jpg",
+      "alt": "Light House",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728043530390-5K7L1XWZYA2XGGJXGI0V/light-house-preview.png"
+    }
+  ]
+}

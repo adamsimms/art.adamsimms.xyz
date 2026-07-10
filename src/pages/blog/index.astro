@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Base title="Blog" description="News and writing by Adam Simms">
+	<header class="page-header">
+		<h1>Blog</h1>
+	</header>
+
+	<ul class="blog-list">
+		{
+			posts.map((post) => (
+				<li>
+					<a href={`/blog/${post.data.slug}`}>{post.data.title}</a>
+					<time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-CA')}</time>
+				</li>
+			))
+		}
+	</ul>
+</Base>

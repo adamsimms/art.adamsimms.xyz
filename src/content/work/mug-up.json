@@ -1,0 +1,60 @@
+{
+  "images": [
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/01.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/01.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948712670-HBQDPYRJUAV7EK659NI1/L1010467.00_00_32_20.Still001.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/02.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/02.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948714488-QD4FTZQDE7OYMQOM5TGW/L1010467.00_00_53_23.Still002.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/03.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/03.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948729467-W3W0SH7UHMQ4DADHJ5OS/L1010467.00_02_24_12.Still004.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/04.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/04.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948731454-VJRCQTK0YXBI1K0GMDDW/L1010467.00_02_32_02.Still005.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/05.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/05.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948745567-F3ZAANNSN6MBGVXUJP2O/L1010467.00_02_38_26.Still006.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/06.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/06.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948745751-9SFS9JCP16U9WAZEW9D8/L1010467.00_07_23_27.Still007.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/07.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/07.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948753709-KLO8FI8CMF2ZBYHQXLIA/L1010467.00_07_33_25.Still008.png"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/mug-up/08.avif",
+      "fallback": "https://media.adamsimms.xyz/work/mug-up/08.jpg",
+      "alt": "Mug Up, Little Bay Islands",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545949051515-U9JFKFDD0Y4YRNNWFFGE/image-asset.jpeg"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+name = "adamsimms-xyz-art"
+compatibility_date = "2025-07-09"
+pages_build_output_dir = "dist"
+
+[[r2_buckets]]
+binding = "PORTFOLIO_MEDIA"
+bucket_name = "adamsimms-xyz-art"

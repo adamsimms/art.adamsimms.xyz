@@ -1,0 +1,33 @@
+---
+interface GalleryImage {
+	src: string;
+	fallback?: string;
+	alt?: string;
+	caption?: string;
+}
+
+interface Props {
+	images: GalleryImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="gallery">
+	{
+		images.map((image) => (
+			<figure>
+				<picture>
+					<source srcset={image.src} type="image/avif" />
+					<img
+						src={image.fallback || image.src}
+						alt={image.alt || ''}
+						loading="lazy"
+						decoding="async"
+					/>
+				</picture>
+				{image.caption ? <figcaption>{image.caption}</figcaption> : null}
+			</figure>
+		))
+	}
+</section>

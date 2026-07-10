@@ -1,0 +1,74 @@
+{
+  "images": [
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/01.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/01.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501662826-COLCEPTJQZTW2GB8IPFR/INTERIOR-1-STRAIGHT-DAYLIGHT-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/02.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/02.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501663922-Y8NQXLI2W1899K3CDFP4/INTERIOR-2-DAYLIGHT-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/03.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/03.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501665046-PU0JVHYYBMLJL6AHA5X5/INTERIOR-DETAIL-1-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/04.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/04.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501665505-WM2EBMX6D5RZ2HEA6RQU/INTERIOR-DETAIL-2-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/05.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/05.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501667650-2YIUGYGY57QETGFAJQ1Q/INTERIOR-DETAIL-5-02.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/06.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/06.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501667833-KN6TE3B152TVCDD3PMXJ/INTERIOR-DETAIL-6-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/07.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/07.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501666695-PU40K5XWWZ1AVKJ3CVI6/INTERIOR-DETAIL-4-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/08.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/08.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501664545-ZBCO3XEVSCZ2CCHI9A5S/INTERIOR-3-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/09.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/09.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501666335-ET5HFQBEQBL5D98C31E3/INTERIOR-DETAIL-3-01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/cabin/10.avif",
+      "fallback": "https://media.adamsimms.xyz/work/cabin/10.jpg",
+      "alt": "Cabin",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501662463-E350ZY0W8OAQ3UE1E97A/EXTERIOR-1-01.jpg"
+    }
+  ]
+}

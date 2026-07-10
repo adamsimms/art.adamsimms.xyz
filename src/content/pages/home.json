@@ -1,0 +1,58 @@
+{
+  "workLinks": [
+    {
+      "slug": "pinchards-island",
+      "title": "Pinchard's Island",
+      "href": "/pinchards-island",
+      "order": 6
+    },
+    {
+      "slug": "adrift",
+      "title": "Adrift",
+      "href": "/adrift",
+      "order": 12
+    },
+    {
+      "slug": "light-house",
+      "title": "Light House",
+      "href": "/light-house",
+      "order": 11
+    },
+    {
+      "slug": "mug-up",
+      "title": "Mug Up",
+      "href": "/mug-up",
+      "order": 10
+    },
+    {
+      "slug": "cabin",
+      "title": "Cabin",
+      "href": "/cabin",
+      "order": 9
+    },
+    {
+      "slug": "cloudberry",
+      "title": "Cloudberry",
+      "href": "/cloudberry",
+      "order": 8
+    },
+    {
+      "slug": "driftwood",
+      "title": "Driftwood",
+      "href": "/driftwood",
+      "order": 7
+    },
+    {
+      "slug": "resettlement",
+      "title": "Resettlement",
+      "href": "/resettlement",
+      "order": 5
+    },
+    {
+      "slug": "sublime",
+      "title": "Sublime",
+      "href": "/sublime",
+      "order": 1
+    }
+  ]
+}

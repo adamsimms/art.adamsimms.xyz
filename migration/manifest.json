@@ -1,0 +1,1698 @@
+{
+  "generatedAt": "2026-07-10T12:17:30.604Z",
+  "mediaBase": "https://media.adamsimms.xyz",
+  "formats": [
+    "avif",
+    "jpg"
+  ],
+  "work": {
+    "sublime": {
+      "imageCount": 14,
+      "expectedCount": 14,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358014159507-6T8AASU3JFR0P6AFU4XZ/01.jpg",
+          "avif": {
+            "path": "work/sublime/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/01.avif",
+            "bytes": 172038
+          },
+          "jpg": {
+            "path": "work/sublime/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/01.jpg",
+            "bytes": 191653
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358020196193-EF1UC5KFPLF5DUSGI782/00.jpg",
+          "avif": {
+            "path": "work/sublime/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/02.avif",
+            "bytes": 79057
+          },
+          "jpg": {
+            "path": "work/sublime/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/02.jpg",
+            "bytes": 111045
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358017121832-2NCV8QVLCWL2KAI2TDH6/03.jpg",
+          "avif": {
+            "path": "work/sublime/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/03.avif",
+            "bytes": 77502
+          },
+          "jpg": {
+            "path": "work/sublime/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/03.jpg",
+            "bytes": 97852
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358020277974-ZID9J5GTPAJUNLUK9MEV/04.jpg",
+          "avif": {
+            "path": "work/sublime/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/04.avif",
+            "bytes": 40319
+          },
+          "jpg": {
+            "path": "work/sublime/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/04.jpg",
+            "bytes": 45873
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358018981480-UVCUCQLQLQELOIVBLZPA/08.jpg",
+          "avif": {
+            "path": "work/sublime/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/05.avif",
+            "bytes": 129943
+          },
+          "jpg": {
+            "path": "work/sublime/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/05.jpg",
+            "bytes": 148351
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358017448235-4O0ZOYWNPQO8XHASHWDH/07.jpeg",
+          "avif": {
+            "path": "work/sublime/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/06.avif",
+            "bytes": 123483
+          },
+          "jpg": {
+            "path": "work/sublime/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/06.jpg",
+            "bytes": 137193
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358017333870-S132H7EB9DXI8YWHRH7M/02.jpg",
+          "avif": {
+            "path": "work/sublime/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/07.avif",
+            "bytes": 103801
+          },
+          "jpg": {
+            "path": "work/sublime/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/07.jpg",
+            "bytes": 124970
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357426781854-UTB3S3OGQOKJ0OWQ7034/13.jpg",
+          "avif": {
+            "path": "work/sublime/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/08.avif",
+            "bytes": 48642
+          },
+          "jpg": {
+            "path": "work/sublime/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/08.jpg",
+            "bytes": 69851
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358017877466-PXKQ6TRP1AXWE8PKNYAM/09.jpg",
+          "avif": {
+            "path": "work/sublime/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/09.avif",
+            "bytes": 147764
+          },
+          "jpg": {
+            "path": "work/sublime/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/09.jpg",
+            "bytes": 171744
+          }
+        },
+        {
+          "file": "10",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357426775051-YY26VWO4M1VV2VMNJ2EC/15.jpg",
+          "avif": {
+            "path": "work/sublime/10.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/10.avif",
+            "bytes": 136846
+          },
+          "jpg": {
+            "path": "work/sublime/10.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/10.jpg",
+            "bytes": 141332
+          }
+        },
+        {
+          "file": "11",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357426742220-LBKRFPLGEQ4C0K9LNDJP/12.jpg",
+          "avif": {
+            "path": "work/sublime/11.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/11.avif",
+            "bytes": 252742
+          },
+          "jpg": {
+            "path": "work/sublime/11.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/11.jpg",
+            "bytes": 293472
+          }
+        },
+        {
+          "file": "12",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358018850978-PWVV82NDCZJ6PUFTGW93/02.jpg",
+          "avif": {
+            "path": "work/sublime/12.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/12.avif",
+            "bytes": 155084
+          },
+          "jpg": {
+            "path": "work/sublime/12.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/12.jpg",
+            "bytes": 179765
+          }
+        },
+        {
+          "file": "13",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357426727708-MRHXSZ8DGOCNEWQZ26SO/11.jpg",
+          "avif": {
+            "path": "work/sublime/13.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/13.avif",
+            "bytes": 108348
+          },
+          "jpg": {
+            "path": "work/sublime/13.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/13.jpg",
+            "bytes": 141056
+          }
+        },
+        {
+          "file": "14",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358018631120-XBCQNSX4DT10DSRBP41A/10.jpg",
+          "avif": {
+            "path": "work/sublime/14.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/14.avif",
+            "bytes": 211790
+          },
+          "jpg": {
+            "path": "work/sublime/14.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/sublime/14.jpg",
+            "bytes": 236083
+          }
+        }
+      ]
+    },
+    "washed-up": {
+      "imageCount": 9,
+      "expectedCount": 9,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249871411-53O3QST8YKTDB6WDM7B3/01.jpg",
+          "avif": {
+            "path": "work/washed-up/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/01.avif",
+            "bytes": 76413
+          },
+          "jpg": {
+            "path": "work/washed-up/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/01.jpg",
+            "bytes": 92051
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249873145-ADUY7H86RBUBGTWROT7B/02.jpg",
+          "avif": {
+            "path": "work/washed-up/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/02.avif",
+            "bytes": 45597
+          },
+          "jpg": {
+            "path": "work/washed-up/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/02.jpg",
+            "bytes": 57775
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249875342-1VBBE2T84HC6GEB3RPDL/03.jpg",
+          "avif": {
+            "path": "work/washed-up/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/03.avif",
+            "bytes": 59329
+          },
+          "jpg": {
+            "path": "work/washed-up/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/03.jpg",
+            "bytes": 72493
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249879379-HGEXGT99TGDGM4A8B9PJ/05.jpg",
+          "avif": {
+            "path": "work/washed-up/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/04.avif",
+            "bytes": 61928
+          },
+          "jpg": {
+            "path": "work/washed-up/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/04.jpg",
+            "bytes": 69979
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249879427-FU8RRJQONW9W4027VAFL/06.jpg",
+          "avif": {
+            "path": "work/washed-up/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/05.avif",
+            "bytes": 33592
+          },
+          "jpg": {
+            "path": "work/washed-up/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/05.jpg",
+            "bytes": 48139
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249882555-HJQMIVQ1SVF47SLJQXSJ/07.jpg",
+          "avif": {
+            "path": "work/washed-up/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/06.avif",
+            "bytes": 61334
+          },
+          "jpg": {
+            "path": "work/washed-up/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/06.jpg",
+            "bytes": 74065
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249884048-R6FFWWY4DPGKPYV7V8AC/08.jpg",
+          "avif": {
+            "path": "work/washed-up/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/07.avif",
+            "bytes": 65494
+          },
+          "jpg": {
+            "path": "work/washed-up/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/07.jpg",
+            "bytes": 74033
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249886416-KRNNJU7V81RA2BI1RP8R/09.jpg",
+          "avif": {
+            "path": "work/washed-up/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/08.avif",
+            "bytes": 32536
+          },
+          "jpg": {
+            "path": "work/washed-up/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/08.jpg",
+            "bytes": 52533
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249887375-OGPEJNCWPOUX6I08IB99/10.jpg",
+          "avif": {
+            "path": "work/washed-up/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/09.avif",
+            "bytes": 58346
+          },
+          "jpg": {
+            "path": "work/washed-up/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/washed-up/09.jpg",
+            "bytes": 66748
+          }
+        }
+      ]
+    },
+    "from-to": {
+      "imageCount": 5,
+      "expectedCount": 5,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357270721247-Z8G7P7XEHWAX8B9NQL6U/01.jpeg",
+          "avif": {
+            "path": "work/from-to/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/01.avif",
+            "bytes": 232950
+          },
+          "jpg": {
+            "path": "work/from-to/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/01.jpg",
+            "bytes": 281164
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357270694885-KHC38QQ8NOXF04OMR96M/02.jpeg",
+          "avif": {
+            "path": "work/from-to/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/02.avif",
+            "bytes": 216554
+          },
+          "jpg": {
+            "path": "work/from-to/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/02.jpg",
+            "bytes": 306249
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357270890629-KKMKT06RGWS07B82WQOY/03.jpeg",
+          "avif": {
+            "path": "work/from-to/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/03.avif",
+            "bytes": 197314
+          },
+          "jpg": {
+            "path": "work/from-to/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/03.jpg",
+            "bytes": 262763
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357270841312-E65KJK1RENB6QTN9SSF2/04.jpeg",
+          "avif": {
+            "path": "work/from-to/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/04.avif",
+            "bytes": 235573
+          },
+          "jpg": {
+            "path": "work/from-to/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/04.jpg",
+            "bytes": 303691
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357271003912-YJOTFUV7TYI8FXXZABDL/05.jpeg",
+          "avif": {
+            "path": "work/from-to/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/05.avif",
+            "bytes": 363990
+          },
+          "jpg": {
+            "path": "work/from-to/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/from-to/05.jpg",
+            "bytes": 445269
+          }
+        }
+      ]
+    },
+    "newfoundland": {
+      "imageCount": 16,
+      "expectedCount": 16,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358024290694-Q2JD4Y7X3RHGD0RWBP0P/02.jpg",
+          "avif": {
+            "path": "work/newfoundland/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/01.avif",
+            "bytes": 219447
+          },
+          "jpg": {
+            "path": "work/newfoundland/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/01.jpg",
+            "bytes": 261368
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023190413-KFNWU7IKSE7VZPGSIF49/10.jpg",
+          "avif": {
+            "path": "work/newfoundland/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/02.avif",
+            "bytes": 165415
+          },
+          "jpg": {
+            "path": "work/newfoundland/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/02.jpg",
+            "bytes": 198944
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023159535-SCAMSKO1FGHDPJCX140B/quote-04.jpg",
+          "avif": {
+            "path": "work/newfoundland/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/03.avif",
+            "bytes": 34386
+          },
+          "jpg": {
+            "path": "work/newfoundland/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/03.jpg",
+            "bytes": 53725
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358024607923-4J1LACDA6054SILX6FQU/08.jpg",
+          "avif": {
+            "path": "work/newfoundland/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/04.avif",
+            "bytes": 162927
+          },
+          "jpg": {
+            "path": "work/newfoundland/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/04.jpg",
+            "bytes": 212318
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358024506187-BG5WSY3PIYJ5CV10WGP0/04.jpg",
+          "avif": {
+            "path": "work/newfoundland/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/05.avif",
+            "bytes": 223767
+          },
+          "jpg": {
+            "path": "work/newfoundland/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/05.jpg",
+            "bytes": 280939
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358024743059-TCGB4KG07GWH0PKK88XX/05.jpg",
+          "avif": {
+            "path": "work/newfoundland/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/06.avif",
+            "bytes": 194365
+          },
+          "jpg": {
+            "path": "work/newfoundland/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/06.jpg",
+            "bytes": 240250
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023157836-3E5X6EDBMAIH6HLCFUON/quote-02.jpg",
+          "avif": {
+            "path": "work/newfoundland/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/07.avif",
+            "bytes": 28553
+          },
+          "jpg": {
+            "path": "work/newfoundland/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/07.jpg",
+            "bytes": 42885
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358024922928-0M19KRRQ6T0OKPPA0GJJ/07.jpg",
+          "avif": {
+            "path": "work/newfoundland/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/08.avif",
+            "bytes": 187879
+          },
+          "jpg": {
+            "path": "work/newfoundland/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/08.jpg",
+            "bytes": 246636
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023157185-UTVN00Z9BT9I66EE05WI/quote-03.jpg",
+          "avif": {
+            "path": "work/newfoundland/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/09.avif",
+            "bytes": 38509
+          },
+          "jpg": {
+            "path": "work/newfoundland/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/09.jpg",
+            "bytes": 60160
+          }
+        },
+        {
+          "file": "10",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358025173262-B51C9YIHX0XI4BTFTKQJ/11.jpg",
+          "avif": {
+            "path": "work/newfoundland/10.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/10.avif",
+            "bytes": 296415
+          },
+          "jpg": {
+            "path": "work/newfoundland/10.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/10.jpg",
+            "bytes": 361738
+          }
+        },
+        {
+          "file": "11",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023343898-KLIQDXM83MF8FHKOTGQN/03.jpg",
+          "avif": {
+            "path": "work/newfoundland/11.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/11.avif",
+            "bytes": 217286
+          },
+          "jpg": {
+            "path": "work/newfoundland/11.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/11.jpg",
+            "bytes": 247768
+          }
+        },
+        {
+          "file": "12",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023156373-2BYVLOSXIRNF037YQF9K/quote-05.jpg",
+          "avif": {
+            "path": "work/newfoundland/12.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/12.avif",
+            "bytes": 30450
+          },
+          "jpg": {
+            "path": "work/newfoundland/12.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/12.jpg",
+            "bytes": 46519
+          }
+        },
+        {
+          "file": "13",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023372170-NRULAEZ93U2VEZTL0O52/01.jpg",
+          "avif": {
+            "path": "work/newfoundland/13.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/13.avif",
+            "bytes": 235301
+          },
+          "jpg": {
+            "path": "work/newfoundland/13.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/13.jpg",
+            "bytes": 261201
+          }
+        },
+        {
+          "file": "14",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358025476289-I2ZSL6T2TQ3NGX7XTIPJ/06.jpg",
+          "avif": {
+            "path": "work/newfoundland/14.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/14.avif",
+            "bytes": 205776
+          },
+          "jpg": {
+            "path": "work/newfoundland/14.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/14.jpg",
+            "bytes": 240299
+          }
+        },
+        {
+          "file": "15",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358023159293-ZPJIG94A52DG51XTSSKY/quote-01.jpg",
+          "avif": {
+            "path": "work/newfoundland/15.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/15.avif",
+            "bytes": 26817
+          },
+          "jpg": {
+            "path": "work/newfoundland/15.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/15.jpg",
+            "bytes": 43726
+          }
+        },
+        {
+          "file": "16",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358025582603-VNHBDCMJ8G3WTCXPP3WH/09.jpg",
+          "avif": {
+            "path": "work/newfoundland/16.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/16.avif",
+            "bytes": 230127
+          },
+          "jpg": {
+            "path": "work/newfoundland/16.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/newfoundland/16.jpg",
+            "bytes": 249918
+          }
+        }
+      ]
+    },
+    "resettlement": {
+      "imageCount": 16,
+      "expectedCount": 16,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358037460592-8M20PN71KQ2FN8FGZ9S9/01-round-harbour.jpg",
+          "avif": {
+            "path": "work/resettlement/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/01.avif",
+            "bytes": 326827
+          },
+          "jpg": {
+            "path": "work/resettlement/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/01.jpg",
+            "bytes": 358527
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217653703-HS6ZIXBODG3W4VVG7B22/04-jacksons-cove.jpg",
+          "avif": {
+            "path": "work/resettlement/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/02.avif",
+            "bytes": 211389
+          },
+          "jpg": {
+            "path": "work/resettlement/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/02.jpg",
+            "bytes": 223756
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217730491-ILV9O8DTP4F5EGNPBY3T/02-coffee-cove.jpg",
+          "avif": {
+            "path": "work/resettlement/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/03.avif",
+            "bytes": 521776
+          },
+          "jpg": {
+            "path": "work/resettlement/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/03.jpg",
+            "bytes": 572991
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217844825-0YTV9VUKZZ4WNMVD8PG2/13-Adam-Simms.jpg",
+          "avif": {
+            "path": "work/resettlement/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/04.avif",
+            "bytes": 327245
+          },
+          "jpg": {
+            "path": "work/resettlement/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/04.jpg",
+            "bytes": 344655
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041215131-BW8O74FNHB2K7555IRVO/center-rock+copy.png",
+          "avif": {
+            "path": "work/resettlement/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/05.avif",
+            "bytes": 286444
+          },
+          "jpg": {
+            "path": "work/resettlement/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/05.jpg",
+            "bytes": 352683
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217545581-BW7BH0Y5VW9GAV0823UP/round-harbour-07-01.jpg",
+          "avif": {
+            "path": "work/resettlement/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/06.avif",
+            "bytes": 400504
+          },
+          "jpg": {
+            "path": "work/resettlement/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/06.jpg",
+            "bytes": 445616
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217434321-CQXB76X57GZVC8649YJ1/05-jacksons-cove.jpg",
+          "avif": {
+            "path": "work/resettlement/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/07.avif",
+            "bytes": 214183
+          },
+          "jpg": {
+            "path": "work/resettlement/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/07.jpg",
+            "bytes": 225364
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041882251-5JH99C1FZHRR3OMCK03L/Screenshot+2024-10-04+at+7.37.44%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/resettlement/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/08.avif",
+            "bytes": 464597
+          },
+          "jpg": {
+            "path": "work/resettlement/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/08.jpg",
+            "bytes": 615430
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217347157-7LLGD79N5LRCRYI4QQ7O/house-01.jpg",
+          "avif": {
+            "path": "work/resettlement/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/09.avif",
+            "bytes": 212327
+          },
+          "jpg": {
+            "path": "work/resettlement/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/09.jpg",
+            "bytes": 221904
+          }
+        },
+        {
+          "file": "10",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041245363-VN7XMUU00KG9N6T4K7DT/DJI_0081-1.png",
+          "avif": {
+            "path": "work/resettlement/10.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/10.avif",
+            "bytes": 618225
+          },
+          "jpg": {
+            "path": "work/resettlement/10.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/10.jpg",
+            "bytes": 744563
+          }
+        },
+        {
+          "file": "11",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217980353-SXH501AM6XT42TU76HQ7/round-harbour-09-01.jpg",
+          "avif": {
+            "path": "work/resettlement/11.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/11.avif",
+            "bytes": 161270
+          },
+          "jpg": {
+            "path": "work/resettlement/11.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/11.jpg",
+            "bytes": 196371
+          }
+        },
+        {
+          "file": "12",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217516964-KKCA0KL6LVP7AI8445T0/wards-harbour-01.jpg",
+          "avif": {
+            "path": "work/resettlement/12.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/12.avif",
+            "bytes": 345624
+          },
+          "jpg": {
+            "path": "work/resettlement/12.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/12.jpg",
+            "bytes": 408450
+          }
+        },
+        {
+          "file": "13",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217817545-46CDU69UBO98J2YJKHEG/dgf.jpg",
+          "avif": {
+            "path": "work/resettlement/13.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/13.avif",
+            "bytes": 89564
+          },
+          "jpg": {
+            "path": "work/resettlement/13.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/13.jpg",
+            "bytes": 127789
+          }
+        },
+        {
+          "file": "14",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217961269-LWZYQZ30X2WFL6WPYNWI/paddocks-bight-01-01.jpg",
+          "avif": {
+            "path": "work/resettlement/14.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/14.avif",
+            "bytes": 180540
+          },
+          "jpg": {
+            "path": "work/resettlement/14.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/14.jpg",
+            "bytes": 222539
+          }
+        },
+        {
+          "file": "15",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041233719-HH6OWE46S6AP8B2NFPSI/DJI_0058-5.png",
+          "avif": {
+            "path": "work/resettlement/15.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/15.avif",
+            "bytes": 463959
+          },
+          "jpg": {
+            "path": "work/resettlement/15.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/15.jpg",
+            "bytes": 619242
+          }
+        },
+        {
+          "file": "16",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041782295-3P2SIRFPRMYLUEXQ7TMQ/map+copy.png",
+          "avif": {
+            "path": "work/resettlement/16.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/16.avif",
+            "bytes": 36402
+          },
+          "jpg": {
+            "path": "work/resettlement/16.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/resettlement/16.jpg",
+            "bytes": 70466
+          }
+        }
+      ]
+    },
+    "pinchards-island": {
+      "imageCount": 21,
+      "expectedCount": 21,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728055310641-OQM2D9T8W02JU4M3ZERW/Screenshot+2024-10-04+at+7.27.41%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/01.avif",
+            "bytes": 42051
+          },
+          "jpg": {
+            "path": "work/pinchards-island/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/01.jpg",
+            "bytes": 88351
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728042767880-B7UY5H1BPDTGAG3FR1PW/Screenshot+2024-10-04+at+7.35.28%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/02.avif",
+            "bytes": 443730
+          },
+          "jpg": {
+            "path": "work/pinchards-island/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/02.jpg",
+            "bytes": 500344
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728040980459-L4RHXI0LUTSY31GI2OQN/image-asset.png",
+          "avif": {
+            "path": "work/pinchards-island/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/03.avif",
+            "bytes": 378533
+          },
+          "jpg": {
+            "path": "work/pinchards-island/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/03.jpg",
+            "bytes": 646794
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793500077-BJKR0VSM6HPXIN55BCTH/03_adam_simms_explorers.jpg",
+          "avif": {
+            "path": "work/pinchards-island/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/04.avif",
+            "bytes": 155289
+          },
+          "jpg": {
+            "path": "work/pinchards-island/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/04.jpg",
+            "bytes": 187615
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728055329322-QZN3ZYBAO24WA5B0SJPG/Screenshot+2024-10-04+at+7.27.56%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/05.avif",
+            "bytes": 56352
+          },
+          "jpg": {
+            "path": "work/pinchards-island/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/05.jpg",
+            "bytes": 91098
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041371724-WNZY82X9UZY9JCJZDGZ8/Screenshot+2024-10-04+at+7.28.22%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/06.avif",
+            "bytes": 83011
+          },
+          "jpg": {
+            "path": "work/pinchards-island/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/06.jpg",
+            "bytes": 169395
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041381256-AS33BYT0ILNFXIRQFI68/Screenshot+2024-10-04+at+7.28.50%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/07.avif",
+            "bytes": 221865
+          },
+          "jpg": {
+            "path": "work/pinchards-island/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/07.jpg",
+            "bytes": 315669
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041113974-3L4UCH397HU7MYTE9EQ4/land-ocean-scape+copy.png",
+          "avif": {
+            "path": "work/pinchards-island/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/08.avif",
+            "bytes": 646132
+          },
+          "jpg": {
+            "path": "work/pinchards-island/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/08.jpg",
+            "bytes": 724090
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041389109-31Z7TZIV335C8ON5K1G1/Screenshot+2024-10-04+at+7.29.06%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/09.avif",
+            "bytes": 286097
+          },
+          "jpg": {
+            "path": "work/pinchards-island/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/09.jpg",
+            "bytes": 418358
+          }
+        },
+        {
+          "file": "10",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793513098-ZJGN00R8AS1MQ0UDSN0I/10_adam_simms_sisters.jpg",
+          "avif": {
+            "path": "work/pinchards-island/10.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/10.avif",
+            "bytes": 168365
+          },
+          "jpg": {
+            "path": "work/pinchards-island/10.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/10.jpg",
+            "bytes": 202339
+          }
+        },
+        {
+          "file": "11",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041672753-NBHZUBBLMM4MJ3FX6JQX/Screenshot+2024-10-04+at+7.34.18%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/11.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/11.avif",
+            "bytes": 208760
+          },
+          "jpg": {
+            "path": "work/pinchards-island/11.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/11.jpg",
+            "bytes": 286806
+          }
+        },
+        {
+          "file": "12",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041162636-Y8F3GDT7IHWCH3QU26WC/bob-man-cabin+copy.png",
+          "avif": {
+            "path": "work/pinchards-island/12.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/12.avif",
+            "bytes": 718233
+          },
+          "jpg": {
+            "path": "work/pinchards-island/12.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/12.jpg",
+            "bytes": 793784
+          }
+        },
+        {
+          "file": "13",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793499354-5WU0TXWWRLRMO937OX8F/02_adam_simms_daisy.jpg",
+          "avif": {
+            "path": "work/pinchards-island/13.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/13.avif",
+            "bytes": 146432
+          },
+          "jpg": {
+            "path": "work/pinchards-island/13.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/13.jpg",
+            "bytes": 179141
+          }
+        },
+        {
+          "file": "14",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793498960-PY9GY0V3T7RQ3DGJ3K7E/01_adam_simms_archipelago.jpg",
+          "avif": {
+            "path": "work/pinchards-island/14.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/14.avif",
+            "bytes": 75827
+          },
+          "jpg": {
+            "path": "work/pinchards-island/14.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/14.jpg",
+            "bytes": 107782
+          }
+        },
+        {
+          "file": "15",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793501700-CRCYWDWWTDDCEWSM8QUA/05_adam_simms_island.jpg",
+          "avif": {
+            "path": "work/pinchards-island/15.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/15.avif",
+            "bytes": 150600
+          },
+          "jpg": {
+            "path": "work/pinchards-island/15.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/15.jpg",
+            "bytes": 183627
+          }
+        },
+        {
+          "file": "16",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793501667-OYLHW9EFLJ040YTBE4Z2/06_adam_simms_houses.jpg",
+          "avif": {
+            "path": "work/pinchards-island/16.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/16.avif",
+            "bytes": 152634
+          },
+          "jpg": {
+            "path": "work/pinchards-island/16.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/16.jpg",
+            "bytes": 182919
+          }
+        },
+        {
+          "file": "17",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793513063-TA1GZZBLFX6EU71TKKF2/09_adam_simms_doris.jpg",
+          "avif": {
+            "path": "work/pinchards-island/17.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/17.avif",
+            "bytes": 204784
+          },
+          "jpg": {
+            "path": "work/pinchards-island/17.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/17.jpg",
+            "bytes": 254689
+          }
+        },
+        {
+          "file": "18",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041527371-IKBV2GSA2JES1U9ROPEJ/picture-map+copy.png",
+          "avif": {
+            "path": "work/pinchards-island/18.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/18.avif",
+            "bytes": 595362
+          },
+          "jpg": {
+            "path": "work/pinchards-island/18.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/18.jpg",
+            "bytes": 817098
+          }
+        },
+        {
+          "file": "19",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041701485-8VV0N819QK7QXNNP09VG/Screenshot+2024-10-04+at+7.34.45%E2%80%AFAM.png",
+          "avif": {
+            "path": "work/pinchards-island/19.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/19.avif",
+            "bytes": 195750
+          },
+          "jpg": {
+            "path": "work/pinchards-island/19.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/19.jpg",
+            "bytes": 278649
+          }
+        },
+        {
+          "file": "20",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041591920-Y4QT8WMGW55YUJ1VP257/window+copy.png",
+          "avif": {
+            "path": "work/pinchards-island/20.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/20.avif",
+            "bytes": 426663
+          },
+          "jpg": {
+            "path": "work/pinchards-island/20.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/20.jpg",
+            "bytes": 494458
+          }
+        },
+        {
+          "file": "21",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041542037-WLCNSXCD90QQF3MN22GX/Screenshot+2024-09-20+at+6.17.05%E2%80%AFPM.png",
+          "avif": {
+            "path": "work/pinchards-island/21.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/21.avif",
+            "bytes": 46031
+          },
+          "jpg": {
+            "path": "work/pinchards-island/21.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/pinchards-island/21.jpg",
+            "bytes": 100842
+          }
+        }
+      ]
+    },
+    "driftwood": {
+      "imageCount": 4,
+      "expectedCount": 4,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1525974332152-9UVITHQ2IL33DXO39FZB/driftwood-01AS.png",
+          "avif": {
+            "path": "work/driftwood/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/01.avif",
+            "bytes": 59023
+          },
+          "jpg": {
+            "path": "work/driftwood/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/01.jpg",
+            "bytes": 148996
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1525789811789-N36774DVVF6NHEA4L6IU/drfitwood-02AS.png",
+          "avif": {
+            "path": "work/driftwood/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/02.avif",
+            "bytes": 101306
+          },
+          "jpg": {
+            "path": "work/driftwood/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/02.jpg",
+            "bytes": 178841
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1525789811986-1G990R052LWNOTRKA8LB/drfitwood-03AS.png",
+          "avif": {
+            "path": "work/driftwood/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/03.avif",
+            "bytes": 113280
+          },
+          "jpg": {
+            "path": "work/driftwood/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/03.jpg",
+            "bytes": 180772
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1526243777895-DEP5U0MINU9LKBQHU97T/image-asset.jpeg",
+          "avif": {
+            "path": "work/driftwood/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/04.avif",
+            "bytes": 4450
+          },
+          "jpg": {
+            "path": "work/driftwood/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/driftwood/04.jpg",
+            "bytes": 7789
+          }
+        }
+      ]
+    },
+    "cloudberry": {
+      "imageCount": 9,
+      "expectedCount": 9,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936990827-ZDT7ZJ3F8GW5YWDA94F9/Simms_8.jpg",
+          "avif": {
+            "path": "work/cloudberry/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/01.avif",
+            "bytes": 309337
+          },
+          "jpg": {
+            "path": "work/cloudberry/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/01.jpg",
+            "bytes": 417637
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936987757-JT2O6G62T7X3G6UTD7HU/Simms_2.jpg",
+          "avif": {
+            "path": "work/cloudberry/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/02.avif",
+            "bytes": 399945
+          },
+          "jpg": {
+            "path": "work/cloudberry/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/02.jpg",
+            "bytes": 525147
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936988716-ZLWUYO55LSRFUV6DS6K3/Simms_3.jpg",
+          "avif": {
+            "path": "work/cloudberry/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/03.avif",
+            "bytes": 285949
+          },
+          "jpg": {
+            "path": "work/cloudberry/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/03.jpg",
+            "bytes": 401875
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936988793-DBFVVDMMOWSA0SJQRMNV/Simms_4.jpg",
+          "avif": {
+            "path": "work/cloudberry/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/04.avif",
+            "bytes": 313765
+          },
+          "jpg": {
+            "path": "work/cloudberry/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/04.jpg",
+            "bytes": 430051
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936989952-7ZVPTZB6DUP4O49S5I2J/Simms_5.jpg",
+          "avif": {
+            "path": "work/cloudberry/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/05.avif",
+            "bytes": 463878
+          },
+          "jpg": {
+            "path": "work/cloudberry/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/05.jpg",
+            "bytes": 599704
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936989863-PJZVMSKR22X25DCHN1YE/Simms_6.jpg",
+          "avif": {
+            "path": "work/cloudberry/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/06.avif",
+            "bytes": 332316
+          },
+          "jpg": {
+            "path": "work/cloudberry/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/06.jpg",
+            "bytes": 451441
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936990696-RT1XQLJS17CAMEGZVA7Z/Simms_7.jpg",
+          "avif": {
+            "path": "work/cloudberry/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/07.avif",
+            "bytes": 271168
+          },
+          "jpg": {
+            "path": "work/cloudberry/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/07.jpg",
+            "bytes": 363178
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936991255-DXR5LPMCPA4W049DFMMB/Simms_10.jpg",
+          "avif": {
+            "path": "work/cloudberry/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/08.avif",
+            "bytes": 180554
+          },
+          "jpg": {
+            "path": "work/cloudberry/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/08.jpg",
+            "bytes": 242686
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1528936991111-8BCZCUNASVAKR3J5DS07/Simms_9.jpg",
+          "avif": {
+            "path": "work/cloudberry/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/09.avif",
+            "bytes": 150642
+          },
+          "jpg": {
+            "path": "work/cloudberry/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cloudberry/09.jpg",
+            "bytes": 195866
+          }
+        }
+      ]
+    },
+    "cabin": {
+      "imageCount": 10,
+      "expectedCount": 10,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501662826-COLCEPTJQZTW2GB8IPFR/INTERIOR-1-STRAIGHT-DAYLIGHT-01.jpg",
+          "avif": {
+            "path": "work/cabin/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/01.avif",
+            "bytes": 318988
+          },
+          "jpg": {
+            "path": "work/cabin/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/01.jpg",
+            "bytes": 468512
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501663922-Y8NQXLI2W1899K3CDFP4/INTERIOR-2-DAYLIGHT-01.jpg",
+          "avif": {
+            "path": "work/cabin/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/02.avif",
+            "bytes": 268490
+          },
+          "jpg": {
+            "path": "work/cabin/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/02.jpg",
+            "bytes": 421273
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501665046-PU0JVHYYBMLJL6AHA5X5/INTERIOR-DETAIL-1-01.jpg",
+          "avif": {
+            "path": "work/cabin/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/03.avif",
+            "bytes": 223219
+          },
+          "jpg": {
+            "path": "work/cabin/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/03.jpg",
+            "bytes": 381075
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501665505-WM2EBMX6D5RZ2HEA6RQU/INTERIOR-DETAIL-2-01.jpg",
+          "avif": {
+            "path": "work/cabin/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/04.avif",
+            "bytes": 180246
+          },
+          "jpg": {
+            "path": "work/cabin/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/04.jpg",
+            "bytes": 306316
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501667650-2YIUGYGY57QETGFAJQ1Q/INTERIOR-DETAIL-5-02.jpg",
+          "avif": {
+            "path": "work/cabin/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/05.avif",
+            "bytes": 243472
+          },
+          "jpg": {
+            "path": "work/cabin/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/05.jpg",
+            "bytes": 403467
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501667833-KN6TE3B152TVCDD3PMXJ/INTERIOR-DETAIL-6-01.jpg",
+          "avif": {
+            "path": "work/cabin/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/06.avif",
+            "bytes": 158609
+          },
+          "jpg": {
+            "path": "work/cabin/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/06.jpg",
+            "bytes": 287697
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501666695-PU40K5XWWZ1AVKJ3CVI6/INTERIOR-DETAIL-4-01.jpg",
+          "avif": {
+            "path": "work/cabin/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/07.avif",
+            "bytes": 186324
+          },
+          "jpg": {
+            "path": "work/cabin/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/07.jpg",
+            "bytes": 340503
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501664545-ZBCO3XEVSCZ2CCHI9A5S/INTERIOR-3-01.jpg",
+          "avif": {
+            "path": "work/cabin/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/08.avif",
+            "bytes": 343183
+          },
+          "jpg": {
+            "path": "work/cabin/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/08.jpg",
+            "bytes": 496055
+          }
+        },
+        {
+          "file": "09",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501666335-ET5HFQBEQBL5D98C31E3/INTERIOR-DETAIL-3-01.jpg",
+          "avif": {
+            "path": "work/cabin/09.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/09.avif",
+            "bytes": 202805
+          },
+          "jpg": {
+            "path": "work/cabin/09.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/09.jpg",
+            "bytes": 346240
+          }
+        },
+        {
+          "file": "10",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1536501662463-E350ZY0W8OAQ3UE1E97A/EXTERIOR-1-01.jpg",
+          "avif": {
+            "path": "work/cabin/10.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/10.avif",
+            "bytes": 171504
+          },
+          "jpg": {
+            "path": "work/cabin/10.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/cabin/10.jpg",
+            "bytes": 276345
+          }
+        }
+      ]
+    },
+    "mug-up": {
+      "imageCount": 8,
+      "expectedCount": 8,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948712670-HBQDPYRJUAV7EK659NI1/L1010467.00_00_32_20.Still001.png",
+          "avif": {
+            "path": "work/mug-up/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/01.avif",
+            "bytes": 87577
+          },
+          "jpg": {
+            "path": "work/mug-up/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/01.jpg",
+            "bytes": 167484
+          }
+        },
+        {
+          "file": "02",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948714488-QD4FTZQDE7OYMQOM5TGW/L1010467.00_00_53_23.Still002.png",
+          "avif": {
+            "path": "work/mug-up/02.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/02.avif",
+            "bytes": 79915
+          },
+          "jpg": {
+            "path": "work/mug-up/02.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/02.jpg",
+            "bytes": 173124
+          }
+        },
+        {
+          "file": "03",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948729467-W3W0SH7UHMQ4DADHJ5OS/L1010467.00_02_24_12.Still004.png",
+          "avif": {
+            "path": "work/mug-up/03.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/03.avif",
+            "bytes": 189370
+          },
+          "jpg": {
+            "path": "work/mug-up/03.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/03.jpg",
+            "bytes": 298022
+          }
+        },
+        {
+          "file": "04",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948731454-VJRCQTK0YXBI1K0GMDDW/L1010467.00_02_32_02.Still005.png",
+          "avif": {
+            "path": "work/mug-up/04.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/04.avif",
+            "bytes": 191602
+          },
+          "jpg": {
+            "path": "work/mug-up/04.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/04.jpg",
+            "bytes": 304212
+          }
+        },
+        {
+          "file": "05",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948745567-F3ZAANNSN6MBGVXUJP2O/L1010467.00_02_38_26.Still006.png",
+          "avif": {
+            "path": "work/mug-up/05.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/05.avif",
+            "bytes": 197973
+          },
+          "jpg": {
+            "path": "work/mug-up/05.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/05.jpg",
+            "bytes": 310742
+          }
+        },
+        {
+          "file": "06",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948745751-9SFS9JCP16U9WAZEW9D8/L1010467.00_07_23_27.Still007.png",
+          "avif": {
+            "path": "work/mug-up/06.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/06.avif",
+            "bytes": 68474
+          },
+          "jpg": {
+            "path": "work/mug-up/06.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/06.jpg",
+            "bytes": 151531
+          }
+        },
+        {
+          "file": "07",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545948753709-KLO8FI8CMF2ZBYHQXLIA/L1010467.00_07_33_25.Still008.png",
+          "avif": {
+            "path": "work/mug-up/07.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/07.avif",
+            "bytes": 124107
+          },
+          "jpg": {
+            "path": "work/mug-up/07.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/07.jpg",
+            "bytes": 218101
+          }
+        },
+        {
+          "file": "08",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1545949051515-U9JFKFDD0Y4YRNNWFFGE/image-asset.jpeg",
+          "avif": {
+            "path": "work/mug-up/08.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/08.avif",
+            "bytes": 30739
+          },
+          "jpg": {
+            "path": "work/mug-up/08.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/mug-up/08.jpg",
+            "bytes": 41555
+          }
+        }
+      ]
+    },
+    "light-house": {
+      "imageCount": 1,
+      "expectedCount": 1,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728043530390-5K7L1XWZYA2XGGJXGI0V/light-house-preview.png",
+          "avif": {
+            "path": "work/light-house/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/light-house/01.avif",
+            "bytes": 42737
+          },
+          "jpg": {
+            "path": "work/light-house/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/light-house/01.jpg",
+            "bytes": 84388
+          }
+        }
+      ]
+    },
+    "adrift": {
+      "imageCount": 1,
+      "expectedCount": 1,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728043226290-HD6FLALH9VBQ59GVJ7AL/image-asset.png",
+          "avif": {
+            "path": "work/adrift/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/adrift/01.avif",
+            "bytes": 86333
+          },
+          "jpg": {
+            "path": "work/adrift/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/adrift/01.jpg",
+            "bytes": 193862
+          }
+        }
+      ]
+    },
+    "new-gallery-1": {
+      "imageCount": 1,
+      "expectedCount": 1,
+      "images": [
+        {
+          "file": "01",
+          "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728045532203-0SLLLHHGVJ6LGDL0D32B/boat-three+copy.png",
+          "avif": {
+            "path": "work/new-gallery-1/01.avif",
+            "publicUrl": "https://media.adamsimms.xyz/work/new-gallery-1/01.avif",
+            "bytes": 185277
+          },
+          "jpg": {
+            "path": "work/new-gallery-1/01.jpg",
+            "publicUrl": "https://media.adamsimms.xyz/work/new-gallery-1/01.jpg",
+            "bytes": 303560
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "images": [
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/01.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/01.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249871411-53O3QST8YKTDB6WDM7B3/01.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/02.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/02.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249873145-ADUY7H86RBUBGTWROT7B/02.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/03.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/03.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249875342-1VBBE2T84HC6GEB3RPDL/03.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/04.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/04.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249879379-HGEXGT99TGDGM4A8B9PJ/05.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/05.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/05.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249879427-FU8RRJQONW9W4027VAFL/06.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/06.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/06.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249882555-HJQMIVQ1SVF47SLJQXSJ/07.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/07.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/07.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249884048-R6FFWWY4DPGKPYV7V8AC/08.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/08.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/08.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249886416-KRNNJU7V81RA2BI1RP8R/09.jpg"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/washed-up/09.avif",
+      "fallback": "https://media.adamsimms.xyz/work/washed-up/09.jpg",
+      "alt": "Washed-up",
+      "caption": "",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1357249887375-OGPEJNCWPOUX6I08IB99/10.jpg"
+    }
+  ]
+}

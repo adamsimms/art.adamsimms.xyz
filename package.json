@@ -1,0 +1,40 @@
+{
+  "name": "art.adamsimms.xyz",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Photography and art portfolio for art.adamsimms.xyz",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "migrate:scrape": "node scripts/scrape-squarespace.mjs",
+    "migrate:content": "node scripts/migrate-content.mjs",
+    "migrate:images": "node scripts/migrate-images.mjs",
+    "migrate:validate": "node scripts/validate-migration.mjs",
+    "migrate": "npm run migrate:scrape && npm run migrate:content && npm run migrate:images && npm run migrate:validate",
+    "analytics:sync": "node scripts/sync-analytics.mjs",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=adamsimms-xyz-art",
+    "deploy:preview": "npm run build && npx wrangler pages deploy dist --project-name=adamsimms-xyz-art --branch=preview",
+    "upload:media": "node scripts/upload-r2.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamsimms/art.adamsimms.xyz"
+  },
+  "author": "Adam Simms",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.7",
+    "cheerio": "^1.2.0",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "wrangler": "^4.110.0"
+  }
+}

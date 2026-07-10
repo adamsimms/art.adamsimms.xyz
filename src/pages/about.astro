@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry, render } from 'astro:content';
+
+const page = await getEntry('pages', 'about');
+if (!page) throw new Error('About page not found');
+const { Content } = await render(page);
+---
+
+<Base title={page.data.title} description={page.data.description}>
+	<article class="prose">
+		<header class="page-header">
+			<h1>{page.data.title}</h1>
+		</header>
+		<Content />
+	</article>
+</Base>

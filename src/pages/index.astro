@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const work = await getCollection('work');
+const orderedWork = work
+	.sort((a, b) => a.data.order - b.data.order)
+	.map((entry) => ({
+		slug: entry.data.slug,
+		title: entry.data.title,
+		href: `/${entry.data.slug}`,
+		cover: entry.data.cover,
+		coverFallback: entry.data.coverFallback,
+	}));
+
+const intro = (await getCollection('pages')).find((p) => p.id === 'intro');
+---
+
+<Base title="Adam Simms" description={intro?.data.description}>
+	<div class="page-header">
+		<h1>Adam Simms</h1>
+		{intro?.data.description ? <p class="lead">{intro.data.description}</p> : null}
+	</div>
+
+	<ul class="work-index">
+		{
+			orderedWork.map((item) => (
+				<li>
+					<a href={item.href}>
+						{item.cover ? (
+							<picture>
+								<source srcset={item.cover} type="image/avif" />
+								<img src={item.coverFallback || item.cover} alt={item.title} loading="lazy" />
+							</picture>
+						) : null}
+						<span>{item.title}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</Base>
