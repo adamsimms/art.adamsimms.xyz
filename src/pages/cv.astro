@@ -2,13 +2,13 @@
 import Base from '../layouts/Base.astro';
 import { getEntry, render } from 'astro:content';
 
-const page = await getEntry('pages', 'resume');
-if (!page) throw new Error('Resume page not found');
+const page = await getEntry('pages', 'cv');
+if (!page) throw new Error('CV page not found');
 const { Content } = await render(page);
 ---
 
 <Base title={page.data.title} description={page.data.description}>
-	<article class="prose">
+	<article class="prose cv">
 		<header class="page-header">
 			<h1>{page.data.title}</h1>
 		</header>

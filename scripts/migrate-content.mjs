@@ -120,7 +120,7 @@ async function main() {
 
 	if (inventory.home) await writePage('intro', inventory.home);
 	if (inventory.about) await writePage('about', inventory.about);
-	if (inventory.resume) await writePage('resume', inventory.resume);
+	if (inventory.resume) await writePage('cv', inventory.resume);
 
 	console.log('Content migration complete.');
 }

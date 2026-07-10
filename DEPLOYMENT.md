@@ -41,7 +41,7 @@ If an earlier WebP upload already ran, re-run `npm run upload:media` after re-en
 ## Cutover (after QA)
 
 1. Deploy and QA on Pages preview URL.
-2. Attach `art.adamsimms.xyz` and spot-check all work pages, about, resume, blog.
+2. Attach `art.adamsimms.xyz` and spot-check all work pages, about, CV, blog.
 3. Enable redirect on `adamsim.ms` in Cloudflare:
 
    ```
