@@ -1,0 +1,81 @@
+---
+interface Props {
+	/** Destination email for FormSubmit delivery */
+	to?: string;
+}
+
+const { to = 'adamsimms@gmail.com' } = Astro.props;
+---
+
+<section class="contact" aria-labelledby="contact-heading">
+	<h2 id="contact-heading">Contact</h2>
+
+	<form class="contact-form" method="POST" action={`https://formsubmit.co/${to}`} data-contact-form>
+		<input type="hidden" name="_subject" value="Message from art.adamsimms.xyz" />
+		<input type="hidden" name="_template" value="table" />
+		<input type="hidden" name="_captcha" value="false" />
+		<input type="text" name="_honey" class="contact-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+		<div class="contact-row">
+			<label>
+				<span>First name</span>
+				<input type="text" name="first_name" required autocomplete="given-name" />
+			</label>
+			<label>
+				<span>Last name</span>
+				<input type="text" name="last_name" required autocomplete="family-name" />
+			</label>
+		</div>
+
+		<label>
+			<span>Email address</span>
+			<input type="email" name="email" required autocomplete="email" />
+		</label>
+
+		<label>
+			<span>Message</span>
+			<textarea name="message" rows="6" required></textarea>
+		</label>
+
+		<div class="contact-actions">
+			<button type="submit">Send</button>
+			<p class="contact-status" data-contact-status hidden></p>
+		</div>
+	</form>
+</section>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const status = document.querySelector('[data-contact-status]');
+	if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) {
+		// Form markup missing — nothing to enhance.
+	} else {
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const button = form.querySelector('button[type="submit"]');
+			if (button instanceof HTMLButtonElement) button.disabled = true;
+			status.hidden = false;
+			status.textContent = 'Sending…';
+			status.dataset.state = 'pending';
+
+			try {
+				const response = await fetch(form.action, {
+					method: 'POST',
+					body: new FormData(form),
+					headers: { Accept: 'application/json' },
+				});
+
+				if (!response.ok) throw new Error(`Submit failed (${response.status})`);
+
+				form.reset();
+				status.textContent = 'Thank you!';
+				status.dataset.state = 'success';
+			} catch {
+				status.textContent = 'Unable to send. Please email adamsimms@gmail.com.';
+				status.dataset.state = 'error';
+			} finally {
+				if (button instanceof HTMLButtonElement) button.disabled = false;
+			}
+		});
+	}
+</script>

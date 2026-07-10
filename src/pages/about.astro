@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
 
 const page = await getEntry('pages', 'about');
@@ -8,10 +9,34 @@ const { Content } = await render(page);
 ---
 
 <Base title={page.data.title} description={page.data.description}>
-	<article class="prose">
+	<article class="about">
 		<header class="page-header">
 			<h1>{page.data.title}</h1>
 		</header>
-		<Content />
+
+		{
+			page.data.statement ? (
+				<p class="about-statement">{page.data.statement}</p>
+			) : null
+		}
+
+		<div class="about-bio prose">
+			<figure class="about-portrait">
+				<picture>
+					<source srcset="/about/portrait.avif" type="image/avif" />
+					<img
+						src="/about/portrait.jpg"
+						alt="Adam Simms"
+						width="720"
+						height="585"
+						loading="eager"
+						decoding="async"
+					/>
+				</picture>
+			</figure>
+			<Content />
+		</div>
+
+		<ContactForm />
 	</article>
 </Base>
