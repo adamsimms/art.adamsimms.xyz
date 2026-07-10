@@ -24,7 +24,6 @@ export const WORK_SLUGS = [
 	'mug-up',
 	'light-house',
 	'adrift',
-	'new-gallery-1',
 ];
 
 export const BLOG_POSTS = [
@@ -33,10 +32,14 @@ export const BLOG_POSTS = [
 	'blog/2013/artsida-5-exhibition',
 ];
 
-export const PAGE_PATHS = ['intro', 'about', 'resume', 'blog', 'home', ...WORK_SLUGS, ...BLOG_POSTS];
+export const PAGE_PATHS = ['intro', 'about', 'resume', 'cv', 'blog', 'home', ...WORK_SLUGS, ...BLOG_POSTS];
 
 export function decodeHtml(text = '') {
 	return text
+		.replace(/&nbsp;?/gi, ' ')
+		.replace(/&#160;/g, ' ')
+		.replace(/&#x0*a0;/gi, ' ')
+		.replace(/\u00a0/g, ' ')
 		.replace(/&mdash;/g, '—')
 		.replace(/&ndash;/g, '–')
 		.replace(/&amp;/g, '&')
