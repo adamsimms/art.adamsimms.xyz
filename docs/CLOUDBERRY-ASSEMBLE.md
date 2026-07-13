@@ -19,7 +19,7 @@ Output: `dist/cloudberry/archive/` + `/maps`, `/maps/trees`, `/maps/resettled`.
 
 | Name | Type | Purpose |
 |------|------|---------|
-| `PUBLIC_MAPBOX_TOKEN` | secret (or var) | Mapbox `pk.*` for `/maps` + archive photo map |
+| `PUBLIC_MAPBOX_TOKEN` | variable (`vars`) | Mapbox `pk.*` for `/maps` + archive photo map |
 | Existing | `CLOUDFLARE_*`, `UMAMI_WEBSITE_ID` | unchanged |
 
 Add `art.adamsimms.xyz` to the Mapbox token URL restrictions.

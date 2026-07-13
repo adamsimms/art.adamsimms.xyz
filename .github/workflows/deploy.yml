@@ -56,12 +56,12 @@ jobs:
       - name: Build Astro site
         run: npm run build
         env:
-          PUBLIC_MAPBOX_TOKEN: ${{ secrets.PUBLIC_MAPBOX_TOKEN }}
+          PUBLIC_MAPBOX_TOKEN: ${{ vars.PUBLIC_MAPBOX_TOKEN }}
 
       - name: Assemble Cloudberry archive into dist
         run: PINCHARDS_REPO_PATH="$GITHUB_WORKSPACE/.pinchards" npm run assemble:cloudberry
         env:
-          MAPBOX_ACCESS_TOKEN: ${{ secrets.PUBLIC_MAPBOX_TOKEN }}
+          MAPBOX_ACCESS_TOKEN: ${{ vars.PUBLIC_MAPBOX_TOKEN }}
 
       - name: Deploy to Cloudflare Pages
         run: |
