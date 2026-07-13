@@ -3,9 +3,12 @@
 /resume /cv 301
 /blog/tag/* /blog 301
 
+# Force directory form so /cloudberry/archive does not 404→homepage
+/cloudberry/archive /cloudberry/archive/ 308
+
 # cloudberry-archive-redirects
-/cloudberry/archive/gallery.php /cloudberry/archive/gallery 301
-/cloudberry/archive/info.php /cloudberry/archive/info 301
+/cloudberry/archive/gallery.php /cloudberry/archive/gallery/ 301
+/cloudberry/archive/info.php /cloudberry/archive/info/ 301
 /cloudberry/archive/slideshow.php /cloudberry/archive/?play=1 301
 /cloudberry/archive/slider.php /cloudberry/archive/?play=1 301
-/cloudberry/archive/index.php /cloudberry/archive 301
+/cloudberry/archive/index.php /cloudberry/archive/ 301
