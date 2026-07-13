@@ -27,3 +27,5 @@ Add `art.adamsimms.xyz` to the Mapbox token URL restrictions.
 ## CI
 
 Art deploy workflow checks out `adamsimms/pinchards.is`, builds the static archive with PHP, assembles into `dist`, deploys Pages. `repository_dispatch` type `cloudberry-archive-rebuild` supported for rebuilds from the archive repo (wire later).
+
+**Important:** Only **GitHub Actions** should deploy this project. If the Cloudflare dashboard also has a Git-connected build (`npm run build` without assemble), it can overwrite production and break `/cloudberry/archive` assets. In the Pages project → **Settings → Builds**, **Disconnect** the GitHub repo (or disable automatic deployments) so Wrangler/GHA is the sole publisher.
