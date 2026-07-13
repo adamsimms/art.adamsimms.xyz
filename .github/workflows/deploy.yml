@@ -112,8 +112,7 @@ jobs:
                 "https://art.adamsimms.xyz/cloudberry/archive/css/pinchard.css"
               ]
             }')
-          python3 -c 'import json,sys; d=json.loads(sys.argv[1]);
-print("purged", d.get("result")) if d.get("success") else sys.exit("purge failed: "+str(d))' "$RESP"
+          python3 -c 'import json,sys; d=json.loads(sys.argv[1]); print("purged", d.get("result")) if d.get("success") else sys.exit("purge failed: "+str(d))' "$RESP"
 
       - name: Comment PR with preview URL
         if: github.event_name == 'pull_request'
