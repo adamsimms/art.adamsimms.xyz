@@ -25,7 +25,18 @@ if (!gallery) throw new Error(`Gallery not found: ${entry.data.galleryFile}`);
 			{entry.data.description ? <p class="lead">{entry.data.description}</p> : null}
 		</header>
 
-		{entry.data.statement ? <div class="statement prose"><p>{entry.data.statement}</p></div> : null}
+		{
+			entry.data.slug === 'cloudberry' ? (
+				<p class="work-cta">
+					<a href="/cloudberry/archive">Enter the archive</a>
+					<span> — browse the full set of frames, weather, and timelines.</span>
+				</p>
+			) : entry.data.statement ? (
+				<div class="statement prose">
+					<p>{entry.data.statement}</p>
+				</div>
+			) : null
+		}
 
 		<WorkGallery images={gallery.images} />
 	</article>
