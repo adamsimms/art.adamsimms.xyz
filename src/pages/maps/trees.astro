@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = '53 Trees';
+const description =
+	"Interactive map of 53 named trees on Pinchard's Island, Newfoundland — a field survey from the Cloudberry geography collection.";
+const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=19NfRJjMQjtei3GXok6oK9WOqnsw';
+---
+
+<Base title={title} description={description}>
+	<article class="maps-page">
+		<header class="page-header">
+			<h1>{title}</h1>
+			<p class="maps-lede">{description}</p>
+			<nav class="maps-subnav" aria-label="Map sections">
+				<a href="/maps">Satellite</a>
+				<a href="/maps/trees" aria-current="page">53 Trees</a>
+				<a href="/maps/resettled">Resettled</a>
+				<a href="/cloudberry/archive">Cloudberry archive</a>
+			</nav>
+		</header>
+		<div class="maps-shell">
+			<iframe class="maps-embed" src={iframeSrc} title="53 Trees map" allowfullscreen loading="lazy"
+			></iframe>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.maps-page {
+		max-width: 72rem;
+		margin: 0 auto;
+		padding: 2rem 1.25rem 4rem;
+	}
+	.maps-lede {
+		max-width: 40rem;
+		margin: 0.75rem 0 1.25rem;
+		opacity: 0.85;
+	}
+	.maps-subnav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1.25rem;
+		margin-bottom: 1.5rem;
+		font-size: 0.95rem;
+	}
+	.maps-subnav a[aria-current='page'] {
+		font-weight: 600;
+		text-decoration: underline;
+	}
+	.maps-shell {
+		border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+		overflow: hidden;
+		min-height: 70vh;
+	}
+	.maps-embed {
+		width: 100%;
+		height: 70vh;
+		min-height: 24rem;
+		border: 0;
+		display: block;
+	}
+</style>

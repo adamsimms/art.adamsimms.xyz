@@ -1,0 +1,18 @@
+# Cache static archive assets at the edge; HTML stays short-lived for deploys.
+/cloudberry/archive/data/*
+  Cache-Control: public, max-age=3600
+
+/cloudberry/archive/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/cloudberry/archive/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/cloudberry/archive/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/cloudberry/archive/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/cloudberry/archive/favicon/*
+  Cache-Control: public, max-age=31536000, immutable
