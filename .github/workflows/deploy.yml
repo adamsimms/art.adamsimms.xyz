@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+  repository_dispatch:
+    types: [cloudberry-archive-rebuild]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -19,14 +22,28 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout art site
         uses: actions/checkout@v4
+
+      - name: Checkout Cloudberry / pinchards repo
+        uses: actions/checkout@v4
+        with:
+          repository: adamsimms/pinchards.is
+          path: .pinchards
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
+
+      - name: Setup PHP (static archive build)
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: exif, json
+          coverage: none
 
       - name: Install dependencies
         run: npm ci
@@ -36,8 +53,15 @@ jobs:
         env:
           UMAMI_WEBSITE_ID: ${{ vars.UMAMI_WEBSITE_ID }}
 
-      - name: Build site
+      - name: Build Astro site
         run: npm run build
+        env:
+          PUBLIC_MAPBOX_TOKEN: ${{ secrets.PUBLIC_MAPBOX_TOKEN }}
+
+      - name: Assemble Cloudberry archive into dist
+        run: PINCHARDS_REPO_PATH="$GITHUB_WORKSPACE/.pinchards" npm run assemble:cloudberry
+        env:
+          MAPBOX_ACCESS_TOKEN: ${{ secrets.PUBLIC_MAPBOX_TOKEN }}
 
       - name: Deploy to Cloudflare Pages
         run: |
