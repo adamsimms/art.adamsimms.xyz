@@ -23,7 +23,8 @@ Assemble injects art Umami into archive HTML from `analytics.config.json` / `UMA
 | Name | Type | Purpose |
 |------|------|---------|
 | `PUBLIC_MAPBOX_TOKEN` | variable (`vars`) | Mapbox `pk.*` for `/maps` + archive photo map |
-| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler Pages deploy + cache purge |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler Pages deploy (+ Zone Cache Purge for optional edge purge) |
+| `CLOUDFLARE_ZONE_ID` | variable (`vars`) | `adamsimms.xyz` zone id for post-deploy archive cache purge |
 | `UMAMI_WEBSITE_ID` | variable (optional if in `analytics.config.json`) | Archive + Astro analytics |
 
 Add `art.adamsimms.xyz` to the Mapbox token URL restrictions.
