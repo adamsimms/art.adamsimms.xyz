@@ -93,8 +93,53 @@ if (!existsSync(PINCHARDS)) {
 	fail(`pinchards repo not found at ${PINCHARDS}`);
 }
 
-if (!existsSync(join(ARCHIVE_SRC, 'index.html'))) {
-	console.log('dist-archive missing — running php scripts/build-static-archive.php…');
+function ensurePinchardsVendor() {
+	const bootstrap = join(PINCHARDS, 'vendor/bootstrap/css/bootstrap.css');
+	const gsap = join(PINCHARDS, 'vendor/gsap/gsap.min.js');
+	if (existsSync(bootstrap) && existsSync(gsap)) {
+		return;
+	}
+	console.log(
+		'assemble-cloudberry-archive: pinchards vendor/ missing — npm ci && npm run vendor:frontend…',
+	);
+	const npmCi = spawnSync('npm', ['ci'], {
+		cwd: PINCHARDS,
+		stdio: 'inherit',
+		env: process.env,
+	});
+	if (npmCi.status !== 0) {
+		fail('npm ci failed in pinchards repo (needed for Bootstrap/GSAP)');
+	}
+	const vendor = spawnSync('npm', ['run', 'vendor:frontend'], {
+		cwd: PINCHARDS,
+		stdio: 'inherit',
+		env: process.env,
+	});
+	if (vendor.status !== 0) {
+		fail('npm run vendor:frontend failed in pinchards repo');
+	}
+	if (!existsSync(bootstrap) || !existsSync(gsap)) {
+		fail('vendor assets still missing after vendor:frontend');
+	}
+}
+
+ensurePinchardsVendor();
+
+const archiveHasVendor =
+	existsSync(join(ARCHIVE_SRC, 'vendor/bootstrap/css/bootstrap.css')) &&
+	existsSync(join(ARCHIVE_SRC, 'vendor/gsap/gsap.min.js'));
+
+if (!existsSync(join(ARCHIVE_SRC, 'index.html')) || !archiveHasVendor) {
+	if (existsSync(join(ARCHIVE_SRC, 'index.html')) && !archiveHasVendor) {
+		console.log(
+			'assemble-cloudberry-archive: dist-archive missing vendor — rebuilding…',
+		);
+		rmSync(ARCHIVE_SRC, { recursive: true, force: true });
+	} else {
+		console.log(
+			'dist-archive missing — running php scripts/build-static-archive.php…',
+		);
+	}
 	const build = spawnSync('php', ['scripts/build-static-archive.php'], {
 		cwd: PINCHARDS,
 		stdio: 'inherit',
