@@ -2,28 +2,53 @@
 
 Canonical host is **`art.adamsimms.xyz`**. `pinchards.is` / `www` redirect onto art paths (citation window). No vanity project subdomains.
 
-## What shipped
+## What shipped in git
 
 | Piece | Status |
 |-------|--------|
-| Redirect Worker | `pinchards-redirect` — [`workers/pinchards-redirect`](../workers/pinchards-redirect/) |
-| Redirect map (reference) | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) |
-| Bulk Redirects script (optional) | `npm run redirects:pinchards` — needs Account Filter Lists + Bulk URL Redirects Edit on the API token |
+| Redirect Worker | [`workers/pinchards-redirect`](../workers/pinchards-redirect/) — deploy once token allows Workers Edit |
+| Bulk Redirects map | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) + [`PHASE5-REDIRECTS.csv`](./PHASE5-REDIRECTS.csv) |
 | DreamHost rsync | Disabled on push for pinchards / dory / adrift / waves (`workflow_dispatch` only) |
 | Waves uptime | Probes `art.adamsimms.xyz/waves/*` |
-| Assembled apps | Still built into art Pages deploy |
+| adamsimms.xyz links | Point at art paths |
 
-Query strings (e.g. `?filename=`) are preserved on redirects.
+Query strings (e.g. `?filename=`) are preserved once redirects are live.
 
-## Deploy / update Worker
+## Finish redirects (pick one)
+
+The art Pages API token can deploy Pages but **not** Workers scripts or Bulk Redirect lists (Auth 10000). Do one of:
+
+### A — Dashboard Bulk Redirects (fastest)
+
+1. Cloudflare Dashboard → **Account** → **Bulk Redirects**
+2. Create list `pinchards_to_art`, upload [`PHASE5-REDIRECTS.csv`](./PHASE5-REDIRECTS.csv)
+3. Add a Bulk Redirect **rule** that enables the list
+4. Keep `pinchards.is` / `www` **proxied**
+
+### B — Expand API token, then re-run
+
+On the GitHub secret `CLOUDFLARE_API_TOKEN`, add:
+
+- Account → **Workers Scripts** → Edit  
+- Account → **Workers Routes** → Edit *(or Zone Workers Routes)*  
+- Account → **Account Filter Lists** → Edit  
+- Account → **Bulk URL Redirects** → Edit  
+
+Then either:
 
 ```bash
 gh workflow run deploy-pinchards-redirect.yml -R adamsimms/art.adamsimms.xyz
-# or locally:
-cd workers/pinchards-redirect && npx wrangler deploy
+# or
+gh workflow run apply-pinchards-redirects.yml -R adamsimms/art.adamsimms.xyz
 ```
 
-DNS for `pinchards.is` / `www` must stay **proxied (orange cloud)** so Worker routes run.
+### C — Local Wrangler
+
+```bash
+cd workers/pinchards-redirect
+npx wrangler login
+npx wrangler deploy
+```
 
 ## Manual ops (Adam)
 

@@ -1,3 +1,4 @@
+account_id = "1bf55fc4d05548d7bf541d845d3bcbb3"
 name = "pinchards-redirect"
 main = "src/index.js"
 compatibility_date = "2026-07-14"
