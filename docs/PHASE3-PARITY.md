@@ -31,6 +31,6 @@ Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 | pinchards → art | `repository_dispatch` type `cloudberry-archive-rebuild` (needs `ART_DISPATCH_TOKEN` on pinchards) |
 | Art push / dispatch | Workflow builds archive + assembles + deploys |
 
-## DreamHost (still live until Phase 5)
+## DreamHost
 
-`pinchards.is` may still serve PHP; citations and share links should already prefer `art.adamsimms.xyz` where updated. Full domain cutover is Phase 5.
+**Retired (Phase 5).** `pinchards.is` is Cloudflare Bulk Redirect → art paths. See [PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md).

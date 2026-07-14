@@ -67,3 +67,11 @@ If an earlier WebP upload already ran, re-run `npm run upload:media` after re-en
 - `/blog/tag/*` → `/blog`
 - `/cloudberry/archive` → `/cloudberry/archive/` (308)
 - Cloudberry `.php` legacy paths (merged from assemble)
+
+## Phase 5 — pinchards.is
+
+Canonical Cloudberry + siblings live on this host. `pinchards.is` is Bulk Redirect–only (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md) and [docs/PHASE5-REDIRECTS.json](docs/PHASE5-REDIRECTS.json)). Re-apply with:
+
+```bash
+gh workflow run apply-pinchards-redirects.yml
+```

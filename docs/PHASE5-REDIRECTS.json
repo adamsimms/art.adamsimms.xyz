@@ -1,0 +1,134 @@
+{
+  "description": "Phase 5: pinchards.is → art.adamsimms.xyz Bulk Redirects. preserve_query_string on all entries. include_subdomains covers www.",
+  "list_name": "pinchards_to_art",
+  "list_description": "Phase 5 cutover: pinchards.is → art.adamsimms.xyz",
+  "defaults": {
+    "status_code": 301,
+    "preserve_query_string": true,
+    "include_subdomains": true,
+    "subpath_matching": false,
+    "preserve_path_suffix": true
+  },
+  "redirects": [
+    {
+      "source_url": "https://pinchards.is/gallery.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/gallery/"
+    },
+    {
+      "source_url": "https://pinchards.is/gallery-days.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/gallery/"
+    },
+    {
+      "source_url": "https://pinchards.is/slideshow.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/"
+    },
+    {
+      "source_url": "https://pinchards.is/slider.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/"
+    },
+    {
+      "source_url": "https://pinchards.is/info.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/info/"
+    },
+    {
+      "source_url": "https://pinchards.is/index.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/"
+    },
+    {
+      "source_url": "https://pinchards.is/viewer-photo.php",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/"
+    },
+    {
+      "source_url": "https://pinchards.is/jam",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/jam",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/map",
+      "target_url": "https://art.adamsimms.xyz/maps"
+    },
+    {
+      "source_url": "https://pinchards.is/maps/satellite",
+      "target_url": "https://art.adamsimms.xyz/maps",
+      "subpath_matching": true,
+      "preserve_path_suffix": false
+    },
+    {
+      "source_url": "https://pinchards.is/maps/trees",
+      "target_url": "https://art.adamsimms.xyz/maps/trees",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/trees",
+      "target_url": "https://art.adamsimms.xyz/maps/trees"
+    },
+    {
+      "source_url": "https://pinchards.is/maps/resettled",
+      "target_url": "https://art.adamsimms.xyz/maps/resettled",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/resettled",
+      "target_url": "https://art.adamsimms.xyz/maps/resettled"
+    },
+    {
+      "source_url": "https://pinchards.is/maps",
+      "target_url": "https://art.adamsimms.xyz/maps",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/adrift/weather.php",
+      "target_url": "https://art.adamsimms.xyz/adrift/api/weather"
+    },
+    {
+      "source_url": "https://pinchards.is/adrift",
+      "target_url": "https://art.adamsimms.xyz/adrift/experience",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/dory",
+      "target_url": "https://art.adamsimms.xyz/dory",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/waves/call-api.php",
+      "target_url": "https://art.adamsimms.xyz/waves/call-api"
+    },
+    {
+      "source_url": "https://pinchards.is/waves/health.php",
+      "target_url": "https://art.adamsimms.xyz/waves/health"
+    },
+    {
+      "source_url": "https://pinchards.is/waves/wave.php",
+      "target_url": "https://art.adamsimms.xyz/waves/"
+    },
+    {
+      "source_url": "https://pinchards.is/waves/wave2.php",
+      "target_url": "https://art.adamsimms.xyz/waves/"
+    },
+    {
+      "source_url": "https://pinchards.is/waves",
+      "target_url": "https://art.adamsimms.xyz/waves",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/light-house",
+      "target_url": "https://art.adamsimms.xyz/light-house/experience",
+      "subpath_matching": true,
+      "preserve_path_suffix": true
+    },
+    {
+      "source_url": "https://pinchards.is/",
+      "target_url": "https://art.adamsimms.xyz/cloudberry/archive/",
+      "subpath_matching": true,
+      "preserve_path_suffix": false
+    }
+  ]
+}

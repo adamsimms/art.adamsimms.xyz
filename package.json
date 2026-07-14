@@ -21,6 +21,7 @@
     "assemble:adrift": "node scripts/assemble-adrift.mjs",
     "assemble:waves": "node scripts/assemble-waves.mjs",
     "assemble:siblings": "npm run assemble:cloudberry && npm run assemble:dory && npm run assemble:adrift && npm run assemble:waves",
+    "redirects:pinchards": "node scripts/apply-pinchards-bulk-redirects.mjs",
     "build": "astro build",
     "build:full": "astro build && npm run assemble:siblings",
     "deploy": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz",
