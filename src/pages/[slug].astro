@@ -31,6 +31,11 @@ if (!gallery) throw new Error(`Gallery not found: ${entry.data.galleryFile}`);
 					<a href="/cloudberry/archive/">Enter the archive</a>
 					<span> — browse the full set of frames, weather, and timelines.</span>
 				</p>
+			) : entry.data.slug === 'adrift' ? (
+				<p class="work-cta">
+					<a href="/adrift/experience/">Enter the experience</a>
+					<span> — live saltbox cabin scene driven by Newfoundland weather.</span>
+				</p>
 			) : entry.data.statement ? (
 				<div class="statement prose">
 					<p>{entry.data.statement}</p>

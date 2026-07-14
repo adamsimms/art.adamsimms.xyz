@@ -8,7 +8,6 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "migrate:scrape": "node scripts/scrape-squarespace.mjs",
@@ -18,8 +17,12 @@
     "migrate": "npm run migrate:scrape && npm run migrate:content && npm run migrate:images && npm run migrate:validate",
     "analytics:sync": "node scripts/sync-analytics.mjs",
     "assemble:cloudberry": "node scripts/assemble-cloudberry-archive.mjs",
+    "assemble:dory": "node scripts/assemble-dory.mjs",
+    "assemble:adrift": "node scripts/assemble-adrift.mjs",
+    "assemble:waves": "node scripts/assemble-waves.mjs",
+    "assemble:siblings": "npm run assemble:cloudberry && npm run assemble:dory && npm run assemble:adrift && npm run assemble:waves",
     "build": "astro build",
-    "build:full": "astro build && node scripts/assemble-cloudberry-archive.mjs",
+    "build:full": "astro build && npm run assemble:siblings",
     "deploy": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz",
     "deploy:preview": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz --branch=preview",
     "upload:media": "node scripts/upload-r2.mjs"

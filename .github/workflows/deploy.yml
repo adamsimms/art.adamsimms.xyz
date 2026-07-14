@@ -32,17 +32,35 @@ jobs:
           path: .pinchards
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout Dory
+        uses: actions/checkout@v4
+        with:
+          repository: adamsimms/dory
+          path: .dory
+
+      - name: Checkout Adrift
+        uses: actions/checkout@v4
+        with:
+          repository: adamsimms/adrift
+          path: .adrift
+
+      - name: Checkout Waves
+        uses: actions/checkout@v4
+        with:
+          repository: adamsimms/waves
+          path: .waves
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
 
-      - name: Setup PHP (static archive build)
+      - name: Setup PHP (static archive + waves export)
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: exif, json
+          extensions: exif, json, curl
           coverage: none
 
       - name: Install dependencies
@@ -58,10 +76,16 @@ jobs:
         env:
           PUBLIC_MAPBOX_TOKEN: ${{ vars.PUBLIC_MAPBOX_TOKEN }}
 
-      - name: Assemble Cloudberry archive into dist
-        run: PINCHARDS_REPO_PATH="$GITHUB_WORKSPACE/.pinchards" npm run assemble:cloudberry
+      - name: Assemble Cloudberry + siblings into dist
+        run: |
+          PINCHARDS_REPO_PATH="$GITHUB_WORKSPACE/.pinchards" \
+          DORY_REPO_PATH="$GITHUB_WORKSPACE/.dory" \
+          ADRIFT_REPO_PATH="$GITHUB_WORKSPACE/.adrift" \
+          WAVES_REPO_PATH="$GITHUB_WORKSPACE/.waves" \
+          npm run assemble:siblings
         env:
           MAPBOX_ACCESS_TOKEN: ${{ vars.PUBLIC_MAPBOX_TOKEN }}
+          WAVES_SITE_BASE_URL: https://art.adamsimms.xyz/waves
 
       - name: Deploy to Cloudflare Pages
         run: |

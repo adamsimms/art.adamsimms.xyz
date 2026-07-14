@@ -3,8 +3,17 @@
 /resume /cv 301
 /blog/tag/* /blog 301
 
-# Force directory form so /cloudberry/archive does not 404→homepage
+# Force directory form for assemble mounts
 /cloudberry/archive /cloudberry/archive/ 308
+/dory /dory/ 308
+/adrift/experience /adrift/experience/ 308
+/waves /waves/ 308
+
+# Sibling legacy aliases
+/waves/call-api.php /waves/call-api 301
+/waves/health.php /waves/health 301
+/waves/wave.php /waves/ 301
+/waves/wave2.php /waves/ 301
 
 # cloudberry-archive-redirects
 /cloudberry/archive/gallery.php /cloudberry/archive/gallery/ 301
