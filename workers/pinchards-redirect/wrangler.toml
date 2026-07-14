@@ -5,7 +5,10 @@ compatibility_date = "2026-07-14"
 workers_dev = false
 
 # Proxied hostnames for the retiring pinchards.is zone (same CF account).
+# Bare host routes are required — `host/*` does not match `/`.
 routes = [
+  { pattern = "pinchards.is", zone_name = "pinchards.is" },
   { pattern = "pinchards.is/*", zone_name = "pinchards.is" },
+  { pattern = "www.pinchards.is", zone_name = "pinchards.is" },
   { pattern = "www.pinchards.is/*", zone_name = "pinchards.is" },
 ]
