@@ -1,4 +1,4 @@
-# Phase 3 parity checklist — Cloudberry on art.adamsimms.xyz
+# Cloudberry parity checklist — art.adamsimms.xyz
 
 Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 
@@ -16,9 +16,9 @@ Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 | Jam | `/cloudberry/archive/jam/` | Fullscreen kiosk slideshow |
 | Maps hub | `/maps`, `/maps/trees`, `/maps/resettled` | Mapbox tiles (pk token allowlisted) |
 | Portfolio CTA | `/cloudberry` → Enter the archive | `/cloudberry/archive/` |
-| Legacy PHP | `/cloudberry/archive/gallery.php` etc. | 301 to clean paths |
+| Legacy path aliases | `/cloudberry/archive/gallery.php` etc. | 301 to clean paths |
 | Assets | `/cloudberry/archive/js/viewer.js` | `application/javascript` (not HTML) |
-| Catalog | `/cloudberry/archive/data/catalog.json` | JSON, ~1652 photos |
+| Catalog | `/cloudberry/archive/data/catalog.json` | JSON catalog |
 | Media | Image from `cloudberry-images.adamsimms.xyz` | 200 JPEG |
 | Umami | View source on archive HTML | `cloud.umami.is/script.js` + website id |
 | CSP-RO | Response headers | `Content-Security-Policy-Report-Only` present |
@@ -30,7 +30,4 @@ Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 | Pages Git auto-build | Disabled — only GHA/Wrangler deploys |
 | pinchards → art | `repository_dispatch` type `cloudberry-archive-rebuild` (needs `ART_DISPATCH_TOKEN` on pinchards) |
 | Art push / dispatch | Workflow builds archive + assembles + deploys |
-
-## DreamHost
-
-**Retired (Phase 5).** `pinchards.is` is Cloudflare Bulk Redirect → art paths. See [PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md).
+| pinchards.is | Worker redirects → art paths (see [PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md)) |

@@ -9,6 +9,7 @@
 | Custom domain | `art.adamsimms.xyz` |
 | R2 bucket (portfolio) | `art-adamsimms-xyz` → `media.adamsimms.xyz` |
 | R2 buckets (Cloudberry) | `art-adamsimms-xyz-cloudberry-images` / `-thumbs` → `cloudberry-*.adamsimms.xyz` |
+| Redirect Worker | `pinchards-redirect` → routes on `pinchards.is` / `www` |
 
 ## How production deploys
 
@@ -25,8 +26,9 @@ Optional: `repository_dispatch` type `cloudberry-archive-rebuild` from `pinchard
 3. Add DNS CNAME records:
    - `art` → Pages project
    - `media` → R2 public bucket domain
+   - `cloudberry-images` / `cloudberry-thumbs` → Cloudberry R2 buckets
 4. Set GitHub Actions secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
-5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`.
+5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`, optional `CLOUDFLARE_ZONE_ID`.
 
 ## Media upload
 
@@ -42,36 +44,21 @@ Images are stored as AVIF (primary) + JPEG (fallback) at:
 - `work/<slug>/NN.avif`
 - `work/<slug>/NN.jpg`
 
-Pages use `<picture>` so browsers that support AVIF get it; others get JPEG.
+## Assembled apps
 
-If an earlier WebP upload already ran, re-run `npm run upload:media` after re-encoding — new keys overwrite by path; leftover `.webp` objects can be deleted from the bucket later.
+`npm run build:full` (and CI) assembles into `dist/`:
 
-## Cutover (after QA)
+| Path | Source |
+|------|--------|
+| `/cloudberry/archive/` | `adamsimms/pinchards.is` static archive |
+| `/dory/` | `adamsimms/dory` |
+| `/adrift/experience/` | `adamsimms/adrift` (+ `/adrift/api/weather` Function) |
+| `/waves/` | `adamsimms/waves` (+ `/waves/call-api`, `/waves/health` Functions) |
 
-1. Deploy and QA on Pages preview URL.
-2. Attach `art.adamsimms.xyz` and spot-check all work pages, about, CV, blog, and `/cloudberry/archive/`.
-3. Enable redirect on `adamsim.ms` in Cloudflare:
+See [docs/CLOUDBERRY-ASSEMBLE.md](docs/CLOUDBERRY-ASSEMBLE.md), [docs/PHASE4-SIBLINGS.md](docs/PHASE4-SIBLINGS.md).
 
-   ```
-   adamsim.ms/* → https://art.adamsimms.xyz/:splat (301)
-   ```
+## Redirects
 
-4. Keep Squarespace live 1–2 weeks as fallback.
+**In-repo** (`public/_redirects`): portfolio aliases, trailing-slash mounts, legacy archive path aliases.
 
-## Redirects (in-repo)
-
-`public/_redirects` handles:
-
-- `/home` → `/`
-- `/intro` → `/`
-- `/blog/tag/*` → `/blog`
-- `/cloudberry/archive` → `/cloudberry/archive/` (308)
-- Cloudberry `.php` legacy paths (merged from assemble)
-
-## Phase 5 — pinchards.is
-
-Canonical Cloudberry + siblings live on this host. `pinchards.is` is Bulk Redirect–only (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md) and [docs/PHASE5-REDIRECTS.json](docs/PHASE5-REDIRECTS.json)). Re-apply with:
-
-```bash
-gh workflow run apply-pinchards-redirects.yml
-```
+**pinchards.is**: Worker `pinchards-redirect` (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md)). Keep `pinchards.is` / `www` DNS proxied.

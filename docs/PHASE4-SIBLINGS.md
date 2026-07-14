@@ -1,4 +1,4 @@
-# Phase 4 — sibling apps on art.adamsimms.xyz
+# Sibling apps on art.adamsimms.xyz
 
 Three separate GitHub repos assemble into the art Pages project at deploy:
 
@@ -34,7 +34,4 @@ Art deploy checks out all four sibling repos and runs `assemble:siblings`, then 
 - `/adrift/api/weather` returns `{ source, current }`
 - `/waves/` WebGL + `/waves/call-api` JSON every ~10s
 - Trailing-slash 308s for each mount
-
-## Phase 5
-
-DreamHost rsync for these apps is **retired** (push no longer deploys). Canonical URLs are the art paths above; `pinchards.is` Bulk Redirects here. See [PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md).
+- `pinchards.is/…` redirects to these art paths ([PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md))

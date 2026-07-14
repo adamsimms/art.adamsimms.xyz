@@ -1,13 +1,15 @@
 # art.adamsimms.xyz
 
-Photography and art portfolio migrated from Squarespace (`adamsim.ms`) to Astro 7 on Cloudflare Pages.
+Photography and art portfolio on Astro 7 / Cloudflare Pages (`art.adamsimms.xyz`).
 
 ## Stack
 
 - Astro 7 (static output)
 - Cloudflare Pages (`art.adamsimms.xyz`)
-- R2 (`media.adamsimms.xyz`)
+- R2 (`media.adamsimms.xyz`, Cloudberry image buckets)
+- Pages Functions (Adrift weather, Waves buoy API)
 - Umami analytics (shared with `adamsimms.xyz`)
+- Assemble-at-deploy for Cloudberry archive + Dory / Adrift / Waves
 
 ## Development
 
@@ -18,28 +20,15 @@ npm install
 npm run dev
 ```
 
-## Migration
-
-Scrape Squarespace, generate content, download and convert images:
-
-```bash
-npm run migrate
-```
-
-Upload staged images to R2 (requires Wrangler auth):
-
-```bash
-npm run upload:media
-```
-
 ## Deploy
 
 ```bash
 npm run deploy
+# or: npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz
 ```
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare setup and cutover steps.
+See [DEPLOYMENT.md](./DEPLOYMENT.md). Assemble notes: [docs/CLOUDBERRY-ASSEMBLE.md](./docs/CLOUDBERRY-ASSEMBLE.md). Cutover: [docs/PHASE5-CUTOVER.md](./docs/PHASE5-CUTOVER.md).
 
 ## URL structure
 
-Flat work URLs are preserved from Squarespace (`/sublime`, not `/work/sublime`). `/home` and `/intro` redirect to `/`.
+Flat work URLs (`/sublime`, `/cloudberry`, …). Archive: `/cloudberry/archive/`. Experiences: `/dory/`, `/adrift/experience/`, `/waves/`.

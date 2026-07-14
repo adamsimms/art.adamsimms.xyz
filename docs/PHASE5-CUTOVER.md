@@ -1,64 +1,35 @@
-# Phase 5 — Cutover
+# Cutover — pinchards.is → art.adamsimms.xyz
 
 Canonical host is **`art.adamsimms.xyz`**. `pinchards.is` / `www` redirect onto art paths (citation window). No vanity project subdomains.
 
-## What shipped in git
+## Live
 
-| Piece | Status |
+| Piece | Detail |
 |-------|--------|
-| Redirect Worker | [`workers/pinchards-redirect`](../workers/pinchards-redirect/) — deploy once token allows Workers Edit |
-| Bulk Redirects map | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) + [`PHASE5-REDIRECTS.csv`](./PHASE5-REDIRECTS.csv) |
-| DreamHost rsync | Disabled on push for pinchards / dory / adrift / waves (`workflow_dispatch` only) |
+| Redirect Worker | `pinchards-redirect` — [`workers/pinchards-redirect`](../workers/pinchards-redirect/) |
+| Redirect map (reference) | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) / [`PHASE5-REDIRECTS.csv`](./PHASE5-REDIRECTS.csv) |
+| Sibling publish | Content ships only via art Pages assemble (sibling repos no longer auto-publish to the old host) |
 | Waves uptime | Probes `art.adamsimms.xyz/waves/*` |
-| adamsimms.xyz links | Point at art paths |
 
-Query strings (e.g. `?filename=`) are preserved once redirects are live.
+Query strings (e.g. `?filename=`) are preserved.
 
-## Finish redirects (pick one)
-
-The art Pages API token can deploy Pages but **not** Workers scripts or Bulk Redirect lists (Auth 10000). Do one of:
-
-### A — Dashboard Bulk Redirects (fastest)
-
-1. Cloudflare Dashboard → **Account** → **Bulk Redirects**
-2. Create list `pinchards_to_art`, upload [`PHASE5-REDIRECTS.csv`](./PHASE5-REDIRECTS.csv)
-3. Add a Bulk Redirect **rule** that enables the list
-4. Keep `pinchards.is` / `www` **proxied**
-
-### B — Expand API token, then re-run
-
-On the GitHub secret `CLOUDFLARE_API_TOKEN`, add:
-
-- Account → **Workers Scripts** → Edit  
-- Account → **Workers Routes** → Edit *(or Zone Workers Routes)*  
-- Account → **Account Filter Lists** → Edit  
-- Account → **Bulk URL Redirects** → Edit  
-
-Then either:
+## Update the Worker
 
 ```bash
 gh workflow run deploy-pinchards-redirect.yml -R adamsimms/art.adamsimms.xyz
-# or
-gh workflow run apply-pinchards-redirects.yml -R adamsimms/art.adamsimms.xyz
+# or locally:
+cd workers/pinchards-redirect && npx wrangler deploy
 ```
 
-### C — Local Wrangler
+DNS for `pinchards.is` / `www` must stay **proxied (orange cloud)**.
+
+API token needs Account Pages + Workers Scripts Edit, Zone Workers Routes Edit (include `pinchards.is`), and optionally Bulk URL Redirects / Filter Lists if using the Bulk Redirects apply workflow.
+
+## Optional Bulk Redirects
 
 ```bash
-cd workers/pinchards-redirect
-npx wrangler login
-npx wrangler deploy
+gh workflow run apply-pinchards-redirects.yml -R adamsimms/art.adamsimms.xyz
 ```
-
-## Manual ops (Adam)
-
-Do these **after** redirects smoke green:
-
-1. Confirm nothing important still hits CloudFront `d3kq73…` / `d35wkp…`.
-2. Delete or empty CloudFront distributions + S3 buckets `shutter-island` / `shutter-island-thumbnails`.
-3. Delete gallery IAM user/keys; remove `AWS_*` GitHub secrets from pinchards (siblings if any).
-4. DreamHost panel — cancel host / stop paying.
-5. Later: stop renewing `.is` when the citation window is done (keep DNS redirect-only until then).
 
 ## Smoke checklist
 
@@ -73,3 +44,7 @@ curl -sSI 'https://www.pinchards.is/?filename=test.jpg' | grep -iE 'HTTP/|locati
 ```
 
 Expect **301** with `Location: https://art.adamsimms.xyz/...`.
+
+## After soak
+
+When citations no longer need the `.is` hostname: stop renewing the domain (keep redirects until then). Gallery media is on R2 (`cloudberry-images|thumbs.adamsimms.xyz`) — retire any leftover third-party object storage / CDN manually once unused.
