@@ -1,18 +1,29 @@
 # Phase 5 — Cutover
 
-Canonical host is **`art.adamsimms.xyz`**. `pinchards.is` / `www` are Cloudflare Bulk Redirects onto art paths (citation window). No vanity project subdomains.
+Canonical host is **`art.adamsimms.xyz`**. `pinchards.is` / `www` redirect onto art paths (citation window). No vanity project subdomains.
 
 ## What shipped
 
 | Piece | Status |
 |-------|--------|
-| Bulk Redirect map | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) |
-| Apply script | `node scripts/apply-pinchards-bulk-redirects.mjs` (workflow: **Apply pinchards Bulk Redirects**) |
+| Redirect Worker | `pinchards-redirect` — [`workers/pinchards-redirect`](../workers/pinchards-redirect/) |
+| Redirect map (reference) | [`PHASE5-REDIRECTS.json`](./PHASE5-REDIRECTS.json) |
+| Bulk Redirects script (optional) | `npm run redirects:pinchards` — needs Account Filter Lists + Bulk URL Redirects Edit on the API token |
 | DreamHost rsync | Disabled on push for pinchards / dory / adrift / waves (`workflow_dispatch` only) |
 | Waves uptime | Probes `art.adamsimms.xyz/waves/*` |
 | Assembled apps | Still built into art Pages deploy |
 
 Query strings (e.g. `?filename=`) are preserved on redirects.
+
+## Deploy / update Worker
+
+```bash
+gh workflow run deploy-pinchards-redirect.yml -R adamsimms/art.adamsimms.xyz
+# or locally:
+cd workers/pinchards-redirect && npx wrangler deploy
+```
+
+DNS for `pinchards.is` / `www` must stay **proxied (orange cloud)** so Worker routes run.
 
 ## Manual ops (Adam)
 
@@ -37,11 +48,3 @@ curl -sSI 'https://www.pinchards.is/?filename=test.jpg' | grep -iE 'HTTP/|locati
 ```
 
 Expect **301** with `Location: https://art.adamsimms.xyz/...`.
-
-## Re-apply redirects
-
-```bash
-gh workflow run apply-pinchards-redirects.yml -R adamsimms/art.adamsimms.xyz
-```
-
-Token needs Account **Bulk URL Redirects** Edit and **Account Filter Lists** Edit (same account as art Pages).
