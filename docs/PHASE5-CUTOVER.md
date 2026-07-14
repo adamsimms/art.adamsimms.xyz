@@ -35,7 +35,6 @@ gh workflow run apply-pinchards-redirects.yml -R adamsimms/art.adamsimms.xyz
 
 ```bash
 curl -sSI 'https://www.pinchards.is/' | grep -iE 'HTTP/|location'
-curl -sSI 'https://www.pinchards.is/info.php' | grep -iE 'HTTP/|location'
 curl -sSI 'https://www.pinchards.is/dory/' | grep -iE 'HTTP/|location'
 curl -sSI 'https://www.pinchards.is/adrift/' | grep -iE 'HTTP/|location'
 curl -sSI 'https://www.pinchards.is/waves/' | grep -iE 'HTTP/|location'

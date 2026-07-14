@@ -16,7 +16,7 @@ Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 | Jam | `/cloudberry/archive/jam/` | Fullscreen kiosk slideshow |
 | Maps hub | `/maps`, `/maps/trees`, `/maps/resettled` | Mapbox tiles (pk token allowlisted) |
 | Portfolio CTA | `/cloudberry` → Enter the archive | `/cloudberry/archive/` |
-| Legacy path aliases | `/cloudberry/archive/gallery.php` etc. | 301 to clean paths |
+| Legacy path aliases | Old gallery/info/slideshow URL shapes under `/cloudberry/archive/` | 301 to clean paths |
 | Assets | `/cloudberry/archive/js/viewer.js` | `application/javascript` (not HTML) |
 | Catalog | `/cloudberry/archive/data/catalog.json` | JSON catalog |
 | Media | Image from `cloudberry-images.adamsimms.xyz` | 200 JPEG |
