@@ -133,7 +133,13 @@ jobs:
                 "https://art.adamsimms.xyz/cloudberry/archive/js/gallery.js",
                 "https://art.adamsimms.xyz/cloudberry/archive/css/viewer.css",
                 "https://art.adamsimms.xyz/cloudberry/archive/css/gallery.css",
-                "https://art.adamsimms.xyz/cloudberry/archive/css/pinchard.css"
+                "https://art.adamsimms.xyz/cloudberry/archive/css/pinchard.css",
+                "https://art.adamsimms.xyz/waves/",
+                "https://art.adamsimms.xyz/waves/assets/js/station-poll.js",
+                "https://art.adamsimms.xyz/waves/assets/css/waves.css",
+                "https://art.adamsimms.xyz/adrift/experience/",
+                "https://art.adamsimms.xyz/adrift/experience/js/h106.js",
+                "https://art.adamsimms.xyz/dory/"
               ]
             }')
           python3 -c 'import json,sys; d=json.loads(sys.argv[1]); print("purged", d.get("result")) if d.get("success") else sys.exit("purge failed: "+str(d))' "$RESP"
