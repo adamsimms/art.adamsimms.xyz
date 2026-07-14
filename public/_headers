@@ -25,3 +25,19 @@
 
 /cloudberry/archive/favicon/*
   Cache-Control: public, max-age=86400
+
+# Sibling app assets are unhashed filenames — keep cache modest so poller/CSS fixes ship.
+/waves/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/dory/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/adrift/experience/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/adrift/experience/jsm/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/adrift/experience/css/*
+  Cache-Control: public, max-age=3600, must-revalidate

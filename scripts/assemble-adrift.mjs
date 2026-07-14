@@ -85,17 +85,22 @@ rewriteWeatherUrls(DEST);
 const indexPath = join(DEST, 'index.html');
 let html = readFileSync(indexPath, 'utf8');
 html = stripGoogleAnalytics(html);
+const experienceUrl = 'https://art.adamsimms.xyz/adrift/experience/';
 if (!html.includes('rel="canonical"')) {
 	html = html.replace(
 		'</head>',
-		'  <link rel="canonical" href="https://art.adamsimms.xyz/adrift/experience/">\n</head>',
+		`  <link rel="canonical" href="${experienceUrl}">\n</head>`,
 	);
 } else {
 	html = html.replace(
-		/href="https?:\/\/[^"]*adrift\/?"/i,
-		'href="https://art.adamsimms.xyz/adrift/experience/"',
+		/href="https?:\/\/[^"]*adrift[^"]*"/i,
+		`href="${experienceUrl}"`,
 	);
 }
+html = html.replace(
+	/<meta\s+property="og:url"\s+content="[^"]*"/i,
+	`<meta property="og:url" content="${experienceUrl}"`,
+);
 writeFileSync(indexPath, html);
 
 injectUmamiIntoHtmlDir(ART_ROOT, DEST, 'assemble-adrift');
