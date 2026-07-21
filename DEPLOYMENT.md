@@ -54,6 +54,7 @@ Images are stored as AVIF (primary) + JPEG (fallback) at:
 | `/dory/` | `adamsimms/dory` |
 | `/adrift/experience/` | `adamsimms/adrift` (+ `/adrift/api/weather` Function) |
 | `/waves/` | `adamsimms/waves` (+ `/waves/call-api`, `/waves/health` Functions) |
+| `/dreamberry/` | `adamsimms/dreamberry` `window/` (portfolio + `/window` + `/info`) |
 
 See [docs/CLOUDBERRY-ASSEMBLE.md](docs/CLOUDBERRY-ASSEMBLE.md), [docs/PHASE4-SIBLINGS.md](docs/PHASE4-SIBLINGS.md).
 

@@ -8,6 +8,9 @@
 /dory /dory/ 308
 /adrift/experience /adrift/experience/ 308
 /waves /waves/ 308
+/dreamberry /dreamberry/ 308
+/dreamberry/window /dreamberry/window/ 308
+/dreamberry/info /dreamberry/info/ 308
 
 # Sibling legacy aliases
 /waves/call-api.php /waves/call-api 301
