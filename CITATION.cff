@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+type: software
+title: art.adamsimms.xyz
+abstract: Photography and art portfolio on Astro 7 / Cloudflare Pages.
+authors:
+  - family-names: Simms
+    given-names: Adam
+    email: hello@adamsimms.xyz
+repository-code: https://github.com/adamsimms/art.adamsimms.xyz
+url: https://art.adamsimms.xyz
+license: MIT
+version: 0.0.1
+date-released: "2026-07-10"
