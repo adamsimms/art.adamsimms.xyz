@@ -1,0 +1,176 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Base from '../layouts/Base.astro';
+import { metaDescription } from '../lib/seo';
+
+const title = 'Collaborations';
+const description = metaDescription(
+	'Selected publication design, catalogues, and web work for artists — and availability for hire.',
+);
+
+function galleryImages(slug: string) {
+	const dir = path.join(process.cwd(), 'public/collaborations', slug);
+	if (!fs.existsSync(dir)) return [];
+	return fs
+		.readdirSync(dir)
+		.filter((file) => /\.jpe?g$/i.test(file))
+		.sort()
+		.map((file) => `/collaborations/${slug}/${file}`);
+}
+
+const projects = [
+	{
+		title: 'Goose Village',
+		slug: 'goose-village',
+		imageAlt: 'Goose Village publication',
+		body: 'Bilingual publication on the lost history of Goose Village in Pointe-Saint-Charles, Montreal — a neighbourhood erased by 1960s urban development.',
+		specs: [
+			'Softcover',
+			'9 × 10 inches • 232 pages',
+			'Published by Marisa Portolese, 2023',
+		],
+		links: [
+			{ href: 'https://www.goosevillage.ca', label: 'www.goosevillage.ca' },
+			{ href: 'https://www.marisaportolese.com', label: 'www.marisaportolese.com' },
+		],
+	},
+	{
+		title: 'Dear Nani',
+		slug: 'dear-nani',
+		imageAlt: 'Dear Nani photobook by Zinnia Naqvi',
+		body: 'Photobook addressing gender performance and colonial mimicry through the family archive. French and English signed editions.',
+		specs: [
+			'Smyth-sewn hardcover • linen • foil stamped',
+			'Paper book band silkscreened with gold ink',
+			'7 × 11 inches',
+			'Published by Anchorless Press, 2022',
+		],
+		links: [{ href: 'https://zinnianaqvi.com/dear-nani', label: 'www.zinnianaqvi.com/dear-nani' }],
+	},
+	{
+		title: 'In the Studio with Notman',
+		slug: 'in-the-studio-with-notman',
+		imageAlt: 'In the Studio with Notman photobook',
+		body: 'Photobook for Marisa Portolese’s In the Studio with Notman, in collaboration with the McCord Museum.',
+		specs: [
+			'10 × 12 inches • 92 pages',
+			'Published by McCord Museum, 2018',
+		],
+		links: [{ href: 'https://www.marisaportolese.com', label: 'www.marisaportolese.com' }],
+	},
+	{
+		title: 'How to Get to Pinchard’s Island',
+		slug: 'how-to-get-to-pinchards-island',
+		imageAlt: 'How to Get to Pinchard’s Island booklet',
+		body: 'Thesis text for MFA in studio arts, photography.',
+		specs: ['4 × 5 inches • 32 pages', 'Self-published, 2021'],
+		links: [{ href: '/pinchards-island', label: 'art.adamsimms.xyz/pinchards-island' }],
+	},
+	{
+		title: 'Occurrence',
+		slug: 'occurrence',
+		imageAlt: 'Occurrence website',
+		gallery: 'website' as const,
+		body: 'Website for Occurrence, espace d’art et d’essai contemporains — Montreal artist-run centre dedicated to contemporary arts, with photography and image practices as an anchor.',
+		specs: [],
+		links: [{ href: 'https://occurrence.ca/', label: 'www.occurrence.ca' }],
+	},
+].map((project) => ({
+	...project,
+	gallery: 'gallery' in project ? project.gallery : undefined,
+	specs: project.specs,
+	links: project.links,
+	images: project.slug ? galleryImages(project.slug) : [],
+}));
+---
+
+<Base title={title} description={description} variant="cv">
+	<article class="collaborations">
+		<header class="page-header">
+			<h1>{title}</h1>
+			<p class="collaborations__lead">
+				Artist books, catalogues, and websites designed for other artists — alongside a few of my
+				own.
+			</p>
+		</header>
+
+		<ul class="collaborations__list">
+			{
+				projects.map((project) => (
+					<li class="collaborations__item">
+						<div class="collaborations__copy">
+							<h2 class="collaborations__title">{project.title}</h2>
+							<p class="collaborations__body">{project.body}</p>
+							{project.specs.length ? (
+								<ul class="collaborations__specs">
+									{project.specs.map((line) => (
+										<li>{line}</li>
+									))}
+								</ul>
+							) : null}
+							{project.links.length ? (
+								<ul class="collaborations__links">
+									{project.links.map((link) => (
+										<li>
+											<a href={link.href}>{link.label}</a>
+										</li>
+									))}
+								</ul>
+							) : null}
+						</div>
+
+						{project.images.length > 0 ? (
+							<ul
+								class:list={[
+									'collaborations__gallery',
+									{ 'collaborations__gallery--website': project.gallery === 'website' },
+								]}
+							>
+								{project.images.map((src, index) => {
+									const alt = `${project.imageAlt}${index === 0 ? '' : ` (${index + 1})`}`;
+									return (
+										<li>
+											<img
+												src={src}
+												alt={alt}
+												loading={index === 0 ? 'eager' : 'lazy'}
+												decoding="async"
+											/>
+										</li>
+									);
+								})}
+							</ul>
+						) : (
+							<figure class="collaborations__media collaborations__media--empty" aria-hidden="true" />
+						)}
+					</li>
+				))
+			}
+		</ul>
+
+		<section class="collaborations__hire">
+			<h2 class="collaborations__hire-title">Available for hire</h2>
+			<p class="collaborations__availability">
+				Open to collaborations on artist websites, print publications, catalogues, exhibition
+				graphics, etc. If you’ve got a project that needs type, pages, or a corner of the
+				internet — <a data-email-mailto data-keep-label href="#">say hello</a>.
+			</p>
+		</section>
+	</article>
+</Base>
+
+<script>
+	import { contactEmail } from '../lib/contact-email';
+
+	function initCollabEmail() {
+		const address = contactEmail();
+		document.querySelectorAll('.collaborations__hire [data-email-mailto]').forEach((node) => {
+			if (!(node instanceof HTMLAnchorElement)) return;
+			node.href = `mailto:${address}`;
+			if (!node.hasAttribute('data-keep-label')) node.textContent = address;
+		});
+	}
+
+	document.addEventListener('astro:page-load', initCollabEmail);
+</script>
