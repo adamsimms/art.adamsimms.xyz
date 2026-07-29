@@ -1,0 +1,343 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { absoluteUrl, metaDescription } from '../../lib/seo';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('writing');
+	return posts.map((post) => ({
+		params: { slug: post.data.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const description = metaDescription(post.data.description);
+const pubDate = post.data.pubDate;
+const canonicalPath = `/writing/${post.data.slug}`;
+
+/** Shallow TOC: h2 parts + selected h3; skip auto Footnotes label (sr-only). */
+const toc = headings.filter((h) => {
+	if (h.slug === 'footnote-label' || /^footnotes$/i.test(h.text)) return false;
+	if (h.depth === 2) return true;
+	if (h.depth === 3) {
+		return /^(Relationship|Methodology|Description|Settlement|Resettlement|The Natural World|Outport Communities|Architecture|People|The Outport Newfoundland House|The Representation|The Floating Home|Conclusion|Next Steps)/i.test(
+			h.text,
+		);
+	}
+	return false;
+});
+
+const articleLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: post.data.title,
+	description,
+	datePublished: pubDate.toISOString().slice(0, 10),
+	author: {
+		'@type': 'Person',
+		name: 'Adam Simms',
+		url: 'https://art.adamsimms.xyz',
+	},
+	url: absoluteUrl(canonicalPath),
+};
+---
+
+<Base
+	title={post.data.title}
+	description={description}
+	ogType="article"
+	variant="writing"
+	jsonLd={articleLd}
+>
+	<div class="writing-layout">
+		{
+			toc.length > 1 ? (
+				<nav class="writing-toc" aria-label="Table of contents">
+					{/* Desktop sidebar list */}
+					<div class="writing-toc__sidebar">
+						<p class="writing-toc__heading">Contents</p>
+						<ol class="writing-toc__list">
+							{toc.map((item) => (
+								<li class={`writing-toc__item writing-toc__item--h${item.depth}`}>
+									<a href={`#${item.slug}`}>{item.text}</a>
+								</li>
+							))}
+						</ol>
+					</div>
+
+					{/* Tablet / mobile: bottom bar + full-screen drawer */}
+					<button
+						type="button"
+						class="writing-toc__launch"
+						data-toc-launch
+						aria-haspopup="dialog"
+						aria-controls="writing-toc-drawer"
+					>
+						<span class="writing-toc__launch-label">Contents</span>
+						<span class="writing-toc__launch-current" data-toc-current></span>
+					</button>
+
+					<dialog class="writing-toc__drawer" id="writing-toc-drawer" aria-label="Contents">
+						<div class="writing-toc__drawer-bar">
+							<p class="writing-toc__drawer-title">Contents</p>
+							<button type="button" class="writing-toc__drawer-close" data-toc-close>
+								Close
+							</button>
+						</div>
+						<ol class="writing-toc__list writing-toc__list--drawer">
+							{toc.map((item) => (
+								<li class={`writing-toc__item writing-toc__item--h${item.depth}`}>
+									<a href={`#${item.slug}`}>{item.text}</a>
+								</li>
+							))}
+						</ol>
+					</dialog>
+				</nav>
+			) : null
+		}
+
+		<article class="prose writing">
+			<header class="page-header">
+				<h1>
+					{
+						post.data.titleLines?.length
+							? post.data.titleLines.map((line, i) => (
+									<>
+										{i > 0 ? <br /> : null}
+										{line}
+									</>
+								))
+							: post.data.title
+					}
+				</h1>
+				{
+					post.data.subtitle ? (
+						<p class="writing-subtitle">{post.data.subtitle}</p>
+					) : null
+				}
+				<p class="writing-meta">
+					<time datetime={pubDate.toISOString().slice(0, 10)}>
+						{pubDate.toLocaleDateString('en-CA', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							timeZone: 'UTC',
+						})}
+					</time>
+				</p>
+			</header>
+			<Content />
+		</article>
+	</div>
+
+	<dialog class="writing-lightbox" aria-label="Enlarged figure">
+		<button type="button" class="writing-lightbox__close" aria-label="Close">
+			Close
+		</button>
+		<figure class="writing-lightbox__figure">
+			<img class="writing-lightbox__img" alt="" />
+			<figcaption class="writing-lightbox__caption"></figcaption>
+		</figure>
+	</dialog>
+
+	<script>
+		const tocObservers = new WeakMap();
+		const figWidthObservers = new WeakMap();
+
+		function initWritingTocSpy() {
+			const nav = document.querySelector('.writing-toc');
+			if (!nav) return;
+
+			tocObservers.get(nav)?.disconnect();
+
+			const drawer = nav.querySelector('.writing-toc__drawer');
+			const launch = nav.querySelector('[data-toc-launch]');
+			const closeBtn = nav.querySelector('[data-toc-close]');
+			const currentEls = [...nav.querySelectorAll('[data-toc-current]')];
+			const links = [...nav.querySelectorAll('a[href^="#"]')];
+			const ids = [
+				...new Set(
+					links.map((a) => a.getAttribute('href')?.slice(1)).filter(Boolean),
+				),
+			];
+			const headings = ids
+				.map((id) => document.getElementById(id))
+				.filter(Boolean);
+
+			if (!headings.length) return;
+
+			const compactMq = window.matchMedia('(max-width: 89.98rem)');
+
+			const setActive = (id) => {
+				let label = '';
+				for (const a of links) {
+					const match = a.getAttribute('href') === `#${id}`;
+					a.classList.toggle('is-active', match);
+					if (match) {
+						a.setAttribute('aria-current', 'location');
+						label = a.textContent?.trim() || '';
+					} else {
+						a.removeAttribute('aria-current');
+					}
+				}
+				for (const el of currentEls) {
+					el.textContent = label;
+				}
+			};
+
+			const visible = new Set();
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting) visible.add(entry.target.id);
+						else visible.delete(entry.target.id);
+					}
+					const current = ids.find((id) => visible.has(id));
+					if (current) setActive(current);
+				},
+				{ rootMargin: '-12% 0px -72% 0px', threshold: 0 },
+			);
+
+			tocObservers.set(nav, observer);
+			for (const el of headings) observer.observe(el);
+			if (ids[0]) setActive(ids[0]);
+
+			const openDrawer = () => {
+				if (!(drawer instanceof HTMLDialogElement) || drawer.open) return;
+				drawer.showModal();
+			};
+
+			const closeDrawer = () => {
+				if (!(drawer instanceof HTMLDialogElement) || !drawer.open) return;
+				drawer.close();
+			};
+
+			if (!nav.dataset.tocDrawerBound) {
+				nav.dataset.tocDrawerBound = 'true';
+				launch?.addEventListener('click', openDrawer);
+				closeBtn?.addEventListener('click', closeDrawer);
+				drawer?.addEventListener('click', (event) => {
+					if (event.target === drawer) closeDrawer();
+				});
+				nav.addEventListener('click', (event) => {
+					const target = event.target;
+					if (!(target instanceof Element)) return;
+					const link = target.closest('.writing-toc__list--drawer a[href^="#"]');
+					if (!link) return;
+					closeDrawer();
+				});
+			}
+
+			// Close drawer if we grow back to desktop
+			const onMode = () => {
+				if (!compactMq.matches) closeDrawer();
+			};
+			onMode();
+			if (!nav.dataset.tocModeBound) {
+				nav.dataset.tocModeBound = 'true';
+				compactMq.addEventListener('change', onMode);
+			}
+		}
+
+		/** Lock each body figure’s box to the rendered image width so captions wrap with it. */
+		function initWritingFigureWidths() {
+			const figures = document.querySelectorAll(
+				'.writing.prose > .writing-figure:not(.writing-figure--lead), .writing.prose > .writing-figures > .writing-figure',
+			);
+
+			for (const fig of figures) {
+				figWidthObservers.get(fig)?.disconnect();
+				const img = fig.querySelector('img');
+				if (!img) continue;
+
+				const sync = () => {
+					const w = img.clientWidth;
+					if (!w) return;
+					fig.style.setProperty('--fig-w', `${w}px`);
+				};
+
+				const ro = new ResizeObserver(sync);
+				ro.observe(img);
+				figWidthObservers.set(fig, ro);
+
+				if (img.complete) sync();
+				else img.addEventListener('load', sync, { once: true });
+			}
+		}
+
+		function initWritingLightbox() {
+			const dialog = document.querySelector('.writing-lightbox');
+			if (!(dialog instanceof HTMLDialogElement)) return;
+
+			const imgEl = dialog.querySelector('.writing-lightbox__img');
+			const captionEl = dialog.querySelector('.writing-lightbox__caption');
+			const closeBtn = dialog.querySelector('.writing-lightbox__close');
+			if (!(imgEl instanceof HTMLImageElement) || !(captionEl instanceof HTMLElement)) return;
+
+			const openFromFigure = (fig) => {
+				const img = fig.querySelector('img');
+				if (!(img instanceof HTMLImageElement) || !img.src) return;
+				const caption = fig.querySelector('figcaption');
+				imgEl.src = img.currentSrc || img.src;
+				imgEl.alt = img.alt || '';
+				captionEl.textContent = caption?.textContent?.replace(/\s+/g, ' ').trim() || '';
+				if (!dialog.open) dialog.showModal();
+			};
+
+			if (!dialog.dataset.ready) {
+				dialog.dataset.ready = 'true';
+				closeBtn?.addEventListener('click', () => dialog.close());
+				dialog.addEventListener('click', (event) => {
+					if (event.target === dialog) dialog.close();
+				});
+				dialog.addEventListener('close', () => {
+					imgEl.removeAttribute('src');
+					captionEl.textContent = '';
+				});
+			}
+
+			const article = document.querySelector('article.writing');
+			if (article && !article.dataset.lightboxBound) {
+				article.dataset.lightboxBound = 'true';
+				article.addEventListener('click', (event) => {
+					const target = event.target;
+					if (!(target instanceof Element)) return;
+					if (target.closest('a, button')) return;
+					const fig = target.closest('.writing-figure');
+					if (!fig || !fig.querySelector('img')) return;
+					if (target.closest('img, picture')) {
+						event.preventDefault();
+						openFromFigure(fig);
+					}
+				});
+				article.addEventListener('keydown', (event) => {
+					if (event.key !== 'Enter' && event.key !== ' ') return;
+					const target = event.target;
+					if (!(target instanceof HTMLElement)) return;
+					if (!target.matches('.writing-figure img')) return;
+					event.preventDefault();
+					const fig = target.closest('.writing-figure');
+					if (fig) openFromFigure(fig);
+				});
+			}
+
+			for (const img of document.querySelectorAll('.writing-figure img')) {
+				img.setAttribute('tabindex', '0');
+				img.setAttribute('role', 'button');
+				img.setAttribute('aria-label', 'View larger image');
+				img.classList.add('writing-figure__zoom');
+			}
+		}
+
+		function initWritingPage() {
+			initWritingTocSpy();
+			initWritingFigureWidths();
+			initWritingLightbox();
+		}
+
+		initWritingPage();
+		document.addEventListener('astro:page-load', initWritingPage);
+	</script>
+</Base>

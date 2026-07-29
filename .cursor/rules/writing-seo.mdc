@@ -1,0 +1,31 @@
+---
+description: SEO checklist when publishing Writing on the main site
+globs: src/content/writing/**/*,src/pages/writing/**/*,src/components/Nav.astro,src/components/Footer.astro,src/lib/seo.ts,astro.config.mjs
+alwaysApply: false
+---
+
+# Writing — go-live SEO
+
+Writing pieces can ship at `/writing/[slug]` before they are linked from the main nav. When Writing is ready to promote on the site, do this SEO pass:
+
+## Discovery & internal links
+
+- Add Writing to main nav (`Nav.astro`) and footer if appropriate
+- Add a Writing index (or clear entry points from home / About / CV) so crawlers and people can find pieces without relying on direct URLs
+- Confirm CV and other internal links use the canonical `/writing/...` paths
+
+## Per-piece metadata
+
+- Every piece needs a strong `description` in frontmatter (used for meta + Article JSON-LD)
+- Pass a dedicated social image into `Base` (lead figure JPG preferred — crawlers often skip AVIF). Today writing pages fall back to the sitewide OG image if `image` is omitted
+- Keep `pubDate` accurate; Article schema already emits `datePublished`
+- If the piece also lives on Medium (or elsewhere), decide canonical: prefer `art.adamsimms.xyz` as canonical when this is the primary home, and align Medium’s canonical / cross-post settings
+
+## Site plumbing
+
+- Sitemap already includes writing routes via `@astrojs/sitemap` — verify new slugs appear after build; only hide a piece if intentional (mirror `HIDDEN_PATHS` / `noindex` pattern used for work)
+- After launch: request indexing in Search Console for `/writing` (or index) and key essays; spot-check rich results / OG previews (Facebook Sharing Debugger, Twitter/X card validator)
+
+## Do not treat as done until
+
+Nav (or index) links exist, each live essay has description + JPG OG image, and sitemap/Search Console have been checked.
