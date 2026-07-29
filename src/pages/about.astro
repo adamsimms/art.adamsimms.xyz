@@ -1,42 +1,63 @@
 ---
 import Base from '../layouts/Base.astro';
-import ContactForm from '../components/ContactForm.astro';
 import { getEntry, render } from 'astro:content';
+import { absoluteUrl, metaDescription } from '../lib/seo';
 
 const page = await getEntry('pages', 'about');
 if (!page) throw new Error('About page not found');
 const { Content } = await render(page);
+const description = metaDescription(page.data.description);
+const portrait = absoluteUrl('/about/portrait.jpg');
 ---
 
-<Base title={page.data.title} description={page.data.description}>
+<Base
+	title={page.data.title}
+	description={description}
+	image={portrait}
+	imageAlt="Adam Simms"
+	variant="about"
+>
 	<article class="about">
-		<header class="page-header">
-			<h1>{page.data.title}</h1>
-		</header>
+		<h1 class="visually-hidden">{page.data.title}</h1>
 
-		{
-			page.data.statement ? (
-				<p class="about-statement">{page.data.statement}</p>
-			) : null
-		}
+		<div class="about-layout">
+			{
+				page.data.statement ? (
+					<section class="about-statement">
+						<h2>Artist Statement</h2>
+						{page.data.statement
+							.split(/\n\n+/)
+							.map((paragraph) => paragraph.trim())
+							.filter(Boolean)
+							.map((paragraph) => (
+								<p>{paragraph}</p>
+							))}
+					</section>
+				) : null
+			}
 
-		<div class="about-bio prose">
-			<figure class="about-portrait">
-				<picture>
-					<source srcset="/about/portrait.avif" type="image/avif" />
-					<img
-						src="/about/portrait.jpg"
-						alt="Adam Simms"
-						width="720"
-						height="585"
-						loading="eager"
-						decoding="async"
-					/>
-				</picture>
-			</figure>
-			<Content />
+			<div class="about-lower">
+				<figure class="about-portrait">
+					<picture>
+						<source srcset="/about/portrait.avif" type="image/avif" />
+						<img
+							src="/about/portrait.jpg"
+							alt="Adam Simms"
+							width="720"
+							height="585"
+							loading="eager"
+							decoding="async"
+						/>
+					</picture>
+				</figure>
+
+				<section class="about-bio-panel">
+					<h2>Biography</h2>
+					<div class="about-bio prose">
+						<Content />
+					</div>
+				</section>
+			</div>
 		</div>
-
-		<ContactForm />
 	</article>
 </Base>

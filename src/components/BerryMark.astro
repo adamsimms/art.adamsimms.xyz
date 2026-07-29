@@ -1,0 +1,29 @@
+---
+import { BERRY_LOBES } from '../lib/berry';
+
+interface Props {
+	animated?: boolean;
+	class?: string;
+	size?: number;
+}
+
+const { animated = false, class: className = '', size = 56 } = Astro.props;
+---
+
+<svg
+	class:list={['berry-mark', animated && 'berry-mark--animated', className]}
+	width={size}
+	height={size}
+	viewBox="0 0 24 24"
+	fill="none"
+	aria-hidden="true"
+	focusable="false"
+>
+	<g transform="translate(3 3.28125) scale(0.28125)" fill-rule="nonzero">
+		{
+			BERRY_LOBES.map((d, i) => (
+				<path class={`berry-mark__lobe berry-mark__lobe--${i + 1}`} d={d} />
+			))
+		}
+	</g>
+</svg>

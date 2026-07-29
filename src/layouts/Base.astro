@@ -1,31 +1,116 @@
 ---
+import { ClientRouter, fade } from 'astro:transitions';
+import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
+import {
+	DEFAULT_DESCRIPTION,
+	DEFAULT_OG_IMAGE_ALT,
+	PERSON_SAME_AS,
+	SITE_NAME,
+	SITE_URL,
+	absoluteUrl,
+	metaDescription,
+	socialImageUrl,
+} from '../lib/seo';
 import '../styles/global.css';
 
 interface Props {
 	title?: string;
 	description?: string;
-	variant?: 'default' | 'home';
+	image?: string;
+	imageAlt?: string;
+	ogType?: 'website' | 'article';
+	noindex?: boolean;
+	variant?: 'default' | 'home' | 'work' | 'about' | 'cv' | 'writing';
+	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
-	title = 'Adam Simms',
-	description = 'Photography and art by Adam Simms',
+	title = SITE_NAME,
+	description,
+	image,
+	imageAlt,
+	ogType = 'website',
+	noindex = false,
 	variant = 'default',
+	jsonLd,
 } = Astro.props;
-const pageTitle = title === 'Adam Simms' ? title : `${title} — Adam Simms`;
+
+const pageTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
+const desc = metaDescription(description);
+const canonical = absoluteUrl(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site?.href || SITE_URL);
+const usingDefaultImage = !image?.trim();
+const ogImage = socialImageUrl(image);
+const ogImageAlt =
+	imageAlt?.trim() ||
+	(usingDefaultImage || title === SITE_NAME
+		? DEFAULT_OG_IMAGE_ALT
+		: `${title} by Adam Simms`);
+const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+
+const personLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: SITE_NAME,
+	url: SITE_URL,
+	jobTitle: 'Media artist',
+	description: DEFAULT_DESCRIPTION,
+	sameAs: [...PERSON_SAME_AS],
+};
+
+const websiteLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: SITE_NAME,
+	url: SITE_URL,
+	description: DEFAULT_DESCRIPTION,
+	publisher: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
+};
+
+const structuredData = [
+	websiteLd,
+	personLd,
+	...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+];
+
 const isHome = variant === 'home';
+const isWork = variant === 'work';
+const isAbout = variant === 'about';
+const isCv = variant === 'cv';
+const isWriting = variant === 'writing';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={fade({ duration: '600ms' })}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=berry-orange" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=berry-orange" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=berry-orange" />
+		<link rel="shortcut icon" href="/favicon.ico?v=berry-orange" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=berry-orange" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content={description} />
+		<meta name="theme-color" content="#fafafa" />
+		<meta name="description" content={desc} />
+		<meta name="robots" content={robots} />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={canonical} />
+
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={desc} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:alt" content={ogImageAlt} />
+		<meta property="og:locale" content="en_CA" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={desc} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="preconnect" href="https://media.adamsimms.xyz" />
@@ -36,6 +121,8 @@ const isHome = variant === 'home';
 			rel="stylesheet"
 		/>
 		<title>{pageTitle}</title>
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		<ClientRouter />
 		<!-- umami-analytics:start -->
 		<script
 			defer
@@ -43,12 +130,51 @@ const isHome = variant === 'home';
 			data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33"
 			data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz"
 			data-do-not-track="true"></script>
+		<script is:inline>
+			document.addEventListener('astro:after-swap', () => {
+				if (typeof umami !== 'undefined') umami.track();
+			});
+		</script>
 		<!-- umami-analytics:end -->
+		<script>
+			document.addEventListener('astro:page-load', () => {
+				const project = document.querySelector('[data-project-reveal]');
+				if (!(project instanceof HTMLElement)) return;
+				project.removeAttribute('data-ready');
+				requestAnimationFrame(() => {
+					project.setAttribute('data-ready', '');
+				});
+			});
+		</script>
 	</head>
-	<body class:list={[isHome && 'body--home']}>
-		<Nav />
-		<main class:list={[isHome && 'main--home']}>
-			<slot />
-		</main>
+	<body class:list={[isHome && 'body--home', isWork && 'body--work', isAbout && 'body--about', isWriting && 'body--writing']}>
+		{
+			isHome ? (
+				<>
+					<Nav />
+					<main class="main--home">
+						<slot />
+					</main>
+				</>
+			) : (
+				<>
+					<div class="site-sheet">
+						<Nav />
+						<main
+							class:list={[
+								isWork && 'main--work',
+								isAbout && 'main--about',
+								isCv && 'main--cv',
+								isWriting && 'main--writing',
+							]}
+						>
+							<slot />
+						</main>
+					</div>
+					<div class="site-footer-reveal" aria-hidden="true"></div>
+					<Footer />
+				</>
+			)
+		}
 	</body>
 </html>

@@ -1,20 +1,27 @@
 ---
 interface Props {
-	/** Destination email for FormSubmit delivery */
-	to?: string;
+	/** Destination set in JS via contact-email helper */
+	id?: string;
 }
 
-const { to = 'adamsimms@gmail.com' } = Astro.props;
+const { id = 'contact' } = Astro.props;
 ---
 
-<section class="contact" aria-labelledby="contact-heading">
+<section class="contact" id={id} aria-labelledby="contact-heading">
 	<h2 id="contact-heading">Contact</h2>
 
-	<form class="contact-form" method="POST" action={`https://formsubmit.co/${to}`} data-contact-form>
+	<form class="contact-form" method="POST" action="#" data-contact-form>
 		<input type="hidden" name="_subject" value="Message from art.adamsimms.xyz" />
 		<input type="hidden" name="_template" value="table" />
 		<input type="hidden" name="_captcha" value="false" />
-		<input type="text" name="_honey" class="contact-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+		<input
+			type="text"
+			name="_honey"
+			class="contact-honey"
+			tabindex="-1"
+			autocomplete="off"
+			aria-hidden="true"
+		/>
 
 		<div class="contact-row">
 			<label>
@@ -45,37 +52,49 @@ const { to = 'adamsimms@gmail.com' } = Astro.props;
 </section>
 
 <script>
-	const form = document.querySelector('[data-contact-form]');
-	const status = document.querySelector('[data-contact-status]');
-	if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) {
-		// Form markup missing — nothing to enhance.
-	} else {
-		form.addEventListener('submit', async (event) => {
-			event.preventDefault();
-			const button = form.querySelector('button[type="submit"]');
-			if (button instanceof HTMLButtonElement) button.disabled = true;
-			status.hidden = false;
-			status.textContent = 'Sending…';
-			status.dataset.state = 'pending';
+	import { contactEmail, formSubmitEndpoint } from '../lib/contact-email';
 
-			try {
-				const response = await fetch(form.action, {
-					method: 'POST',
-					body: new FormData(form),
-					headers: { Accept: 'application/json' },
-				});
+	function initContactForms() {
+		document.querySelectorAll('[data-contact-form]').forEach((node) => {
+			if (!(node instanceof HTMLFormElement)) return;
 
-				if (!response.ok) throw new Error(`Submit failed (${response.status})`);
+			node.action = formSubmitEndpoint();
 
-				form.reset();
-				status.textContent = 'Thank you!';
-				status.dataset.state = 'success';
-			} catch {
-				status.textContent = 'Unable to send. Please email adamsimms@gmail.com.';
-				status.dataset.state = 'error';
-			} finally {
-				if (button instanceof HTMLButtonElement) button.disabled = false;
-			}
+			if (node.dataset.enhanced === 'true') return;
+			node.dataset.enhanced = 'true';
+
+			const status = node.querySelector('[data-contact-status]');
+			if (!(status instanceof HTMLElement)) return;
+
+			node.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				const button = node.querySelector('button[type="submit"]');
+				if (button instanceof HTMLButtonElement) button.disabled = true;
+				status.hidden = false;
+				status.textContent = 'Sending…';
+				status.dataset.state = 'pending';
+
+				try {
+					const response = await fetch(node.action, {
+						method: 'POST',
+						body: new FormData(node),
+						headers: { Accept: 'application/json' },
+					});
+
+					if (!response.ok) throw new Error(`Submit failed (${response.status})`);
+
+					node.reset();
+					status.textContent = 'Thank you!';
+					status.dataset.state = 'success';
+				} catch {
+					status.textContent = `Unable to send. Please email ${contactEmail()}.`;
+					status.dataset.state = 'error';
+				} finally {
+					if (button instanceof HTMLButtonElement) button.disabled = false;
+				}
+			});
 		});
 	}
+
+	document.addEventListener('astro:page-load', initContactForms);
 </script>

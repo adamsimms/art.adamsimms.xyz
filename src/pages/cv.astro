@@ -1,13 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getEntry, render } from 'astro:content';
+import { metaDescription } from '../lib/seo';
 
 const page = await getEntry('pages', 'cv');
 if (!page) throw new Error('CV page not found');
 const { Content } = await render(page);
+const description = metaDescription(page.data.description);
 ---
 
-<Base title={page.data.title} description={page.data.description}>
+<Base title={page.data.title} description={description} variant="cv">
 	<article class="prose cv">
 		<header class="page-header">
 			<h1>{page.data.title}</h1>

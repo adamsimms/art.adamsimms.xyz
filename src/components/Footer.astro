@@ -1,0 +1,278 @@
+---
+import { getCollection } from 'astro:content';
+import BerryMark from './BerryMark.astro';
+
+const year = new Date().getFullYear();
+const bio =
+	'Adam Simms is a Canadian media artist who uses photography, video, and microelectronics to create immersive installations.';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const work = await getCollection('work');
+const workPaths = new Set(['/works', ...work.map((entry) => `/${entry.data.slug}`)]);
+
+const siteLinks = [
+	{ href: '/works', label: 'Works', current: workPaths.has(current) },
+	{ href: '/about', label: 'About', current: current === '/about' },
+	{ href: '/cv', label: 'CV', current: current === '/cv' },
+	{ href: '/collaborations', label: 'Collaborations', current: current === '/collaborations' },
+];
+
+const externalLinks = [
+	{ href: 'https://github.com/adamsimms', label: 'GitHub' },
+	{ href: 'https://www.linkedin.com/in/adamsimms', label: 'LinkedIn' },
+	{ href: 'https://www.concordia.ca/faculty/adam-simms.html', label: 'Teaching' },
+];
+---
+
+<footer class="site-footer">
+	<div class="site-footer__island" aria-hidden="true"></div>
+	<div class="site-footer__col site-footer__col--mark">
+		<div class="site-footer__hero" aria-hidden="true">
+			<BerryMark class="site-footer__berry-lg" animated size={160} />
+		</div>
+		<p class="site-footer__weather" data-pinchard-weather>
+			<span data-weather-label>Pinchard’s Island</span>
+			<span data-weather-meta></span>
+		</p>
+	</div>
+	<div class="site-footer__col site-footer__col--bio">
+		<p class="site-footer__bio">{bio}</p>
+		<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
+	</div>
+	<div class="site-footer__col site-footer__col--links">
+		<nav class="site-footer__nav" aria-label="Site">
+			<ul>
+				{
+					siteLinks.map((link) => (
+						<li>
+							<a href={link.href} aria-current={link.current ? 'page' : undefined}>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<nav class="site-footer__nav" aria-label="External">
+			<ul>
+				{
+					externalLinks.map((link) => (
+						<li>
+							<a href={link.href} target="_blank" rel="noopener noreferrer">
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+	<p class="site-footer__copy">© {year}</p>
+</footer>
+
+<script>
+	const ICON_CONDITION = {
+		0: 'Sunny',
+		1: 'Sunny',
+		2: 'Cloudy',
+		3: 'Cloudy',
+		4: 'Cloudy',
+		5: 'Cloudy',
+		6: 'Rain',
+		7: 'Rain',
+		8: 'Snow',
+		9: 'Rain',
+		10: 'Cloudy',
+		11: 'Rain',
+		12: 'Rain',
+		13: 'Rain',
+		14: 'Rain',
+		15: 'Rain',
+		16: 'Snow',
+		17: 'Snow',
+		18: 'Snow',
+		19: 'Rain',
+		20: 'Fog',
+		21: 'Fog',
+		22: 'Cloudy',
+		23: 'Fog',
+		24: 'Fog',
+		25: 'Snow',
+		26: 'Snow',
+		27: 'Snow',
+		28: 'Rain',
+		30: 'Clear',
+		31: 'Clear',
+		32: 'Cloudy',
+		33: 'Cloudy',
+		34: 'Cloudy',
+		35: 'Cloudy',
+		36: 'Rain',
+		37: 'Snow',
+		38: 'Snow',
+		39: 'Rain',
+		40: 'Snow',
+		43: 'Windy',
+		44: 'Fog',
+		46: 'Rain',
+		47: 'Rain',
+	};
+
+	function simplifyCondition(text, iconCode) {
+		if (iconCode != null && ICON_CONDITION[iconCode]) return ICON_CONDITION[iconCode];
+		const lower = String(text || '').toLowerCase();
+		if (!lower) return '';
+		if (/\b(fog|mist|haze)\b/.test(lower)) return 'Fog';
+		if (/\b(snow|flurries|blizzard|ice pellets|freezing)\b/.test(lower)) return 'Snow';
+		if (/\b(thunder|storm)\b/.test(lower)) return 'Rain';
+		if (/\b(rain|shower|drizzle|precip)\b/.test(lower)) return 'Rain';
+		if (/\b(sun|clear|fair)\b/.test(lower)) return 'Sunny';
+		if (/\b(cloud|overcast)\b/.test(lower)) return 'Cloudy';
+		return text;
+	}
+
+	function formatPinchardWeather(data) {
+		const current = data?.current;
+		if (!current || current.temp_c == null || !Number.isFinite(Number(current.temp_c))) {
+			return null;
+		}
+
+		const temp = `${Math.round(Number(current.temp_c))}° C`;
+		const condition =
+			typeof current.condition === 'string' && current.condition.trim()
+				? current.condition.trim()
+				: simplifyCondition(current.condition_text, current.icon);
+		const parts = [temp];
+		if (condition) parts.push(condition);
+
+		const dir = typeof current.wind_dir === 'string' ? current.wind_dir.trim() : '';
+		const wind =
+			current.wind_kph != null && Number.isFinite(Number(current.wind_kph))
+				? Math.round(Number(current.wind_kph))
+				: null;
+
+		if (dir && wind != null) {
+			parts.push(`Wind ${wind} km/h ${dir}`);
+		} else if (wind != null) {
+			parts.push(`Wind ${wind} km/h`);
+		} else if (dir) {
+			parts.push(`Wind ${dir}`);
+		}
+
+		return parts.join(' · ');
+	}
+
+	function geometEn(value) {
+		if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+		if (Object.hasOwn(value, 'en') && Object.hasOwn(value, 'fr')) return value.en;
+		const out = {};
+		for (const [key, nested] of Object.entries(value)) out[key] = geometEn(nested);
+		return out;
+	}
+
+	async function fetchMscWeather() {
+		const lat = 49.2006;
+		const lon = -53.4869;
+		const pad = 0.2;
+		const bbox = `${lon - pad},${lat - pad},${lon + pad},${lat + pad}`;
+		const url =
+			`https://api.weather.gc.ca/collections/citypageweather-realtime/items` +
+			`?f=json&limit=1&bbox=${encodeURIComponent(bbox)}`;
+		const response = await fetch(url);
+		if (!response.ok) return null;
+		const data = await response.json();
+		const props = data?.features?.[0]?.properties;
+		if (!props) return null;
+
+		const current = geometEn(props.currentConditions || {});
+		const hourlyGroup = geometEn(props.hourlyForecastGroup || {});
+		const hourly = Array.isArray(hourlyGroup.hourlyForecasts)
+			? geometEn(hourlyGroup.hourlyForecasts[0] || {})
+			: {};
+		const iconRaw = current?.iconCode?.value ?? hourly?.iconCode?.value;
+		const icon = Number.isFinite(Number(iconRaw)) ? Number(iconRaw) : null;
+		const conditionText =
+			(typeof current?.condition === 'string' && current.condition) ||
+			(typeof hourly?.condition === 'string' && hourly.condition) ||
+			'';
+
+		return {
+			current: {
+				condition: simplifyCondition(conditionText, icon),
+				condition_text: conditionText,
+				icon,
+				temp_c: current?.temperature?.value ?? null,
+				wind_dir: current?.wind?.direction?.value ?? '',
+				wind_kph: current?.wind?.speed?.value ?? null,
+			},
+		};
+	}
+
+	async function loadPinchardWeather() {
+		const root = document.querySelector('[data-pinchard-weather]');
+		if (!(root instanceof HTMLElement)) return;
+		const meta = root.querySelector('[data-weather-meta]');
+		if (!(meta instanceof HTMLElement)) return;
+
+		const applyLine = (line) => {
+			meta.textContent = line;
+		};
+
+		const endpoints = ['/adrift/api/weather', 'https://art.adamsimms.xyz/adrift/api/weather'];
+
+		for (const endpoint of endpoints) {
+			try {
+				const response = await fetch(endpoint);
+				if (!response.ok) continue;
+				const data = await response.json();
+				let line = formatPinchardWeather(data);
+				if (!line) continue;
+
+				if (!data?.current?.condition) {
+					const msc = await fetchMscWeather();
+					if (msc?.current) {
+						line =
+							formatPinchardWeather({
+								current: {
+									...data.current,
+									condition: msc.current.condition,
+									condition_text: msc.current.condition_text,
+									icon: msc.current.icon,
+								},
+							}) || line;
+					}
+				}
+
+				applyLine(line);
+				return;
+			} catch {
+				/* try next endpoint */
+			}
+		}
+
+		try {
+			const msc = await fetchMscWeather();
+			const line = formatPinchardWeather(msc);
+			if (line) applyLine(line);
+		} catch {
+			/* keep static label */
+		}
+	}
+
+	document.addEventListener('astro:page-load', loadPinchardWeather);
+</script>
+
+<script>
+	import { contactEmail } from '../lib/contact-email';
+
+	function revealMailto() {
+		document.querySelectorAll('[data-email-mailto]').forEach((node) => {
+			if (!(node instanceof HTMLAnchorElement)) return;
+			const address = contactEmail();
+			node.href = `mailto:${address}`;
+			node.textContent = address;
+		});
+	}
+
+	document.addEventListener('astro:page-load', revealMailto);
+</script>
