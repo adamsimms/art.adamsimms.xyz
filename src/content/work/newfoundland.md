@@ -1,6 +1,7 @@
 ---
 title: Newfoundland
 slug: newfoundland
+seoDescription: "Newfoundland — early photography by Adam Simms."
 description: ""
 statement: ""
 cover: "https://media.adamsimms.xyz/work/newfoundland/01.avif"

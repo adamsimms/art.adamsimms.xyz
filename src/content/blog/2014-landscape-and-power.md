@@ -1,6 +1,6 @@
 ---
 title: Landscape and Power
-description: ""
+description: "Notes on W. J. T. Mitchell’s theses on landscape, June 2014."
 pubDate: 2014-06-08
 slug: 2014/landscape-and-power
 ---

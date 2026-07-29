@@ -4,12 +4,6 @@
       "slug": "pinchards-island",
       "title": "Pinchard's Island",
       "href": "/pinchards-island",
-      "order": 6
-    },
-    {
-      "slug": "adrift",
-      "title": "Adrift",
-      "href": "/adrift",
       "order": 12
     },
     {
@@ -19,28 +13,34 @@
       "order": 11
     },
     {
+      "slug": "adrift",
+      "title": "Adrift",
+      "href": "/adrift",
+      "order": 10
+    },
+    {
       "slug": "mug-up",
       "title": "Mug Up",
       "href": "/mug-up",
-      "order": 10
+      "order": 9
     },
     {
       "slug": "cabin",
       "title": "Cabin",
       "href": "/cabin",
-      "order": 9
+      "order": 8
     },
     {
       "slug": "cloudberry",
       "title": "Cloudberry",
       "href": "/cloudberry",
-      "order": 8
+      "order": 7
     },
     {
       "slug": "driftwood",
       "title": "Driftwood",
       "href": "/driftwood",
-      "order": 7
+      "order": 6
     },
     {
       "slug": "resettlement",

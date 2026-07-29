@@ -1,6 +1,6 @@
 ---
 title: ARTSIDA5 Auction
-description: ""
+description: "ARTSIDA5 auction featuring photography by Adam Simms, May 2013."
 pubDate: 2013-05-04
 slug: 2013/artsida5-auction
 ---
