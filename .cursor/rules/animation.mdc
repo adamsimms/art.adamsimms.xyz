@@ -1,0 +1,24 @@
+---
+description: Animation approach — CSS now, GSAP for narrative project views
+alwaysApply: true
+---
+
+# Animation
+
+Default motion stack:
+
+- **CSS** transitions/keyframes for UI chrome (nav, title, hovers)
+- **Astro view transitions** (`ClientRouter`, `fade`) for page changes
+- Prefer no animation framework for general site chrome
+
+## Future: site preload
+
+If the site needs a loading / splash / preload state, use the **footer berry mark animation** (`BerryMark` with `animated` — per-lobe opacity fade over the cloudberry silhouette in `src/components/BerryMark.astro` / `src/lib/berry.ts`). Do not invent a separate spinner or generic loader; that berry pulse is the brand preload.
+
+## Future: narrative project views
+
+When building richer, scroll- or timeline-driven **individual project** experiences (storytelling layouts, sequenced reveals, scroll-linked narrative), prefer **GSAP** (GreenSock) over Framer Motion or other React-centric libraries.
+
+- Do not add GSAP until a concrete narrative interaction needs it
+- Scope GSAP to those project views; keep site-wide chrome on CSS + Astro transitions
+- Prefer GSAP over Framer Motion — this site is Astro, not a React SPA
