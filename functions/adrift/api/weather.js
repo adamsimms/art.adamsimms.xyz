@@ -67,9 +67,102 @@ function formatLastUpdated(iso) {
 	}
 }
 
+/** Environment Canada icon codes → short footer labels */
+const ICON_CONDITION = {
+	0: 'Sunny',
+	1: 'Sunny',
+	2: 'Cloudy',
+	3: 'Cloudy',
+	4: 'Cloudy',
+	5: 'Cloudy',
+	6: 'Rain',
+	7: 'Rain',
+	8: 'Snow',
+	9: 'Rain',
+	10: 'Cloudy',
+	11: 'Rain',
+	12: 'Rain',
+	13: 'Rain',
+	14: 'Rain',
+	15: 'Rain',
+	16: 'Snow',
+	17: 'Snow',
+	18: 'Snow',
+	19: 'Rain',
+	20: 'Fog',
+	21: 'Fog',
+	22: 'Cloudy',
+	23: 'Fog',
+	24: 'Fog',
+	25: 'Snow',
+	26: 'Snow',
+	27: 'Snow',
+	28: 'Rain',
+	30: 'Clear',
+	31: 'Clear',
+	32: 'Cloudy',
+	33: 'Cloudy',
+	34: 'Cloudy',
+	35: 'Cloudy',
+	36: 'Rain',
+	37: 'Snow',
+	38: 'Snow',
+	39: 'Rain',
+	40: 'Snow',
+	43: 'Windy',
+	44: 'Fog',
+	46: 'Rain',
+	47: 'Rain',
+};
+
+function pickIconCode(...candidates) {
+	for (const candidate of candidates) {
+		const raw = candidate?.value ?? candidate;
+		const code = Number(raw);
+		if (Number.isFinite(code)) return code;
+	}
+	return null;
+}
+
+function pickConditionText(...candidates) {
+	for (const candidate of candidates) {
+		if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+		if (candidate && typeof candidate === 'object') {
+			const en = candidate.en ?? candidate.value;
+			if (typeof en === 'string' && en.trim()) return en.trim();
+		}
+	}
+	return '';
+}
+
+function simplifyCondition(text, iconCode) {
+	if (iconCode != null && ICON_CONDITION[iconCode]) {
+		return ICON_CONDITION[iconCode];
+	}
+
+	const lower = text.toLowerCase();
+	if (!lower) return '';
+	if (/\b(fog|mist|haze)\b/.test(lower)) return 'Fog';
+	if (/\b(snow|flurries|blizzard|ice pellets|freezing)\b/.test(lower)) return 'Snow';
+	if (/\b(thunder|storm)\b/.test(lower)) return 'Rain';
+	if (/\b(rain|shower|drizzle|precip)\b/.test(lower)) return 'Rain';
+	if (/\b(sun|clear|fair)\b/.test(lower)) return 'Sunny';
+	if (/\b(cloud|overcast)\b/.test(lower)) return 'Cloudy';
+	return text;
+}
+
 function toLiveData(citypageProps) {
 	const en = geometEn(citypageProps);
 	const current = geometEn(citypageProps.currentConditions || {});
+	const hourlyGroup = geometEn(citypageProps.hourlyForecastGroup || {});
+	const hourly = Array.isArray(hourlyGroup.hourlyForecasts)
+		? geometEn(hourlyGroup.hourlyForecasts[0] || {})
+		: {};
+	const forecastGroup = geometEn(citypageProps.forecastGroup || {});
+	const today = Array.isArray(forecastGroup.forecasts)
+		? geometEn(forecastGroup.forecasts[0] || {})
+		: {};
+
 	const tempC = current?.temperature?.value ?? null;
 	const windKph = current?.wind?.speed?.value ?? null;
 	const gustKph = current?.wind?.gust?.value ?? null;
@@ -82,10 +175,25 @@ function toLiveData(citypageProps) {
 		typeof current?.timestamp === 'string' ? current.timestamp : en?.lastUpdated,
 	);
 
+	const iconCode = pickIconCode(
+		current?.iconCode,
+		hourly?.iconCode,
+		today?.abbreviatedForecast?.icon,
+	);
+	const conditionText = pickConditionText(
+		current?.condition,
+		hourly?.condition,
+		today?.abbreviatedForecast?.textSummary,
+	);
+	const condition = simplifyCondition(conditionText, iconCode);
+
 	return {
 		source: 'msc-geomet',
 		current: {
 			cloud: 0,
+			condition,
+			condition_text: conditionText || condition,
+			icon: iconCode,
 			feelslike_c: windChill ?? tempC,
 			feelslike_f:
 				windChill != null
@@ -142,7 +250,7 @@ export async function onRequestGet(context) {
 
 	const cache = caches.default;
 	const cacheKey = new Request(
-		`https://art.adamsimms.xyz/adrift/api/weather?lat=${lat}&lon=${lon}`,
+		`https://art.adamsimms.xyz/adrift/api/weather?lat=${lat}&lon=${lon}&v=condition`,
 		{ method: 'GET' },
 	);
 	const cached = await cache.match(cacheKey);

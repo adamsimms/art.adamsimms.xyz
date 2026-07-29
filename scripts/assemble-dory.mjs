@@ -34,19 +34,31 @@ ensureDir(DEST);
 
 cpSync(join(DORY, 'index.html'), join(DEST, 'index.html'));
 cpSync(join(DORY, 'css'), join(DEST, 'css'), { recursive: true });
+for (const dir of ['images', 'favicon']) {
+	const src = join(DORY, dir);
+	if (existsSync(src)) {
+		cpSync(src, join(DEST, dir), { recursive: true });
+	}
+}
+for (const file of ['robots.txt', 'sitemap.xml']) {
+	const src = join(DORY, file);
+	if (existsSync(src)) {
+		cpSync(src, join(DEST, file));
+	}
+}
 
 let html = readFileSync(join(DEST, 'index.html'), 'utf8');
 html = stripGoogleAnalytics(html);
 html = html
-	.replace('<title>Dory</title>', '<title>Dory — Adam Simms</title>')
-	.replace(
-		'<meta name="description" content="">',
-		'<meta name="description" content="Interactive 3D Newfoundland dory boat model on Sketchfab.">',
-	)
-	.replace(
+	.replaceAll('https://www.pinchards.is/dory/', 'https://art.adamsimms.xyz/dory/')
+	.replaceAll('https://www.pinchards.is/', 'https://art.adamsimms.xyz/')
+	.replace('<title>Dory</title>', '<title>Dory — Adam Simms</title>');
+if (!html.includes('rel="canonical"')) {
+	html = html.replace(
 		'</head>',
 		'  <link rel="canonical" href="https://art.adamsimms.xyz/dory/">\n</head>',
 	);
+}
 writeFileSync(join(DEST, 'index.html'), html);
 
 injectUmamiIntoHtmlDir(ART_ROOT, DEST, 'assemble-dory');
