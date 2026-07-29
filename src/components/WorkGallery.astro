@@ -3,31 +3,505 @@ interface GalleryImage {
 	src: string;
 	fallback?: string;
 	alt?: string;
+	title?: string;
+	date?: string;
+	dimensions?: string;
+	notes?: string;
 	caption?: string;
+}
+
+interface GalleryVideo {
+	id: string;
+	title?: string;
+	poster?: string;
+	posterFallback?: string;
 }
 
 interface Props {
 	images: GalleryImage[];
+	title?: string;
+	video?: GalleryVideo | null;
 }
 
-const { images } = Astro.props;
+const { images, title = '', video = null } = Astro.props;
+const hasVideo = Boolean(video?.id);
+const imageCount = images.length;
+const total = imageCount + (hasVideo ? 1 : 0);
+const showControls = total > 1;
+
+function trimField(value?: string) {
+	return value?.trim() || '';
+}
+
+function imageAlt(image: GalleryImage, imageIndex: number) {
+	const raw = image.alt?.trim() || '';
+	const generic = !raw || (title && raw.toLowerCase() === title.toLowerCase());
+	if (!generic) return raw;
+	const n = imageIndex + 1;
+	if (title && imageCount > 1) return `${title}, image ${n} of ${imageCount}`;
+	if (title) return title;
+	return imageCount > 1 ? `Gallery image ${n} of ${imageCount}` : 'Project image';
+}
+
+function imageCaption(image: GalleryImage) {
+	const parts = [
+		trimField(image.title),
+		trimField(image.date),
+		trimField(image.dimensions),
+		trimField(image.notes),
+		trimField(image.caption),
+	].filter(Boolean);
+	return parts.length ? parts.join(' • ') : null;
+}
+
+const vimeoSrc = hasVideo
+	? `https://player.vimeo.com/video/${video!.id}?title=0&byline=0&portrait=0&autoplay=1`
+	: '';
+const videoTitle = video?.title || (title ? `${title} — video` : 'Project video');
+const posterSrc = video?.poster || '';
+const posterFallback = video?.posterFallback || posterSrc;
 ---
 
-<section class="gallery">
-	{
-		images.map((image) => (
-			<figure>
-				<picture>
-					<source srcset={image.src} type="image/avif" />
-					<img
-						src={image.fallback || image.src}
-						alt={image.alt || ''}
-						loading="lazy"
-						decoding="async"
-					/>
-				</picture>
-				{image.caption ? <figcaption>{image.caption}</figcaption> : null}
-			</figure>
-		))
+{
+	total > 0 ? (
+		<section
+			class:list={['gallery', 'gallery--carousel', hasVideo && 'gallery--has-video']}
+			data-gallery
+			tabindex="0"
+			aria-roledescription="carousel"
+			aria-label={title ? `${title} gallery` : 'Project gallery'}
+		>
+			<div class="gallery__viewport" data-gallery-viewport>
+				{
+					hasVideo ? (
+						<figure
+							class="gallery__item gallery__item--video"
+							id="image-1"
+							data-index="0"
+							data-gallery-video
+							data-active=""
+							aria-hidden="false"
+						>
+							<div class="gallery__video-frame" data-gallery-video-shell>
+								{
+									posterFallback ? (
+										<picture class="gallery__video-poster">
+											{posterSrc ? <source srcset={posterSrc} type="image/avif" /> : null}
+											<img
+												src={posterFallback}
+												alt=""
+												width="16"
+												height="9"
+												decoding="async"
+												fetchpriority="high"
+											/>
+										</picture>
+									) : null
+								}
+								<button
+									type="button"
+									class="gallery__video-play"
+									data-gallery-video-play
+									aria-label={`Play ${videoTitle}`}
+								>
+									<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+										<path d="M8 5.5v13l11-6.5z" fill="currentColor"></path>
+									</svg>
+								</button>
+								<iframe
+									data-gallery-video-frame
+									data-src={vimeoSrc}
+									title={videoTitle}
+									allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+									allowfullscreen
+									tabindex="-1"
+								/>
+							</div>
+						</figure>
+					) : null
+				}
+
+				{images.map((image, imageIndex) => {
+					const slideIndex = hasVideo ? imageIndex + 1 : imageIndex;
+					const n = slideIndex + 1;
+					const id = `image-${n}`;
+					const isFirst = !hasVideo && imageIndex === 0;
+					const caption = imageCaption(image);
+					return (
+						<figure
+							class="gallery__item"
+							id={id}
+							data-index={String(slideIndex)}
+							data-active={isFirst ? '' : undefined}
+							aria-hidden={isFirst ? 'false' : 'true'}
+						>
+							<picture>
+								<source srcset={image.src} type="image/avif" />
+								<img
+									src={image.fallback || image.src}
+									alt={imageAlt(image, imageIndex)}
+									width="3"
+									height="2"
+									loading={isFirst ? 'eager' : 'lazy'}
+									decoding="async"
+								/>
+							</picture>
+							{caption ? <figcaption class="gallery__caption">{caption}</figcaption> : null}
+						</figure>
+					);
+				})}
+
+				{
+					showControls ? (
+						<>
+							<div class="gallery__controls" aria-label="Gallery navigation">
+								<button
+									type="button"
+									class="gallery__hit gallery__hit--prev"
+									data-gallery-prev
+									aria-label="Previous slide"
+									disabled
+								>
+									<span class="visually-hidden">Previous slide</span>
+								</button>
+								<button
+									type="button"
+									class="gallery__hit gallery__hit--next"
+									data-gallery-next
+									aria-label="Next slide"
+								>
+									<span class="visually-hidden">Next slide</span>
+								</button>
+							</div>
+
+							<div class="gallery__cursor" data-gallery-cursor aria-hidden="true">
+								<span class="gallery__cursor-chip">
+									<svg class="gallery__cursor-bg" width="40" height="40" aria-hidden="true" focusable="false">
+										<rect width="40" height="40" fill="rgb(0 0 0 / 64%)"></rect>
+									</svg>
+									<svg class="gallery__cursor-arrow gallery__cursor-arrow--prev" viewBox="0 0 24 24" width="18" height="18" focusable="false">
+										<path d="M13 5 L6 12 L13 19" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"></path>
+										<path d="M6 12 H22" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square"></path>
+									</svg>
+									<svg class="gallery__cursor-arrow gallery__cursor-arrow--next" viewBox="0 0 24 24" width="18" height="18" focusable="false">
+										<path d="M11 5 L18 12 L11 19" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"></path>
+										<path d="M2 12 H18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square"></path>
+									</svg>
+								</span>
+							</div>
+						</>
+					) : null
+				}
+			</div>
+		</section>
+	) : null
+}
+
+<script>
+	function playVideoFrame(root: ParentNode) {
+		const shell = root.querySelector('[data-gallery-video-shell]');
+		const iframe = root.querySelector('[data-gallery-video-frame]');
+		if (!(iframe instanceof HTMLIFrameElement)) return;
+		if (shell instanceof HTMLElement && shell.hasAttribute('data-playing')) return;
+		const src = iframe.getAttribute('data-src');
+		if (!src) return;
+		iframe.setAttribute('src', src);
+		if (shell instanceof HTMLElement) shell.setAttribute('data-playing', '');
 	}
-</section>
+
+	function bindVideoPlay(root: ParentNode, signal?: AbortSignal) {
+		root.querySelectorAll('[data-gallery-video-play]').forEach((button) => {
+			button.addEventListener(
+				'click',
+				(event) => {
+					event.preventDefault();
+					event.stopPropagation();
+					const slide = button.closest('.gallery__item') || root;
+					playVideoFrame(slide);
+				},
+				{ signal },
+			);
+		});
+	}
+
+	function enhanceCarousel(gallery: HTMLElement) {
+		if (gallery.hasAttribute('data-enhanced')) return;
+
+		const viewport = gallery.querySelector('[data-gallery-viewport]');
+		const slides = [...gallery.querySelectorAll('.gallery__item')];
+		const prevBtn = gallery.querySelector('[data-gallery-prev]');
+		const nextBtn = gallery.querySelector('[data-gallery-next]');
+		const cursor = gallery.querySelector('[data-gallery-cursor]');
+		if (
+			!(viewport instanceof HTMLElement) ||
+			!slides.length ||
+			!(prevBtn instanceof HTMLButtonElement) ||
+			!(nextBtn instanceof HTMLButtonElement) ||
+			!(cursor instanceof HTMLElement)
+		) {
+			return;
+		}
+
+		const totalSlides = slides.length;
+		const finePointer = window.matchMedia('(pointer: fine)').matches;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const AUTOPLAY_MS = 7000;
+		const EDGE_RATIO = 0.18;
+		let index = 0;
+		let side = 'next';
+		let tracking = false;
+		let frame = 0;
+		let autoplayTimer = 0;
+		let hovered = false;
+		const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+		const ac = new AbortController();
+		const { signal } = ac;
+
+		const isVideoSlide = (i: number) =>
+			slides[i] instanceof HTMLElement && slides[i].hasAttribute('data-gallery-video');
+
+		const parseHash = () => {
+			const match = /^#image-(\d+)$/.exec(location.hash);
+			if (!match) return null;
+			const n = Number(match[1]);
+			if (!Number.isInteger(n) || n < 1 || n > totalSlides) return null;
+			return n - 1;
+		};
+
+		const setHash = (i: number) => {
+			const nextHash = '#image-' + (i + 1);
+			if (location.hash === nextHash) return;
+			history.replaceState(null, '', location.pathname + location.search + nextHash);
+		};
+
+		const canGo = (direction: string) => (direction === 'prev' ? index > 0 : index < totalSlides - 1);
+
+		const stopAutoplay = () => {
+			window.clearInterval(autoplayTimer);
+			autoplayTimer = 0;
+		};
+
+		const startAutoplay = () => {
+			stopAutoplay();
+			if (reduceMotion || totalSlides < 2) return;
+			if (hovered || document.hidden) return;
+			if (isVideoSlide(index)) return;
+			if (index >= totalSlides - 1) return;
+
+			autoplayTimer = window.setInterval(() => {
+				if (hovered || document.hidden) return;
+				if (isVideoSlide(index) || index >= totalSlides - 1) {
+					stopAutoplay();
+					return;
+				}
+				goTo(index + 1);
+			}, AUTOPLAY_MS);
+		};
+
+		const updateCursor = () => {
+			cursor.dataset.side = side;
+			cursor.dataset.disabled = canGo(side) ? 'false' : 'true';
+		};
+
+		const syncVideoMode = () => {
+			if (isVideoSlide(index)) viewport.setAttribute('data-video-active', '');
+			else viewport.removeAttribute('data-video-active');
+		};
+
+		const edgeSide = (clientX: number) => {
+			const rect = viewport.getBoundingClientRect();
+			const x = clientX - rect.left;
+			const edge = rect.width * EDGE_RATIO;
+			if (x <= edge) return 'prev';
+			if (x >= rect.width - edge) return 'next';
+			return null;
+		};
+
+		const goTo = (next: number, options?: { updateHash?: boolean; restartAutoplay?: boolean }) => {
+			const updateHash = !options || options.updateHash !== false;
+			const restartAutoplay = !options || options.restartAutoplay !== false;
+			const clamped = Math.max(0, Math.min(totalSlides - 1, next));
+			index = clamped;
+
+			slides.forEach((slide, i) => {
+				const active = i === index;
+				if (active) slide.setAttribute('data-active', '');
+				else slide.removeAttribute('data-active');
+				slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+			});
+
+			prevBtn.disabled = index === 0;
+			nextBtn.disabled = index === totalSlides - 1;
+			syncVideoMode();
+			updateCursor();
+
+			if (updateHash) setHash(index);
+			if (restartAutoplay) startAutoplay();
+			else stopAutoplay();
+		};
+
+		const setCursorPosition = () => {
+			cursor.style.left = Math.round(pos.x) - 20 + 'px';
+			cursor.style.top = Math.round(pos.y) - 20 + 'px';
+			cursor.style.transform = 'none';
+		};
+
+		const tick = () => {
+			const accel = reduceMotion ? 1 : 0.22;
+			pos.x += (pos.tx - pos.x) * accel;
+			pos.y += (pos.ty - pos.y) * accel;
+			setCursorPosition();
+			if (tracking) frame = requestAnimationFrame(tick);
+		};
+
+		const showCursor = (clientX: number, clientY: number, forcedSide?: string | null) => {
+			const rect = viewport.getBoundingClientRect();
+			pos.tx = clientX - rect.left;
+			pos.ty = clientY - rect.top;
+			side = forcedSide || (pos.tx < rect.width / 2 ? 'prev' : 'next');
+			updateCursor();
+			cursor.dataset.active = 'true';
+			viewport.dataset.cursor = 'true';
+
+			if (!tracking) {
+				pos.x = pos.tx;
+				pos.y = pos.ty;
+				setCursorPosition();
+				tracking = true;
+				cancelAnimationFrame(frame);
+				frame = requestAnimationFrame(tick);
+			}
+		};
+
+		const hideCursor = () => {
+			tracking = false;
+			cancelAnimationFrame(frame);
+			cursor.dataset.active = 'false';
+			viewport.dataset.cursor = 'false';
+		};
+
+		const cleanup = () => {
+			stopAutoplay();
+			cancelAnimationFrame(frame);
+			ac.abort();
+		};
+
+		gallery.setAttribute('data-enhanced', '');
+
+		const fromHash = parseHash();
+		goTo(fromHash == null ? 0 : fromHash, {
+			updateHash: fromHash != null,
+			restartAutoplay: fromHash == null ? !isVideoSlide(0) : undefined,
+		});
+
+		bindVideoPlay(gallery, signal);
+
+		prevBtn.addEventListener(
+			'click',
+			() => {
+				goTo(index - 1);
+				gallery.focus({ preventScroll: true });
+			},
+			{ signal },
+		);
+
+		nextBtn.addEventListener(
+			'click',
+			() => {
+				goTo(index + 1);
+				gallery.focus({ preventScroll: true });
+			},
+			{ signal },
+		);
+
+		viewport.addEventListener(
+			'pointerenter',
+			(event) => {
+				hovered = true;
+				stopAutoplay();
+				if (finePointer && event.pointerType === 'mouse') {
+					if (isVideoSlide(index)) {
+						const edge = edgeSide(event.clientX);
+						if (edge) showCursor(event.clientX, event.clientY, edge);
+						else hideCursor();
+					} else {
+						showCursor(event.clientX, event.clientY);
+					}
+				}
+			},
+			{ signal },
+		);
+
+		if (finePointer) {
+			viewport.addEventListener(
+				'pointermove',
+				(event) => {
+					if (event.pointerType !== 'mouse') return;
+					if (isVideoSlide(index)) {
+						const edge = edgeSide(event.clientX);
+						if (edge) showCursor(event.clientX, event.clientY, edge);
+						else hideCursor();
+						return;
+					}
+					showCursor(event.clientX, event.clientY);
+				},
+				{ signal },
+			);
+		}
+
+		viewport.addEventListener(
+			'pointerleave',
+			(event) => {
+				hovered = false;
+				if (finePointer && event.pointerType === 'mouse') hideCursor();
+				startAutoplay();
+			},
+			{ signal },
+		);
+
+		document.addEventListener(
+			'visibilitychange',
+			() => {
+				if (document.hidden) stopAutoplay();
+				else startAutoplay();
+			},
+			{ signal },
+		);
+
+		gallery.addEventListener(
+			'keydown',
+			(event) => {
+				if (event.key === 'ArrowLeft') {
+					event.preventDefault();
+					goTo(index - 1);
+				} else if (event.key === 'ArrowRight') {
+					event.preventDefault();
+					goTo(index + 1);
+				}
+			},
+			{ signal },
+		);
+
+		window.addEventListener(
+			'hashchange',
+			() => {
+				const fromHashChange = parseHash();
+				if (fromHashChange != null) goTo(fromHashChange, { updateHash: false });
+			},
+			{ signal },
+		);
+
+		document.addEventListener('astro:before-swap', cleanup, { once: true });
+	}
+
+	function initGalleries() {
+		document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+			const hasControls = gallery.querySelector('[data-gallery-prev]');
+			if (hasControls) enhanceCarousel(gallery);
+			else bindVideoPlay(gallery);
+		});
+	}
+
+	document.addEventListener('astro:page-load', initGalleries);
+	initGalleries();
+</script>

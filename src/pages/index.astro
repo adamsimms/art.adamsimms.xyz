@@ -1,32 +1,105 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getCollection } from 'astro:content';
+import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from '../lib/seo';
 
-const work = await getCollection('work');
-const lightHouse = work.find((entry) => entry.data.slug === 'light-house');
-const heroSrc = lightHouse?.data.cover;
-const heroFallback = lightHouse?.data.coverFallback || heroSrc;
+const mediaBase = 'https://media.adamsimms.xyz/work/light-house';
+const posterSrc = `${mediaBase}/hero-poster.jpg`;
+const videoSrc720 = `${mediaBase}/hero-720.mp4`;
+const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 ---
 
 <Base
 	title="Adam Simms"
-	description="Photography and art by Adam Simms"
+	description={DEFAULT_DESCRIPTION}
+	image={DEFAULT_OG_IMAGE}
+	imageAlt={DEFAULT_OG_IMAGE_ALT}
 	variant="home"
 >
-	<section class="home-hero" aria-label="Featured work: Light House">
-		{
-			heroFallback ? (
-				<picture class="home-hero__media">
-					{heroSrc ? <source srcset={heroSrc} type="image/avif" /> : null}
-					<img
-						src={heroFallback}
-						alt="Light House — a glowing wireframe house on a dark shoreline"
-						width="2119"
-						height="1413"
-						fetchpriority="high"
-					/>
-				</picture>
-			) : null
-		}
+	<section class="home-hero" aria-labelledby="home-heading" data-home-hero>
+		<h1 id="home-heading" class="visually-hidden">Adam Simms</h1>
+		<img
+			class="home-hero__media home-hero__poster"
+			src={posterSrc}
+			alt="Light House — a glowing wireframe house on a dark shoreline"
+			width="1920"
+			height="1080"
+			fetchpriority="high"
+		/>
+		<video
+			class="home-hero__media home-hero__video"
+			muted
+			playsinline
+			loop
+			preload="none"
+			poster={posterSrc}
+			aria-hidden="true"
+			data-src-720={videoSrc720}
+			data-src-1080={videoSrc1080}
+		></video>
+		<p class="home-hero__credit">
+			<a href="/light-house">Light House, 2020</a>
+		</p>
 	</section>
+
+	<script is:inline>
+		(() => {
+			const init = () => {
+				const root = document.querySelector('[data-home-hero]');
+				if (!(root instanceof HTMLElement) || root.dataset.videoInit === '1') return;
+				root.dataset.videoInit = '1';
+
+				const video = root.querySelector('.home-hero__video');
+				if (!(video instanceof HTMLVideoElement)) return;
+
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				const saveData = Boolean(navigator.connection?.saveData);
+				if (reduceMotion || saveData) return;
+
+				const src720 = video.getAttribute('data-src-720');
+				const src1080 = video.getAttribute('data-src-1080');
+				if (!src720 && !src1080) return;
+
+				const pickSrc = () => {
+					const wide = window.matchMedia('(min-width: 768px)').matches;
+					if (wide && src1080) return src1080;
+					return src720 || src1080;
+				};
+
+				const reveal = () => {
+					if (video.videoWidth > 0) {
+						root.classList.add('home-hero--video-ready');
+					}
+				};
+
+				const load = () => {
+					const src = pickSrc();
+					if (!src || video.dataset.loaded === '1') return;
+					video.dataset.loaded = '1';
+					video.src = src;
+					video.addEventListener('loadeddata', reveal, { once: true });
+					video.addEventListener('playing', reveal, { once: true });
+					const play = video.play();
+					if (play && typeof play.catch === 'function') {
+						play.catch(() => {
+							/* Keep poster if autoplay is blocked */
+						});
+					}
+				};
+
+				const schedule = () => {
+					if ('requestIdleCallback' in window) {
+						window.requestIdleCallback(load, { timeout: 1500 });
+					} else {
+						window.setTimeout(load, 200);
+					}
+				};
+
+				if (document.readyState === 'complete') schedule();
+				else window.addEventListener('load', schedule, { once: true });
+			};
+
+			init();
+			document.addEventListener('astro:page-load', init);
+		})();
+	</script>
 </Base>

@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, isHiddenWorkSlug } from '../lib/seo';
+
+const work = await getCollection('work');
+const orderedWork = work
+	.filter((entry) => !isHiddenWorkSlug(entry.data.slug))
+	.sort((a, b) => b.data.order - a.data.order)
+	.map((entry) => ({
+		slug: entry.data.slug,
+		title: entry.data.title,
+		href: `/${entry.data.slug}`,
+		cover: entry.data.cover,
+		coverFallback: entry.data.coverFallback,
+	}));
+---
+
+<Base
+	title="Works"
+	description="Selected photography and art projects by Adam Simms"
+	image={DEFAULT_OG_IMAGE}
+	imageAlt={DEFAULT_OG_IMAGE_ALT}
+	variant="work"
+>
+	<section class="work-hover" aria-labelledby="works-heading" data-work-hover>
+		<h1 id="works-heading" class="visually-hidden">Works</h1>
+		<div class="work-hover__stage">
+			<div class="work-hover__backgrounds" data-active="false" aria-hidden="true">
+				{
+					orderedWork.map((item, index) =>
+						item.cover ? (
+							<div class="work-hover__bg" data-index={String(index)}>
+								<picture>
+									<source srcset={item.cover} type="image/avif" />
+									<img
+										src={item.coverFallback || item.cover}
+										alt=""
+										width="3"
+										height="2"
+										decoding="async"
+										fetchpriority={index < 3 ? 'high' : 'auto'}
+									/>
+								</picture>
+							</div>
+						) : null,
+					)
+				}
+			</div>
+
+			<ul class="work-hover__list">
+				{
+					orderedWork.map((item, index) => (
+						<li>
+							<a class="work-hover__link" href={item.href} data-index={String(index)}>
+								{item.title}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<script is:inline>
+		(() => {
+			const root = document.querySelector('[data-work-hover]');
+			if (!(root instanceof HTMLElement)) return;
+
+			const stage = root.querySelector('.work-hover__stage');
+			const backgrounds = root.querySelector('.work-hover__backgrounds');
+			const links = [...root.querySelectorAll('.work-hover__link')];
+			const images = [...root.querySelectorAll('.work-hover__bg')];
+			if (!(stage instanceof HTMLElement) || !(backgrounds instanceof HTMLElement)) return;
+			if (!links.length || !images.length) return;
+
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			// Squarespace: acceleration = 0.01 * modeFollowAcceleration (default 10) => 0.1
+			const ACCELERATION = reduceMotion ? 1 : 0.1;
+			const FADE_MS = 850; // soft fade duration
+
+			const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+			let tracking = false;
+			let frame = 0;
+			let stopTimer = 0;
+			let clearTimer = 0;
+			let size = 0;
+
+			const measure = () => {
+				size = backgrounds.offsetWidth;
+			};
+
+			const setTarget = (clientX, clientY) => {
+				pos.tx = clientX;
+				pos.ty = clientY;
+			};
+
+			const updatePosition = () => {
+				pos.x += (pos.tx - pos.x) * ACCELERATION;
+				pos.y += (pos.ty - pos.y) * ACCELERATION;
+
+				const half = size / 2;
+				const stageRect = stage.getBoundingClientRect();
+				// Center the preview on the cursor — don't clamp to stage bounds
+				// (clamping pinned the first/top titles' images to y=0)
+				const x = pos.x - half - stageRect.left;
+				const y = pos.y - half - stageRect.top;
+				backgrounds.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+			};
+
+			const tick = () => {
+				updatePosition();
+				frame = requestAnimationFrame(tick);
+			};
+
+			const onMove = (event) => {
+				setTarget(event.clientX, event.clientY);
+			};
+
+			const startFollowing = () => {
+				clearTimeout(stopTimer);
+				window.addEventListener('pointermove', onMove);
+				if (!tracking) {
+					pos.x = pos.tx;
+					pos.y = pos.ty;
+					tracking = true;
+					cancelAnimationFrame(frame);
+					frame = requestAnimationFrame(tick);
+				}
+				updatePosition();
+			};
+
+			const stopFollowing = () => {
+				clearTimeout(stopTimer);
+				window.removeEventListener('pointermove', onMove);
+				stopTimer = window.setTimeout(() => {
+					tracking = false;
+					cancelAnimationFrame(frame);
+				}, FADE_MS);
+			};
+
+			const setActive = (index) => {
+				backgrounds.dataset.active = index >= 0 ? 'true' : 'false';
+
+				images.forEach((img) => {
+					if (img.getAttribute('data-index') === String(index)) {
+						img.setAttribute('data-active', '');
+					} else {
+						img.removeAttribute('data-active');
+					}
+				});
+
+				links.forEach((link) => {
+					link.classList.toggle('is-active', link.getAttribute('data-index') === String(index));
+				});
+
+				if (index >= 0) startFollowing();
+				else stopFollowing();
+			};
+
+			const scheduleClear = () => {
+				clearTimeout(clearTimer);
+				clearTimer = window.setTimeout(() => {
+					const overTitle = links.some((link) => link.matches(':hover'));
+					if (!overTitle) setActive(-1);
+				}, 30);
+			};
+
+			const cleanup = () => {
+				clearTimeout(stopTimer);
+				clearTimeout(clearTimer);
+				cancelAnimationFrame(frame);
+				window.removeEventListener('pointermove', onMove);
+				window.removeEventListener('resize', measure);
+				document.removeEventListener('astro:before-swap', cleanup);
+			};
+
+			links.forEach((link) => {
+				link.addEventListener('pointerenter', (event) => {
+					if (event.pointerType === 'touch') return;
+					clearTimeout(clearTimer);
+					measure();
+					setTarget(event.clientX, event.clientY);
+					setActive(Number(link.getAttribute('data-index')));
+				});
+
+				link.addEventListener('pointerleave', (event) => {
+					if (event.pointerType === 'touch') return;
+					scheduleClear();
+				});
+
+				link.addEventListener('focus', () => {
+					clearTimeout(clearTimer);
+					const rect = link.getBoundingClientRect();
+					measure();
+					setTarget(rect.left + rect.width / 2, rect.top + rect.height / 2);
+					setActive(Number(link.getAttribute('data-index')));
+				});
+
+				link.addEventListener('blur', () => {
+					scheduleClear();
+				});
+			});
+
+			root.addEventListener('pointerleave', () => {
+				clearTimeout(clearTimer);
+				setActive(-1);
+			});
+
+			window.addEventListener('resize', measure);
+			document.addEventListener('astro:before-swap', cleanup);
+			measure();
+		})();
+	</script>
+</Base>

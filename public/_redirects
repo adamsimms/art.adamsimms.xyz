@@ -1,7 +1,11 @@
 /home / 301
 /intro / 301
+/work /works 301
 /resume /cv 301
-/blog/tag/* /blog 301
+/blog / 301
+/blog/* / 301
+/maps / 301
+/maps/* / 301
 
 # Force directory form for assemble mounts
 /cloudberry/archive /cloudberry/archive/ 308

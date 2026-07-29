@@ -2,6 +2,13 @@
 import Base from '../layouts/Base.astro';
 import WorkGallery from '../components/WorkGallery.astro';
 import { getCollection } from 'astro:content';
+import {
+	SITE_URL,
+	absoluteUrl,
+	isHiddenWorkSlug,
+	metaDescription,
+	socialImageUrl,
+} from '../lib/seo';
 
 const galleries = import.meta.glob('../content/work/*.json', { eager: true, import: 'default' });
 
@@ -16,33 +23,217 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const gallery = galleries[`../content/work/${entry.data.galleryFile}`];
 if (!gallery) throw new Error(`Gallery not found: ${entry.data.galleryFile}`);
+
+const images = gallery.images ?? [];
+const hidden = isHiddenWorkSlug(entry.data.slug);
+const pageDescription = metaDescription(entry.data.seoDescription, entry.data.description);
+const pageImage = socialImageUrl(entry.data.cover, entry.data.coverFallback);
+const coverAlt =
+	typeof images[0]?.alt === 'string' &&
+	images[0].alt.trim() &&
+	images[0].alt.trim().toLowerCase() !== entry.data.title.toLowerCase()
+		? images[0].alt.trim()
+		: `${entry.data.title} by Adam Simms`;
+
+const orderedWork = (await getCollection('work'))
+	.filter((item) => !isHiddenWorkSlug(item.data.slug))
+	.sort((a, b) => b.data.order - a.data.order);
+
+const currentIndex = orderedWork.findIndex((item) => item.data.slug === entry.data.slug);
+const nextEntry =
+	currentIndex === -1 ? null : orderedWork[(currentIndex + 1) % orderedWork.length];
+
+function formatDuration(seconds: number) {
+	const m = Math.floor(seconds / 60);
+	const s = seconds % 60;
+	return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function durationLabel(seconds: number) {
+	const m = Math.floor(seconds / 60);
+	const s = seconds % 60;
+	if (s === 0) return m === 1 ? '1 minute' : `${m} minutes`;
+	const minutes = m === 1 ? '1 minute' : `${m} minutes`;
+	const secondsLabel = s === 1 ? '1 second' : `${s} seconds`;
+	return m === 0 ? secondsLabel : `${minutes} ${secondsLabel}`;
+}
+
+const year = entry.data.year;
+const medium = entry.data.medium;
+const video = entry.data.video;
+const vimeoId = video?.provider === 'vimeo' ? video.id : undefined;
+const videoLoops = Boolean(video?.loop);
+const durationSeconds = video?.duration;
+const showDuration = !videoLoops && durationSeconds != null;
+const showLoop = videoLoops;
+const showRuntime = showDuration || showLoop;
+
+const creativeWorkLd = {
+	'@context': 'https://schema.org',
+	'@type': 'CreativeWork',
+	name: entry.data.title,
+	description: pageDescription,
+	url: absoluteUrl(`/${entry.data.slug}`),
+	image: pageImage,
+	creator: { '@type': 'Person', name: 'Adam Simms', url: SITE_URL },
+	...(year ? { dateCreated: year } : {}),
+	...(medium ? { material: medium } : {}),
+};
 ---
 
-<Base title={entry.data.title} description={entry.data.description}>
-	<article>
-		<header class="page-header">
-			<h1>{entry.data.title}</h1>
-			{entry.data.description ? <p class="lead">{entry.data.description}</p> : null}
+<Base
+	title={entry.data.title}
+	description={pageDescription}
+	image={pageImage}
+	imageAlt={coverAlt}
+	variant="work"
+	noindex={hidden}
+	jsonLd={creativeWorkLd}
+>
+	<article class="project" data-project-reveal>
+		<header class="project-header">
+			<h1 class="project-title">{entry.data.title}</h1>
+
+			<div class="project-intro" data-project-intro data-project-body>
+				<div class="project-intro__text" data-project-text>
+					{
+						year || showRuntime ? (
+							<p class="project-meta">
+								{year ? <span>{year}</span> : null}
+								{year && showRuntime ? (
+									<span class="project-meta__sep" aria-hidden="true">
+										{' '}
+										·{' '}
+									</span>
+								) : null}
+								{showLoop ? (
+									<span>Loop</span>
+								) : showDuration && durationSeconds != null ? (
+									<span aria-label={`Duration ${durationLabel(durationSeconds)}`}>
+										{formatDuration(durationSeconds)}
+									</span>
+								) : null}
+							</p>
+						) : null
+					}
+
+					{
+						entry.data.description
+							? entry.data.description
+									.trim()
+									.split(/\n\n+/)
+									.map((paragraph) => <p class="project-lead">{paragraph}</p>)
+							: null
+					}
+
+					{medium ? <p class="project-medium">{medium}</p> : null}
+
+					{
+						entry.data.slug === 'cloudberry' ? (
+							<p class="project-cta">
+								<a href="/cloudberry/archive/">Enter the archive</a>
+								<span> — browse the full set of frames, weather, and timelines.</span>
+							</p>
+						) : entry.data.slug === 'adrift' ? (
+							<p class="project-cta">
+								<a href="/adrift/experience/">Enter the experience</a>
+								<span> — live saltbox cabin scene driven by Newfoundland weather.</span>
+							</p>
+						) : entry.data.statement ? (
+							<p class="project-cta">{entry.data.statement}</p>
+						) : null
+					}
+				</div>
+
+				{
+					images.length > 0 || vimeoId ? (
+						<WorkGallery
+							images={images}
+							title={entry.data.title}
+							video={
+								vimeoId
+									? {
+											id: vimeoId,
+											title: `${entry.data.title} — video`,
+											poster: entry.data.cover,
+											posterFallback: entry.data.coverFallback || entry.data.cover,
+										}
+									: null
+							}
+						/>
+					) : null
+				}
+			</div>
 		</header>
 
 		{
-			entry.data.slug === 'cloudberry' ? (
-				<p class="work-cta">
-					<a href="/cloudberry/archive/">Enter the archive</a>
-					<span> — browse the full set of frames, weather, and timelines.</span>
-				</p>
-			) : entry.data.slug === 'adrift' ? (
-				<p class="work-cta">
-					<a href="/adrift/experience/">Enter the experience</a>
-					<span> — live saltbox cabin scene driven by Newfoundland weather.</span>
-				</p>
-			) : entry.data.statement ? (
-				<div class="statement prose">
-					<p>{entry.data.statement}</p>
-				</div>
+			nextEntry ? (
+				<nav class="project-next" data-project-body aria-label="Next project">
+					<a href={`/${nextEntry.data.slug}`}>
+						<span class="project-next__label">Next</span>
+						<span class="project-next__title">
+							{nextEntry.data.title}
+							<svg viewBox="0 0 9 16" width="9" height="16" aria-hidden="true" focusable="false">
+								<polyline
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.25"
+									stroke-miterlimit="10"
+									points="1.6,1.2 6.5,7.9 1.6,14.7"
+								></polyline>
+							</svg>
+						</span>
+					</a>
+				</nav>
 			) : null
 		}
-
-		<WorkGallery images={gallery.images} />
 	</article>
+
+	<script>
+		function syncProjectLayout() {
+			const intro = document.querySelector('[data-project-intro]');
+			const text = document.querySelector('[data-project-text]');
+			const media = intro?.querySelector('.gallery--carousel, .project-hero');
+			if (
+				!(intro instanceof HTMLElement) ||
+				!(text instanceof HTMLElement) ||
+				!(media instanceof HTMLElement)
+			) {
+				return;
+			}
+
+			const MIN_SIDE_BY_SIDE = 640;
+			const mediaAspect = media.classList.contains('gallery--has-video') ? 16 / 9 : 3 / 2;
+
+			const syncLayout = () => {
+				const styles = getComputedStyle(intro);
+				const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+				const total = intro.clientWidth;
+				const imageColWidth = Math.max(0, (total - gap) * (2 / 3));
+				const imageHeight = imageColWidth / mediaAspect;
+				const textHeight = text.scrollHeight;
+				const tooNarrow = total < MIN_SIDE_BY_SIDE;
+				const shouldStack = tooNarrow || textHeight > imageHeight + 1;
+
+				intro.classList.toggle('project-intro--stacked', shouldStack);
+			};
+
+			syncLayout();
+
+			const observer = new ResizeObserver(() => syncLayout());
+			observer.observe(intro);
+			observer.observe(text);
+			observer.observe(media);
+
+			const cleanup = () => {
+				observer.disconnect();
+				window.removeEventListener('load', syncLayout);
+			};
+
+			window.addEventListener('load', syncLayout);
+			document.addEventListener('astro:before-swap', cleanup, { once: true });
+		}
+
+		document.addEventListener('astro:page-load', syncProjectLayout);
+	</script>
 </Base>

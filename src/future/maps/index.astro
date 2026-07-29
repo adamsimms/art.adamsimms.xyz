@@ -42,9 +42,10 @@ const view = { lat: 49.1998, lon: -53.4865, zoom: 13.5 };
 			<link href="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.css" rel="stylesheet" />
 			<script is:inline define:vars={{ token, cabin, view }}>
 				const boot = () => {
-					const script = document.createElement('script');
-					script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js';
-					script.onload = () => {
+					const container = document.getElementById('pinchard-satellite-map');
+					if (!container || container.dataset.mapReady === 'true') return;
+
+					const startMap = () => {
 						mapboxgl.accessToken = token;
 						const map = new mapboxgl.Map({
 							container: 'pinchard-satellite-map',
@@ -54,7 +55,24 @@ const view = { lat: 49.1998, lon: -53.4865, zoom: 13.5 };
 						});
 						map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right');
 						new mapboxgl.Marker().setLngLat([cabin.lon, cabin.lat]).addTo(map);
+						container.dataset.mapReady = 'true';
 					};
+
+					if (typeof mapboxgl !== 'undefined') {
+						startMap();
+						return;
+					}
+
+					const existing = document.querySelector('script[data-mapbox-gl]');
+					if (existing) {
+						existing.addEventListener('load', startMap, { once: true });
+						return;
+					}
+
+					const script = document.createElement('script');
+					script.src = 'https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js';
+					script.dataset.mapboxGl = '';
+					script.onload = startMap;
 					document.head.appendChild(script);
 				};
 				if (document.readyState === 'loading') {
