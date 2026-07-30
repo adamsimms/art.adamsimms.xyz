@@ -1,0 +1,25 @@
+---
+description: Typography and layout stack — Utopia CSS tokens, no Tailwind by default
+globs: src/styles/global.css,src/layouts/**/*.astro,src/components/**/*.astro,src/pages/**/*.astro
+alwaysApply: false
+---
+
+# Design stack
+
+## Typography & space
+
+Fluid type and space live as **Utopia-generated CSS custom properties** in `src/styles/global.css` (viewport ~360→1240, semantic roles like `--type-brand|display|index|title|lead|body|nav|caption` and `--space-*`).
+
+- Extend or reuse those tokens; do not invent parallel `clamp()` scales or a second type system
+- Prefer semantic roles over one-off font sizes
+
+## Layout
+
+Hand-written CSS in `global.css` — sparse artist layouts, not a utility framework.
+
+- **Do not** add Tailwind, Open Props, or a layout-component library unless explicitly asked
+- Prefer tightening existing shells/grids over introducing a new grid system
+
+## Motion
+
+See `animation.mdc` — CSS + Astro view transitions for chrome; GSAP only later for narrative project views.

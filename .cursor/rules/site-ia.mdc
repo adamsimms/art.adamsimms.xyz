@@ -1,0 +1,29 @@
+---
+description: Main nav vs footer IA and homepage brand treatment
+globs: src/components/Nav.astro,src/components/Footer.astro,src/layouts/Base.astro,src/pages/index.astro,src/pages/**/*.astro
+alwaysApply: false
+---
+
+# Site information architecture
+
+## Main nav
+
+Primary practice links only: **Works · About · CV**.
+
+Do not add secondary surfaces (Collaborations / design-for-hire, Writing go-live, Maps, Blog mirrors, external profiles) to the main nav without an explicit request.
+
+## Footer
+
+Secondary and site-wide links live in the footer: Works, About, CV, Collaborations, plus external/professional links (email, GitHub, LinkedIn, Concordia, etc.) as already wired.
+
+- **Maps** (`/maps`) — staged / not live yet: routes build, but stay out of the footer and sitemap (`noindex`) until go-live (satellite + trees + resettled; Mapbox needs `PUBLIC_MAPBOX_TOKEN`)
+- **Collaborations** (`/collaborations`) → footer, not main nav (publication / web work for others + hire CTA)
+- Keep the footer quiet — short labels, no link farm
+
+## Writing
+
+Long-form essays can live at `/writing/[slug]` before they appear in nav. Discoverability via CV (and later an index) is enough until the Writing SEO go-live checklist in `writing-seo.mdc` is done.
+
+## Homepage brand
+
+On the homepage, the site title always shows the full name **Adam Simms** — never the condensed **AS** treatment used elsewhere when space is tight.

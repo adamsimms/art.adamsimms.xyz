@@ -17,7 +17,7 @@ Writing pieces can ship at `/writing/[slug]` before they are linked from the mai
 ## Per-piece metadata
 
 - Every piece needs a strong `description` in frontmatter (used for meta + Article JSON-LD)
-- Pass a dedicated social image into `Base` (lead figure JPG preferred — crawlers often skip AVIF). Today writing pages fall back to the sitewide OG image if `image` is omitted
+- Pass a dedicated social image into `Base` (lead figure JPG preferred — crawlers often skip AVIF). Set optional `image` + `imageAlt` in writing frontmatter; writing pages fall back to the sitewide OG image if omitted
 - Keep `pubDate` accurate; Article schema already emits `datePublished`
 - If the piece also lives on Medium (or elsewhere), decide canonical: prefer `art.adamsimms.xyz` as canonical when this is the primary home, and align Medium’s canonical / cross-post settings
 

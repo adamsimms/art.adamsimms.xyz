@@ -1,0 +1,57 @@
+---
+description: Conventions for work frontmatter, gallery captions, and hidden projects
+globs: src/content/work/**/*,src/components/WorkGallery.astro,src/content.config.ts,src/pages/[slug].astro,astro.config.mjs
+alwaysApply: false
+---
+
+# Work content
+
+## Frontmatter
+
+- `description` — short intro before media (one or two paragraphs)
+- `body` — optional additional essay paragraphs below media (smaller type); split with blank lines
+- `seoDescription` — short meta / Open Graph blurb (≤160 chars); do not paste the essay into meta
+- `year` — use an em dash for ranges; ongoing projects are `2020—Ongoing` (no brackets)
+- `video.loop: true` — UI shows “Loop”; do not show a duration for loops
+- `order` — controls Works index sort (higher / configured order as used on `/works`)
+
+## Titles & slugs
+
+- Keep **Light House** / `light-house` (two words). Do not rename to Lighthouse — the split is intentional (lighted house vs maritime lighthouse).
+
+## Gallery JSON captions
+
+Structured fields on each image, rendered as one line joined by ` • ` (empty fields skipped):
+
+`title` · `date` · `dimensions` · `notes` · optional freeform `caption`
+
+```json
+{
+  "src": "https://media.adamsimms.xyz/work/cabin/01.avif",
+  "fallback": "https://media.adamsimms.xyz/work/cabin/01.jpg",
+  "alt": "Cabin interior",
+  "title": "Interior, daylight",
+  "date": "2018",
+  "dimensions": "24 × 36 in",
+  "notes": "Archival pigment print"
+}
+```
+
+Prefer AVIF + JPG `fallback`. Prefer specific `alt` text; generic title-only alts become `"{title}, image N of M"` in the gallery.
+
+## Video + stills
+
+For video-primary works where stills should not share the hero carousel, set `stillsAfterBody: true`. Hero shows video only; gallery images render as a **Reference** thumbnail grid below the essay and open in a lightbox.
+
+## Documentation stills (non-video)
+
+Optional `documentation` array in the gallery JSON (same image shape as `images`). Shown below the essay as the **Documentation** grid when `stillsAfterBody` is not used — e.g. process photos while the hero keeps the work gallery.
+
+
+## Hidden works
+
+These stay live at their URLs but are excluded from the sitemap and get `noindex, nofollow`:
+
+`from-to`, `washed-up`, `newfoundland`
+
+Source of truth: `HIDDEN_WORK_SLUGS` / `HIDDEN_PATHS` in `src/lib/seo.ts` (imported by `astro.config.mjs` for the sitemap filter). Mirror the page-level `noindex` flag when adding or removing a hidden work.
