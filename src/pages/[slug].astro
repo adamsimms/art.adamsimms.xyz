@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import WorkGallery from '../components/WorkGallery.astro';
+import StillsThumbs from '../components/StillsThumbs.astro';
 import { getCollection } from 'astro:content';
 import {
 	SITE_URL,
@@ -40,6 +41,10 @@ const orderedWork = (await getCollection('work'))
 	.sort((a, b) => b.data.order - a.data.order);
 
 const currentIndex = orderedWork.findIndex((item) => item.data.slug === entry.data.slug);
+const prevEntry =
+	currentIndex === -1
+		? null
+		: orderedWork[(currentIndex - 1 + orderedWork.length) % orderedWork.length];
 const nextEntry =
 	currentIndex === -1 ? null : orderedWork[(currentIndex + 1) % orderedWork.length];
 
@@ -67,6 +72,29 @@ const durationSeconds = video?.duration;
 const showDuration = !videoLoops && durationSeconds != null;
 const showLoop = videoLoops;
 const showRuntime = showDuration || showLoop;
+const stillsAfterBody = Boolean(entry.data.stillsAfterBody && vimeoId && images.length > 0);
+const heroImages = stillsAfterBody ? [] : images;
+const documentation = Array.isArray(gallery.documentation) ? gallery.documentation : [];
+const bodyStills = stillsAfterBody ? images : documentation;
+
+/** Assembled sibling mounts live in `dist/` after `build:full` — not available in `astro dev`. */
+const projectLink =
+	entry.data.slug === 'cloudberry'
+		? {
+				href: import.meta.env.DEV ? `${SITE_URL}/cloudberry/archive/` : '/cloudberry/archive/',
+				label: 'Archive',
+			}
+		: entry.data.slug === 'adrift'
+			? {
+					href: import.meta.env.DEV ? `${SITE_URL}/adrift/experience/` : '/adrift/experience/',
+					label: 'Experience',
+				}
+			: null;
+const showMeta = Boolean(year || showRuntime || projectLink);
+const descriptionParagraphs = entry.data.description
+	? entry.data.description.trim().split(/\n\n+/).filter(Boolean)
+	: [];
+const [leadParagraph, ...moreLeadParagraphs] = descriptionParagraphs;
 
 const creativeWorkLd = {
 	'@context': 'https://schema.org',
@@ -92,86 +120,132 @@ const creativeWorkLd = {
 >
 	<article class="project" data-project-reveal>
 		<header class="project-header">
-			<h1 class="project-title">{entry.data.title}</h1>
+			<div class="project-intro">
+				<div class="project-intro__text">
+					<div class="project-intro__head">
+						<h1 class="project-title">{entry.data.title}</h1>
+						{medium ? <p class="project-medium">{medium}</p> : null}
+					</div>
 
-			<div class="project-intro" data-project-intro data-project-body>
-				<div class="project-intro__text" data-project-text>
-					{
-						year || showRuntime ? (
-							<p class="project-meta">
-								{year ? <span>{year}</span> : null}
-								{year && showRuntime ? (
-									<span class="project-meta__sep" aria-hidden="true">
-										{' '}
-										·{' '}
-									</span>
-								) : null}
-								{showLoop ? (
-									<span>Loop</span>
-								) : showDuration && durationSeconds != null ? (
-									<span aria-label={`Duration ${durationLabel(durationSeconds)}`}>
-										{formatDuration(durationSeconds)}
-									</span>
-								) : null}
-							</p>
-						) : null
-					}
+					<div class="project-intro__copy" data-project-body>
+						{
+							showMeta ? (
+								<p class="project-meta">
+									{year ? <span>{year}</span> : null}
+									{year && showRuntime ? (
+										<span class="project-meta__sep" aria-hidden="true">
+											{' '}
+											·{' '}
+										</span>
+									) : null}
+									{showLoop ? (
+										<span>Loop</span>
+									) : showDuration && durationSeconds != null ? (
+										<span aria-label={`Duration ${durationLabel(durationSeconds)}`}>
+											{formatDuration(durationSeconds)}
+										</span>
+									) : null}
+									{(year || showRuntime) && projectLink ? (
+										<span class="project-meta__sep" aria-hidden="true">
+											{' '}
+											·{' '}
+										</span>
+									) : null}
+									{projectLink ? (
+										<a href={projectLink.href} data-astro-reload>
+											{projectLink.label}
+										</a>
+									) : null}
+								</p>
+							) : null
+						}
 
-					{
-						entry.data.description
-							? entry.data.description
-									.trim()
-									.split(/\n\n+/)
-									.map((paragraph) => <p class="project-lead">{paragraph}</p>)
-							: null
-					}
+						{leadParagraph ? <p class="project-lead">{leadParagraph}</p> : null}
 
-					{medium ? <p class="project-medium">{medium}</p> : null}
-
-					{
-						entry.data.slug === 'cloudberry' ? (
-							<p class="project-cta">
-								<a href="/cloudberry/archive/">Enter the archive</a>
-								<span> — browse the full set of frames, weather, and timelines.</span>
-							</p>
-						) : entry.data.slug === 'adrift' ? (
-							<p class="project-cta">
-								<a href="/adrift/experience/">Enter the experience</a>
-								<span> — live saltbox cabin scene driven by Newfoundland weather.</span>
-							</p>
-						) : entry.data.statement ? (
-							<p class="project-cta">{entry.data.statement}</p>
-						) : null
-					}
+						{entry.data.statement ? <p class="project-cta">{entry.data.statement}</p> : null}
+					</div>
 				</div>
 
 				{
-					images.length > 0 || vimeoId ? (
-						<WorkGallery
-							images={images}
-							title={entry.data.title}
-							video={
-								vimeoId
-									? {
-											id: vimeoId,
-											title: `${entry.data.title} — video`,
-											poster: entry.data.cover,
-											posterFallback: entry.data.coverFallback || entry.data.cover,
-										}
-									: null
-							}
-						/>
+					heroImages.length > 0 || vimeoId ? (
+						<div data-project-body>
+							<WorkGallery
+								images={heroImages}
+								title={entry.data.title}
+								video={
+									vimeoId
+										? {
+												id: vimeoId,
+												title: `${entry.data.title} — video`,
+												poster: video?.poster || entry.data.cover,
+												posterFallback:
+													video?.posterFallback ||
+													video?.poster ||
+													entry.data.coverFallback ||
+													entry.data.cover,
+											}
+										: null
+								}
+							/>
+						</div>
+					) : null
+				}
+
+				{
+					moreLeadParagraphs.length > 0 ? (
+						<div class="project-intro__more" data-project-body>
+							{moreLeadParagraphs.map((paragraph) => (
+								<p class="project-lead">{paragraph}</p>
+							))}
+						</div>
 					) : null
 				}
 			</div>
+
+			{
+				entry.data.body ? (
+					<div class="project-essay" data-project-body>
+						{entry.data.body
+							.trim()
+							.split(/\n\n+/)
+							.map((paragraph) => <p class="project-body">{paragraph}</p>)}
+					</div>
+				) : null
+			}
+
+			{
+				bodyStills.length > 0 ? (
+					<div class="project-stills" data-project-body>
+						<h2 class="project-stills__title">
+							{stillsAfterBody ? 'Reference' : 'Documentation'}
+						</h2>
+						<StillsThumbs images={bodyStills} title={entry.data.title} />
+					</div>
+				) : null
+			}
 		</header>
 
 		{
-			nextEntry ? (
-				<nav class="project-next" data-project-body aria-label="Next project">
-					<a href={`/${nextEntry.data.slug}`}>
-						<span class="project-next__label">Next</span>
-						<span class="project-next__title">
+			prevEntry && nextEntry ? (
+				<nav class="project-nav" data-project-body aria-label="Project navigation">
+					<a class="project-nav__link project-nav__link--prev" href={`/${prevEntry.data.slug}`}>
+						<span class="project-nav__label">Previous</span>
+						<span class="project-nav__title">
+							<svg viewBox="0 0 9 16" width="9" height="16" aria-hidden="true" focusable="false">
+								<polyline
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.25"
+									stroke-miterlimit="10"
+									points="7.4,1.2 2.5,7.9 7.4,14.7"
+								></polyline>
+							</svg>
+							{prevEntry.data.title}
+						</span>
+					</a>
+					<a class="project-nav__link project-nav__link--next" href={`/${nextEntry.data.slug}`}>
+						<span class="project-nav__label">Next</span>
+						<span class="project-nav__title">
 							{nextEntry.data.title}
 							<svg viewBox="0 0 9 16" width="9" height="16" aria-hidden="true" focusable="false">
 								<polyline
@@ -188,52 +262,4 @@ const creativeWorkLd = {
 			) : null
 		}
 	</article>
-
-	<script>
-		function syncProjectLayout() {
-			const intro = document.querySelector('[data-project-intro]');
-			const text = document.querySelector('[data-project-text]');
-			const media = intro?.querySelector('.gallery--carousel, .project-hero');
-			if (
-				!(intro instanceof HTMLElement) ||
-				!(text instanceof HTMLElement) ||
-				!(media instanceof HTMLElement)
-			) {
-				return;
-			}
-
-			const MIN_SIDE_BY_SIDE = 640;
-			const mediaAspect = media.classList.contains('gallery--has-video') ? 16 / 9 : 3 / 2;
-
-			const syncLayout = () => {
-				const styles = getComputedStyle(intro);
-				const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
-				const total = intro.clientWidth;
-				const imageColWidth = Math.max(0, (total - gap) * (2 / 3));
-				const imageHeight = imageColWidth / mediaAspect;
-				const textHeight = text.scrollHeight;
-				const tooNarrow = total < MIN_SIDE_BY_SIDE;
-				const shouldStack = tooNarrow || textHeight > imageHeight + 1;
-
-				intro.classList.toggle('project-intro--stacked', shouldStack);
-			};
-
-			syncLayout();
-
-			const observer = new ResizeObserver(() => syncLayout());
-			observer.observe(intro);
-			observer.observe(text);
-			observer.observe(media);
-
-			const cleanup = () => {
-				observer.disconnect();
-				window.removeEventListener('load', syncLayout);
-			};
-
-			window.addEventListener('load', syncLayout);
-			document.addEventListener('astro:before-swap', cleanup, { once: true });
-		}
-
-		document.addEventListener('astro:page-load', syncProjectLayout);
-	</script>
 </Base>

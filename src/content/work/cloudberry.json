@@ -77,5 +77,43 @@
       "alt": "Contact sheet of 288 Cloudberry frames sampled across the archive",
       "caption": ""
     }
+  ],
+  "documentation": [
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/solar-install.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/solar-install.jpg",
+      "alt": "Solar power installation on Pinchard’s Island",
+      "caption": "130 W solar power system install"
+    },
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cam-do.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cam-do.jpg",
+      "alt": "Cam Do weatherproof enclosure mounted on the cabin",
+      "caption": "Cam Do enclosure — fixed north-facing frame"
+    },
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/pi.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/pi.jpg",
+      "alt": "Raspberry Pi assembly with cellular modem",
+      "caption": "Raspberry Pi field computer and LTE modem"
+    },
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/precious-moments.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/precious-moments.jpg",
+      "alt": "Precious Memories cabin on Pinchard’s Island",
+      "caption": "Precious Memories cabin"
+    },
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/notebook.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/notebook.jpg",
+      "alt": "Cloudberry project notebook",
+      "caption": "Project notebook"
+    },
+    {
+      "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cloudberry-system.jpg",
+      "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cloudberry-system.jpg",
+      "alt": "Cloudberry system diagram",
+      "caption": "System diagram — GoPro, Raspberry Pi, solar, and cellular upload"
+    }
   ]
 }

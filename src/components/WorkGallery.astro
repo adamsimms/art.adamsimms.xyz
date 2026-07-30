@@ -21,13 +21,18 @@ interface Props {
 	images: GalleryImage[];
 	title?: string;
 	video?: GalleryVideo | null;
+	/** Stack images vertically with no carousel controls. */
+	layout?: 'carousel' | 'stack';
+	/** Prefix for figure ids (default `image`). Use `still` for body stills. */
+	idPrefix?: string;
 }
 
-const { images, title = '', video = null } = Astro.props;
+const { images, title = '', video = null, layout = 'carousel', idPrefix = 'image' } = Astro.props;
+const isStack = layout === 'stack';
 const hasVideo = Boolean(video?.id);
 const imageCount = images.length;
 const total = imageCount + (hasVideo ? 1 : 0);
-const showControls = total > 1;
+const showControls = !isStack && total > 1;
 
 function trimField(value?: string) {
 	return value?.trim() || '';
@@ -65,18 +70,30 @@ const posterFallback = video?.posterFallback || posterSrc;
 {
 	total > 0 ? (
 		<section
-			class:list={['gallery', 'gallery--carousel', hasVideo && 'gallery--has-video']}
+			class:list={[
+				'gallery',
+				isStack ? 'gallery--stack' : 'gallery--carousel',
+				hasVideo && 'gallery--has-video',
+			]}
 			data-gallery
-			tabindex="0"
-			aria-roledescription="carousel"
-			aria-label={title ? `${title} gallery` : 'Project gallery'}
+			tabindex={showControls ? '0' : undefined}
+			aria-roledescription={showControls ? 'carousel' : undefined}
+			aria-label={
+				title
+					? isStack
+						? `${title} stills`
+						: `${title} gallery`
+					: isStack
+						? 'Project stills'
+						: 'Project gallery'
+			}
 		>
 			<div class="gallery__viewport" data-gallery-viewport>
 				{
 					hasVideo ? (
 						<figure
 							class="gallery__item gallery__item--video"
-							id="image-1"
+							id={`${idPrefix}-1`}
 							data-index="0"
 							data-gallery-video
 							data-active=""
@@ -124,7 +141,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 				{images.map((image, imageIndex) => {
 					const slideIndex = hasVideo ? imageIndex + 1 : imageIndex;
 					const n = slideIndex + 1;
-					const id = `image-${n}`;
+					const id = `${idPrefix}-${n}`;
 					const isFirst = !hasVideo && imageIndex === 0;
 					const caption = imageCaption(image);
 					return (
@@ -132,16 +149,16 @@ const posterFallback = video?.posterFallback || posterSrc;
 							class="gallery__item"
 							id={id}
 							data-index={String(slideIndex)}
-							data-active={isFirst ? '' : undefined}
-							aria-hidden={isFirst ? 'false' : 'true'}
+							data-active={isStack || isFirst ? '' : undefined}
+							aria-hidden={isStack || isFirst ? 'false' : 'true'}
 						>
 							<picture>
 								<source srcset={image.src} type="image/avif" />
 								<img
 									src={image.fallback || image.src}
 									alt={imageAlt(image, imageIndex)}
-									width="3"
-									height="2"
+									width={isStack ? '16' : '3'}
+									height={isStack ? '9' : '2'}
 									loading={isFirst ? 'eager' : 'lazy'}
 									decoding="async"
 								/>
@@ -176,16 +193,11 @@ const posterFallback = video?.posterFallback || posterSrc;
 
 							<div class="gallery__cursor" data-gallery-cursor aria-hidden="true">
 								<span class="gallery__cursor-chip">
-									<svg class="gallery__cursor-bg" width="40" height="40" aria-hidden="true" focusable="false">
-										<rect width="40" height="40" fill="rgb(0 0 0 / 64%)"></rect>
+									<svg class="gallery__cursor-arrow gallery__cursor-arrow--prev" viewBox="0 0 24 24" width="40" height="40" focusable="false">
+										<path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter"></path>
 									</svg>
-									<svg class="gallery__cursor-arrow gallery__cursor-arrow--prev" viewBox="0 0 24 24" width="18" height="18" focusable="false">
-										<path d="M13 5 L6 12 L13 19" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"></path>
-										<path d="M6 12 H22" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square"></path>
-									</svg>
-									<svg class="gallery__cursor-arrow gallery__cursor-arrow--next" viewBox="0 0 24 24" width="18" height="18" focusable="false">
-										<path d="M11 5 L18 12 L11 19" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"></path>
-										<path d="M2 12 H18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="square"></path>
+									<svg class="gallery__cursor-arrow gallery__cursor-arrow--next" viewBox="0 0 24 24" width="40" height="40" focusable="false">
+										<path d="M9 4 L17 12 L9 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter"></path>
 									</svg>
 								</span>
 							</div>
@@ -210,7 +222,13 @@ const posterFallback = video?.posterFallback || posterSrc;
 	}
 
 	function bindVideoPlay(root: ParentNode, signal?: AbortSignal) {
+		const finePointer = window.matchMedia('(pointer: fine)').matches;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 		root.querySelectorAll('[data-gallery-video-play]').forEach((button) => {
+			if (!(button instanceof HTMLButtonElement)) return;
+			const icon = button.querySelector('svg');
+
 			button.addEventListener(
 				'click',
 				(event) => {
@@ -221,7 +239,115 @@ const posterFallback = video?.posterFallback || posterSrc;
 				},
 				{ signal },
 			);
+
+			if (!finePointer || !(icon instanceof SVGElement)) return;
+
+			const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+			let tracking = false;
+			let frame = 0;
+
+			const setIconPosition = () => {
+				icon.style.left = Math.round(pos.x) + 'px';
+				icon.style.top = Math.round(pos.y) + 'px';
+				icon.style.transform = 'translate(-50%, -50%)';
+			};
+
+			const tick = () => {
+				const accel = reduceMotion ? 1 : 0.22;
+				pos.x += (pos.tx - pos.x) * accel;
+				pos.y += (pos.ty - pos.y) * accel;
+				setIconPosition();
+				if (tracking) frame = requestAnimationFrame(tick);
+			};
+
+			const onMove = (event: PointerEvent) => {
+				if (event.pointerType !== 'mouse') return;
+				const rect = button.getBoundingClientRect();
+				pos.tx = event.clientX - rect.left;
+				pos.ty = event.clientY - rect.top;
+				button.dataset.hovering = 'true';
+
+				if (!tracking) {
+					pos.x = pos.tx;
+					pos.y = pos.ty;
+					setIconPosition();
+					tracking = true;
+					cancelAnimationFrame(frame);
+					frame = requestAnimationFrame(tick);
+				}
+			};
+
+			const onLeave = () => {
+				tracking = false;
+				cancelAnimationFrame(frame);
+				button.dataset.hovering = 'false';
+				icon.style.left = '';
+				icon.style.top = '';
+				icon.style.transform = '';
+			};
+
+			button.addEventListener('pointerenter', onMove, { signal });
+			button.addEventListener('pointermove', onMove, { signal });
+			button.addEventListener('pointerleave', onLeave, { signal });
+			signal?.addEventListener('abort', () => {
+				tracking = false;
+				cancelAnimationFrame(frame);
+			});
 		});
+	}
+
+	/** Align captions to the object-fit:contain photo, not the full carousel frame. */
+	function syncCaptionToImage(figure: Element) {
+		if (!(figure instanceof HTMLElement)) return;
+		const img = figure.querySelector('img');
+		const caption = figure.querySelector('figcaption');
+		if (!(img instanceof HTMLImageElement) || !(caption instanceof HTMLElement)) {
+			figure.style.removeProperty('--caption-inset');
+			figure.style.removeProperty('--caption-width');
+			return;
+		}
+
+		const boxW = img.clientWidth;
+		const boxH = img.clientHeight;
+		const natW = img.naturalWidth;
+		const natH = img.naturalHeight;
+		if (!boxW || !boxH || !natW || !natH) return;
+
+		const boxRatio = boxW / boxH;
+		const imageRatio = natW / natH;
+		let renderedW: number;
+		let inset: number;
+		if (imageRatio >= boxRatio) {
+			renderedW = boxW;
+			inset = 0;
+		} else {
+			renderedW = boxH * imageRatio;
+			inset = (boxW - renderedW) / 2;
+		}
+
+		figure.style.setProperty('--caption-inset', `${Math.max(0, inset)}px`);
+		figure.style.setProperty('--caption-width', `${renderedW}px`);
+	}
+
+	function bindCaptionAlignment(gallery: HTMLElement, signal?: AbortSignal) {
+		const figures = [...gallery.querySelectorAll('.gallery__item')];
+		const syncAll = () => figures.forEach(syncCaptionToImage);
+
+		figures.forEach((figure) => {
+			const img = figure.querySelector('img');
+			if (!(img instanceof HTMLImageElement)) return;
+			if (img.complete) syncCaptionToImage(figure);
+			else img.addEventListener('load', () => syncCaptionToImage(figure), { once: true, signal });
+		});
+
+		const ro = new ResizeObserver(syncAll);
+		const viewport = gallery.querySelector('[data-gallery-viewport]');
+		if (viewport instanceof HTMLElement) ro.observe(viewport);
+		else ro.observe(gallery);
+
+		signal?.addEventListener('abort', () => ro.disconnect());
+		window.addEventListener('resize', syncAll, { signal });
+		syncAll();
 	}
 
 	function enhanceCarousel(gallery: HTMLElement) {
@@ -299,8 +425,12 @@ const posterFallback = video?.posterFallback || posterSrc;
 		};
 
 		const updateCursor = () => {
+			const disabled = !canGo(side);
 			cursor.dataset.side = side;
-			cursor.dataset.disabled = canGo(side) ? 'false' : 'true';
+			cursor.dataset.disabled = disabled ? 'true' : 'false';
+			if (cursor.dataset.active === 'true') {
+				viewport.dataset.cursor = 'true';
+			}
 		};
 
 		const syncVideoMode = () => {
@@ -341,8 +471,10 @@ const posterFallback = video?.posterFallback || posterSrc;
 		};
 
 		const setCursorPosition = () => {
-			cursor.style.left = Math.round(pos.x) - 20 + 'px';
-			cursor.style.top = Math.round(pos.y) - 20 + 'px';
+			const halfW = cursor.offsetWidth / 2;
+			const halfH = cursor.offsetHeight / 2;
+			cursor.style.left = Math.round(pos.x) - halfW + 'px';
+			cursor.style.top = Math.round(pos.y) - halfH + 'px';
 			cursor.style.transform = 'none';
 		};
 
@@ -359,9 +491,8 @@ const posterFallback = video?.posterFallback || posterSrc;
 			pos.tx = clientX - rect.left;
 			pos.ty = clientY - rect.top;
 			side = forcedSide || (pos.tx < rect.width / 2 ? 'prev' : 'next');
-			updateCursor();
 			cursor.dataset.active = 'true';
-			viewport.dataset.cursor = 'true';
+			updateCursor();
 
 			if (!tracking) {
 				pos.x = pos.tx;
@@ -394,6 +525,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 			restartAutoplay: fromHash == null ? !isVideoSlide(0) : undefined,
 		});
 
+		bindCaptionAlignment(gallery, signal);
 		bindVideoPlay(gallery, signal);
 
 		prevBtn.addEventListener(
@@ -497,8 +629,14 @@ const posterFallback = video?.posterFallback || posterSrc;
 	function initGalleries() {
 		document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
 			const hasControls = gallery.querySelector('[data-gallery-prev]');
-			if (hasControls) enhanceCarousel(gallery);
-			else bindVideoPlay(gallery);
+			if (hasControls) {
+				enhanceCarousel(gallery);
+				return;
+			}
+			const ac = new AbortController();
+			bindCaptionAlignment(gallery, ac.signal);
+			bindVideoPlay(gallery, ac.signal);
+			document.addEventListener('astro:before-swap', () => ac.abort(), { once: true });
 		});
 	}
 

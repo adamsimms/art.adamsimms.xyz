@@ -1,11 +1,40 @@
 {
   "images": [
     {
+      "src": "https://media.adamsimms.xyz/work/adrift/03.avif",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/03.jpg",
+      "alt": "Adrift, two-story yellow house floating on the ocean at dusk",
+      "caption": "Film still"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/adrift/04.avif",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/04.jpg",
+      "alt": "Adrift, yellow house on a wooden platform floating on calm water",
+      "caption": "Film still"
+    },
+    {
       "src": "https://media.adamsimms.xyz/work/adrift/01.avif",
       "fallback": "https://media.adamsimms.xyz/work/adrift/01.jpg",
-      "alt": "Adrift",
-      "caption": "",
-      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728043226290-HD6FLALH9VBQ59GVJ7AL/image-asset.png"
+      "alt": "Adrift, single-story yellow cabin floating on the ocean at twilight",
+      "caption": "Film still"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/work/adrift/02.avif",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/02.jpg",
+      "alt": "Adrift, two-story yellow house floating on dark water under a black sky",
+      "caption": "Film still"
+    },
+    {
+      "src": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-103.avif",
+      "fallback": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-103.jpg",
+      "alt": "A house being floated from Silver Fox Island, Bonavista Bay, to Dover, Newfoundland, 1961",
+      "caption": "Brooks, B. “A house being moved by floating it from Silver Fox Island, Bonavista Bay, to Dover, Newfoundland.” Library and Archive Canada, 4950058, 1961."
+    },
+    {
+      "src": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-104.avif",
+      "fallback": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-104.jpg",
+      "alt": "A house being towed by motorboat from Fox Island to Flat Island, Dover, Newfoundland, 1961",
+      "caption": "Brooks, B. “House being towed by a 40 hp motorboat during relocation from Fox Island to Flat Island, Dover, Newfoundland.” Library and Archive Canada, 4953638, 1961."
     }
   ]
 }

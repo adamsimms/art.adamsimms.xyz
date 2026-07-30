@@ -1,11 +1,10 @@
 {
   "images": [
     {
-      "src": "https://media.adamsimms.xyz/work/light-house/01.avif",
-      "fallback": "https://media.adamsimms.xyz/work/light-house/01.jpg",
-      "alt": "Light House",
-      "caption": "",
-      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728043530390-5K7L1XWZYA2XGGJXGI0V/light-house-preview.png"
+      "src": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-104.avif",
+      "fallback": "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-104.jpg",
+      "alt": "A house being towed by motorboat from Fox Island to Flat Island, Dover, Newfoundland, 1961",
+      "caption": "Brooks, B. “House being towed by a 40 hp motorboat during relocation from Fox Island to Flat Island, Dover, Newfoundland.” Library and Archive Canada, 4953638, 1961."
     }
   ]
 }

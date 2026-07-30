@@ -1,0 +1,363 @@
+---
+interface StillImage {
+	src: string;
+	fallback?: string;
+	alt?: string;
+	caption?: string;
+}
+
+interface Props {
+	images: StillImage[];
+	title?: string;
+}
+
+const { images, title = '' } = Astro.props;
+
+function stillAlt(image: StillImage, index: number) {
+	const raw = image.alt?.trim() || '';
+	const generic = !raw || (title && raw.toLowerCase() === title.toLowerCase());
+	if (!generic) return raw;
+	if (title && images.length > 1) return `${title}, still ${index + 1} of ${images.length}`;
+	if (title) return title;
+	return images.length > 1 ? `Still ${index + 1} of ${images.length}` : 'Still';
+}
+---
+
+{
+	images.length > 0 ? (
+		<>
+			<ul
+				class="stills-thumbs"
+				data-stills-gallery
+				data-stills-title={title}
+				aria-label={title ? `${title} stills` : 'Project stills'}
+			>
+				{images.map((image, index) => {
+					const alt = stillAlt(image, index);
+					/** JPG (or non-AVIF) for the grid — full AVIF via data-full-src for the lightbox. */
+					const thumbSrc = image.fallback || image.src;
+					const fullSrc = image.src.includes('.avif') ? image.src : thumbSrc;
+					return (
+						<li>
+							<button
+								type="button"
+								class="stills-thumbs__zoom"
+								data-stills-zoom
+								data-index={String(index)}
+								data-full-src={fullSrc}
+								data-caption={image.caption?.trim() || undefined}
+								aria-label={`View larger: ${alt}`}
+							>
+								<img
+									src={thumbSrc}
+									alt={alt}
+									width="16"
+									height="9"
+									loading="eager"
+									decoding="async"
+								/>
+							</button>
+						</li>
+					);
+				})}
+			</ul>
+
+			<dialog class="stills-lightbox" aria-label="Enlarged still">
+				<button type="button" class="stills-lightbox__close" data-stills-lightbox-close aria-label="Close">
+					Close
+				</button>
+
+				{
+					images.length > 1 ? (
+						<>
+							<div class="stills-lightbox__controls" aria-label="Still navigation">
+								<button
+									type="button"
+									class="stills-lightbox__hit stills-lightbox__hit--prev"
+									data-stills-lightbox-prev
+									aria-label="Previous still"
+								>
+									<span class="visually-hidden">Previous still</span>
+								</button>
+								<button
+									type="button"
+									class="stills-lightbox__hit stills-lightbox__hit--next"
+									data-stills-lightbox-next
+									aria-label="Next still"
+								>
+									<span class="visually-hidden">Next still</span>
+								</button>
+							</div>
+
+							<div class="stills-lightbox__cursor" data-stills-lightbox-cursor aria-hidden="true">
+								<span class="stills-lightbox__cursor-chip">
+									<svg
+										class="stills-lightbox__cursor-arrow stills-lightbox__cursor-arrow--prev"
+										viewBox="0 0 24 24"
+										width="40"
+										height="40"
+										focusable="false"
+									>
+										<path
+											d="M15 4 L7 12 L15 20"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="square"
+											stroke-linejoin="miter"
+										></path>
+									</svg>
+									<svg
+										class="stills-lightbox__cursor-arrow stills-lightbox__cursor-arrow--next"
+										viewBox="0 0 24 24"
+										width="40"
+										height="40"
+										focusable="false"
+									>
+										<path
+											d="M9 4 L17 12 L9 20"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="1.75"
+											stroke-linecap="square"
+											stroke-linejoin="miter"
+										></path>
+									</svg>
+								</span>
+							</div>
+						</>
+					) : null
+				}
+
+				<figure class="stills-lightbox__figure">
+					<img class="stills-lightbox__img" alt="" />
+					<figcaption class="stills-lightbox__caption">
+						<span class="stills-lightbox__title" data-stills-lightbox-title></span>
+						<span class="stills-lightbox__text" data-stills-lightbox-caption></span>
+						<span class="stills-lightbox__count" data-stills-lightbox-count></span>
+					</figcaption>
+				</figure>
+			</dialog>
+		</>
+	) : null
+}
+
+<script>
+	function initStillsLightbox(root: ParentNode = document) {
+		root.querySelectorAll<HTMLElement>('[data-stills-gallery]').forEach((gallery) => {
+			if (gallery.dataset.lightboxBound === 'true') return;
+			gallery.dataset.lightboxBound = 'true';
+
+			const dialog = gallery.nextElementSibling;
+			if (!(dialog instanceof HTMLDialogElement) || !dialog.classList.contains('stills-lightbox')) {
+				return;
+			}
+
+			const imgEl = dialog.querySelector('.stills-lightbox__img');
+			const titleEl = dialog.querySelector('[data-stills-lightbox-title]');
+			const captionEl = dialog.querySelector('[data-stills-lightbox-caption]');
+			const countEl = dialog.querySelector('[data-stills-lightbox-count]');
+			const closeBtn = dialog.querySelector('[data-stills-lightbox-close]');
+			const prevBtn = dialog.querySelector('[data-stills-lightbox-prev]');
+			const nextBtn = dialog.querySelector('[data-stills-lightbox-next]');
+			const cursor = dialog.querySelector('[data-stills-lightbox-cursor]');
+			if (
+				!(imgEl instanceof HTMLImageElement) ||
+				!(titleEl instanceof HTMLElement) ||
+				!(captionEl instanceof HTMLElement) ||
+				!(countEl instanceof HTMLElement)
+			) {
+				return;
+			}
+
+			type Slide = { src: string; alt: string; caption: string };
+			let slides: Slide[] = [];
+			let index = 0;
+			const finePointer = window.matchMedia('(pointer: fine)').matches;
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+			let tracking = false;
+			let frame = 0;
+			let side: 'prev' | 'next' = 'next';
+
+			const canGo = (direction: 'prev' | 'next') =>
+				direction === 'prev' ? index > 0 : index < slides.length - 1;
+
+			const setCursorPosition = () => {
+				if (!(cursor instanceof HTMLElement)) return;
+				const halfW = cursor.offsetWidth / 2;
+				const halfH = cursor.offsetHeight / 2;
+				cursor.style.left = Math.round(pos.x) - halfW + 'px';
+				cursor.style.top = Math.round(pos.y) - halfH + 'px';
+				cursor.style.transform = 'none';
+			};
+
+			const tick = () => {
+				if (!(cursor instanceof HTMLElement)) return;
+				const accel = reduceMotion ? 1 : 0.22;
+				pos.x += (pos.tx - pos.x) * accel;
+				pos.y += (pos.ty - pos.y) * accel;
+				setCursorPosition();
+				if (tracking) frame = requestAnimationFrame(tick);
+			};
+
+			const updateCursor = () => {
+				if (!(cursor instanceof HTMLElement)) return;
+				cursor.dataset.side = side;
+				cursor.dataset.disabled = canGo(side) ? 'false' : 'true';
+				if (cursor.dataset.active === 'true') {
+					dialog.dataset.cursor = 'true';
+				}
+			};
+
+			const showCursor = (clientX: number, clientY: number, nextSide: 'prev' | 'next') => {
+				if (!(cursor instanceof HTMLElement)) return;
+				const rect = dialog.getBoundingClientRect();
+				pos.tx = clientX - rect.left;
+				pos.ty = clientY - rect.top;
+				side = nextSide;
+				cursor.dataset.active = 'true';
+				updateCursor();
+
+				if (!tracking) {
+					pos.x = pos.tx;
+					pos.y = pos.ty;
+					setCursorPosition();
+					tracking = true;
+					cancelAnimationFrame(frame);
+					frame = requestAnimationFrame(tick);
+				}
+			};
+
+			const hideCursor = () => {
+				if (!(cursor instanceof HTMLElement)) return;
+				tracking = false;
+				cancelAnimationFrame(frame);
+				cursor.dataset.active = 'false';
+				dialog.dataset.cursor = 'false';
+			};
+
+			const render = () => {
+				const slide = slides[index];
+				if (!slide) return;
+				imgEl.src = slide.src;
+				imgEl.alt = slide.alt;
+				const projectTitle = gallery.dataset.stillsTitle || '';
+				titleEl.textContent = projectTitle;
+				captionEl.textContent = slide.caption;
+				captionEl.hidden = !slide.caption;
+				const multi = slides.length > 1;
+				countEl.textContent = multi ? `${index + 1} / ${slides.length}` : '';
+				countEl.hidden = !multi;
+				if (prevBtn instanceof HTMLButtonElement) {
+					prevBtn.hidden = !multi;
+					prevBtn.disabled = index <= 0;
+				}
+				if (nextBtn instanceof HTMLButtonElement) {
+					nextBtn.hidden = !multi;
+					nextBtn.disabled = index >= slides.length - 1;
+				}
+				updateCursor();
+			};
+
+			const openAt = (startIndex: number) => {
+				const buttons = [...gallery.querySelectorAll('[data-stills-zoom]')];
+				slides = buttons
+					.map((btn) => {
+						if (!(btn instanceof HTMLElement)) return null;
+						const img = btn.querySelector('img');
+						if (!(img instanceof HTMLImageElement) || !img.src) return null;
+						const full = btn.dataset.fullSrc?.trim();
+						return {
+							src: full || img.currentSrc || img.src,
+							alt: img.alt || '',
+							caption: btn.dataset.caption?.trim() || '',
+						};
+					})
+					.filter((slide): slide is Slide => Boolean(slide));
+				if (!slides.length) return;
+				index = Math.max(0, Math.min(startIndex, slides.length - 1));
+				render();
+				if (!dialog.open) dialog.showModal();
+			};
+
+			const step = (delta: number) => {
+				const next = index + delta;
+				if (next < 0 || next >= slides.length) return;
+				index = next;
+				render();
+			};
+
+			closeBtn?.addEventListener('click', () => dialog.close());
+
+			dialog.addEventListener('click', (event) => {
+				if (event.target === dialog) dialog.close();
+			});
+
+			dialog.addEventListener('close', () => {
+				hideCursor();
+				imgEl.removeAttribute('src');
+				titleEl.textContent = '';
+				captionEl.textContent = '';
+				captionEl.hidden = true;
+				countEl.textContent = '';
+				slides = [];
+				index = 0;
+			});
+
+			if (prevBtn instanceof HTMLButtonElement) {
+				prevBtn.addEventListener('click', () => step(-1));
+				if (finePointer) {
+					prevBtn.addEventListener('pointerenter', (event) => {
+						if (event.pointerType === 'mouse') showCursor(event.clientX, event.clientY, 'prev');
+					});
+					prevBtn.addEventListener('pointermove', (event) => {
+						if (event.pointerType === 'mouse') showCursor(event.clientX, event.clientY, 'prev');
+					});
+					prevBtn.addEventListener('pointerleave', (event) => {
+						if (event.pointerType === 'mouse') hideCursor();
+					});
+				}
+			}
+
+			if (nextBtn instanceof HTMLButtonElement) {
+				nextBtn.addEventListener('click', () => step(1));
+				if (finePointer) {
+					nextBtn.addEventListener('pointerenter', (event) => {
+						if (event.pointerType === 'mouse') showCursor(event.clientX, event.clientY, 'next');
+					});
+					nextBtn.addEventListener('pointermove', (event) => {
+						if (event.pointerType === 'mouse') showCursor(event.clientX, event.clientY, 'next');
+					});
+					nextBtn.addEventListener('pointerleave', (event) => {
+						if (event.pointerType === 'mouse') hideCursor();
+					});
+				}
+			}
+
+			dialog.addEventListener('keydown', (event) => {
+				if (!dialog.open) return;
+				if (event.key === 'ArrowLeft') {
+					event.preventDefault();
+					step(-1);
+				} else if (event.key === 'ArrowRight') {
+					event.preventDefault();
+					step(1);
+				}
+			});
+
+			gallery.addEventListener('click', (event) => {
+				const target = event.target;
+				if (!(target instanceof Element)) return;
+				const btn = target.closest('[data-stills-zoom]');
+				if (!(btn instanceof HTMLButtonElement) || !gallery.contains(btn)) return;
+				event.preventDefault();
+				const start = Number(btn.dataset.index || '0');
+				openAt(Number.isFinite(start) ? start : 0);
+			});
+		});
+	}
+
+	document.addEventListener('astro:page-load', () => initStillsLightbox());
+	initStillsLightbox();
+</script>
