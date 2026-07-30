@@ -5,6 +5,7 @@ import Nav from '../components/Nav.astro';
 import {
 	DEFAULT_DESCRIPTION,
 	DEFAULT_OG_IMAGE_ALT,
+	PERSON_IMAGE,
 	PERSON_SAME_AS,
 	SITE_NAME,
 	SITE_URL,
@@ -22,6 +23,8 @@ interface Props {
 	ogType?: 'website' | 'article';
 	noindex?: boolean;
 	variant?: 'default' | 'home' | 'work' | 'about' | 'cv' | 'writing';
+	/** When false, omit the reveal footer (e.g. full-viewport works index). */
+	footer?: boolean;
 	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
@@ -33,6 +36,7 @@ const {
 	ogType = 'website',
 	noindex = false,
 	variant = 'default',
+	footer = true,
 	jsonLd,
 } = Astro.props;
 
@@ -55,7 +59,13 @@ const personLd = {
 	url: SITE_URL,
 	jobTitle: 'Media artist',
 	description: DEFAULT_DESCRIPTION,
+	image: PERSON_IMAGE,
 	sameAs: [...PERSON_SAME_AS],
+	affiliation: {
+		'@type': 'Organization',
+		name: 'Concordia University',
+		url: 'https://www.concordia.ca/',
+	},
 };
 
 const websiteLd = {
@@ -64,7 +74,7 @@ const websiteLd = {
 	name: SITE_NAME,
 	url: SITE_URL,
 	description: DEFAULT_DESCRIPTION,
-	publisher: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
+	publisher: { '@type': 'Person', name: SITE_NAME, url: SITE_URL, image: PERSON_IMAGE },
 };
 
 const structuredData = [
@@ -147,7 +157,7 @@ const isWriting = variant === 'writing';
 			});
 		</script>
 	</head>
-	<body class:list={[isHome && 'body--home', isWork && 'body--work', isAbout && 'body--about', isWriting && 'body--writing']}>
+	<body class:list={[isHome && 'body--home', isWork && 'body--work', isAbout && 'body--about', isCv && 'body--cv', isWriting && 'body--writing']}>
 		{
 			isHome ? (
 				<>
@@ -170,9 +180,8 @@ const isWriting = variant === 'writing';
 						>
 							<slot />
 						</main>
+						{footer ? <Footer /> : null}
 					</div>
-					<div class="site-footer-reveal" aria-hidden="true"></div>
-					<Footer />
 				</>
 			)
 		}

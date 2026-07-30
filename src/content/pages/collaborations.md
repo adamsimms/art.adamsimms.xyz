@@ -1,6 +1,5 @@
 ---
 title: Collaborations
 description: Selected publication design, catalogues, and web work for artists — and availability for hire.
+statement: Artist books, catalogues, and websites designed for other artists and myself.
 ---
-
-Print, books, and digital projects made with and for other artists — and a few of my own publications. Available for artist books, catalogues, exhibition graphics, and related web work. [Get in touch](/about).

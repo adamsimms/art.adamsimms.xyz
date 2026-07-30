@@ -2,9 +2,8 @@
 import { getCollection } from 'astro:content';
 import BerryMark from './BerryMark.astro';
 
-const year = new Date().getFullYear();
 const bio =
-	'Adam Simms is a Canadian media artist who uses photography, video, and microelectronics to create immersive installations.';
+	'Adam Simms is a Canadian media artist. His work is about belonging, displacement, and intangible culture.';
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const work = await getCollection('work');
@@ -25,15 +24,10 @@ const externalLinks = [
 ---
 
 <footer class="site-footer">
-	<div class="site-footer__island" aria-hidden="true"></div>
 	<div class="site-footer__col site-footer__col--mark">
-		<div class="site-footer__hero" aria-hidden="true">
-			<BerryMark class="site-footer__berry-lg" animated size={160} />
-		</div>
-		<p class="site-footer__weather" data-pinchard-weather>
-			<span data-weather-label>Pinchard’s Island</span>
-			<span data-weather-meta></span>
-		</p>
+		<a class="site-footer__hero" href="/" aria-label="Home">
+			<BerryMark class="site-footer__berry-lg" animated size={80} />
+		</a>
 	</div>
 	<div class="site-footer__col site-footer__col--bio">
 		<p class="site-footer__bio">{bio}</p>
@@ -67,7 +61,10 @@ const externalLinks = [
 			</ul>
 		</nav>
 	</div>
-	<p class="site-footer__copy">© {year}</p>
+	<p class="site-footer__weather" data-pinchard-weather>
+		<span data-weather-label>Pinchard’s Island</span>
+		<span data-weather-meta></span>
+	</p>
 </footer>
 
 <script>

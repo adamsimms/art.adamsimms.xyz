@@ -2,7 +2,7 @@
 title: About
 description: Adam Simms is a Canadian media artist who uses photography, video, and microelectronics to create immersive installations.
 statement: |
-  I need to connect to Newfoundland — to belong to its landscape, and to understand its isolation, harshness, and history. I long for this land: to trace its past with my footprints, for it to become a memory on the soles of my feet. I want to be present in places that history has tried to erase, and to challenge globalization and its lack of consideration for the local. I am unsettled, and I am resettled.
+  I need to connect to Newfoundland. To belong to its landscape. To understand its isolation, its harshness, and its history. I long for this land: to trace its past with my footprints, for it to become a memory on the soles of my feet. I want to be present in places that history has tried to erase, and to challenge globalization and its lack of consideration for the local. I am unsettled, and I am resettled.
 
   I work with photography, video, sound, and microelectronics to ask how place, identity, and intangible culture persist after resettlement, out-migration, and distance. My practice begins from Newfoundland, a North Atlantic island that joined Canada in 1949, and from a position inside and outside that history: I am from the island, and years away have made me an outsider.
 

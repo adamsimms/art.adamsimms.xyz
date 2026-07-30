@@ -5,6 +5,8 @@ titleLines:
   - Newfoundland
 subtitle: Through Archive Photographs
 description: "Independent study researching vernacular photography of outport Newfoundland through institutional archives, and how that visual history informs resettlement and research-creation practice."
+image: "https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-lead.jpg?v=1800"
+imageAlt: "Woman and three young girls on a hill overlooking Curling, Newfoundland — Gustav Anderson, 1939, The Rooms Archive."
 pubDate: 2019-04-30
 slug: vernacular-outport-newfoundland
 ---

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
-import { absoluteUrl, metaDescription } from '../../lib/seo';
+import { absoluteUrl, metaDescription, socialImageUrl } from '../../lib/seo';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writing');
@@ -16,6 +16,9 @@ const { Content, headings } = await render(post);
 const description = metaDescription(post.data.description);
 const pubDate = post.data.pubDate;
 const canonicalPath = `/writing/${post.data.slug}`;
+const pageImage = socialImageUrl(post.data.image);
+const pageImageAlt =
+	post.data.imageAlt?.trim() || `${post.data.title} by Adam Simms`;
 
 /** Shallow TOC: h2 parts + selected h3; skip auto Footnotes label (sr-only). */
 const toc = headings.filter((h) => {
@@ -41,12 +44,15 @@ const articleLd = {
 		url: 'https://art.adamsimms.xyz',
 	},
 	url: absoluteUrl(canonicalPath),
+	...(post.data.image ? { image: pageImage } : {}),
 };
 ---
 
 <Base
 	title={post.data.title}
 	description={description}
+	image={post.data.image ? pageImage : undefined}
+	imageAlt={post.data.image ? pageImageAlt : undefined}
 	ogType="article"
 	variant="writing"
 	jsonLd={articleLd}

@@ -1,6 +1,6 @@
 ---
 title: CV
-description: Curriculum vitae for Adam Simms — education, teaching, exhibitions, writing, press, and experience.
+description: Curriculum vitae for Adam Simms — education, teaching, exhibitions, talks, writing, press, and experience.
 ---
 
 <div class="cv-layout">
@@ -17,7 +17,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 ## Teaching
 
 **Artist-in-Residence, Studio Arts**  
-<span class="cv-meta">Concordia University, Montreal, Quebec, 2024–Present</span>
+<span class="cv-meta">Concordia University, Montreal, Quebec, 2024–2025</span>
 
 - [Photographic Vision: Theory & Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">• PHOT 300</span>
 - [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">• PHOT 331</span>
@@ -87,6 +87,11 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 - **Flash Forward Emerging Photographers** – [*Magenta Foundation*](https://www.magentafoundation.org/flash-forward/) – <span class="cv-meta">2013</span>
 - **Best of College Photography Finalist** – [*Photographer’s Forum*](https://www.photographersforum.com/) – <span class="cv-meta">2011</span>
 - **Canadian Millennium Scholarship** – [*Canada Millennium Scholarship Foundation*](https://en.wikipedia.org/wiki/Canada_Millennium_Scholarship) – <span class="cv-meta">2007–2009</span>
+
+## Talks
+
+- **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
+- **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
 
 ## Writing
 
