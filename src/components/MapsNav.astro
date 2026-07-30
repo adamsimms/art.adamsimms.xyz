@@ -1,0 +1,23 @@
+---
+interface Props {
+	current: 'satellite' | 'trees' | 'resettled';
+}
+
+const { current } = Astro.props;
+
+const links = [
+	{ href: '/maps', id: 'satellite' as const, label: "Pinchard's Island" },
+	{ href: '/maps/trees', id: 'trees' as const, label: '53 Trees' },
+	{ href: '/maps/resettled', id: 'resettled' as const, label: 'Resettled communities' },
+];
+---
+
+<nav class="maps__nav" aria-label="Map sections">
+	{
+		links.map((link) => (
+			<a href={link.href} aria-current={link.id === current ? 'page' : undefined}>
+				{link.label}
+			</a>
+		))
+	}
+</nav>

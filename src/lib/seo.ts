@@ -1,16 +1,40 @@
 /** Work slugs kept routable but excluded from sitemap / index. */
 export const HIDDEN_WORK_SLUGS = new Set(['from-to', 'washed-up', 'newfoundland']);
 
+/** Pathname form of hidden works (no trailing slash) — keep in sync with `HIDDEN_WORK_SLUGS`. */
+export const HIDDEN_PATHS = new Set(
+	[...HIDDEN_WORK_SLUGS].map((slug) => `/${slug}`),
+);
+
+/**
+ * Surfaces that stay buildable but are not linked or sitemap'd until go-live.
+ * Currently: Maps (`/maps`, `/maps/trees`, `/maps/resettled`).
+ */
+export function isStagedPath(pathname: string): boolean {
+	const path = pathname.replace(/\/$/, '') || '/';
+	return path === '/maps' || path.startsWith('/maps/');
+}
+
+/** Paths omitted from `@astrojs/sitemap` (hidden works + staged surfaces). */
+export function isExcludedFromSitemap(pathname: string): boolean {
+	const path = pathname.replace(/\/$/, '') || '/';
+	return HIDDEN_PATHS.has(path) || isStagedPath(path);
+}
+
 export const SITE_NAME = 'Adam Simms';
 export const SITE_URL = 'https://art.adamsimms.xyz';
-export const DEFAULT_DESCRIPTION = 'Photography and art by Adam Simms';
+export const DEFAULT_DESCRIPTION =
+	'Canadian media artist Adam Simms — photography, video, and installation on belonging, displacement, and Newfoundland resettlement.';
 /**
- * Sitewide brand card for non-project pages (home, works index, CV).
+ * Sitewide brand card for non-project pages (home, works index, CV, maps).
  * Prefer JPG — social crawlers often skip AVIF.
  */
 export const DEFAULT_OG_IMAGE = 'https://media.adamsimms.xyz/work/light-house/01.jpg';
 export const DEFAULT_OG_IMAGE_ALT =
 	'Light House — a glowing wireframe house on a dark shoreline';
+
+/** Portrait used in Person JSON-LD and About OG. */
+export const PERSON_IMAGE = `${SITE_URL}/about/portrait.jpg`;
 
 export const PERSON_SAME_AS = [
 	'https://github.com/adamsimms',

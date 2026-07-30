@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import MapsNav from '../../components/MapsNav.astro';
+
+const title = 'Resettled communities';
+const description =
+	'Map of Newfoundland outport communities emptied by mid-century resettlement programs — research by Adam Simms.';
+const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=1-gIU1rTeKAwvGmqoiJZefa8p-qc';
+---
+
+<Base title={title} description={description} variant="cv" noindex>
+	<article class="maps">
+		<header class="page-header">
+			<p class="maps__eyebrow">Maps</p>
+			<h1>{title}</h1>
+			<p class="maps__lead">{description}</p>
+			<MapsNav current="resettled" />
+		</header>
+
+		<div class="maps__shell">
+			<iframe
+				class="maps__embed"
+				src={iframeSrc}
+				title="Resettled communities map"
+				allowfullscreen
+				loading="lazy"></iframe>
+		</div>
+	</article>
+</Base>
