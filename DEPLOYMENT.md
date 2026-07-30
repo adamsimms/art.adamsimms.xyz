@@ -10,6 +10,7 @@
 | R2 bucket (portfolio) | `art-adamsimms-xyz` → `media.adamsimms.xyz` |
 | R2 buckets (Cloudberry) | `art-adamsimms-xyz-cloudberry-images` / `-thumbs` → `cloudberry-*.adamsimms.xyz` |
 | Redirect Worker | `pinchards-redirect` → routes on `pinchards.is` / `www` |
+| Redirect Worker | `adamsim-ms-redirect` → routes on `adamsim.ms` / `www` |
 
 ## How production deploys
 
@@ -63,3 +64,5 @@ See [docs/CLOUDBERRY-ASSEMBLE.md](docs/CLOUDBERRY-ASSEMBLE.md), [docs/PHASE4-SIB
 **In-repo** (`public/_redirects`): portfolio aliases, trailing-slash mounts, legacy archive path aliases.
 
 **pinchards.is**: Worker `pinchards-redirect` (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md)). Keep `pinchards.is` / `www` DNS proxied.
+
+**adamsim.ms**: Worker `adamsim-ms-redirect` — 301s apex/`www` to `art.adamsimms.xyz` (path aliases match `public/_redirects`). Keep `adamsim.ms` / `www` DNS **proxied**; Squarespace origin records can stay until you cancel the subscription.

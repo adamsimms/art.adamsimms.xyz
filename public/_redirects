@@ -2,10 +2,11 @@
 /intro / 301
 /work /works 301
 /resume /cv 301
+# Brief /work-with-me alias → collaborations (page lives beside public/collaborations/* assets)
+/work-with-me /collaborations 301
+/work-with-me/ /collaborations 301
 /blog / 301
 /blog/* / 301
-/maps / 301
-/maps/* / 301
 
 # Force directory form for assemble mounts
 /cloudberry/archive /cloudberry/archive/ 308

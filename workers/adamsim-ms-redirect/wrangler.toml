@@ -1,0 +1,14 @@
+account_id = "1bf55fc4d05548d7bf541d845d3bcbb3"
+name = "adamsim-ms-redirect"
+main = "src/index.js"
+compatibility_date = "2026-07-30"
+workers_dev = false
+
+# Proxied hostnames for adamsim.ms (Squarespace → art cutover).
+# Bare host routes are required — `host/*` does not match `/`.
+routes = [
+  { pattern = "adamsim.ms", zone_name = "adamsim.ms" },
+  { pattern = "adamsim.ms/*", zone_name = "adamsim.ms" },
+  { pattern = "www.adamsim.ms", zone_name = "adamsim.ms" },
+  { pattern = "www.adamsim.ms/*", zone_name = "adamsim.ms" },
+]
