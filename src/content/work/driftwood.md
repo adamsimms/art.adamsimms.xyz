@@ -3,10 +3,9 @@ title: Driftwood
 slug: driftwood
 seoDescription: "Kinetic driftwood installation driven by live Atlantic Ocean buoy data from Newfoundland."
 description: |
-  Adam collected the eponymous object featured in Driftwood from the Atlantic Ocean off the coast of Newfoundland, his family’s homeland. In this kinetic installation, a microelectronic system controls the driftwood’s movement. This system receives transmissions of live data from a buoy located in the Atlantic ocean off the coast of Newfoundland. The electronics translate the data into motion, enabling the driftwood to respond in real-time to the movement of the ocean. Though we don’t see the ocean, the installation evokes it: the driftwood moves rhythmically through the negative space, just as it would in the water.
-body: |
-  By separating the driftwood from its original context and presenting it as sculpture in a stark gallery setting, Adam draws a parallel to the Resettlement Acts that took place in Newfoundland after it became Canada’s 10th province in 1949. Resettlement entailed the relocation of people from remote locations with few economic prospects to areas the Canadian government deemed to have more potential for growth. As a result, the people from the resettled areas left their communities and their land behind to start over in new locations. In Driftwood, Adam examines the notion of displacement, questioning the changes that occur when something—or someone—is uprooted from its native environment. Here, the driftwood is geographically distant from the ocean, but the ocean remains its lifeblood, carrying it along on invisible waves.
-statement: ""
+  I collected the weathered driftwood from the Atlantic Ocean off the coast of Newfoundland and transported it to my studio in Montreal. There, I built a microelectronic system that ties it back to the water it left: live data from a buoy in the Atlantic is translated into motion, so the wood responds in real time to the ocean’s movement. The driftwood moves rhythmically through the negative space, just as it would in the water.
+
+  Taken from its shore and set in a gallery, the work parallels [resettlement](/resettlement), where government programs uprooted people from isolated outports into “growth” centres. Communities were left behind. People started over in new locations, yet remained tethered to their homeland and to lives that could not be fully uprooted. Driftwood makes that invisible connection perceptible. Geographically distant from the ocean, the wood is still moved by it: the ocean remains its lifeblood, carrying it along on invisible waves.
 cover: "https://media.adamsimms.xyz/work/driftwood/01.avif"
 coverFallback: "https://media.adamsimms.xyz/work/driftwood/01.jpg"
 galleryFile: driftwood.json

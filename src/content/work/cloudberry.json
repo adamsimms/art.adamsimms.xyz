@@ -89,7 +89,7 @@
       "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cam-do.jpg",
       "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cam-do.jpg",
       "alt": "Cam Do weatherproof enclosure mounted on the cabin",
-      "caption": "Cam Do enclosure — fixed north-facing frame"
+      "caption": "Cam Do enclosure: fixed north-facing frame"
     },
     {
       "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/pi.jpg",
@@ -113,7 +113,7 @@
       "src": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cloudberry-system.jpg",
       "fallback": "https://art.adamsimms.xyz/cloudberry/archive/images/info/cloudberry-system.jpg",
       "alt": "Cloudberry system diagram",
-      "caption": "System diagram — GoPro, Raspberry Pi, solar, and cellular upload"
+      "caption": "System diagram: GoPro, Raspberry Pi, solar, and cellular upload"
     }
   ]
 }

@@ -1,14 +1,13 @@
 ---
 title: Adrift
 slug: adrift
-seoDescription: "Adrift elides physical and virtual space while challenging ephemeral notions of home."
+seoDescription: "A virtual reconstruction of my grandmother’s childhood house, floating on live Atlantic weather data."
 description: |
-  Adrift elides physical and virtual space while challenging ephemeral notions of home. The digital structure floats perpetually on the ocean in response to live atmospheric data from a weather station in the Atlantic Ocean. As the viewer experiences the piece, the house drifts and turns as it would if it were floating in physical space.
-body: |
-  The view functions as a historical representation of my grandmother's experience, and by extension, all resettled homes. The house also acts as another form of resettlement to a third, imaginary dimension still influenced by its geographical context: whereby the image prevails over the thing it is an image of. The virtual space, linked to an actual place via data, becomes a third space of hybridity accessed by the window of technology.
+  Adrift is my grandmother’s childhood house, rebuilt from her recollections, then set floating on a digital ocean. Live data from a weather station in the Atlantic Ocean drives the house’s rotation, the intensity of the waves, and the rocking of the barge.
 
-  While technology allows us to access this hybrid space, it also challenges the real and actual, the near and far. It reminds us that neither a resettled resident nor their home can ever return to their origins.
-statement: ""
+  When outports were emptied, some families took their houses with them: lifted from their foundations, floated, and towed toward unfamiliar shores. Adrift restages that image as a perpetual crossing, a house lost at sea. A dwelling can be moved, but it cannot carry intact the life that belonged to its original shore.
+
+  Adrift resettles the house a third time, into a virtual space linked by data to the Atlantic it answers to and met through the window of a screen. Real and virtual meet. Near and far collapse. Neither a [resettled](/resettlement) resident nor their home can return to the life left behind.
 cover: "https://media.adamsimms.xyz/work/adrift/poster.avif"
 coverFallback: "https://media.adamsimms.xyz/work/adrift/poster.jpg"
 galleryFile: adrift.json

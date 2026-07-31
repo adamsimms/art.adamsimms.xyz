@@ -1,18 +1,17 @@
 ---
 title: "Pinchard's Island"
 slug: pinchards-island
-seoDescription: "Photographs of Adam’s family reactivating Pinchard’s Island after mid-century resettlement."
+seoDescription: "Family photographs from the return to Pinchard’s Island, a Newfoundland outport emptied by mid-century resettlement."
 description: |
-  In Pinchard’s Island, Adam documents his family’s reactivating of the land where his grandmother was born, before the Canadian government’s Resettlement Act paid residents to move from the isolated fishing community to areas with more potential for economic growth. Over a series of trips to the remote island, Adam and his family have built a cabin there, staking a claim to the land that has been all but forgotten, its people dispersed, and its culture left to fade away.
-body: |
-  Through this hyper-local and deeply personal series of large-scale photographs, Adam evokes global themes of displacement, homogenizing of cultures, and the inextricability of place from an individual’s—and family’s—identity.
+  Pinchard’s Island is a treeless outport off Newfoundland’s northeast coast, reachable only when the Atlantic Ocean permits. My grandmother was born and raised there. In the early 1950s its houses were lifted from their foundations, floated as house boats, and towed by boats across the ocean to nearby communities. Other than a few gravestones, nothing of the original settlement remains.
 
-  The photographs in this series highlight the contrast between the desolate landscape and the animation that the reestablishment of even the smallest community brings to the setting. One element Adam manipulates to create this contrast is scale: in one photograph, the built structures are barely noticeable in the sweeping panorama of the shoreline, while in another, the interior space looms large as the windows frame and contain the expanse of the land.
-statement: ""
+  Years later, against policies that discouraged return, my family began going back. We built an off-grid [cabin](/cabin) and spent summers walking the island again, in a place history had marked as having “no great future.”
+
+  In some views the cabin and figures are barely noticeable against the shoreline; in others the interior looms, and the windows frame and contain the land and sea. Between those distances I am both from the place and outside it, trying to represent a place that no longer exists.
 cover: "https://media.adamsimms.xyz/work/pinchards-island/01.avif"
 coverFallback: "https://media.adamsimms.xyz/work/pinchards-island/01.jpg"
 galleryFile: pinchards-island.json
 order: 12
-year: "2020—Ongoing"
+year: "2020-Ongoing"
 medium: "Photography · Archive · Memory Maps"
 ---

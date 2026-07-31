@@ -1,18 +1,17 @@
 ---
 title: Cloudberry
 slug: cloudberry
-seoDescription: "Solar-powered camera photographs from Pinchard’s Island — a continuous remote foothold on a resettled place."
+seoDescription: "A solar-powered camera on Pinchard’s Island: one year of remote looking, access held at a distance."
 description: |
-  The simplicity of the Cloudberry photographs belies the complexity of the solar-powered camera system that makes them possible. A camera affixed to Adam’s family’s cabin on Pinchard’s Island takes the photographs continuously throughout the day and uploads them to the internet via cellular network. Able to control the camera and access the images from anywhere, Adam uses technology to maintain a constant presence in a place that is inaccessible most of the year. In capturing a view that recalls the experience of looking out the cabin’s window, the camera stands in for the photographer. Thus, these photographs constitute a political act: they allow an uninterrupted foothold on a place that was effectively erased when the Canadian government resettled the area shortly after Newfoundland became the country’s 10th province.
-body: |
-  Comprised of thousands of photographs, the enormity of the Cloudberry project has inspired Adam to explore a new aspect of the sublime in his work. While other projects have focused on the pursuit of a single majestic photograph, Cloudberry inspires awe through its abundance of quotidian images. The title itself parallels this shift: while it may at first evoke the vast Newfoundland sky, Cloudberry, in fact, references the indigenous wild berry—colloquially known as a “bakeapple”—that flourishes on the seemingly inhospitable land.
+  The simplicity of the Cloudberry photographs hides the complexity of the solar-powered camera system that makes them possible. For a year, a camera affixed to our family’s [cabin](/cabin) on [Pinchard’s Island](/pinchards-island) photographed throughout the day. Each frame was uploaded via cellular network and opened in a browser window, so my family and I could access a place that is inaccessible most of the year, and return to the experience of looking out the cabin’s window. The camera stands in for us. These photographs constitute a political act: they allow an uninterrupted foothold on a place that was effectively erased when the Canadian government resettled the area shortly after Newfoundland became the country’s 10th province.
 
-  The Cloudberry photographs are at once static and dynamic: though the frame remains exactly the same, the landscape is constantly changing. The enormous variety in the images recalls Impressionist paintings that show the same scene in different types of light, in all seasons, and throughout the day. The sky, the ocean, and the terrain in the photographs seem to change more readily than the immutable rocks, but even their appearance eventually transforms as seasons change. Though Cloudberry highlights the specificity of this particular landscape, it also manifests the familiar desire to connect to one’s homeland not as a relic of the past but as a place that is alive.
-statement: ""
+  Where earlier works like [Sublime](/sublime) pursued singular, large-scale photographs of Newfoundland’s land and weather, Cloudberry turns that impulse toward quantity and duration. The photographs are at once static and dynamic: the frame remains exactly the same while the landscape constantly changes. Sky, ocean, and terrain shift more readily than the rocks, but even their appearance eventually transforms as seasons change. Though Cloudberry highlights the specificity of this particular landscape, it also manifests the familiar desire to connect to one’s homeland not as a relic of the past but as a place that is alive.
+
+  The name Cloudberry references the local wild berry, colloquially known as a “bakeapple,” that flourishes on the seemingly inhospitable land. After a year the system failed. What remains is the archive.
 cover: "https://media.adamsimms.xyz/work/cloudberry/01.avif"
 coverFallback: "https://media.adamsimms.xyz/work/cloudberry/01.jpg"
 galleryFile: cloudberry.json
 order: 7
-year: "2017—2018"
+year: "2017-2018"
 medium: "Photography · Solar-Powered Camera · Raspberry Pi"
 ---

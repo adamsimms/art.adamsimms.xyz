@@ -19,7 +19,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2024–2025</span>
 
-- [Photographic Vision: Theory & Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">• PHOT 300</span>
+- [Photographic Vision: Theory + Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">• PHOT 300</span>
 - [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">• PHOT 331</span>
 - [Digital Photography II](https://syllabi.adamsimms.xyz/phot332/) <span class="cv-meta">• PHOT 332</span>
 - [Advanced Workshop in Photography](https://syllabi.adamsimms.xyz/phot400/) <span class="cv-meta">• PHOT 400</span>
@@ -27,7 +27,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2021–2022</span>
 
-- [As Seen on Screens: Cyberspace & Image Economy](https://syllabi.adamsimms.xyz/phot398/) <span class="cv-meta">• PHOT 398</span>
+- [As Seen on Screens: Cyberspace + Image Economy](https://syllabi.adamsimms.xyz/phot398/) <span class="cv-meta">• PHOT 398</span>
 - [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">• PHOT 331</span>
 
 **Teaching Assistant** – [*Geneviève Cadieux*](https://en.wikipedia.org/wiki/Genevi%C3%A8ve_Cadieux)  
@@ -38,7 +38,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 **Teaching Assistant** – [*Marisa Portolese*](https://www.marisaportolese.com)  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2016</span>
 
-- Photographic Vision: Theory & Practice <span class="cv-meta">• PHOT 300</span>
+- Photographic Vision: Theory + Practice <span class="cv-meta">• PHOT 300</span>
 
 ## Residencies + Workshops
 

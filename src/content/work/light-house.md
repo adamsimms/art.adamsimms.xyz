@@ -1,12 +1,13 @@
 ---
 title: Light House
 slug: light-house
-seoDescription: "Light House memorializes resettlement “ghost houses” as a lighted beacon on a dark shoreline."
+seoDescription: "An illuminated house outline on the Newfoundland shore: a beacon for resettlement’s lost houses, and an afterlife for our family’s cabin."
 description: |
-  Light House references the image of the floating house that recurs in historical photographs of resettlement, which has been a touchpoint of my work. Like a traditional lighthouse, the lighted structure acts as a beacon, helping seaborn vessels navigate their way to a safe landing.
+  Working with my father, we built Light House as an illuminated outline of a house at the edge of the Newfoundland shore. Firmly sited on land, it is a beacon toward a safe landing.
 
-  Here, the vessels at sea are the “ghost houses” of resettlement, or those that set out on barges for their new locations but, for unknown reasons, did not arrive. Light House provides a resolution—an afterlife—for the ghost house’s unsettled nature, and memorializes their loss.
-statement: ""
+  It calls to houses of [resettlement](/resettlement) lost between shores: those that set out on barges for new communities and never arrived, perpetually lost like [Adrift](/adrift). Light House offers that crossing a shore, a place to land, a resolution for an unsettled passage.
+
+  The glowing outline is also an afterlife for our family’s [cabin](/cabin) on [Pinchard’s Island](/pinchards-island), sold when a majority of relatives chose to let it go. A light on shore guiding that lost cabin toward a safe landing, holding what could not be kept intact.
 cover: "https://media.adamsimms.xyz/work/light-house/01.avif"
 coverFallback: "https://media.adamsimms.xyz/work/light-house/01.jpg"
 galleryFile: light-house.json

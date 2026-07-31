@@ -1,20 +1,19 @@
 ---
 title: Sublime
 slug: sublime
-seoDescription: "Large-scale photographs of Newfoundland sky, ocean, and forest — fog, atmosphere, and homeland."
+seoDescription: "Large-scale photographs of Newfoundland sky, ocean, and forest: fog, atmosphere, and homeland."
 description: |
-  In Sublime, Adam contemplates the grandeur of the sky, ocean, and forest of his homeland in Newfoundland. As a city dweller, Adam’s experience of this expansive place is at once foreign and familiar, both about returning home and experiencing unexplored places. Sublime proved to be transformational in Adam’s work. This inaugural exploration of Newfoundland prompted further investigation of its history, leading to several bodies of work photographing resettled communities.
-body: |
-  The large scale and the focus on natural settings in these images recall 19th century Hudson River School landscape paintings. While those paintings romanticized the natural world and emphasized its formidable power over humankind, the photographs in Sublime approach nature on a less intimidating—though still majestic—scale.
+  Sublime was an early sustained look at Newfoundland’s sky, ocean, and forest: a place at once home and unfamiliar after years of living in the city. Returning and not-quite-returning at the same time. The work opened the questions that followed, and led me into photographing [resettled communities](/resettlement).
 
-  Newfoundland’s trademark fog is the protagonist of these photographs. Though often associated with melancholy, here the atmosphere is almost playful: clouds echo the shapes of rock formations, fog obscures the horizon line, and the only evidence of the elusive wind is the way the trees lean in its wake. The photographs are alive with texture: snow-laden branches, grassy hills, faceted cliffs, the rippled surface of the sea. Others are more nuanced, requiring a longer look, to see what lies beyond the fog.
+  The photographs are large, and the land fills the frame. They recall nineteenth-century Hudson River School painting in scale and subject, without the same drama of nature overwhelming the figure. The atmosphere here is less intimidation than immersion: a desire to belong, to find a way back into a place I was only beginning to know how to enter again.
 
-  Adam inserts the human figure into some photographs in the series to investigate humankind’s relationship to the land. While figures in Hudson River School painting were minuscule compared to the imposing landscape, the figures in the Sublime photographs—seen from behind—fit into the landscape almost seamlessly. Even their clothing seems felicitous: the pattern of the woman’s sweater nearly aligns with the horizon; the man, with his camouflage hat, shares the palette of his surroundings.
-statement: ""
+  Fog runs through the work. Often read as melancholy, it turns almost playful: clouds echo rock, fog erases the horizon, and wind shows only in the lean of trees. The pictures are thick with texture: snow-laden branches, grassy hills, faceted cliffs, the rippled surface of the sea. Others ask for a longer look, for what sits just beyond the weather.
+
+  In some frames I place a figure in the land to play with our relationship to it, seen from behind. Unlike the tiny staffage of Hudson River School canvases, these bodies fit the scale around them. A sweater’s pattern nearly meets the horizon; a camouflage hat takes the palette of the shore. People and place share a footing, briefly.
 cover: "https://media.adamsimms.xyz/work/sublime/01.avif"
 coverFallback: "https://media.adamsimms.xyz/work/sublime/01.jpg"
 galleryFile: sublime.json
 order: 1
-year: "2010—Ongoing"
+year: "2010-Ongoing"
 medium: "Photography"
 ---
