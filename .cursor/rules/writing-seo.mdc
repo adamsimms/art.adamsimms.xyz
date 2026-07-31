@@ -8,7 +8,7 @@ alwaysApply: false
 
 Writing pieces can ship at `/writing/[slug]` before they are linked from the main nav. When Writing is ready to promote on the site, do this SEO pass:
 
-## Discovery & internal links
+## Discovery + internal links
 
 - Add Writing to main nav (`Nav.astro`) and footer if appropriate
 - Add a Writing index (or clear entry points from home / About / CV) so crawlers and people can find pieces without relying on direct URLs

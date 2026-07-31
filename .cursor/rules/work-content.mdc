@@ -8,14 +8,21 @@ alwaysApply: false
 
 ## Frontmatter
 
-- `description` — short intro before media (one or two paragraphs)
-- `body` — optional additional essay paragraphs below media (smaller type); split with blank lines
+- `description` — project statement (one or more paragraphs, blank-line separated); left column beside media
 - `seoDescription` — short meta / Open Graph blurb (≤160 chars); do not paste the essay into meta
-- `year` — use an em dash for ranges; ongoing projects are `2020—Ongoing` (no brackets)
+- `year` — use a hyphen for ranges; ongoing projects are `2020-Ongoing`
 - `video.loop: true` — UI shows “Loop”; do not show a duration for loops
 - `order` — controls Works index sort (higher / configured order as used on `/works`)
 
-## Titles & slugs
+## Cross-work links
+
+In `description`, link other works with markdown: `[Pinchard’s Island](/pinchards-island)`. Rendered as body-coloured text with a faint grey underline. Do not self-link the current work’s title.
+
+## Prose punctuation
+
+Do not use em dashes (—) or en dashes (–) in `description` or `seoDescription`. Prefer commas, periods, colons, or parentheses. Hyphens only in compound words and year ranges (`2020-Ongoing`).
+
+## Titles + slugs
 
 - Keep **Light House** / `light-house` (two words). Do not rename to Lighthouse — the split is intentional (lighted house vs maritime lighthouse).
 

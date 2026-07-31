@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Design stack
 
-## Typography & space
+## Typography + space
 
 Fluid type and space live as **Utopia-generated CSS custom properties** in `src/styles/global.css` (viewport ~360→1240, semantic roles like `--type-brand|display|index|title|lead|body|nav|caption` and `--space-*`).
 

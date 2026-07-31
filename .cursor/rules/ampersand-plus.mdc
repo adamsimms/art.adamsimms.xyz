@@ -1,0 +1,29 @@
+---
+description: Prefer + over & in site copy; keep citation and official-name ampersands
+alwaysApply: true
+---
+
+# Ampersand vs plus
+
+In user-facing copy, nav labels, headings, and site writing, prefer **+** over **&**.
+
+| Prefer | Avoid (site voice) |
+|--------|--------------------|
+| Residencies + Workshops | Residencies & Workshops |
+| Railway + steamships | Railway & steamships |
+| Theory + Practice | Theory & Practice |
+
+## Keep `&` when it is not our voice
+
+Leave ampersands that belong to **citations, bibliographic publishers, or legal/official names** we are quoting accurately:
+
+- Publisher names in citations (`McClelland & Stewart`)
+- Cited titles that use `&` (`Heritage: Newfoundland & Labrador`, book titles)
+- Institution legal names (`Leonard & Bina Ellen Art Gallery`)
+
+Do not rewrite those to `+`.
+
+## Also
+
+- Prefer `+` in Cursor rules and docs for this repo when joining two nouns (same house style)
+- Do not change `&` in URLs, HTML entities, or code (`&&`, query strings)
