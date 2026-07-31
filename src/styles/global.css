@@ -2129,7 +2129,7 @@ body:has(.work-hover) {
 		margin-top: var(--space-m);
 	}
 
-	/* Flatten wrappers so mobile can order: title → copy → media → references */
+	/* Flatten wrappers so mobile can order: title → medium → media → date → statement → references */
 	.project-intro:has(.gallery--carousel, .project-hero),
 	.project-intro:has(.gallery--carousel, .project-hero) .project-intro__text {
 		display: contents;
@@ -2139,22 +2139,22 @@ body:has(.work-hover) {
 		order: 1;
 	}
 
-	.project-intro:has(.gallery--carousel, .project-hero) .project-intro__copy {
-		order: 2;
-		margin-top: var(--space-m);
-	}
-
 	.project-intro:has(.gallery--carousel, .project-hero) > [data-project-body]:has(.gallery--carousel, .project-hero),
 	.project-intro:has(.gallery--carousel, .project-hero) .project-hero,
 	.project-intro:has(.gallery--carousel, .project-hero) .gallery--carousel {
+		order: 2;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.project-intro:has(.gallery--carousel, .project-hero) .project-intro__copy {
 		order: 3;
-		margin-top: var(--space-l);
-		margin-bottom: var(--space-s);
+		margin-top: var(--space-m);
 	}
 
 	.project-stills {
 		order: 4;
-		margin-top: 0;
+		margin-top: var(--space-l);
 	}
 
 	.project .gallery {
