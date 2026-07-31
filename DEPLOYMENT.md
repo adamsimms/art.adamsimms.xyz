@@ -9,8 +9,11 @@
 | Custom domain | `art.adamsimms.xyz` |
 | R2 bucket (portfolio) | `art-adamsimms-xyz` → `media.adamsimms.xyz` |
 | R2 buckets (Cloudberry) | `art-adamsimms-xyz-cloudberry-images` / `-thumbs` → `cloudberry-*.adamsimms.xyz` |
+| R2 bucket (research inbox) | `art-adamsimms-xyz-research` (private; email capture) |
 | Redirect Worker | `pinchards-redirect` → routes on `pinchards.is` / `www` |
 | Redirect Worker | `adamsim-ms-redirect` → routes on `adamsim.ms` / `www` |
+| Email Worker | `art-adamsimms-xyz-research` → `research@adamsimms.xyz` (Email Routing on `adamsimms.xyz`) |
+| Research admin Worker | `art-adamsimms-xyz-research-admin` → `art.adamsimms.xyz/research/admin*` (Cloudflare Access) |
 
 ## How production deploys
 
@@ -66,3 +69,26 @@ See [docs/CLOUDBERRY-ASSEMBLE.md](docs/CLOUDBERRY-ASSEMBLE.md), [docs/PHASE4-SIB
 **pinchards.is**: Worker `pinchards-redirect` (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md)). Keep `pinchards.is` / `www` DNS proxied.
 
 **adamsim.ms**: Worker `adamsim-ms-redirect` — 301s apex/`www` to `art.adamsimms.xyz` (path aliases match `public/_redirects`). Keep `adamsim.ms` / `www` DNS **proxied**; Squarespace origin records can stay until you cancel the subscription.
+
+## Research email inbox + enrichment
+
+Private capture into R2 (`art-adamsimms-xyz-research`) via Email Routing on **`adamsimms.xyz`**:
+
+- Address: `research@adamsimms.xyz`
+- Worker: `art-adamsimms-xyz-research` — deploy from `workers/art-adamsimms-xyz-research/` (`npx wrangler deploy`)
+- Queue: `art-adamsimms-xyz-research-enrich` (deep enrich consumer on the same Worker)
+- Allowlist: `adamsimms@gmail.com`, `hello@adamsimms.xyz`
+
+Full setup, enrich stages, and object layout: [docs/RESEARCH-INBOX.md](docs/RESEARCH-INBOX.md).
+
+## Research admin (phase 3a)
+
+Triage + promote UI at **`https://art.adamsimms.xyz/research/admin`** (Worker route; Cloudflare Access).
+
+```bash
+cd workers/art-adamsimms-xyz-research-admin
+npx wrangler secret put GITHUB_TOKEN    # Contents R/W on this repo
+npx wrangler deploy
+```
+
+Set `TEAM_DOMAIN` + `POLICY_AUD` from the Access application. Details: [workers/art-adamsimms-xyz-research-admin/README.md](workers/art-adamsimms-xyz-research-admin/README.md).

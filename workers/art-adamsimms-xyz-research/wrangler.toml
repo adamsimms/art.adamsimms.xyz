@@ -1,0 +1,25 @@
+account_id = "1bf55fc4d05548d7bf541d845d3bcbb3"
+name = "art-adamsimms-xyz-research"
+main = "src/index.js"
+compatibility_date = "2026-07-14"
+workers_dev = true
+
+[vars]
+ALLOWLIST = "adamsimms@gmail.com,hello@adamsimms.xyz"
+
+[[r2_buckets]]
+binding = "RESEARCH"
+bucket_name = "art-adamsimms-xyz-research"
+
+[ai]
+binding = "AI"
+
+[[queues.producers]]
+binding = "ENRICH_QUEUE"
+queue = "art-adamsimms-xyz-research-enrich"
+
+[[queues.consumers]]
+queue = "art-adamsimms-xyz-research-enrich"
+max_batch_size = 1
+max_retries = 3
+max_batch_timeout = 30

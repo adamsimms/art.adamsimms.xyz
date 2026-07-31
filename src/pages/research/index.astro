@@ -1,0 +1,148 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublicResearch, uniqueSorted } from '../../lib/research';
+
+const entries = await getPublicResearch();
+const types = uniqueSorted(entries.map((e) => e.data.type));
+const tags = uniqueSorted(entries.flatMap((e) => e.data.tags));
+const collections = uniqueSorted(entries.flatMap((e) => e.data.collections));
+
+const title = 'Research';
+const description =
+	'Working library of books, essays, places, and concepts behind the practice — staged, not yet public.';
+---
+
+<Base title={title} description={description} variant="cv" noindex>
+	<article class="research">
+		<header class="page-header">
+			<h1>{title}</h1>
+			<p class="research__lead">{description}</p>
+		</header>
+
+		{
+			entries.length > 0 && (
+				<div class="research-filters" data-research-filters>
+					<label class="research-filters__field">
+						<span class="research-filters__label">Type</span>
+						<select data-filter="type" aria-label="Filter by type">
+							<option value="">All</option>
+							{types.map((t) => (
+								<option value={t}>{t}</option>
+							))}
+						</select>
+					</label>
+					<label class="research-filters__field">
+						<span class="research-filters__label">Tag</span>
+						<select data-filter="tag" aria-label="Filter by tag">
+							<option value="">All</option>
+							{tags.map((t) => (
+								<option value={t}>{t}</option>
+							))}
+						</select>
+					</label>
+					<label class="research-filters__field">
+						<span class="research-filters__label">Collection</span>
+						<select data-filter="collection" aria-label="Filter by collection">
+							<option value="">All</option>
+							{collections.map((c) => (
+								<option value={c}>{c}</option>
+							))}
+						</select>
+					</label>
+				</div>
+			)
+		}
+
+		{
+			entries.length === 0 ? (
+				<p class="research__empty">No public research nodes yet.</p>
+			) : (
+				<ul class="research-list" data-research-list>
+					{entries.map((entry) => (
+						<li
+							class="research-list__item"
+							data-type={entry.data.type}
+							data-tags={entry.data.tags.join(' ')}
+							data-collections={entry.data.collections.join(' ')}
+						>
+							<a class="research-list__link" href={`/research/${entry.data.slug}`}>
+								<span class="research-list__title">{entry.data.title}</span>
+								<span class="research-list__meta">
+									<span class="research-list__type">{entry.data.type}</span>
+									{entry.data.by && (
+										<span class="research-list__by">{entry.data.by}</span>
+									)}
+									{entry.data.year && (
+										<span class="research-list__year">{entry.data.year}</span>
+									)}
+									<span class={`research-list__status research-list__status--${entry.data.status}`}>
+										{entry.data.status}
+									</span>
+								</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</article>
+</Base>
+
+<script>
+	const root = document.querySelector('[data-research-filters]');
+	const list = document.querySelector('[data-research-list]');
+	if (root && list) {
+		const typeSelect = /** @type {HTMLSelectElement | null} */ (
+			root.querySelector('[data-filter="type"]')
+		);
+		const tagSelect = /** @type {HTMLSelectElement | null} */ (
+			root.querySelector('[data-filter="tag"]')
+		);
+		const collectionSelect = /** @type {HTMLSelectElement | null} */ (
+			root.querySelector('[data-filter="collection"]')
+		);
+		const items = list.querySelectorAll('.research-list__item');
+		const params = new URLSearchParams(window.location.search);
+
+		const setIfOption = (select, value) => {
+			if (!select || !value) return;
+			const match = [...select.options].some((o) => o.value === value);
+			if (match) select.value = value;
+		};
+
+		setIfOption(typeSelect, params.get('type'));
+		setIfOption(tagSelect, params.get('tag'));
+		setIfOption(collectionSelect, params.get('collection'));
+
+		const syncUrl = () => {
+			const next = new URLSearchParams();
+			if (typeSelect?.value) next.set('type', typeSelect.value);
+			if (tagSelect?.value) next.set('tag', tagSelect.value);
+			if (collectionSelect?.value) next.set('collection', collectionSelect.value);
+			const qs = next.toString();
+			const path = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+			window.history.replaceState({}, '', path);
+		};
+
+		const apply = () => {
+			const type = typeSelect?.value;
+			const tag = tagSelect?.value;
+			const collection = collectionSelect?.value;
+
+			for (const item of items) {
+				const el = /** @type {HTMLElement} */ (item);
+				const okType = !type || el.dataset.type === type;
+				const okTag = !tag || (el.dataset.tags || '').split(/\s+/).includes(tag);
+				const okCollection =
+					!collection || (el.dataset.collections || '').split(/\s+/).includes(collection);
+				el.hidden = !(okType && okTag && okCollection);
+			}
+			syncUrl();
+		};
+
+		for (const select of [typeSelect, tagSelect, collectionSelect]) {
+			select?.addEventListener('change', apply);
+		}
+		apply();
+	}
+</script>

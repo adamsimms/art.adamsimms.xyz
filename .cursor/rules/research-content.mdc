@@ -1,0 +1,72 @@
+---
+description: Research library content model, slug stability, privacy, and graph hygiene
+globs: src/content/research/**,src/pages/research/**,src/lib/research.ts,src/content.config.ts,workers/art-adamsimms-xyz-research/**,workers/art-adamsimms-xyz-research-admin/**,docs/RESEARCH-INBOX.md
+alwaysApply: false
+---
+
+# Research content
+
+Hidden `/research` library (phase 1). Email capture inbox (phase 2). Not in nav or footer. `noindex` + sitemap exclude via `isStagedPath` until an explicit go-live.
+
+## Capture vs library
+
+| Layer | Where | Who writes |
+| --- | --- | --- |
+| **Inbox** | R2 `art-adamsimms-xyz-research` (`inbox/…`) | Worker `art-adamsimms-xyz-research` via `research@adamsimms.xyz` |
+| **Library** | `src/content/research/*.md` | You (or phase 3 admin promote) |
+
+Capture is freeform (link, PDF attach, or linked file URL). The Worker stores evidence and enqueues **deep enrichment** (OG, reader excerpt, bib, Wayback, Workers AI suggestions, graph hints). It **never** creates markdown nodes. See [docs/RESEARCH-INBOX.md](../../docs/RESEARCH-INBOX.md).
+
+Binaries never live in git — attachments stay on research R2 (`attachments` frontmatter URLs after promote).
+
+## Enrichment
+
+- Queue: `art-adamsimms-xyz-research-enrich` (inbox Worker produces + consumes; admin re-enrich produces)
+- Suggestions + provenance live on inbox `meta.enrichment`; promote is human-confirmed
+- Prefer existing `tags` / `collections` from `library/index.json`; LLM may propose `newTags` separately
+- Graph hints also use `site/works.json` + `site/writing.json` (rebuild via admin or after promote)
+- Reader/PDF excerpts are triage aids — do not dump full HTML/PDF text into git
+
+## Slug stability
+
+- `slug` is a **permanent ID** once anything links to it (`relatedResearch`, future map)
+- Prefer a better `title` over renaming `slug`
+- If a rename is required, update every inbound `relatedResearch` (and any hard-coded links) in the same change
+
+## One node per URL
+
+- At most one **non-private** node per normalized `url`
+- To add a source to another set, use `collections` and/or `relatedResearch` — do not duplicate the file
+- Build fails on duplicate public URLs (`assertUniqueResearchUrls` in `src/lib/research.ts`)
+
+## Collections vs tags
+
+- `tags` — associative / topical
+- `collections` — intentional sets (membership); one file, many collections
+
+## Types
+
+`book` · `essay` · `artwork` · `person` · `concept` · `place` · `archive` · `film` · `other`
+
+There is no `link` type — use the `url` field on any type.
+
+## Status
+
+`note` → `developed` → `core`
+
+## Private
+
+`private: true` omits the node from the index, `getStaticPaths`, and sitemap. No auth-walled preview in phase 1.
+
+## Attachments
+
+`attachments` point at hosted files on research R2. Binaries never live in git.
+
+## Related graph
+
+- `relatedResearch` — other research slugs (backlinks computed at build as “Linked from”)
+- `relatedWorks` / `relatedWriting` — site slugs (`/` and `/writing/`)
+
+## Phase 3a (admin)
+
+Access-gated UI at `/research/admin` (Worker `art-adamsimms-xyz-research-admin`): triage inbox, promote → git commit on default branch, edit/delete library files. Not linked from public nav.

@@ -1,0 +1,32 @@
+account_id = "1bf55fc4d05548d7bf541d845d3bcbb3"
+name = "art-adamsimms-xyz-research-admin"
+main = "src/index.js"
+compatibility_date = "2026-07-14"
+workers_dev = true
+
+# Path on the art site (Workers route wins over Pages for this prefix).
+routes = [
+	{ pattern = "art.adamsimms.xyz/research/admin", zone_name = "adamsimms.xyz" },
+	{ pattern = "art.adamsimms.xyz/research/admin/*", zone_name = "adamsimms.xyz" },
+]
+
+[vars]
+GITHUB_OWNER = "adamsimms"
+GITHUB_REPO = "art.adamsimms.xyz"
+GITHUB_BRANCH = "main"
+# Set after creating Access app:
+# TEAM_DOMAIN = "https://YOURTEAM.cloudflareaccess.com"
+# POLICY_AUD = "your-application-aud-tag"
+# Local only — never set in production:
+# ALLOW_INSECURE_DEV = "true"
+
+[[r2_buckets]]
+binding = "RESEARCH"
+bucket_name = "art-adamsimms-xyz-research"
+
+[[queues.producers]]
+binding = "ENRICH_QUEUE"
+queue = "art-adamsimms-xyz-research-enrich"
+
+# Secrets (set via `wrangler secret put`):
+# GITHUB_TOKEN — fine-grained PAT with Contents read/write on this repo

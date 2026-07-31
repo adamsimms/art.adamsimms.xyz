@@ -1,0 +1,203 @@
+---
+import Base from '../../layouts/Base.astro';
+import { render } from 'astro:content';
+import {
+	buildResearchBacklinks,
+	getPublicResearch,
+	researchBySlug,
+} from '../../lib/research';
+import { metaDescription } from '../../lib/seo';
+
+export async function getStaticPaths() {
+	const entries = await getPublicResearch();
+	const bySlug = researchBySlug(entries);
+	const backlinks = buildResearchBacklinks(entries);
+
+	return entries.map((entry) => ({
+		params: { slug: entry.data.slug },
+		props: {
+			entry,
+			related: entry.data.relatedResearch
+				.map((slug) => bySlug.get(slug))
+				.filter(Boolean),
+			linkedFrom: backlinks.get(entry.data.slug) ?? [],
+		},
+	}));
+}
+
+const { entry, related, linkedFrom } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const description = metaDescription(d.summary, d.citation);
+const hasLinks = Boolean(d.url || d.archivedUrl || d.attachments.length);
+const hasOutbound =
+	related.length > 0 || d.relatedWorks.length > 0 || d.relatedWriting.length > 0;
+---
+
+<Base title={d.title} description={description} variant="cv" noindex>
+	<article class="research research--detail">
+		<p class="research-back">
+			<a href="/research">Research</a>
+		</p>
+
+		<header class="page-header">
+			<p class="research-kicker">
+				<span class="research-kicker__type">{d.type}</span>
+				<span class={`research-kicker__status research-kicker__status--${d.status}`}>
+					{d.status}
+				</span>
+			</p>
+			<h1>{d.title}</h1>
+			{
+				(d.by || d.year) && (
+					<p class="research-byline">
+						{[d.by, d.year].filter(Boolean).join(', ')}
+					</p>
+				)
+			}
+		</header>
+
+		{
+			d.quote && (
+				<blockquote class="research-quote">
+					<p>{d.quote}</p>
+				</blockquote>
+			)
+		}
+
+		{d.summary && <p class="research-summary">{d.summary}</p>}
+
+		{
+			d.citation && (
+				<p class="research-citation">
+					<cite>{d.citation}</cite>
+				</p>
+			)
+		}
+
+		{
+			hasLinks && (
+				<section class="research-section" aria-labelledby="research-sources">
+					<h2 id="research-sources" class="research-section__heading">
+						Sources
+					</h2>
+					<ul class="research-sources">
+						{d.url && (
+							<li>
+								<a href={d.url} rel="noopener noreferrer">
+									Live
+								</a>
+							</li>
+						)}
+						{d.archivedUrl && (
+							<li>
+								<a href={d.archivedUrl} rel="noopener noreferrer">
+									Archived
+									{d.archivedAt && (
+										<span class="research-sources__date">
+											{' '}
+											({d.archivedAt.toISOString().slice(0, 10)})
+										</span>
+									)}
+								</a>
+							</li>
+						)}
+						{d.attachments.map((file) => (
+							<li>
+								<a href={file.url} rel="noopener noreferrer">
+									{file.title || file.kind}
+									<span class="research-sources__kind"> ({file.kind})</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+
+		{
+			(d.tags.length > 0 || d.collections.length > 0) && (
+				<section class="research-section" aria-labelledby="research-meta">
+					<h2 id="research-meta" class="research-section__heading">
+						Tags & collections
+					</h2>
+					<ul class="research-chips">
+						{d.tags.map((tag) => (
+							<li>
+								<a href={`/research?tag=${encodeURIComponent(tag)}`}>{tag}</a>
+							</li>
+						))}
+						{d.collections.map((c) => (
+							<li class="research-chips__collection">
+								<a href={`/research?collection=${encodeURIComponent(c)}`}>{c}</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+
+		<div class="research-body prose">
+			<Content />
+		</div>
+
+		{
+			hasOutbound && (
+				<section class="research-section" aria-labelledby="research-related">
+					<h2 id="research-related" class="research-section__heading">
+						Related
+					</h2>
+					<ul class="research-related">
+						{related.map(
+							(node) =>
+								node && (
+									<li>
+										<a href={`/research/${node.data.slug}`}>
+											<span class="research-related__title">{node.data.title}</span>
+											<span class="research-related__type">{node.data.type}</span>
+										</a>
+									</li>
+								),
+						)}
+						{d.relatedWorks.map((slug) => (
+							<li>
+								<a href={`/${slug}`}>
+									<span class="research-related__title">{slug}</span>
+									<span class="research-related__type">work</span>
+								</a>
+							</li>
+						))}
+						{d.relatedWriting.map((slug) => (
+							<li>
+								<a href={`/writing/${slug}`}>
+									<span class="research-related__title">{slug}</span>
+									<span class="research-related__type">writing</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+
+		{
+			linkedFrom.length > 0 && (
+				<section class="research-section" aria-labelledby="research-backlinks">
+					<h2 id="research-backlinks" class="research-section__heading">
+						Linked from
+					</h2>
+					<ul class="research-related">
+						{linkedFrom.map((node) => (
+							<li>
+								<a href={`/research/${node.data.slug}`}>
+									<span class="research-related__title">{node.data.title}</span>
+									<span class="research-related__type">{node.data.type}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</article>
+</Base>

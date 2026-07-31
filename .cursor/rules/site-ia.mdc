@@ -16,13 +16,18 @@ Do not add secondary surfaces (Collaborations / design-for-hire, Writing go-live
 
 Secondary and site-wide links live in the footer: Works, About, CV, Collaborations, plus external/professional links (email, GitHub, LinkedIn, Concordia, etc.) as already wired.
 
-- **Maps** (`/maps`) — staged / not live yet: routes build, but stay out of the footer and sitemap (`noindex`) until go-live (satellite + trees + resettled; Mapbox needs `PUBLIC_MAPBOX_TOKEN`)
+- **Maps** (`/maps`) — staged / not live yet: routes build, but stay out of the footer and sitemap (`noindex`) until go-live (satellite + trees + resettled + railway 1931 + Natural Resources 1941; Mapbox needs `PUBLIC_MAPBOX_TOKEN`)
+- **Research** (`/research`) — staged / not live yet: content library + detail routes build, but stay out of nav, footer, and sitemap (`noindex`) until go-live. Email capture: `research@adamsimms.xyz` → R2 inbox (see `docs/RESEARCH-INBOX.md`); promote/admin is phase 3.
 - **Collaborations** (`/collaborations`) → footer, not main nav (publication / web work for others + hire CTA)
 - Keep the footer quiet — short labels, no link farm
 
 ## Writing
 
 Long-form essays can live at `/writing/[slug]` before they appear in nav. Discoverability via CV (and later an index) is enough until the Writing SEO go-live checklist in `writing-seo.mdc` is done.
+
+## Research
+
+Working library of books, essays, places, concepts, etc. at `/research` and `/research/[slug]`. See `research-content.mdc`. Keep off main nav and footer until explicitly asked to un-hide.
 
 ## Homepage brand
 
