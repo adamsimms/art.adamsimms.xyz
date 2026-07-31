@@ -40,7 +40,7 @@ const {
 	jsonLd,
 } = Astro.props;
 
-const pageTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
+const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 const desc = metaDescription(description);
 const canonical = absoluteUrl(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site?.href || SITE_URL);
 const usingDefaultImage = !image?.trim();
@@ -180,8 +180,8 @@ const isWriting = variant === 'writing';
 						>
 							<slot />
 						</main>
-						{footer ? <Footer /> : null}
 					</div>
+					{footer ? <Footer /> : null}
 				</>
 			)
 		}

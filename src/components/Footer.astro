@@ -2,8 +2,7 @@
 import { getCollection } from 'astro:content';
 import BerryMark from './BerryMark.astro';
 
-const bio =
-	'Adam Simms is a Canadian media artist. His work is about belonging, displacement, and intangible culture.';
+const year = new Date().getFullYear();
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const work = await getCollection('work');
@@ -16,7 +15,7 @@ const siteLinks = [
 	{ href: '/collaborations', label: 'Collaborations', current: current === '/collaborations' },
 ];
 
-const externalLinks = [
+const socialLinks = [
 	{ href: 'https://github.com/adamsimms', label: 'GitHub' },
 	{ href: 'https://www.linkedin.com/in/adamsimms', label: 'LinkedIn' },
 	{ href: 'https://www.concordia.ca/faculty/adam-simms.html', label: 'Teaching' },
@@ -24,35 +23,24 @@ const externalLinks = [
 ---
 
 <footer class="site-footer">
-	<div class="site-footer__col site-footer__col--mark">
-		<a class="site-footer__hero" href="/" aria-label="Home">
-			<BerryMark class="site-footer__berry-lg" animated size={80} />
-		</a>
-	</div>
-	<div class="site-footer__col site-footer__col--bio">
-		<p class="site-footer__bio">{bio}</p>
+	<a class="site-footer__hero" href="/" aria-label="Home">
+		<BerryMark class="site-footer__berry-lg" animated size={80} />
+	</a>
+	<div class="site-footer__identity">
+		<p class="site-footer__bio">
+			Adam Simms is a Canadian media artist.<br />His work focuses on belonging, displacement, and
+			intangible culture.
+		</p>
 		<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
-	</div>
-	<div class="site-footer__col site-footer__col--links">
-		<nav class="site-footer__nav" aria-label="Site">
-			<ul>
+		<nav aria-label="Links">
+			<ul class="site-footer__tags">
 				{
 					siteLinks.map((link) => (
 						<li>
-							<a href={link.href} aria-current={link.current ? 'page' : undefined}>
-								{link.label}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
-		<nav class="site-footer__nav" aria-label="External">
-			<ul>
-				{
-					externalLinks.map((link) => (
-						<li>
-							<a href={link.href} target="_blank" rel="noopener noreferrer">
+							<a
+								href={link.href}
+								aria-current={'current' in link && link.current ? 'page' : undefined}
+							>
 								{link.label}
 							</a>
 						</li>
@@ -61,10 +49,34 @@ const externalLinks = [
 			</ul>
 		</nav>
 	</div>
-	<p class="site-footer__weather" data-pinchard-weather>
-		<span data-weather-label>Pinchard’s Island</span>
-		<span data-weather-meta></span>
-	</p>
+	<div class="site-footer__bottom">
+		<p class="site-footer__weather" data-pinchard-weather>
+			<span data-weather-label>Pinchard’s Island</span>
+			<span data-weather-meta>—</span>
+		</p>
+		<div class="site-footer__meta">
+			<nav class="site-footer__social" aria-label="Social">
+				{
+					socialLinks.map((link, index) => (
+						<>
+							{index > 0 ? (
+								<span class="site-footer__social-sep" aria-hidden="true">
+									·
+								</span>
+							) : null}
+							<a href={link.href} target="_blank" rel="noopener noreferrer">
+								{link.label}
+							</a>
+						</>
+					))
+				}
+			</nav>
+			<span class="site-footer__social-sep" aria-hidden="true">
+				·
+			</span>
+			<p class="site-footer__copy">© {year}</p>
+		</div>
+	</div>
 </footer>
 
 <script>

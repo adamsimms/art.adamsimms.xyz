@@ -102,7 +102,7 @@ const orderedWork = work
 
 				const half = size / 2;
 				const stageRect = stage.getBoundingClientRect();
-				// Center the preview on the cursor — don't clamp to stage bounds
+				// Center the preview on the cursor: don't clamp to stage bounds
 				// (clamping pinned the first/top titles' images to y=0)
 				const x = pos.x - half - stageRect.left;
 				const y = pos.y - half - stageRect.top;

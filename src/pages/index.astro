@@ -17,28 +17,28 @@ const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 >
 	<section class="home-hero" aria-labelledby="home-heading" data-home-hero>
 		<h1 id="home-heading" class="visually-hidden">Adam Simms</h1>
-		<img
-			class="home-hero__media home-hero__poster"
-			src={posterSrc}
-			alt="Light House — a glowing wireframe house on a dark shoreline"
-			width="1920"
-			height="1080"
-			fetchpriority="high"
-		/>
-		<video
-			class="home-hero__media home-hero__video"
-			muted
-			playsinline
-			loop
-			preload="none"
-			poster={posterSrc}
-			aria-hidden="true"
-			data-src-720={videoSrc720}
-			data-src-1080={videoSrc1080}
-		></video>
-		<p class="home-hero__credit">
-			<a href="/light-house">Light House, 2020</a>
-		</p>
+		<a class="home-hero__link" href="/light-house" aria-label="Light House, 2020">
+			<img
+				class="home-hero__media home-hero__poster"
+				src={posterSrc}
+				alt=""
+				width="1920"
+				height="1080"
+				fetchpriority="high"
+			/>
+			<video
+				class="home-hero__media home-hero__video"
+				muted
+				playsinline
+				loop
+				preload="none"
+				poster={posterSrc}
+				aria-hidden="true"
+				data-src-720={videoSrc720}
+				data-src-1080={videoSrc1080}
+			></video>
+		</a>
+		<a class="home-hero__credit" href="/light-house">Light House, 2020</a>
 	</section>
 
 	<script is:inline>

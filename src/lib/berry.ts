@@ -1,4 +1,4 @@
-/** Cloudberry mark — lobe paths for BerryMark (footer pulse; future site preload) */
+/** Cloudberry mark: lobe paths for BerryMark (footer pulse; future site preload) */
 
 export const BERRY_LOBES = [
 	'M51.9,29.6 C55.8,35.2 54.4,43 48.7,46.9 C43,50.8 35.3,49.5 31.4,43.8 C27.5,38.2 28.9,30.5 34.6,26.5 C40.3,22.6 48,23.9 51.9,29.6 Z',
