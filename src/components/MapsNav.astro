@@ -1,6 +1,6 @@
 ---
 interface Props {
-	current: 'satellite' | 'trees' | 'resettled';
+	current: 'satellite' | 'trees' | 'resettled' | 'railway' | 'natural-resources';
 }
 
 const { current } = Astro.props;
@@ -9,6 +9,8 @@ const links = [
 	{ href: '/maps', id: 'satellite' as const, label: "Pinchard's Island" },
 	{ href: '/maps/trees', id: 'trees' as const, label: '53 Trees' },
 	{ href: '/maps/resettled', id: 'resettled' as const, label: 'Resettled communities' },
+	{ href: '/maps/railway', id: 'railway' as const, label: 'Railway + steamships, 1931' },
+	{ href: '/maps/natural-resources', id: 'natural-resources' as const, label: 'Natural Resources, 1941' },
 ];
 ---
 

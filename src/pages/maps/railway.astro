@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import MapsNav from '../../components/MapsNav.astro';
+import MapsStaticFigure from '../../components/MapsStaticFigure.astro';
+
+const title = 'Railway + steamships, 1931';
+const description =
+	'Research maps of Newfoundland: resettlement, Pinchard’s Island, and related sites.';
+const mapSrc = '/maps/newfoundland-railway-1931.avif';
+const mapFallback = '/maps/newfoundland-railway-1931.jpg';
+const mapFull = '/maps/newfoundland-railway-1931-full.jpg';
+const mapAlt =
+	'Map of Newfoundland showing railway lines, steamship routes, and branch railways under construction, ca. 1931, with Labrador inset.';
+const lacUrl =
+	'https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Record?IdNumber=3932909&app=fonandcol&ecopy=e010751885-v6';
+---
+
+<Base title={title} description={description} variant="cv" noindex>
+	<article class="maps">
+		<header class="page-header">
+			<h1>Maps</h1>
+			<p class="maps__lead">{description}</p>
+			<MapsNav current="railway" />
+		</header>
+
+		<MapsStaticFigure
+			src={mapSrc}
+			fallback={mapFallback}
+			full={mapFull}
+			alt={mapAlt}
+			width={2388}
+			height={2400}
+		>
+			<figcaption class="maps__credit">
+				Newfoundland Railway. <cite>Map of Newfoundland</cite> [railway and steamship lines].
+				[Newfoundland], ca. 1931. Memorial University of Newfoundland Map Room,
+				G/3436/P7/1931/M3 (call number stamped on sheet). Related later issue:{' '}
+				<a href={lacUrl} target="_blank" rel="noopener noreferrer"
+					>Map showing Newfoundland railway and steamship system. 1933</a
+				>, Library and Archives Canada, Mikan 3932909.
+			</figcaption>
+		</MapsStaticFigure>
+	</article>
+</Base>

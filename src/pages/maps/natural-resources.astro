@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import MapsNav from '../../components/MapsNav.astro';
+import MapsStaticFigure from '../../components/MapsStaticFigure.astro';
+
+const title = 'Natural Resources, 1941';
+const description =
+	'Research maps of Newfoundland: resettlement, Pinchard’s Island, and related sites.';
+const mapSrc = '/maps/newfoundland-natural-resources-1941.avif';
+const mapFallback = '/maps/newfoundland-natural-resources-1941.jpg';
+const mapFull = '/maps/newfoundland-natural-resources-1941-full.jpg';
+const mapAlt =
+	'Colour map of Newfoundland published in 1941 by the Department of Natural Resources, showing roads, railway, district boundaries, and coastal place names.';
+const gazetteerUrl = 'https://publications.gc.ca/site/eng/9.883609/publication.html';
+---
+
+<Base title={title} description={description} variant="cv" noindex>
+	<article class="maps">
+		<header class="page-header">
+			<h1>Maps</h1>
+			<p class="maps__lead">{description}</p>
+			<MapsNav current="natural-resources" />
+		</header>
+
+		<MapsStaticFigure
+			src={mapSrc}
+			fallback={mapFallback}
+			full={mapFull}
+			alt={mapAlt}
+			width={2118}
+			height={2400}
+		>
+			<figcaption class="maps__credit">
+				Newfoundland. Department of Natural Resources.
+				<cite>Newfoundland</cite> [10-mile map]. Under the direction of the Commissioner for
+				Natural Resources. [St. John’s], 1941. Scale 10 miles to 1 inch (approx. 1:633,600).
+				Memorial University of Newfoundland Map Room, G/3435/1941/N33. Cited as the “10-mile Map
+				of Newfoundland” in{' '}
+				<a href={gazetteerUrl} target="_blank" rel="noopener noreferrer"
+					>A list of the place names of the Island of Newfoundland</a
+				>
+				(Canada, Geographical Branch, 1950).
+			</figcaption>
+		</MapsStaticFigure>
+	</article>
+</Base>

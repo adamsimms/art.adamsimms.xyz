@@ -4,26 +4,38 @@ import MapsNav from '../../components/MapsNav.astro';
 
 const title = '53 Trees';
 const description =
-	'Map of 53 trees tied to Pinchard’s Island and Newfoundland research sites by Adam Simms.';
+	'Research maps of Newfoundland: resettlement, Pinchard’s Island, and related sites.';
 const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=19NfRJjMQjtei3GXok6oK9WOqnsw';
 ---
 
 <Base title={title} description={description} variant="cv" noindex>
 	<article class="maps">
 		<header class="page-header">
-			<p class="maps__eyebrow">Maps</p>
-			<h1>{title}</h1>
+			<h1>Maps</h1>
 			<p class="maps__lead">{description}</p>
 			<MapsNav current="trees" />
 		</header>
 
-		<div class="maps__shell">
-			<iframe
-				class="maps__embed"
-				src={iframeSrc}
-				title="53 Trees map"
-				allowfullscreen
-				loading="lazy"></iframe>
-		</div>
+		<figure class="maps__figure">
+			<div class="maps__shell">
+				<iframe
+					class="maps__embed"
+					src={iframeSrc}
+					title="53 Trees map"
+					allowfullscreen
+					loading="lazy"></iframe>
+			</div>
+			<figcaption class="maps__credit">
+				This geolocation map represents the 53 black spruce trees I planted on Pinchard’s
+				Island, one for each house floated off during resettlement. Research for the MFA
+				thesis{' '}
+				<cite>Re-presenting Place: Reviving Newfoundland’s Disappearing Culture</cite>
+				(Concordia University, 2021) and the field guide{' '}
+				<a href="/collaborations">
+					<cite>How to Get to Pinchard’s Island</cite>
+				</a>{' '}
+				(self-published, 2021).
+			</figcaption>
+		</figure>
 	</article>
 </Base>

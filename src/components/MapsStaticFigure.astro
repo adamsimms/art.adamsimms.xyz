@@ -1,0 +1,106 @@
+---
+interface Props {
+	src: string;
+	fallback: string;
+	full: string;
+	alt: string;
+	width: number;
+	height: number;
+}
+
+const { src, fallback, full, alt, width, height } = Astro.props;
+---
+
+<figure class="maps__figure" data-maps-figure>
+	<button
+		type="button"
+		class="maps__image-link"
+		data-maps-lightbox-open
+		aria-haspopup="dialog"
+		aria-label={`Enlarge map: ${alt}`}
+	>
+		<picture>
+			<source srcset={src} type="image/avif" />
+			<img
+				class="maps__image"
+				src={fallback}
+				alt={alt}
+				width={width}
+				height={height}
+				loading="eager"
+				decoding="async"
+				data-full-src={full}
+			/>
+		</picture>
+	</button>
+	<slot />
+</figure>
+
+<dialog class="stills-lightbox" aria-label="Enlarged map">
+	<button type="button" class="stills-lightbox__close" data-maps-lightbox-close aria-label="Close">
+		Close
+	</button>
+	<figure class="stills-lightbox__figure">
+		<img class="stills-lightbox__img" alt="" />
+		<figcaption class="stills-lightbox__caption">
+			<span class="stills-lightbox__text" data-maps-lightbox-caption></span>
+		</figcaption>
+	</figure>
+</dialog>
+
+<script>
+	function initMapsLightbox() {
+		const figures = document.querySelectorAll('[data-maps-figure]');
+		figures.forEach((figure) => {
+			if (!(figure instanceof HTMLElement) || figure.dataset.lightboxBound === 'true') return;
+			figure.dataset.lightboxBound = 'true';
+
+			const dialog = figure.nextElementSibling;
+			if (!(dialog instanceof HTMLDialogElement) || !dialog.classList.contains('stills-lightbox')) {
+				return;
+			}
+
+			const openBtn = figure.querySelector('[data-maps-lightbox-open]');
+			const img = figure.querySelector('.maps__image');
+			const credit = figure.querySelector('.maps__credit');
+			const imgEl = dialog.querySelector('.stills-lightbox__img');
+			const captionEl = dialog.querySelector('[data-maps-lightbox-caption]');
+			const closeBtn = dialog.querySelector('[data-maps-lightbox-close]');
+
+			if (
+				!(openBtn instanceof HTMLButtonElement) ||
+				!(img instanceof HTMLImageElement) ||
+				!(imgEl instanceof HTMLImageElement) ||
+				!(captionEl instanceof HTMLElement)
+			) {
+				return;
+			}
+
+			const open = () => {
+				imgEl.src = img.dataset.fullSrc || img.currentSrc || img.src;
+				imgEl.alt = img.alt || '';
+				const caption = credit?.textContent?.replace(/\s+/g, ' ').trim() || '';
+				captionEl.textContent = caption;
+				captionEl.hidden = !caption;
+				if (!dialog.open) dialog.showModal();
+			};
+
+			openBtn.addEventListener('click', open);
+
+			if (!dialog.dataset.ready) {
+				dialog.dataset.ready = 'true';
+				closeBtn?.addEventListener('click', () => dialog.close());
+				dialog.addEventListener('click', (event) => {
+					if (event.target === dialog) dialog.close();
+				});
+				dialog.addEventListener('close', () => {
+					imgEl.removeAttribute('src');
+					captionEl.textContent = '';
+					captionEl.hidden = true;
+				});
+			}
+		});
+	}
+
+	document.addEventListener('astro:page-load', initMapsLightbox);
+</script>

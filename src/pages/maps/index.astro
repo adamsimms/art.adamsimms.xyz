@@ -4,31 +4,46 @@ import MapsNav from '../../components/MapsNav.astro';
 
 const title = "Pinchard's Island";
 const description =
-	"Satellite map of Pinchard's Island, Newfoundland — a resettled outport and ongoing site in Adam Simms's research.";
+	'Research maps of Newfoundland: resettlement, Pinchard’s Island, and related sites.';
 const mapLabel = "Satellite map of Pinchard's Island, Newfoundland";
 const token = import.meta.env.PUBLIC_MAPBOX_TOKEN || '';
 const cabin = { lat: 49.2025694, lon: -53.48586388888953 };
 const view = { lat: 49.1998, lon: -53.4865, zoom: 13.5 };
+/** Display DMS matching Cloudberry archive GPS defaults for the cabin. */
+const cabinDms = { lat: '49°12′09.14″ N', lon: '53°29′09.11″ W' };
 ---
 
 <Base title={title} description={description} variant="cv" noindex>
 	<article class="maps">
 		<header class="page-header">
-			<p class="maps__eyebrow">Maps</p>
-			<h1>{title}</h1>
+			<h1>Maps</h1>
 			<p class="maps__lead">{description}</p>
 			<MapsNav current="satellite" />
 		</header>
 
 		{
 			token.startsWith('pk.') ? (
-				<div class="maps__shell">
-					<div id="pinchard-satellite-map" class="maps__canvas" role="img" aria-label={mapLabel} />
-				</div>
+				<figure class="maps__figure">
+					<div class="maps__shell">
+						<div
+							id="pinchard-satellite-map"
+							class="maps__canvas"
+							role="img"
+							aria-label={mapLabel}
+						/>
+					</div>
+					<figcaption class="maps__credit">
+						Pinchard’s Island, Bonavista Bay, Newfoundland and Labrador. A resettled outport
+						at the northern edge of the bay, emptied in the early 1950s when its houses were
+						floated to nearby communities. Marker: family cabin <cite>Precious Memories</cite>
+						,{` ${cabinDms.lat}, ${cabinDms.lon}`} ({cabin.lat.toFixed(6)},{' '}
+						{cabin.lon.toFixed(6)}). Accessible by boat when the Atlantic permits.
+					</figcaption>
+				</figure>
 			) : (
 				<p class="maps__missing">
-					Map unavailable. Set <code>PUBLIC_MAPBOX_TOKEN</code> (Mapbox public <code>pk.*</code> token)
-					and allowlist <code>art.adamsimms.xyz</code> on the token.
+					Map unavailable. Set <code>PUBLIC_MAPBOX_TOKEN</code> (Mapbox public <code>pk.*</code>{' '}
+					token) and allowlist <code>art.adamsimms.xyz</code> on the token.
 				</p>
 			)
 		}
@@ -52,6 +67,7 @@ const view = { lat: 49.1998, lon: -53.4865, zoom: 13.5 };
 							style: 'mapbox://styles/mapbox/standard-satellite',
 							center: [view.lon, view.lat],
 							zoom: view.zoom,
+							cooperativeGestures: true,
 						});
 						map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }), 'top-right');
 						new mapboxgl.Marker().setLngLat([cabin.lon, cabin.lat]).addTo(map);
