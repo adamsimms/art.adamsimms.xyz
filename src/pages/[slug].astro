@@ -10,6 +10,7 @@ import {
 	metaDescription,
 	socialImageUrl,
 } from '../lib/seo';
+import { inlineMarkdown, stripInlineMarkdown } from '../lib/inlineMarkdown';
 
 const galleries = import.meta.glob('../content/work/*.json', { eager: true, import: 'default' });
 
@@ -27,7 +28,10 @@ if (!gallery) throw new Error(`Gallery not found: ${entry.data.galleryFile}`);
 
 const images = gallery.images ?? [];
 const hidden = isHiddenWorkSlug(entry.data.slug);
-const pageDescription = metaDescription(entry.data.seoDescription, entry.data.description);
+const pageDescription = metaDescription(
+	entry.data.seoDescription,
+	entry.data.description ? stripInlineMarkdown(entry.data.description) : undefined,
+);
 const pageImage = socialImageUrl(entry.data.cover, entry.data.coverFallback);
 const coverAlt =
 	typeof images[0]?.alt === 'string' &&
@@ -77,24 +81,23 @@ const heroImages = stillsAfterBody ? [] : images;
 const documentation = Array.isArray(gallery.documentation) ? gallery.documentation : [];
 const bodyStills = stillsAfterBody ? images : documentation;
 
-/** Assembled sibling mounts live in `dist/` after `build:full` — not available in `astro dev`. */
+/** Assembled sibling mounts live in `dist/` after `build:full`: not available in `astro dev`. */
 const projectLink =
 	entry.data.slug === 'cloudberry'
 		? {
 				href: import.meta.env.DEV ? `${SITE_URL}/cloudberry/archive/` : '/cloudberry/archive/',
-				label: 'Archive',
+				label: 'Cloudberry Archive',
 			}
 		: entry.data.slug === 'adrift'
 			? {
 					href: import.meta.env.DEV ? `${SITE_URL}/adrift/experience/` : '/adrift/experience/',
-					label: 'Experience',
+					label: 'View Adrift',
 				}
 			: null;
 const showMeta = Boolean(year || showRuntime || projectLink);
 const descriptionParagraphs = entry.data.description
 	? entry.data.description.trim().split(/\n\n+/).filter(Boolean)
 	: [];
-const [leadParagraph, ...moreLeadParagraphs] = descriptionParagraphs;
 
 const creativeWorkLd = {
 	'@context': 'https://schema.org',
@@ -160,7 +163,9 @@ const creativeWorkLd = {
 							) : null
 						}
 
-						{leadParagraph ? <p class="project-lead">{leadParagraph}</p> : null}
+						{descriptionParagraphs.map((paragraph) => (
+							<p class="project-lead" set:html={inlineMarkdown(paragraph)} />
+						))}
 
 						{entry.data.statement ? <p class="project-cta">{entry.data.statement}</p> : null}
 					</div>
@@ -176,7 +181,7 @@ const creativeWorkLd = {
 									vimeoId
 										? {
 												id: vimeoId,
-												title: `${entry.data.title} — video`,
+												title: `${entry.data.title} · video`,
 												poster: video?.poster || entry.data.cover,
 												posterFallback:
 													video?.posterFallback ||
@@ -190,28 +195,7 @@ const creativeWorkLd = {
 						</div>
 					) : null
 				}
-
-				{
-					moreLeadParagraphs.length > 0 ? (
-						<div class="project-intro__more" data-project-body>
-							{moreLeadParagraphs.map((paragraph) => (
-								<p class="project-lead">{paragraph}</p>
-							))}
-						</div>
-					) : null
-				}
 			</div>
-
-			{
-				entry.data.body ? (
-					<div class="project-essay" data-project-body>
-						{entry.data.body
-							.trim()
-							.split(/\n\n+/)
-							.map((paragraph) => <p class="project-body">{paragraph}</p>)}
-					</div>
-				) : null
-			}
 
 			{
 				bodyStills.length > 0 ? (

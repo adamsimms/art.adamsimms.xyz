@@ -62,7 +62,7 @@ function imageCaption(image: GalleryImage) {
 const vimeoSrc = hasVideo
 	? `https://player.vimeo.com/video/${video!.id}?title=0&byline=0&portrait=0&autoplay=1`
 	: '';
-const videoTitle = video?.title || (title ? `${title} — video` : 'Project video');
+const videoTitle = video?.title || (title ? `${title} · video` : 'Project video');
 const posterSrc = video?.poster || '';
 const posterFallback = video?.posterFallback || posterSrc;
 ---
@@ -201,6 +201,8 @@ const posterFallback = video?.posterFallback || posterSrc;
 									</svg>
 								</span>
 							</div>
+
+							<p class="gallery__count" data-gallery-count aria-live="polite"></p>
 						</>
 					) : null
 				}
@@ -296,22 +298,13 @@ const posterFallback = video?.posterFallback || posterSrc;
 		});
 	}
 
-	/** Align captions to the object-fit:contain photo, not the full carousel frame. */
-	function syncCaptionToImage(figure: Element) {
-		if (!(figure instanceof HTMLElement)) return;
-		const img = figure.querySelector('img');
-		const caption = figure.querySelector('figcaption');
-		if (!(img instanceof HTMLImageElement) || !(caption instanceof HTMLElement)) {
-			figure.style.removeProperty('--caption-inset');
-			figure.style.removeProperty('--caption-width');
-			return;
-		}
-
+	/** Align caption + count to the object-fit:contain photo, not the full carousel frame. */
+	function measureContainBand(img: HTMLImageElement) {
 		const boxW = img.clientWidth;
 		const boxH = img.clientHeight;
 		const natW = img.naturalWidth;
 		const natH = img.naturalHeight;
-		if (!boxW || !boxH || !natW || !natH) return;
+		if (!boxW || !boxH || !natW || !natH) return null;
 
 		const boxRatio = boxW / boxH;
 		const imageRatio = natW / natH;
@@ -325,19 +318,83 @@ const posterFallback = video?.posterFallback || posterSrc;
 			inset = (boxW - renderedW) / 2;
 		}
 
-		figure.style.setProperty('--caption-inset', `${Math.max(0, inset)}px`);
-		figure.style.setProperty('--caption-width', `${renderedW}px`);
+		return {
+			inset: `${Math.max(0, inset)}px`,
+			width: `${renderedW}px`,
+		};
+	}
+
+	function applyMetaBand(target: HTMLElement, inset: string, width: string) {
+		target.style.setProperty('--caption-inset', inset);
+		target.style.setProperty('--caption-width', width);
+	}
+
+	function clearMetaBand(target: HTMLElement) {
+		target.style.removeProperty('--caption-inset');
+		target.style.removeProperty('--caption-width');
+	}
+
+	function syncCaptionToImage(figure: Element) {
+		if (!(figure instanceof HTMLElement)) return;
+
+		// Video fills the frame; keep meta flush to the edges.
+		if (figure.hasAttribute('data-gallery-video')) {
+			applyMetaBand(figure, '0px', '100%');
+			return;
+		}
+
+		const img = figure.querySelector('img');
+		const caption = figure.querySelector('figcaption');
+		if (!(img instanceof HTMLImageElement)) {
+			clearMetaBand(figure);
+			return;
+		}
+
+		// Still measure when there is no caption — the count needs the same band.
+		const band = measureContainBand(img);
+		if (!band) {
+			if (!(caption instanceof HTMLElement)) clearMetaBand(figure);
+			return;
+		}
+
+		applyMetaBand(figure, band.inset, band.width);
+	}
+
+	function syncActiveMetaBand(gallery: HTMLElement) {
+		const viewport = gallery.querySelector('[data-gallery-viewport]');
+		const active = gallery.querySelector('.gallery__item[data-active]');
+		if (!(viewport instanceof HTMLElement)) return;
+		if (!(active instanceof HTMLElement)) {
+			clearMetaBand(viewport);
+			return;
+		}
+
+		syncCaptionToImage(active);
+		const inset = active.style.getPropertyValue('--caption-inset') || '0px';
+		const width = active.style.getPropertyValue('--caption-width') || '100%';
+		applyMetaBand(viewport, inset, width);
 	}
 
 	function bindCaptionAlignment(gallery: HTMLElement, signal?: AbortSignal) {
 		const figures = [...gallery.querySelectorAll('.gallery__item')];
-		const syncAll = () => figures.forEach(syncCaptionToImage);
+		const syncAll = () => {
+			figures.forEach(syncCaptionToImage);
+			syncActiveMetaBand(gallery);
+		};
 
 		figures.forEach((figure) => {
+			if (!(figure instanceof HTMLElement)) return;
+			if (figure.hasAttribute('data-gallery-video')) {
+				syncCaptionToImage(figure);
+				return;
+			}
 			const img = figure.querySelector('img');
 			if (!(img instanceof HTMLImageElement)) return;
 			if (img.complete) syncCaptionToImage(figure);
-			else img.addEventListener('load', () => syncCaptionToImage(figure), { once: true, signal });
+			else img.addEventListener('load', () => {
+				syncCaptionToImage(figure);
+				syncActiveMetaBand(gallery);
+			}, { once: true, signal });
 		});
 
 		const ro = new ResizeObserver(syncAll);
@@ -358,6 +415,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 		const prevBtn = gallery.querySelector('[data-gallery-prev]');
 		const nextBtn = gallery.querySelector('[data-gallery-next]');
 		const cursor = gallery.querySelector('[data-gallery-cursor]');
+		const countEl = gallery.querySelector('[data-gallery-count]');
 		if (
 			!(viewport instanceof HTMLElement) ||
 			!slides.length ||
@@ -373,6 +431,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const AUTOPLAY_MS = 7000;
 		const EDGE_RATIO = 0.18;
+		const SWIPE_MIN = 48;
 		let index = 0;
 		let side = 'next';
 		let tracking = false;
@@ -380,6 +439,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 		let autoplayTimer = 0;
 		let hovered = false;
 		const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+		const swipe = { id: -1, x: 0, y: 0, armed: false, ignoreClickUntil: 0 };
 		const ac = new AbortController();
 		const { signal } = ac;
 
@@ -464,6 +524,10 @@ const posterFallback = video?.posterFallback || posterSrc;
 			nextBtn.disabled = index === totalSlides - 1;
 			syncVideoMode();
 			updateCursor();
+			if (countEl instanceof HTMLElement) {
+				countEl.textContent = `${index + 1} / ${totalSlides}`;
+			}
+			syncActiveMetaBand(gallery);
 
 			if (updateHash) setHash(index);
 			if (restartAutoplay) startAutoplay();
@@ -528,6 +592,15 @@ const posterFallback = video?.posterFallback || posterSrc;
 		bindCaptionAlignment(gallery, signal);
 		bindVideoPlay(gallery, signal);
 
+		const suppressSwipeClick = (event: Event) => {
+			if (performance.now() > swipe.ignoreClickUntil) return;
+			event.preventDefault();
+			event.stopPropagation();
+			swipe.ignoreClickUntil = 0;
+		};
+
+		viewport.addEventListener('click', suppressSwipeClick, { capture: true, signal });
+
 		prevBtn.addEventListener(
 			'click',
 			() => {
@@ -542,6 +615,53 @@ const posterFallback = video?.posterFallback || posterSrc;
 			() => {
 				goTo(index + 1);
 				gallery.focus({ preventScroll: true });
+			},
+			{ signal },
+		);
+
+		viewport.addEventListener(
+			'pointerdown',
+			(event) => {
+				if (event.pointerType === 'mouse') return;
+				if (event.button !== 0 && event.pointerType === 'pen') return;
+				swipe.id = event.pointerId;
+				swipe.x = event.clientX;
+				swipe.y = event.clientY;
+				swipe.armed = true;
+			},
+			{ signal },
+		);
+
+		viewport.addEventListener(
+			'pointermove',
+			(event) => {
+				if (!swipe.armed || event.pointerId !== swipe.id) return;
+				const dx = event.clientX - swipe.x;
+				const dy = event.clientY - swipe.y;
+				if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return;
+				if (Math.abs(dy) >= Math.abs(dx)) swipe.armed = false;
+			},
+			{ signal },
+		);
+
+		const endSwipe = (event: PointerEvent) => {
+			if (!swipe.armed || event.pointerId !== swipe.id) return;
+			const dx = event.clientX - swipe.x;
+			const dy = event.clientY - swipe.y;
+			swipe.armed = false;
+			if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) <= Math.abs(dy)) return;
+			swipe.ignoreClickUntil = performance.now() + 450;
+			if (dx < 0) goTo(index + 1);
+			else goTo(index - 1);
+			gallery.focus({ preventScroll: true });
+		};
+
+		viewport.addEventListener('pointerup', endSwipe, { signal });
+		viewport.addEventListener(
+			'pointercancel',
+			(event) => {
+				if (event.pointerId !== swipe.id) return;
+				swipe.armed = false;
 			},
 			{ signal },
 		);

@@ -29,12 +29,11 @@ function stillAlt(image: StillImage, index: number) {
 			<ul
 				class="stills-thumbs"
 				data-stills-gallery
-				data-stills-title={title}
 				aria-label={title ? `${title} stills` : 'Project stills'}
 			>
 				{images.map((image, index) => {
 					const alt = stillAlt(image, index);
-					/** JPG (or non-AVIF) for the grid — full AVIF via data-full-src for the lightbox. */
+					/** JPG (or non-AVIF) for the grid: full AVIF via data-full-src for the lightbox. */
 					const thumbSrc = image.fallback || image.src;
 					const fullSrc = image.src.includes('.avif') ? image.src : thumbSrc;
 					return (
@@ -51,8 +50,8 @@ function stillAlt(image: StillImage, index: number) {
 								<img
 									src={thumbSrc}
 									alt={alt}
-									width="16"
-									height="9"
+									width="1"
+									height="1"
 									loading="eager"
 									decoding="async"
 								/>
@@ -132,7 +131,6 @@ function stillAlt(image: StillImage, index: number) {
 				<figure class="stills-lightbox__figure">
 					<img class="stills-lightbox__img" alt="" />
 					<figcaption class="stills-lightbox__caption">
-						<span class="stills-lightbox__title" data-stills-lightbox-title></span>
 						<span class="stills-lightbox__text" data-stills-lightbox-caption></span>
 						<span class="stills-lightbox__count" data-stills-lightbox-count></span>
 					</figcaption>
@@ -154,7 +152,6 @@ function stillAlt(image: StillImage, index: number) {
 			}
 
 			const imgEl = dialog.querySelector('.stills-lightbox__img');
-			const titleEl = dialog.querySelector('[data-stills-lightbox-title]');
 			const captionEl = dialog.querySelector('[data-stills-lightbox-caption]');
 			const countEl = dialog.querySelector('[data-stills-lightbox-count]');
 			const closeBtn = dialog.querySelector('[data-stills-lightbox-close]');
@@ -163,7 +160,6 @@ function stillAlt(image: StillImage, index: number) {
 			const cursor = dialog.querySelector('[data-stills-lightbox-cursor]');
 			if (
 				!(imgEl instanceof HTMLImageElement) ||
-				!(titleEl instanceof HTMLElement) ||
 				!(captionEl instanceof HTMLElement) ||
 				!(countEl instanceof HTMLElement)
 			) {
@@ -242,8 +238,6 @@ function stillAlt(image: StillImage, index: number) {
 				if (!slide) return;
 				imgEl.src = slide.src;
 				imgEl.alt = slide.alt;
-				const projectTitle = gallery.dataset.stillsTitle || '';
-				titleEl.textContent = projectTitle;
 				captionEl.textContent = slide.caption;
 				captionEl.hidden = !slide.caption;
 				const multi = slides.length > 1;
@@ -297,7 +291,6 @@ function stillAlt(image: StillImage, index: number) {
 			dialog.addEventListener('close', () => {
 				hideCursor();
 				imgEl.removeAttribute('src');
-				titleEl.textContent = '';
 				captionEl.textContent = '';
 				captionEl.hidden = true;
 				countEl.textContent = '';
