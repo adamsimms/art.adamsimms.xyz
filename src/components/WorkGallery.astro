@@ -605,7 +605,6 @@ const posterFallback = video?.posterFallback || posterSrc;
 			'click',
 			() => {
 				goTo(index - 1);
-				gallery.focus({ preventScroll: true });
 			},
 			{ signal },
 		);
@@ -614,7 +613,6 @@ const posterFallback = video?.posterFallback || posterSrc;
 			'click',
 			() => {
 				goTo(index + 1);
-				gallery.focus({ preventScroll: true });
 			},
 			{ signal },
 		);
@@ -653,7 +651,6 @@ const posterFallback = video?.posterFallback || posterSrc;
 			swipe.ignoreClickUntil = performance.now() + 450;
 			if (dx < 0) goTo(index + 1);
 			else goTo(index - 1);
-			gallery.focus({ preventScroll: true });
 		};
 
 		viewport.addEventListener('pointerup', endSwipe, { signal });

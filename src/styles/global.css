@@ -85,8 +85,8 @@
 	--space-2xl: clamp(4rem, 3.7955rem + 0.9091vw, 4.5rem);
 	--space-3xl: clamp(6rem, 5.6932rem + 1.3636vw, 6.75rem);
 
-	/* Space between page content and sticky footer reveal */
-	--space-before-footer: calc(var(--space-2xl) * 3);
+	/* Space between page content and sticky footer reveal (must cover in-flow footer height) */
+	--space-before-footer: calc(var(--space-2xl) * 4.5);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -442,10 +442,12 @@ main {
 	width: 100%;
 	box-sizing: border-box;
 	margin: 0;
-	padding: 5rem 2rem 9rem;
+	padding: 5rem 2rem 2rem;
 	background: var(--footer-bg);
 	color: #e8eef4;
 	color-scheme: dark;
+	/* Keep in-flow height honest so the sticky reveal can scroll to social links */
+	overflow: visible;
 }
 
 .site-footer__hero {
@@ -612,16 +614,13 @@ main {
 }
 
 .site-footer__bottom {
-	position: absolute;
-	left: 2rem;
-	right: 2rem;
-	bottom: 2rem;
-	z-index: 1;
 	display: flex;
 	align-items: last baseline;
 	justify-content: space-between;
 	gap: 1rem;
-	width: auto;
+	width: 100%;
+	margin-top: var(--space-xl);
+	padding-top: var(--space-s);
 }
 
 .site-footer__weather {
@@ -670,7 +669,7 @@ main {
 }
 
 .site-footer__social a {
-	color: color-mix(in srgb, #e8eef4 45%, transparent);
+	color: color-mix(in srgb, #e8eef4 62%, transparent);
 	text-decoration: none;
 	transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -689,7 +688,7 @@ main {
 	font-size: var(--step--2);
 	letter-spacing: 0.02em;
 	line-height: 1;
-	color: color-mix(in srgb, #e8eef4 45%, transparent);
+	color: color-mix(in srgb, #e8eef4 62%, transparent);
 }
 
 @media (max-width: 60rem) {
@@ -702,7 +701,7 @@ main {
 
 @media (max-width: 40rem) {
 	.site-footer {
-		padding: 3rem 1.25rem 8.5rem;
+		padding: 3rem 1.25rem 1.5rem;
 	}
 
 	.site-footer__tags {
@@ -719,13 +718,11 @@ main {
 	}
 
 	.site-footer__bottom {
-		left: 1.25rem;
-		right: 1.25rem;
-		bottom: 1.25rem;
 		flex-wrap: wrap;
 		align-items: flex-start;
 		row-gap: 0;
 		column-gap: 1rem;
+		margin-top: var(--space-l);
 	}
 
 	.site-footer__weather {
@@ -735,7 +732,7 @@ main {
 
 	.site-footer__meta {
 		flex: 1 1 auto;
-		margin-top: 1.75rem;
+		margin-top: 1.25rem;
 	}
 
 	.site-footer__berry-lg,
@@ -1106,11 +1103,22 @@ body:has(.work-hover) {
 
 .gallery--carousel {
 	outline: none;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .gallery--carousel:focus-visible {
 	outline: 2px solid var(--hover);
 	outline-offset: 0.5rem;
+}
+
+/* Touch: never show the orange focus ring while swiping / tapping slides */
+@media (hover: none) {
+	.gallery--carousel:focus,
+	.gallery--carousel:focus-visible,
+	.gallery__hit:focus,
+	.gallery__hit:focus-visible {
+		outline: none;
+	}
 }
 
 .gallery__viewport {
@@ -1177,6 +1185,7 @@ body:has(.work-hover) {
 	background: transparent;
 	cursor: pointer;
 	pointer-events: auto;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .gallery__hit--prev {
