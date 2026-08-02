@@ -212,6 +212,9 @@ const posterFallback = video?.posterFallback || posterSrc;
 }
 
 <script>
+	type GalleryNav = (direction: 'prev' | 'next') => void;
+	type GalleryElement = HTMLElement & { galleryNav?: GalleryNav };
+
 	function playVideoFrame(root: ParentNode) {
 		const shell = root.querySelector('[data-gallery-video-shell]');
 		const iframe = root.querySelector('[data-gallery-video-frame]');
@@ -605,6 +608,8 @@ const posterFallback = video?.posterFallback || posterSrc;
 			'click',
 			() => {
 				goTo(index - 1);
+				// Drop focus so a following arrow key doesn't paint the focus ring on the edge hit zone.
+				prevBtn.blur();
 			},
 			{ signal },
 		);
@@ -613,6 +618,7 @@ const posterFallback = video?.posterFallback || posterSrc;
 			'click',
 			() => {
 				goTo(index + 1);
+				nextBtn.blur();
 			},
 			{ signal },
 		);
@@ -717,19 +723,14 @@ const posterFallback = video?.posterFallback || posterSrc;
 			{ signal },
 		);
 
-		gallery.addEventListener(
-			'keydown',
-			(event) => {
-				if (event.key === 'ArrowLeft') {
-					event.preventDefault();
-					goTo(index - 1);
-				} else if (event.key === 'ArrowRight') {
-					event.preventDefault();
-					goTo(index + 1);
-				}
-			},
-			{ signal },
-		);
+		// Expose navigation so a single page-level keydown listener can drive this carousel
+		// from anywhere on the page (no need to focus the carousel first).
+		(gallery as GalleryElement).galleryNav = (direction) => {
+			goTo(direction === 'prev' ? index - 1 : index + 1);
+		};
+		signal.addEventListener('abort', () => {
+			delete (gallery as GalleryElement).galleryNav;
+		});
 
 		window.addEventListener(
 			'hashchange',
@@ -743,7 +744,54 @@ const posterFallback = video?.posterFallback || posterSrc;
 		document.addEventListener('astro:before-swap', cleanup, { once: true });
 	}
 
+	/** Choose the enhanced carousel currently visible + nearest the viewport centre. */
+	function pickActiveGallery(): GalleryElement | null {
+		const galleries = [...document.querySelectorAll<GalleryElement>('[data-gallery][data-enhanced]')].filter(
+			(gallery) => typeof gallery.galleryNav === 'function',
+		);
+		if (!galleries.length) return null;
+
+		const viewportH = window.innerHeight || document.documentElement.clientHeight;
+		let best: GalleryElement | null = null;
+		let bestDist = Infinity;
+		for (const gallery of galleries) {
+			const rect = gallery.getBoundingClientRect();
+			if (rect.bottom <= 0 || rect.top >= viewportH) continue;
+			const dist = Math.abs(rect.top + rect.height / 2 - viewportH / 2);
+			if (dist < bestDist) {
+				bestDist = dist;
+				best = gallery;
+			}
+		}
+		return best;
+	}
+
+	let keyboardBound = false;
+	function bindGlobalKeyboard() {
+		if (keyboardBound) return;
+		keyboardBound = true;
+		document.addEventListener('keydown', (event) => {
+			if (event.defaultPrevented) return;
+			if (event.altKey || event.ctrlKey || event.metaKey) return;
+			if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+			const target = event.target;
+			if (target instanceof HTMLElement) {
+				if (target.isContentEditable) return;
+				const tag = target.tagName;
+				if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+			}
+
+			const gallery = pickActiveGallery();
+			if (!gallery?.galleryNav) return;
+
+			event.preventDefault();
+			gallery.galleryNav(event.key === 'ArrowLeft' ? 'prev' : 'next');
+		});
+	}
+
 	function initGalleries() {
+		bindGlobalKeyboard();
 		document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
 			const hasControls = gallery.querySelector('[data-gallery-prev]');
 			if (hasControls) {
