@@ -819,8 +819,8 @@ main {
 	z-index: 3;
 	inset: auto 2rem 2rem auto;
 	margin: 0;
-	font-size: var(--step--2);
-	font-weight: 400;
+	font-size: var(--type-caption);
+	font-weight: 600;
 	line-height: 1.4;
 	letter-spacing: 0.02em;
 	color: #fff;
@@ -828,8 +828,7 @@ main {
 	transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.home-hero__credit:is(:hover, :focus-visible),
-.home-hero__link:is(:hover, :focus-visible) ~ .home-hero__credit {
+.home-hero__credit:is(:hover, :focus-visible) {
 	color: var(--hover);
 }
 
