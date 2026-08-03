@@ -3175,14 +3175,24 @@ body:has(.work-hover) {
 	position: sticky;
 	top: 1.5rem;
 	margin: 0;
-	width: 100%;
+	width: 28rem;
+	max-width: 100%;
 	min-width: 0;
+	justify-self: start;
 }
 
 .about-portrait img {
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+.about-portrait__credit {
+	margin: var(--space-2xs) 0 0;
+	font-size: var(--step--2);
+	line-height: 1.4;
+	letter-spacing: 0.01em;
+	color: color-mix(in srgb, var(--muted) 70%, var(--bg));
 }
 
 .about a {
@@ -3329,6 +3339,14 @@ body:has(.work-hover) {
 	.about-portrait {
 		position: static;
 		order: -1;
+		justify-self: stretch;
+		width: 100%;
+	}
+
+	.about-portrait img {
+		aspect-ratio: 3 / 2;
+		object-fit: cover;
+		object-position: center -30px;
 	}
 }
 
