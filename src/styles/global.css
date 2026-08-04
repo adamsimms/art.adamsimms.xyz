@@ -85,8 +85,8 @@
 	--space-2xl: clamp(4rem, 3.7955rem + 0.9091vw, 4.5rem);
 	--space-3xl: clamp(6rem, 5.6932rem + 1.3636vw, 6.75rem);
 
-	/* Space between page content and sticky footer reveal (must cover in-flow footer height) */
-	--space-before-footer: calc(var(--space-2xl) * 4.5);
+	/* Gap between page content and the footer block */
+	--space-before-footer: calc(var(--space-2xl) * 4);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -123,19 +123,12 @@ body > main {
 	flex: 1 0 auto;
 }
 
-/*
- * Sticky footer reveal — page sheet scrolls away over the footer.
- * Footer height is content-sized (no fixed vh).
- */
 .site-sheet {
 	position: relative;
-	z-index: 2;
 	display: flex;
+	flex: 1 0 auto;
 	flex-direction: column;
-	min-height: 100vh;
-	min-height: 100dvh;
 	background: var(--bg);
-	isolation: isolate;
 }
 
 .body--work .site-sheet {
@@ -144,19 +137,6 @@ body > main {
 
 .site-sheet > main {
 	flex: 1 0 auto;
-}
-
-.site-sheet:has(+ .site-footer) {
-	padding-bottom: var(--space-before-footer);
-}
-
-/* Page shells keep side padding only — bottom gap is --space-before-footer */
-.site-sheet:has(+ .site-footer) > main {
-	padding-bottom: 0;
-}
-
-.site-sheet:has(+ .site-footer) .project {
-	padding-bottom: 0;
 }
 
 /* Berry mark: footer pulse (also the future site preload) */
@@ -432,22 +412,17 @@ main {
 }
 
 .site-footer {
-	position: sticky;
-	bottom: 0;
-	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: var(--space-s);
 	width: 100%;
 	box-sizing: border-box;
-	margin: 0;
+	margin: var(--space-before-footer) 0 0;
 	padding: 5rem 2rem 2rem;
 	background: var(--footer-bg);
 	color: #e8eef4;
 	color-scheme: dark;
-	/* Keep in-flow height honest so the sticky reveal can scroll to social links */
-	overflow: visible;
 }
 
 .site-footer__hero {
