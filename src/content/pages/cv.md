@@ -42,8 +42,8 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Residencies + Workshops
 
-- **Post Image Cluster** – [*Milieux Institute for Arts, Culture and Technology*](https://postimage.hexagram.ca/research/) – <span class="cv-meta">Montreal, Quebec, Present</span>
-- **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2021</span>
+- **Post Image Cluster** – [*Milieux Institute for Arts, Culture and Technology*](https://postimage.hexagram.ca/research/) – <span class="cv-meta">Montreal, Quebec, 2016–2022</span>
+- **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
 - **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
 - **Le Mois de la Photo Portfolio Review** – <span class="cv-meta">Montreal, Quebec, 2011</span>
 
@@ -90,6 +90,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Talks
 
+- **Virtual Identity for Artists** – Guest Lecture, Survival Tactics (Professional Practices) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2026</span>
 - **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
 - **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
 
