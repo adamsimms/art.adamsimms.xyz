@@ -4329,14 +4329,21 @@ body:has(.work-hover) {
 	}
 }
 
-/* 404: resettled / Pinchard's Island */
+/* 404: resettled / Pinchard's Island — full viewport sheet */
 body:has(.not-found) {
+	overflow: hidden;
+	height: 100%;
 	background: var(--hover);
 }
 
 .site-sheet:has(.not-found) {
+	height: 100vh;
+	height: 100dvh;
+	min-height: 100vh;
+	min-height: 100dvh;
 	background: var(--hover);
 	color: #fff;
+	overflow: visible;
 }
 
 .site-sheet:has(.not-found) .site-header,
@@ -4350,11 +4357,6 @@ body:has(.not-found) {
 	opacity: 0.72;
 }
 
-.site-sheet:has(.not-found),
-.site-sheet:has(.not-found) > main {
-	overflow: visible;
-}
-
 .site-sheet:has(.not-found) > main {
 	display: flex;
 	flex-direction: column;
@@ -4364,6 +4366,8 @@ body:has(.not-found) {
 	margin: 0;
 	padding: 0 2rem;
 	min-height: 0;
+	height: 100%;
+	overflow: visible;
 }
 
 .not-found {
@@ -4374,6 +4378,7 @@ body:has(.not-found) {
 	justify-content: flex-end;
 	align-items: flex-start;
 	min-height: 0;
+	height: 100%;
 	padding: 0 0 var(--space-xl);
 	overflow: visible;
 	color: #fff;
