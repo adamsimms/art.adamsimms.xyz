@@ -7,7 +7,12 @@ import { isExcludedFromSitemap } from './src/lib/seo.ts';
 export default defineConfig({
 	site: 'https://art.adamsimms.xyz',
 	output: 'static',
+	// File output (`works.html`) so Cloudflare Pages serves `/works` without a
+	// 308 to `/works/`. Directory output + trailingSlash never still redirected.
 	trailingSlash: 'never',
+	build: {
+		format: 'file',
+	},
 	integrations: [
 		sitemap({
 			filter: (page) => {

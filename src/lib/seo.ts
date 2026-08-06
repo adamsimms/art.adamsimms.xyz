@@ -11,7 +11,7 @@ export const HIDDEN_PATHS = new Set(
  * Currently: Maps (`/maps`…) and Research (`/research`…).
  */
 export function isStagedPath(pathname: string): boolean {
-	const path = pathname.replace(/\/$/, '') || '/';
+	const path = cleanPathname(pathname);
 	return (
 		path === '/maps' ||
 		path.startsWith('/maps/') ||
@@ -22,7 +22,7 @@ export function isStagedPath(pathname: string): boolean {
 
 /** Paths omitted from `@astrojs/sitemap` (hidden works + staged surfaces). */
 export function isExcludedFromSitemap(pathname: string): boolean {
-	const path = pathname.replace(/\/$/, '') || '/';
+	const path = cleanPathname(pathname);
 	return HIDDEN_PATHS.has(path) || isStagedPath(path);
 }
 
@@ -39,7 +39,7 @@ export const DEFAULT_OG_IMAGE_ALT =
 	'Light House: a glowing wireframe house on a dark shoreline';
 
 /** Portrait used in Person JSON-LD and About OG. */
-export const PERSON_IMAGE = `${SITE_URL}/about/portrait.jpg`;
+export const PERSON_IMAGE = `${SITE_URL}/img/about/portrait.jpg`;
 
 export const PERSON_SAME_AS = [
 	'https://github.com/adamsimms',
@@ -70,6 +70,17 @@ export function absoluteUrl(pathOrUrl: string, site = SITE_URL): string {
 	const base = site.replace(/\/$/, '');
 	const path = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
 	return `${base}${path === '/' ? '' : path}`;
+}
+
+/**
+ * Normalize Astro build pathnames for canonicals.
+ * With `build.format: 'file'`, `Astro.url.pathname` can be `/about.html` or `/index.html`.
+ */
+export function cleanPathname(pathname: string): string {
+	let path = pathname.replace(/\/$/, '') || '/';
+	if (path.endsWith('.html')) path = path.slice(0, -5) || '/';
+	if (path === '/index') path = '/';
+	return path || '/';
 }
 
 export function isHiddenWorkSlug(slug: string): boolean {

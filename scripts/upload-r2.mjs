@@ -8,7 +8,11 @@ const CONTENT_TYPES = {
 	'.jpg': 'image/jpeg',
 	'.jpeg': 'image/jpeg',
 	'.webp': 'image/webp',
+	'.mp4': 'video/mp4',
 };
+
+/** Long-lived browser + edge cache; filenames are content-addressed / versioned in practice. */
+const CACHE_CONTROL = 'public, max-age=31536000, immutable';
 
 async function walk(dir) {
 	const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -37,7 +41,7 @@ async function main() {
 		const contentType = CONTENT_TYPES[ext] || 'application/octet-stream';
 		console.log(`Uploading ${key} (${contentType})...`);
 		execSync(
-			`npx wrangler r2 object put art-adamsimms-xyz/${key} --remote --file="${file}" --content-type=${contentType}`,
+			`npx wrangler r2 object put art-adamsimms-xyz/${key} --remote --file="${file}" --content-type=${contentType} --cache-control="${CACHE_CONTROL}"`,
 			{ stdio: 'inherit' },
 		);
 	}

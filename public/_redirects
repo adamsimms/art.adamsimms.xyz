@@ -8,6 +8,42 @@
 /blog / 301
 /blog/* / 301
 
+# Portrait moved off /about/* so about.html can use build.format=file
+/about/portrait.jpg /img/about/portrait.jpg 301
+/about/portrait.avif /img/about/portrait.avif 301
+
+# Drop trailing slash on portfolio HTML routes (build.format=file)
+/about/ /about 301
+/collaborations/ /collaborations 301
+/cv/ /cv 301
+/works/ /works 301
+/maps/ /maps 301
+/research/ /research 301
+/writing/vernacular-outport-newfoundland/ /writing/vernacular-outport-newfoundland 301
+/adrift/ /adrift 301
+/cabin/ /cabin 301
+/cloudberry/ /cloudberry 301
+/driftwood/ /driftwood 301
+/from-to/ /from-to 301
+/light-house/ /light-house 301
+/mug-up/ /mug-up 301
+/newfoundland/ /newfoundland 301
+/pinchards-island/ /pinchards-island 301
+/resettlement/ /resettlement 301
+/sublime/ /sublime 301
+/washed-up/ /washed-up 301
+/maps/natural-resources/ /maps/natural-resources 301
+/maps/railway/ /maps/railway 301
+/maps/resettled/ /maps/resettled 301
+/maps/trees/ /maps/trees 301
+/research/casey-getting-back-into-place/ /research/casey-getting-back-into-place 301
+/research/creates-places-of-presence/ /research/creates-places-of-presence 301
+/research/fagan-images-of-resettlement/ /research/fagan-images-of-resettlement 301
+/research/hirsch-family-frames/ /research/hirsch-family-frames 301
+/research/pinchards-island/ /research/pinchards-island 301
+/research/postmemory/ /research/postmemory 301
+/research/resettlement-as-displacement/ /research/resettlement-as-displacement 301
+
 # Force directory form for assemble mounts
 /cloudberry/archive /cloudberry/archive/ 308
 /dory /dory/ 308

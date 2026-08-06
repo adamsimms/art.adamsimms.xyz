@@ -10,6 +10,7 @@ import {
 	SITE_NAME,
 	SITE_URL,
 	absoluteUrl,
+	cleanPathname,
 	metaDescription,
 	socialImageUrl,
 } from '../lib/seo';
@@ -42,7 +43,7 @@ const {
 
 const pageTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 const desc = metaDescription(description);
-const canonical = absoluteUrl(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site?.href || SITE_URL);
+const canonical = absoluteUrl(cleanPathname(Astro.url.pathname), Astro.site?.href || SITE_URL);
 const usingDefaultImage = !image?.trim();
 const ogImage = socialImageUrl(image);
 const ogImageAlt =
@@ -121,14 +122,22 @@ const isWriting = variant === 'writing';
 		<meta name="twitter:image" content={ogImage} />
 		<meta name="twitter:image:alt" content={ogImageAlt} />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="preconnect" href="https://media.adamsimms.xyz" />
 		<link rel="preconnect" href="https://cloudberry-images.adamsimms.xyz" />
 		<link rel="preconnect" href="https://cloudberry-thumbs.adamsimms.xyz" />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-			rel="stylesheet"
+			rel="preload"
+			href="/fonts/google-sans-flex-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/inter-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
 		/>
 		<title>{pageTitle}</title>
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

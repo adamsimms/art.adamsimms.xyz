@@ -27,7 +27,9 @@
     "build:full": "astro build && npm run assemble:siblings",
     "deploy": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz",
     "deploy:preview": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz --branch=preview",
-    "upload:media": "node scripts/upload-r2.mjs"
+    "upload:media": "node scripts/upload-r2.mjs",
+    "media:perf": "node scripts/perf-media.mjs",
+    "media:restamp-cache": "node scripts/restamp-r2-cache.mjs"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,10 @@ import Base from '../layouts/Base.astro';
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from '../lib/seo';
 
 const mediaBase = 'https://media.adamsimms.xyz/work/light-house';
-const posterSrc = `${mediaBase}/hero-poster.jpg`;
+const posterJpg = `${mediaBase}/hero-poster.jpg`;
+const posterAvif = `${mediaBase}/hero-poster.avif`;
+const posterJpg960 = `${mediaBase}/hero-poster-960.jpg`;
+const posterAvif960 = `${mediaBase}/hero-poster-960.avif`;
 const videoSrc720 = `${mediaBase}/hero-720.mp4`;
 const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 ---
@@ -18,21 +21,34 @@ const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 	<section class="home-hero" aria-labelledby="home-heading" data-home-hero>
 		<h1 id="home-heading" class="visually-hidden">Adam Simms</h1>
 		<a class="home-hero__link" href="/light-house" aria-label="Light House, 2020">
-			<img
-				class="home-hero__media home-hero__poster"
-				src={posterSrc}
-				alt=""
-				width="1920"
-				height="1080"
-				fetchpriority="high"
-			/>
+			<picture>
+				<source
+					type="image/avif"
+					srcset={`${posterAvif960} 960w, ${posterAvif} 1920w`}
+					sizes="100vw"
+				/>
+				<source
+					type="image/jpeg"
+					srcset={`${posterJpg960} 960w, ${posterJpg} 1920w`}
+					sizes="100vw"
+				/>
+				<img
+					class="home-hero__media home-hero__poster"
+					src={posterJpg960}
+					alt=""
+					width="1920"
+					height="1080"
+					fetchpriority="high"
+					decoding="async"
+				/>
+			</picture>
 			<video
 				class="home-hero__media home-hero__video"
 				muted
 				playsinline
 				loop
 				preload="none"
-				poster={posterSrc}
+				poster={posterJpg960}
 				aria-hidden="true"
 				data-src-720={videoSrc720}
 				data-src-1080={videoSrc1080}

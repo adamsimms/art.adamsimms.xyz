@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { hoverMediaUrl } from '../lib/media';
 import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT, isHiddenWorkSlug } from '../lib/seo';
 
 const work = await getCollection('work');
@@ -11,8 +12,10 @@ const orderedWork = work
 		slug: entry.data.slug,
 		title: entry.data.title,
 		href: `/${entry.data.slug}`,
-		cover: entry.data.cover,
-		coverFallback: entry.data.coverFallback,
+		cover: entry.data.cover ? hoverMediaUrl(entry.data.cover) : undefined,
+		coverFallback: entry.data.coverFallback
+			? hoverMediaUrl(entry.data.coverFallback)
+			: undefined,
 	}));
 ---
 
@@ -33,14 +36,13 @@ const orderedWork = work
 						item.cover ? (
 							<div class="work-hover__bg" data-index={String(index)}>
 								<picture>
-									<source srcset={item.cover} type="image/avif" />
+									<source data-srcset={item.cover} type="image/avif" />
 									<img
-										src={item.coverFallback || item.cover}
+										data-src={item.coverFallback || item.cover}
 										alt=""
 										width="3"
 										height="2"
 										decoding="async"
-										fetchpriority={index < 3 ? 'high' : 'auto'}
 									/>
 								</picture>
 							</div>
@@ -89,6 +91,21 @@ const orderedWork = work
 
 			const measure = () => {
 				size = backgrounds.offsetWidth;
+			};
+
+			const ensureLoaded = (bg) => {
+				if (!(bg instanceof HTMLElement) || bg.dataset.loaded === '1') return;
+				bg.dataset.loaded = '1';
+				const source = bg.querySelector('source[data-srcset]');
+				const img = bg.querySelector('img[data-src]');
+				if (source instanceof HTMLSourceElement) {
+					source.srcset = source.dataset.srcset || '';
+					source.removeAttribute('data-srcset');
+				}
+				if (img instanceof HTMLImageElement) {
+					img.src = img.dataset.src || '';
+					img.removeAttribute('data-src');
+				}
 			};
 
 			const setTarget = (clientX, clientY) => {
@@ -145,6 +162,7 @@ const orderedWork = work
 
 				images.forEach((img) => {
 					if (img.getAttribute('data-index') === String(index)) {
+						ensureLoaded(img);
 						img.setAttribute('data-active', '');
 					} else {
 						img.removeAttribute('data-active');

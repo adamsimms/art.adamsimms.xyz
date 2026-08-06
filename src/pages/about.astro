@@ -7,7 +7,7 @@ const page = await getEntry('pages', 'about');
 if (!page) throw new Error('About page not found');
 const { Content } = await render(page);
 const description = metaDescription(page.data.description);
-const portrait = absoluteUrl('/about/portrait.jpg');
+const portrait = absoluteUrl('/img/about/portrait.jpg');
 
 const statementParagraphs = page.data.statement
 	? page.data.statement
@@ -54,9 +54,9 @@ const [statementLead, ...statementRest] = statementParagraphs;
 				</div>
 				<figure class="about-portrait">
 					<picture>
-						<source srcset="/about/portrait.avif" type="image/avif" />
+						<source srcset="/img/about/portrait.avif" type="image/avif" />
 						<img
-							src="/about/portrait.jpg"
+							src="/img/about/portrait.jpg"
 							alt="Adam Simms"
 							width="1200"
 							height="1800"

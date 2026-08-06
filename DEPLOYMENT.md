@@ -48,6 +48,22 @@ Images are stored as AVIF (primary) + JPEG (fallback) at:
 - `work/<slug>/NN.avif`
 - `work/<slug>/NN.jpg`
 
+Uploads set `Cache-Control: public, max-age=31536000, immutable`. To restamp existing objects:
+
+```bash
+node scripts/restamp-r2-cache.mjs work/
+```
+
+Hover covers + home hero poster variants (AVIF + 960w):
+
+```bash
+node scripts/perf-media.mjs
+```
+
+## robots.txt + Cloudflare AI crawlers
+
+`public/robots.txt` lists AI crawler `Disallow` rules in-repo. In the Cloudflare dashboard for `adamsimms.xyz`, turn **off** managed robots.txt / “Display Content Signals Policy” for this hostname so Cloudflare does not inject a `Content-Signal` line (Lighthouse SEO flags that directive as unknown). Keep the in-repo Disallows for GPTBot, Google-Extended, etc.
+
 ## Assembled apps
 
 `npm run build:full` (and CI) assembles into `dist/`:
