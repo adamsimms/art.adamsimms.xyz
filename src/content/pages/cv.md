@@ -91,8 +91,8 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 ## Talks
 
 - **Virtual Identity for Artists** – Guest Lecture, Survival Tactics (Professional Practices) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2026</span>
-- **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
-- **Artist Talk** – Studio Arts, Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
+- **Artist Talk** – Photographic Vision: Theory & Practice II – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
+- **Artist Talk** – Advanced Workshop in Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
 
 ## Writing
 
