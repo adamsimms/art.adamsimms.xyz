@@ -132,13 +132,17 @@ const isWriting = variant === 'writing';
 			type="font/woff2"
 			crossorigin
 		/>
-		<link
-			rel="preload"
-			href="/fonts/inter-latin.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
+		{
+			!isHome && (
+				<link
+					rel="preload"
+					href="/fonts/inter-latin.woff2"
+					as="font"
+					type="font/woff2"
+					crossorigin
+				/>
+			)
+		}
 		<title>{pageTitle}</title>
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		<ClientRouter />
@@ -149,12 +153,19 @@ const isWriting = variant === 'writing';
 			data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33"
 			data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz"
 			data-do-not-track="true"></script>
-		<script is:inline>
-			document.addEventListener('astro:after-swap', () => {
-				if (typeof umami !== 'undefined') umami.track();
-			});
-		</script>
 		<!-- umami-analytics:end -->
+		<script is:inline>
+			(() => {
+				const trackPage = () => {
+					if (typeof navigator !== 'undefined' && navigator.webdriver) return;
+					if (typeof umami === 'undefined' || typeof umami.track !== 'function') return;
+					// SPA form: merge current page props (avoids bare/malformed payloads → 400)
+					umami.track((props) => ({ ...props }));
+				};
+				// after-swap: ClientRouter navigations only (initial pageview is auto-tracked)
+				document.addEventListener('astro:after-swap', trackPage);
+			})();
+		</script>
 		<script>
 			document.addEventListener('astro:page-load', () => {
 				const project = document.querySelector('[data-project-reveal]');
