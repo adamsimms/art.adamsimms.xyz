@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { render } from 'astro:content';
+import { researchCitation } from '../../lib/chicago';
 import {
 	buildResearchBacklinks,
 	getPublicResearch,
@@ -28,7 +29,8 @@ export async function getStaticPaths() {
 const { entry, related, linkedFrom } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
-const description = metaDescription(d.summary, d.citation);
+const citation = researchCitation(d);
+const description = metaDescription(d.summary, citation);
 const hasLinks = Boolean(d.url || d.archivedUrl || d.attachments.length);
 const hasOutbound =
 	related.length > 0 || d.relatedWorks.length > 0 || d.relatedWriting.length > 0;
@@ -68,9 +70,9 @@ const hasOutbound =
 		{d.summary && <p class="research-summary">{d.summary}</p>}
 
 		{
-			d.citation && (
+			citation && (
 				<p class="research-citation">
-					<cite>{d.citation}</cite>
+					<cite>{citation}</cite>
 				</p>
 			)
 		}
@@ -119,7 +121,7 @@ const hasOutbound =
 			(d.tags.length > 0 || d.collections.length > 0) && (
 				<section class="research-section" aria-labelledby="research-meta">
 					<h2 id="research-meta" class="research-section__heading">
-						Tags & collections
+						Tags + collections
 					</h2>
 					<ul class="research-chips">
 						{d.tags.map((tag) => (

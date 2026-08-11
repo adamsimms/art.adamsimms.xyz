@@ -41,8 +41,8 @@
       "notes": "Digital C-print"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/resettlement/06.avif",
-      "fallback": "https://media.adamsimms.xyz/work/resettlement/06.jpg",
+      "src": "https://media.adamsimms.xyz/work/resettlement/06.avif?v=20260802",
+      "fallback": "https://media.adamsimms.xyz/work/resettlement/06.jpg?v=20260802",
       "alt": "Resettlement",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217545581-BW7BH0Y5VW9GAV0823UP/round-harbour-07-01.jpg",
       "dimensions": "40 × 50 in",
@@ -81,16 +81,16 @@
       "notes": "Digital C-print"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/resettlement/11.avif?v=2",
-      "fallback": "https://media.adamsimms.xyz/work/resettlement/11.jpg?v=2",
+      "src": "https://media.adamsimms.xyz/work/resettlement/11.avif?v=20260802",
+      "fallback": "https://media.adamsimms.xyz/work/resettlement/11.jpg?v=20260802",
       "alt": "Resettlement",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217980353-SXH501AM6XT42TU76HQ7/round-harbour-09-01.jpg",
       "dimensions": "40 × 50 in",
       "notes": "Digital C-print"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/resettlement/12.avif",
-      "fallback": "https://media.adamsimms.xyz/work/resettlement/12.jpg",
+      "src": "https://media.adamsimms.xyz/work/resettlement/12.avif?v=20260802",
+      "fallback": "https://media.adamsimms.xyz/work/resettlement/12.jpg?v=20260802",
       "alt": "Resettlement",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217516964-KKCA0KL6LVP7AI8445T0/wards-harbour-01.jpg",
       "dimensions": "40 × 50 in",
@@ -105,16 +105,16 @@
       "notes": "Digital C-print"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/resettlement/14.avif",
-      "fallback": "https://media.adamsimms.xyz/work/resettlement/14.jpg",
+      "src": "https://media.adamsimms.xyz/work/resettlement/14.avif?v=20260802",
+      "fallback": "https://media.adamsimms.xyz/work/resettlement/14.jpg?v=20260802",
       "alt": "Resettlement",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1358217961269-LWZYQZ30X2WFL6WPYNWI/paddocks-bight-01-01.jpg",
       "dimensions": "40 × 50 in",
       "notes": "Digital C-print"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/resettlement/15.avif",
-      "fallback": "https://media.adamsimms.xyz/work/resettlement/15.jpg",
+      "src": "https://media.adamsimms.xyz/work/resettlement/15.avif?v=20260802",
+      "fallback": "https://media.adamsimms.xyz/work/resettlement/15.jpg?v=20260802",
       "alt": "Resettlement",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041233719-HH6OWE46S6AP8B2NFPSI/DJI_0058-5.png",
       "dimensions": "40 × 50 in",

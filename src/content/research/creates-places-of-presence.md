@@ -4,7 +4,9 @@ slug: creates-places-of-presence
 type: book
 by: Marlene Creates and Joan M. Schwartz
 year: "1997"
-citation: "Creates, Marlene, and Joan M. Schwartz. Places of Presence: Newfoundland Kin and Ancestral Land, Newfoundland 1989–1991. Killick Press, St. John’s, 1997."
+subtitle: "Newfoundland Kin and Ancestral Land, Newfoundland 1989–1991"
+place: "St. John's"
+publisher: Killick Press
 status: developed
 collected: 2019-03-28
 tags: [newfoundland, kinship, land, photography]

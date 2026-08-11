@@ -4,7 +4,10 @@ slug: fagan-images-of-resettlement
 type: essay
 by: Bonaventure Fagan
 year: "1990"
-citation: "Fagan, Bonaventure. “Images of Resettlement.” Newfoundland Studies 6.1 (1990): 1–33."
+container: Newfoundland Studies
+volume: "6"
+issue: "1"
+pages: "1–33"
 url: https://journals.lib.unb.ca/index.php/NFLDS/article/view/899
 status: core
 collected: 2019-02-20

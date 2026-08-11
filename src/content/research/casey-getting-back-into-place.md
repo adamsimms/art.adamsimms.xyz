@@ -4,7 +4,9 @@ slug: casey-getting-back-into-place
 type: book
 by: Edward S. Casey
 year: "2002"
-citation: "Casey, Edward S. Getting Back into Place: Toward a Renewed Understanding of the Place-World. University of Minnesota Press, Minneapolis, 2002."
+subtitle: Toward a Renewed Understanding of the Place-World
+place: Minneapolis
+publisher: University of Minnesota Press
 status: core
 collected: 2019-03-12
 tags: [place, phenomenology, belonging]

@@ -1,6 +1,13 @@
 import { requireAccess } from './auth.js';
 import { deleteRepoFile, getRepoFile, listResearchFiles, putRepoFile } from './github.js';
-import { copyAttachmentToFiles, getInboxItem, listInboxItems, putMeta } from './inbox.js';
+import {
+	copyAttachmentToFiles,
+	deleteInboxItem,
+	getInboxItem,
+	listInboxItems,
+	nextInboxItemId,
+	putMeta,
+} from './inbox.js';
 import { rebuildAllIndexes } from './indexes.js';
 import {
 	extractUrlFromMarkdown,
@@ -17,7 +24,18 @@ import {
 	libraryEditPage,
 	libraryListPage,
 } from './ui.js';
+import { formatChicagoCitation } from '../../shared/chicago.js';
 
+const BIB_FIELDS = [
+	'subtitle',
+	'place',
+	'publisher',
+	'doi',
+	'container',
+	'volume',
+	'issue',
+	'pages',
+];
 const BASE = '/research/admin';
 
 /**
@@ -70,6 +88,11 @@ export default {
 				const headers = new Headers();
 				obj.writeHttpMetadata(headers);
 				headers.set('Cache-Control', 'no-store');
+				headers.set('Content-Disposition', 'inline');
+				const ct = headers.get('Content-Type') || '';
+				if ((!ct || ct === 'application/octet-stream') && /\.pdf$/i.test(key)) {
+					headers.set('Content-Type', 'application/pdf');
+				}
 				return new Response(obj.body, { headers });
 			}
 
@@ -78,13 +101,34 @@ export default {
 				const id = String(form.get('id') || '');
 				const status = String(form.get('status') || '');
 				if (!['deferred', 'discarded', 'inbox'].includes(status)) {
-					return redirect(`${BASE}/item/${id}?error=bad+status`);
+					return redirect(request, `${BASE}/item/${id}?error=bad+status`);
 				}
 				const item = await getInboxItem(env.RESEARCH, id);
-				if (!item) return redirect(`${BASE}/?error=not+found`);
+				if (!item) return redirect(request, `${BASE}/?error=not+found`);
 				item.status = status;
 				await putMeta(env.RESEARCH, item.prefix, item);
-				return redirect(`${BASE}/?status=${status}&flash=updated`);
+				const nextId = await nextInboxItemId(env.RESEARCH, id);
+				if (nextId) {
+					return redirect(request, 
+						`${BASE}/item/${nextId}?flash=${encodeURIComponent(status === 'deferred' ? 'Deferred - next item' : status === 'discarded' ? 'Discarded - next item' : 'Updated')}`,
+					);
+				}
+				return redirect(request, `${BASE}/?status=inbox&flash=${encodeURIComponent('Inbox clear')}`);
+			}
+
+			if (request.method === 'POST' && path === `${BASE}/api/delete`) {
+				const form = await request.formData();
+				const id = String(form.get('id') || '');
+				const item = await getInboxItem(env.RESEARCH, id);
+				if (!item) return redirect(request, `${BASE}/?error=not+found`);
+				await deleteInboxItem(env.RESEARCH, item);
+				const nextId = await nextInboxItemId(env.RESEARCH, id);
+				if (nextId) {
+					return redirect(request, 
+						`${BASE}/item/${nextId}?flash=${encodeURIComponent('Deleted permanently - next item')}`,
+					);
+				}
+				return redirect(request, `${BASE}/?status=inbox&flash=${encodeURIComponent('Deleted permanently - inbox clear')}`);
 			}
 
 			if (request.method === 'POST' && path === `${BASE}/api/enrich`) {
@@ -93,7 +137,7 @@ export default {
 
 			if (request.method === 'POST' && path === `${BASE}/api/indexes`) {
 				const counts = await rebuildAllIndexes(env);
-				return redirect(
+				return redirect(request, 
 					`${BASE}/?flash=${encodeURIComponent(`indexes: research ${counts.library}, works ${counts.works}, writing ${counts.writing}`)}`,
 				);
 			}
@@ -106,8 +150,8 @@ export default {
 				const slug = path.slice(`${BASE}/api/library/`.length);
 				const form = await request.formData();
 				const method = String(form.get('_method') || 'put').toLowerCase();
-				if (method === 'delete') return handleLibraryDelete(env, slug);
-				return handleLibrarySave(env, slug, form);
+				if (method === 'delete') return handleLibraryDelete(request, env, slug);
+				return handleLibrarySave(request, env, slug, form);
 			}
 
 			if (path.startsWith(BASE)) {
@@ -134,15 +178,15 @@ async function handleEnrich(request, env) {
 	const form = await request.formData();
 	const id = String(form.get('id') || '');
 	const item = await getInboxItem(env.RESEARCH, id);
-	if (!item) return redirect(`${BASE}/?error=not+found`);
+	if (!item) return redirect(request, `${BASE}/?error=not+found`);
 
 	const status = item.enrichment?.status;
 	const force = form.get('force') === '1';
 	if (status === 'running' && !force) {
-		return redirect(`${BASE}/item/${id}?error=${encodeURIComponent('Enrichment already running')}`);
+		return redirect(request, `${BASE}/item/${id}?error=${encodeURIComponent('Enrichment already running')}`);
 	}
 	if (status === 'queued' && !force) {
-		return redirect(`${BASE}/item/${id}?flash=${encodeURIComponent('Already queued')}`);
+		return redirect(request, `${BASE}/item/${id}?flash=${encodeURIComponent('Already queued')}`);
 	}
 
 	const primaryUrl = String(form.get('primaryUrl') || '').trim();
@@ -160,7 +204,7 @@ async function handleEnrich(request, env) {
 	await putMeta(env.RESEARCH, item.prefix, item);
 
 	if (!env.ENRICH_QUEUE) {
-		return redirect(`${BASE}/item/${id}?error=${encodeURIComponent('ENRICH_QUEUE not bound')}`);
+		return redirect(request, `${BASE}/item/${id}?error=${encodeURIComponent('ENRICH_QUEUE not bound')}`);
 	}
 
 	await env.ENRICH_QUEUE.send({
@@ -172,7 +216,7 @@ async function handleEnrich(request, env) {
 		generation,
 	});
 
-	return redirect(`${BASE}/item/${id}?flash=enrichment+queued`);
+	return redirect(request, `${BASE}/item/${id}?flash=enrichment+queued`);
 }
 
 /**
@@ -183,7 +227,7 @@ async function handlePromote(request, env) {
 	const form = await request.formData();
 	const id = String(form.get('id') || '');
 	const item = await getInboxItem(env.RESEARCH, id);
-	if (!item) return redirect(`${BASE}/?error=not+found`);
+	if (!item) return redirect(request, `${BASE}/?error=not+found`);
 
 	const title = String(form.get('title') || '').trim();
 	const slug = slugify(String(form.get('slug') || title));
@@ -203,15 +247,16 @@ async function handlePromote(request, env) {
 	const relatedResearch = splitCsv(String(form.get('relatedResearch') || ''));
 	const relatedWorks = splitCsv(String(form.get('relatedWorks') || ''));
 	const relatedWriting = splitCsv(String(form.get('relatedWriting') || ''));
+	const bib = readBibFields(form);
 
 	if (!title || !slug) {
-		return redirect(`${BASE}/item/${id}?error=title+and+slug+required`);
+		return redirect(request, `${BASE}/item/${id}?error=title+and+slug+required`);
 	}
 
 	if (pageUrl) {
 		const dup = await findLibraryUrlConflict(env, pageUrl, null);
 		if (dup) {
-			return redirect(
+			return redirect(request, 
 				`${BASE}/item/${id}?error=${encodeURIComponent(`URL already in library as ${dup}`)}`,
 			);
 		}
@@ -219,7 +264,7 @@ async function handlePromote(request, env) {
 
 	const existing = await getRepoFile(env, `src/content/research/${slug}.md`);
 	if (existing) {
-		return redirect(`${BASE}/item/${id}?error=${encodeURIComponent(`Slug already exists: ${slug}`)}`);
+		return redirect(request, `${BASE}/item/${id}?error=${encodeURIComponent(`Slug already exists: ${slug}`)}`);
 	}
 
 	const promotedAttachments = [];
@@ -253,7 +298,12 @@ async function handlePromote(request, env) {
 	if (pageUrl) data.url = pageUrl;
 	if (by) data.by = by;
 	if (year) data.year = year;
-	if (citation) data.citation = citation;
+	Object.assign(data, bib);
+	// Only persist citation when it differs from the auto Chicago string (hand override).
+	if (citation) {
+		const generated = formatChicagoCitation({ ...data, title, type, by, year, ...bib });
+		if (!generated || citation !== generated) data.citation = citation;
+	}
 	if (quote) data.quote = quote;
 	if (archivedUrl) {
 		data.archivedUrl = archivedUrl;
@@ -278,18 +328,25 @@ async function handlePromote(request, env) {
 		console.error(JSON.stringify({ event: 'index_rebuild_fail', error: String(err) }));
 	}
 
-	return redirect(`${BASE}/library/${slug}?flash=promoted`);
+	const nextId = await nextInboxItemId(env.RESEARCH, id);
+	if (nextId) {
+		return redirect(request, 
+			`${BASE}/item/${nextId}?flash=${encodeURIComponent(`Added ${slug} - next item`)}`,
+		);
+	}
+	return redirect(request, `${BASE}/library/${slug}?flash=${encodeURIComponent('Added to Research - inbox clear')}`);
 }
 
 /**
+ * @param {Request} request
  * @param {AdminEnv} env
  * @param {string} slug
  * @param {FormData} form
  */
-async function handleLibrarySave(env, slug, form) {
+async function handleLibrarySave(request, env, slug, form) {
 	const path = `src/content/research/${slug}.md`;
 	const existing = await getRepoFile(env, path);
-	if (!existing) return redirect(`${BASE}/library?error=not+found`);
+	if (!existing) return redirect(request, `${BASE}/library?error=not+found`);
 
 	const rawOverride = String(form.get('raw') || '').trim();
 	let content;
@@ -307,12 +364,13 @@ async function handleLibrarySave(env, slug, form) {
 		const body = String(form.get('body') || '');
 		const tags = splitCsv(String(form.get('tags') || ''));
 		const collections = splitCsv(String(form.get('collections') || ''));
+		const bib = readBibFields(form);
 
 		const prev = parseResearchMarkdown(existing.content);
 		if (pageUrl) {
 			const dup = await findLibraryUrlConflict(env, pageUrl, slug);
 			if (dup) {
-				return redirect(
+				return redirect(request, 
 					`${BASE}/library/${slug}?error=${encodeURIComponent(`URL already used by ${dup}`)}`,
 				);
 			}
@@ -335,8 +393,15 @@ async function handleLibrarySave(env, slug, form) {
 		else delete data.by;
 		if (year) data.year = year;
 		else delete data.year;
-		if (citation) data.citation = citation;
-		else delete data.citation;
+		for (const key of BIB_FIELDS) {
+			if (bib[key]) data[key] = bib[key];
+			else delete data[key];
+		}
+		if (citation) {
+			const generated = formatChicagoCitation({ ...data, title, type, by, year, ...bib });
+			if (!generated || citation !== generated) data.citation = citation;
+			else delete data.citation;
+		} else delete data.citation;
 
 		content = serializeResearchMarkdown(data, body);
 	}
@@ -354,17 +419,18 @@ async function handleLibrarySave(env, slug, form) {
 		console.error(JSON.stringify({ event: 'index_rebuild_fail', error: String(err) }));
 	}
 
-	return redirect(`${BASE}/library/${slug}?flash=saved`);
+	return redirect(request, `${BASE}/library/${slug}?flash=saved`);
 }
 
 /**
+ * @param {Request} request
  * @param {AdminEnv} env
  * @param {string} slug
  */
-async function handleLibraryDelete(env, slug) {
+async function handleLibraryDelete(request, env, slug) {
 	const path = `src/content/research/${slug}.md`;
 	const existing = await getRepoFile(env, path);
-	if (!existing) return redirect(`${BASE}/library?error=not+found`);
+	if (!existing) return redirect(request, `${BASE}/library?error=not+found`);
 	await deleteRepoFile(env, {
 		path,
 		sha: existing.sha,
@@ -375,7 +441,7 @@ async function handleLibraryDelete(env, slug) {
 	} catch (err) {
 		console.error(JSON.stringify({ event: 'index_rebuild_fail', error: String(err) }));
 	}
-	return redirect(`${BASE}/library?flash=deleted`);
+	return redirect(request, `${BASE}/library?flash=deleted`);
 }
 
 /**
@@ -446,7 +512,25 @@ function splitCsv(s) {
 		.filter(Boolean);
 }
 
-/** @param {string} to */
-function redirect(to) {
-	return Response.redirect(to, 303);
+/**
+ * @param {FormData} form
+ * @returns {Record<string, string>}
+ */
+function readBibFields(form) {
+	/** @type {Record<string, string>} */
+	const out = {};
+	for (const key of BIB_FIELDS) {
+		const v = String(form.get(key) || '').trim();
+		if (v) out[key] = v;
+	}
+	return out;
+}
+
+/**
+ * Workers require absolute Location URLs.
+ * @param {Request} request
+ * @param {string} to
+ */
+function redirect(request, to) {
+	return Response.redirect(new URL(to, request.url).href, 303);
 }

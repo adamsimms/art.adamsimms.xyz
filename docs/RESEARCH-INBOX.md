@@ -14,7 +14,7 @@ Mail to **`research@adamsimms.xyz`** is stored in private R2. It does **not** pu
 | Queue | `art-adamsimms-xyz-research-enrich` |
 | R2 bucket | `art-adamsimms-xyz-research` (private — no public CDN yet) |
 | Allowlist | `adamsimms@gmail.com`, `hello@adamsimms.xyz` (envelope From) |
-| LLM | Workers AI `@cf/meta/llama-3.1-8b-instruct` |
+| LLM | Workers AI `@cf/zai-org/glm-4.7-flash` |
 
 ## Flow
 
@@ -30,7 +30,7 @@ Mail to **`research@adamsimms.xyz`** is stored in private R2. It does **not** pu
 | `og` | SSRF-safe fetch → Open Graph or store linked file |
 | `reader` | Capped HTML plain-text excerpt (~4k) — not written to git |
 | `ids` | DOI / ISBN from URL or PDF bytes |
-| `bib` | Crossref / Open Library → citation suggestions |
+| `bib` | Crossref / Open Library → structured bib fields + Chicago suggestion |
 | `pdf` | Rough PDF text (~8k / first ~2MB scan) |
 | `archive` | Wayback Save Page Now (best-effort; never blocks promote) |
 | `llm` | Workers AI suggestions (tags, type, related*, summary) |

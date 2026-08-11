@@ -106,7 +106,23 @@ const research = defineCollection({
 		collections: z.array(z.string()).default([]),
 		by: z.string().optional(),
 		year: z.string().optional(),
+		/** Bibliographic subtitle (joined as “Title: Subtitle” in Chicago). */
+		subtitle: z.string().optional(),
+		/** Place of publication (Chicago: before publisher). */
+		place: z.string().optional(),
+		publisher: z.string().optional(),
+		doi: z.string().optional(),
+		/** Journal or edited-volume title (essays). */
+		container: z.string().optional(),
+		volume: z.string().optional(),
+		issue: z.string().optional(),
+		pages: z.string().optional(),
+		/**
+		 * Optional hand-tuned Chicago bibliography string.
+		 * When omitted, the site generates Chicago from structured fields.
+		 */
 		citation: z.string().optional(),
+		/** Optional external id (e.g. Zotero key) — not used for display. */
 		ref: z.string().optional(),
 		status: z.enum(['note', 'developed', 'core']).default('note'),
 		collected: z.coerce.date(),

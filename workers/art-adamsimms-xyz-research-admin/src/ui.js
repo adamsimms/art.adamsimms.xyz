@@ -1,9 +1,28 @@
+import { formatChicagoCitation, researchCitation } from '../../shared/chicago.js';
+
 /**
  * Admin UI with site chrome (header + left-aligned sheet) matching /research (cv variant).
- * @param {{ title: string, body: string, active?: string }} opts
+ * @param {{ title: string, body: string, active?: string, compactHeader?: boolean, headExtra?: string }} opts
  */
 export function layout(opts) {
 	const active = opts.active || 'inbox';
+	const compact = Boolean(opts.compactHeader);
+	const pageHeader = compact
+		? `<header class="page-header page-header--compact">
+        <nav class="admin-nav" aria-label="Admin">
+          <a href="/research/admin/" ${active === 'inbox' ? 'aria-current="page"' : ''}>Inbox</a>
+          <a href="/research/admin/library" ${active === 'library' ? 'aria-current="page"' : ''}>Library</a>
+        </nav>
+      </header>`
+		: `<header class="page-header">
+        <h1>Research</h1>
+        <p class="research__lead">Admin — inbox triage and library. Not public.</p>
+        <nav class="admin-nav" aria-label="Admin">
+          <a href="/research/admin/" ${active === 'inbox' ? 'aria-current="page"' : ''}>Inbox</a>
+          <a href="/research/admin/library" ${active === 'library' ? 'aria-current="page"' : ''}>Library</a>
+        </nav>
+      </header>`;
+
 	return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +30,7 @@ export function layout(opts) {
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="robots" content="noindex"/>
 <meta name="theme-color" content="#fafafa"/>
+${opts.headExtra || ''}
 <title>${escapeHtml(opts.title)} · Research admin · Adam Simms</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=berry-orange"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -23,8 +43,14 @@ export function layout(opts) {
   --muted: #666;
   --bg: #fff;
   --border: #e5e5e5;
-  --link: #f05f40;
-  --hover: #e04a2c;
+  --danger: #c0392b;
+  --danger-hover: #a93226;
+  --amber: #d97706;
+  --amber-hover: #b45309;
+  --secondary: #3a3a3a;
+  --secondary-hover: #2a2a2a;
+  --soft: #e8e8e8;
+  --soft-hover: #dcdcdc;
   --font-display: "Google Sans Flex", system-ui, sans-serif;
   --font-body: Inter, system-ui, sans-serif;
   --step--1: clamp(0.8333rem, 0.8061rem + 0.1212vw, 0.9rem);
@@ -44,7 +70,6 @@ export function layout(opts) {
   --space-m: clamp(1.5rem, 1.4233rem + 0.3409vw, 1.6875rem);
   --space-l: clamp(2rem, 1.8977rem + 0.4545vw, 2.25rem);
   --space-xl: clamp(3rem, 2.8466rem + 0.6818vw, 3.375rem);
-  --space-2xl: clamp(4rem, 3.7955rem + 0.9091vw, 4.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 * { box-sizing: border-box; }
@@ -107,6 +132,11 @@ a { color: inherit; text-decoration: none; }
 }
 .research { max-width: none; font-size: var(--type-nav); line-height: 1.5; text-align: left; }
 .page-header { margin-bottom: var(--space-l); }
+.page-header--compact {
+  margin: 0 0 var(--space-s);
+  padding-bottom: var(--space-s);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
 .page-header h1 {
   margin: 0 0 var(--space-2xs); font-family: var(--font-display); font-size: var(--type-display);
   font-weight: 500; font-optical-sizing: auto; letter-spacing: var(--tracking-display); line-height: var(--leading-display);
@@ -116,8 +146,8 @@ a { color: inherit; text-decoration: none; }
   color: color-mix(in srgb, var(--text) 78%, var(--muted));
 }
 .admin-nav {
-  display: flex; flex-wrap: wrap; gap: 0.65rem 1.35rem;
-  font-size: var(--type-caption); letter-spacing: 0.01em;
+  display: flex; flex-wrap: wrap; gap: 0.85rem 1.5rem;
+  font-size: var(--type-nav); letter-spacing: 0.01em;
 }
 .admin-nav a { position: relative; color: var(--muted); transition: color 0.45s var(--ease); }
 .admin-nav a::after {
@@ -146,17 +176,17 @@ a { color: inherit; text-decoration: none; }
 .research-list__meta {
   display: flex; flex-wrap: wrap; gap: 0.35rem 0.85rem; font-size: var(--type-caption); color: var(--muted);
 }
-.research-back { margin: 0 0 var(--space-m); font-size: var(--type-caption); }
-.research-back a { color: var(--muted); }
-.research-back a:is(:hover, :focus-visible) { color: var(--text); }
-.research-kicker {
-  display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0 0 var(--space-2xs);
-  font-size: var(--type-caption); color: var(--muted); letter-spacing: 0.02em;
+.research-back {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--type-caption);
 }
-.research-section { margin: 0 0 var(--space-l); }
-.research-section__heading {
-  margin: 0 0 var(--space-2xs); font-size: var(--type-caption); font-weight: 500;
-  letter-spacing: 0.02em; color: var(--muted);
+.research-back a {
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+}
+.research-back a:is(:hover, :focus-visible) {
+  color: var(--text);
+  border-bottom-color: color-mix(in srgb, var(--text) 30%, transparent);
 }
 .research-summary {
   max-width: 38rem; margin: 0 0 var(--space-m);
@@ -167,59 +197,221 @@ a { color: inherit; text-decoration: none; }
 }
 .research__empty { margin: 0; color: var(--muted); }
 .detail-title {
-  margin: 0 0 var(--space-xs); font-family: var(--font-display); font-size: var(--type-title);
+  margin: 0; font-family: var(--font-display); font-size: var(--type-title);
   font-weight: 500; letter-spacing: var(--tracking-display); line-height: 1.15;
 }
-.actions { display: flex; flex-wrap: wrap; gap: var(--space-2xs); margin: 0 0 var(--space-l); }
-button, .btn {
-  font-family: var(--font-body); font-size: var(--type-caption); padding: 0.4rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 0;
-  background: transparent; color: var(--text); cursor: pointer; display: inline-block;
-  transition: color 0.35s var(--ease), background 0.35s var(--ease), border-color 0.35s var(--ease);
+
+/* Buttons — solid fills, easy to scan */
+.btn, button.btn {
+  font-family: var(--font-body); font-size: var(--type-caption); padding: 0.5rem 0.95rem;
+  border: 1px solid transparent; border-radius: 0;
+  background: var(--soft); color: var(--text); cursor: pointer; display: inline-block;
+  letter-spacing: 0.01em; font-weight: 500;
+  transition: color 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease), opacity 0.2s var(--ease);
 }
-button:hover, .btn:hover { border-color: color-mix(in srgb, var(--text) 40%, transparent); }
-button.primary, .btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+.btn:hover { background: var(--soft-hover); }
+.btn:active { opacity: 0.9; }
+.btn:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
+.btn.btn--primary,
+button.btn--primary {
+  background: #111; color: #fff; border-color: #111;
+}
+.btn.btn--primary:hover,
+button.btn--primary:hover,
+.btn.btn--primary:active,
+button.btn--primary:active { background: #000; border-color: #000; color: #fff; }
+.btn.btn--secondary,
+button.btn--secondary {
+  background: var(--secondary); color: #fff; border-color: var(--secondary);
+}
+.btn.btn--secondary:hover,
+button.btn--secondary:hover,
+.btn.btn--secondary:active,
+button.btn--secondary:active { background: var(--secondary-hover); border-color: var(--secondary-hover); color: #fff; }
+.btn.btn--ghost,
+button.btn--ghost,
+.btn.btn--amber,
+button.btn--amber {
+  background: var(--amber); color: #fff; border-color: var(--amber);
+}
+.btn.btn--ghost:hover,
+button.btn--ghost:hover,
+.btn.btn--amber:hover,
+button.btn--amber:hover,
+.btn.btn--ghost:active,
+button.btn--ghost:active,
+.btn.btn--amber:active,
+button.btn--amber:active { background: var(--amber-hover); border-color: var(--amber-hover); color: #fff; }
+.btn.btn--ghost:focus-visible,
+button.btn--ghost:focus-visible,
+.btn.btn--amber:focus-visible,
+button.btn--amber:focus-visible { outline-color: var(--amber); }
+.btn.btn--danger,
+button.btn--danger {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.btn.btn--danger:hover,
+button.btn--danger:hover,
+.btn.btn--danger:active,
+button.btn--danger:active { background: var(--danger-hover); border-color: var(--danger-hover); color: #fff; }
+.btn.btn--danger:focus-visible,
+button.btn--danger:focus-visible { outline-color: var(--danger); }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0; }
+.actions form { display: inline; margin: 0; }
+
 form.stack {
-  display: flex; flex-direction: column; gap: var(--space-s); margin: 0 0 var(--space-xl); max-width: 38rem;
+  display: flex; flex-direction: column; gap: var(--space-s); margin: 0; max-width: none;
 }
+.admin-panel form.stack { gap: var(--space-xs); }
 label {
-  display: flex; flex-direction: column; gap: 0.25rem; font-size: var(--type-caption);
+  display: flex; flex-direction: column; gap: 0.2rem; font-size: var(--type-caption);
   color: var(--muted); letter-spacing: 0.02em;
+}
+.inline-code {
+  font-family: var(--font-body); font-size: 0.92em;
+  color: color-mix(in srgb, var(--text) 78%, var(--muted));
+}
+.field-hint {
+  margin: 0; font-size: 0.7rem; color: color-mix(in srgb, var(--muted) 85%, transparent); letter-spacing: 0.02em;
+}
+.option-card {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  margin: 0; padding: 0.65rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, var(--bg));
+  cursor: pointer;
+}
+.option-card input {
+  margin: 0.2rem 0 0; flex: 0 0 auto; width: 1rem; height: 1rem;
+}
+.option-card__text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.option-card__label {
+  font-size: var(--type-caption); font-weight: 500; color: var(--text); letter-spacing: 0.01em;
+}
+.option-card__help {
+  font-size: 0.7rem; line-height: 1.4; color: var(--muted); letter-spacing: 0;
+}
+.enrich-actions {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: var(--space-xs);
 }
 input, select, textarea {
   font-family: var(--font-body); font-size: var(--type-nav); color: var(--text); background: var(--bg);
   border: 1px solid color-mix(in srgb, var(--text) 18%, transparent); border-radius: 0; padding: 0.4rem 0.5rem;
 }
-textarea { min-height: 6rem; line-height: 1.5; }
+textarea { min-height: 5rem; line-height: 1.5; }
 .flash {
   padding: var(--space-2xs) var(--space-xs); margin: 0 0 var(--space-m);
-  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); font-size: var(--type-caption); max-width: 38rem;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); font-size: var(--type-caption); max-width: none;
 }
-.flash.err { border-color: color-mix(in srgb, #a44 50%, var(--border)); }
+.flash.err { border-color: color-mix(in srgb, var(--danger) 50%, var(--border)); color: var(--danger); }
+.flash a { color: var(--text); border-bottom: 1px solid color-mix(in srgb, var(--text) 22%, transparent); }
 pre.block {
   white-space: pre-wrap; font-family: var(--font-body); font-size: var(--type-caption); line-height: 1.45;
-  max-width: 38rem; margin: 0 0 var(--space-m); padding: var(--space-xs);
+  max-width: none; margin: 0; padding: var(--space-xs);
   background: color-mix(in srgb, var(--text) 4%, var(--bg));
   color: color-mix(in srgb, var(--text) 82%, var(--muted));
 }
-.file-list { list-style: none; margin: 0 0 var(--space-m); padding: 0; font-size: var(--type-caption); color: var(--muted); }
+.pdf-embed {
+  display: block; width: 100%; height: min(70vh, 36rem); margin-top: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  background: color-mix(in srgb, var(--text) 3%, var(--bg));
+}
+.file-list { list-style: none; margin: 0; padding: 0; font-size: var(--type-caption); color: var(--muted); }
 .file-list li { margin: 0.35rem 0; }
 .file-list a { color: var(--text); border-bottom: 1px solid color-mix(in srgb, var(--text) 22%, transparent); }
-.promote-heading {
-  margin: var(--space-xl) 0 var(--space-s); font-family: var(--font-display);
-  font-size: var(--type-nav); font-weight: 500; letter-spacing: 0.02em;
-}
 .badge {
   display: inline-block; font-size: 0.75em; letter-spacing: 0.02em;
   padding: 0.1rem 0.35rem; border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-  color: var(--muted); margin-right: 0.25rem;
+  color: var(--muted); margin-right: 0.15rem;
 }
-details { margin: 0.5rem 0; font-size: var(--type-caption); color: var(--muted); }
+.badge--ok { border-color: color-mix(in srgb, #2a6 35%, transparent); color: #2a6644; }
+.badge--warn { border-color: color-mix(in srgb, #a80 40%, transparent); color: #8a6a20; }
+.badge--fail { border-color: color-mix(in srgb, var(--danger) 40%, transparent); color: var(--danger); }
+details { margin: 0.5rem 0 0; font-size: var(--type-caption); color: var(--muted); }
 details summary { cursor: pointer; color: var(--text); }
+details pre.block { margin-top: 0.5rem; }
+
+/* Item triage layout — nav → back → meta → title → actions */
+.item-top { margin-bottom: var(--space-l); }
+.item-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.5rem;
+  margin: 0 0 var(--space-xs); font-size: var(--type-caption); color: var(--muted);
+}
+.item-meta__sep { opacity: 0.35; user-select: none; }
+.item-title-row { margin: 0 0 var(--space-s); }
+.item-title-row .detail-title { margin: 0; }
+.item-triage { margin: 0; }
+
+.admin-grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 56rem) {
+  .admin-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
+    gap: var(--space-l);
+  }
+  .admin-col--promote { position: sticky; top: 1rem; }
+}
+.admin-col { display: flex; flex-direction: column; gap: var(--space-m); min-width: 0; }
+.admin-panel {
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  padding: var(--space-s) var(--space-m);
+  background: #fff;
+}
+.admin-panel__title {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--type-caption);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.admin-panel__body { margin: 0; }
+.admin-panel .research-summary { margin-bottom: var(--space-xs); max-width: none; }
+.admin-panel pre.block { margin-bottom: 0; }
+.stage-chips {
+  display: flex; flex-wrap: wrap; gap: 0.35rem;
+  margin: 0 0 var(--space-xs); padding: 0; list-style: none;
+}
+.stage-chips li {
+  font-size: 0.7rem; letter-spacing: 0.02em;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--muted);
+}
+.stage-chips li[data-status="ok"] { color: #2a6644; border-color: color-mix(in srgb, #2a6 30%, transparent); }
+.stage-chips li[data-status="failed"] { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+.stage-chips li[data-status="skipped"],
+.stage-chips li[data-status="pending"],
+.stage-chips li[data-status="running"],
+.stage-chips li[data-status="queued"] { color: #8a6a20; border-color: color-mix(in srgb, #a80 30%, transparent); }
+
+.promote-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+}
+@media (min-width: 40rem) {
+  .promote-grid { grid-template-columns: 1fr 1fr; }
+  .promote-grid .span-2 { grid-column: 1 / -1; }
+}
+.promote-actions { margin-top: var(--space-s); }
+.enrich-note {
+  margin: 0 0 var(--space-xs); font-size: var(--type-caption);
+  color: #8a6a20;
+}
+.list-toolbar { margin: 0 0 var(--space-m); }
+
 @media (max-width: 40rem) {
   .site-header { padding: 1.25rem 1.25rem 1rem; }
   .main--cv { padding: 0 1.25rem 3rem; }
   .site-title__full { display: none; }
+  .admin-panel { padding: var(--space-s); }
 }
 </style>
 </head>
@@ -242,14 +434,7 @@ details summary { cursor: pointer; color: var(--text); }
   </header>
   <main class="main--cv">
     <article class="research">
-      <header class="page-header">
-        <h1>Research</h1>
-        <p class="research__lead">Admin — inbox triage and library. Not public.</p>
-        <nav class="admin-nav" aria-label="Admin">
-          <a href="/research/admin/" ${active === 'inbox' ? 'aria-current="page"' : ''}>Inbox</a>
-          <a href="/research/admin/library" ${active === 'library' ? 'aria-current="page"' : ''}>Library</a>
-        </nav>
-      </header>
+      ${pageHeader}
       ${opts.body}
     </article>
   </main>
@@ -265,6 +450,37 @@ export function escapeHtml(s) {
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;');
+}
+
+/** True when enrichment stored a raw PDF syntax dump instead of readable text. */
+function looksLikeRawPdfDump(text) {
+	if (!text) return true;
+	const t = text.trim();
+	if (/^%PDF-/i.test(t)) return true;
+	if (/\bendobj\b/i.test(t) && /\/(?:Type|Linearized|Filter|Length)\b/.test(t)) return true;
+	return false;
+}
+
+/**
+ * @param {Array<{ field?: string, source?: string, confidence?: number }>} provenance
+ * @param {string} field
+ */
+function provHint(provenance, field) {
+	const p = provenance.find((x) => x.field === field);
+	if (!p?.source) return '';
+	return `<p class="field-hint">${escapeHtml(field)} · ${escapeHtml(String(p.source))}</p>`;
+}
+
+/**
+ * @param {string} status
+ */
+function enrichBadgeClass(status) {
+	if (status === 'ok') return 'badge badge--ok';
+	if (status === 'partial' || status === 'queued' || status === 'running' || status === 'pending') {
+		return 'badge badge--warn';
+	}
+	if (status === 'failed') return 'badge badge--fail';
+	return 'badge';
 }
 
 /**
@@ -295,7 +511,7 @@ export function inboxListPage(items, filter) {
               <span class="research-list__title">${escapeHtml(String(title))}</span>
               <span class="research-list__meta">
                 <span>${escapeHtml(String(item.status || ''))}</span>
-                <span class="badge">${escapeHtml(estatus)}</span>
+                <span class="${enrichBadgeClass(estatus)}">${escapeHtml(estatus)}</span>
                 ${match}
                 <span>${escapeHtml(when)}</span>
                 <span>${(item.attachments || []).length} file(s)</span>
@@ -310,9 +526,9 @@ export function inboxListPage(items, filter) {
 		title: 'Inbox',
 		active: 'inbox',
 		body: `<div class="research-filters" aria-label="Status filter">${tabs}</div>
-<p class="research-summary" style="margin-bottom:1rem">
-  <form method="post" action="/research/admin/api/indexes" style="display:inline">
-    <button type="submit">Refresh site indexes</button>
+<p class="list-toolbar">
+  <form method="post" action="/research/admin/api/indexes">
+    <button class="btn btn--secondary" type="submit">Refresh site indexes</button>
   </form>
 </p>
 <ul class="research-list">${rows}</ul>`,
@@ -326,6 +542,9 @@ export function inboxListPage(items, filter) {
 export function inboxItemPage(item, opts = {}) {
 	const enrich = /** @type {Record<string, unknown>} */ (item.enrichment || {});
 	const sug = /** @type {Record<string, unknown>} */ (enrich.suggestions || {});
+	const provenance = Array.isArray(enrich.provenance)
+		? /** @type {Array<{ field?: string, source?: string, confidence?: number }>} */ (enrich.provenance)
+		: [];
 	const titleGuess = sug.title || enrich.title || item.subject || 'Untitled';
 	const typeGuess = String(sug.type || 'essay');
 	const slugGuess = String(titleGuess)
@@ -334,6 +553,9 @@ export function inboxItemPage(item, opts = {}) {
 		.replace(/^-|-$/g, '')
 		.slice(0, 80);
 	const collected = String(item.collectedAt || '').slice(0, 10);
+	const enrichStatus = String(enrich.status || '—');
+	const enriching = enrichStatus === 'queued' || enrichStatus === 'running';
+
 	const atts = (item.attachments || [])
 		.map(
 			(a, i) =>
@@ -343,6 +565,35 @@ export function inboxItemPage(item, opts = {}) {
 		)
 		.join('');
 
+	const pdfAtt = /** @type {{ key?: string, filename?: string, kind?: string, contentType?: string, stored?: boolean } | undefined} */ (
+		(item.attachments || []).find(
+			(a) =>
+				a.stored &&
+				a.key &&
+				(a.kind === 'pdf' ||
+					String(a.contentType || '').includes('pdf') ||
+					String(a.filename || '').toLowerCase().endsWith('.pdf')),
+		)
+	);
+	const pdfSrc = pdfAtt?.key
+		? `/research/admin/api/attachment?key=${encodeURIComponent(String(pdfAtt.key))}`
+		: '';
+	const rawPdfText = String(enrich.pdfTextPreview || '');
+	const pdfText = looksLikeRawPdfDump(rawPdfText) ? '' : rawPdfText;
+	const pdfPreviewHtml = pdfSrc || pdfText
+		? `<details open>
+        <summary>PDF${pdfAtt?.filename ? ` · ${escapeHtml(String(pdfAtt.filename))}` : ''}</summary>
+        ${pdfSrc ? `<iframe class="pdf-embed" src="${escapeHtml(pdfSrc)}" title="PDF preview"></iframe>` : ''}
+        ${
+					pdfText
+						? `<pre class="block">${escapeHtml(pdfText)}</pre>`
+						: pdfSrc
+							? `<p class="field-hint">No readable text extracted yet. Re-enrich to retry text extraction (the file above is the original PDF).</p>`
+							: ''
+				}
+      </details>`
+		: '';
+
 	const flash = opts.error
 		? `<p class="flash err">${escapeHtml(opts.error)}</p>`
 		: opts.flash
@@ -350,25 +601,40 @@ export function inboxItemPage(item, opts = {}) {
 			: '';
 
 	const types = ['book', 'essay', 'artwork', 'person', 'concept', 'place', 'archive', 'film', 'other'];
-	const urls = (item.urls || [])
-		.map((u) => `<a href="${escapeHtml(u)}">${escapeHtml(u)}</a>`)
-		.join('<br/>');
+	const urlList = item.urls || [];
+	const urlsHtml = urlList.length
+		? urlList.map((u) => `<a href="${escapeHtml(u)}">${escapeHtml(u)}</a>`).join('<br/>')
+		: '';
 
 	const stages = /** @type {Record<string, Record<string, unknown>>} */ (enrich.stages || {});
-	const stageRows = Object.keys(stages)
-		.map((k) => {
-			const s = stages[k] || {};
-			return `<li><strong>${escapeHtml(k)}</strong>: ${escapeHtml(String(s.status || ''))}${s.reason ? ` — ${escapeHtml(String(s.reason))}` : ''}${s.source ? ` (${escapeHtml(String(s.source))})` : ''}</li>`;
-		})
-		.join('');
+	const stageKeys = Object.keys(stages);
+	const stageChips = stageKeys.length
+		? `<ul class="stage-chips" aria-label="Enrichment stages">${stageKeys
+				.map((k) => {
+					const s = stages[k] || {};
+					const st = String(s.status || '');
+					const tip = [s.reason, s.source, s.preview].filter(Boolean).join(' · ');
+					return `<li data-status="${escapeHtml(st)}" title="${escapeHtml(tip)}">${escapeHtml(k)} · ${escapeHtml(st || '—')}</li>`;
+				})
+				.join('')}</ul>`
+		: `<p class="research-summary">No stages yet.</p>`;
+	const llmStage = stages.llm || {};
+	const llmFailNote =
+		llmStage.status === 'failed'
+			? `<p class="enrich-note">LLM failed${llmStage.model ? ` via <code class="inline-code">${escapeHtml(String(llmStage.model))}</code>` : ''}${
+					llmStage.reason ? ` (${escapeHtml(String(llmStage.reason))})` : ''
+				}${
+					llmStage.preview ? `: <code class="inline-code">${escapeHtml(String(llmStage.preview).slice(0, 160))}</code>` : ''
+				}. Re-enrich, or fill promote fields manually.</p>`
+			: '';
 
-	const prov = Array.isArray(enrich.provenance)
-		? enrich.provenance
+	const provBadges = provenance.length
+		? `<p class="research-summary">${provenance
 				.map(
 					(p) =>
 						`<span class="badge" title="confidence ${escapeHtml(String(p.confidence))}">${escapeHtml(String(p.field))}: ${escapeHtml(String(p.source))}</span>`,
 				)
-				.join(' ')
+				.join(' ')}</p>`
 		: '';
 
 	const match = enrich.libraryMatch
@@ -389,94 +655,244 @@ export function inboxItemPage(item, opts = {}) {
 		})
 		.join('');
 
-	const tagsVal = [...(Array.isArray(sug.tags) ? sug.tags : []), ...(Array.isArray(sug.newTags) ? sug.newTags : [])].join(
-		', ',
-	);
+	const tagsVal = [
+		...(Array.isArray(sug.tags) ? sug.tags : []),
+		...(Array.isArray(sug.newTags) ? sug.newTags : []),
+	].join(', ');
 	const colsVal = Array.isArray(sug.collections) ? sug.collections.join(', ') : '';
 	const relatedResearch = Array.isArray(sug.relatedResearch) ? sug.relatedResearch.join(', ') : '';
 	const relatedWorks = Array.isArray(sug.relatedWorks) ? sug.relatedWorks.join(', ') : '';
 	const relatedWriting = Array.isArray(sug.relatedWriting) ? sug.relatedWriting.join(', ') : '';
+	const chicagoPreview =
+		formatChicagoCitation({
+			title: titleGuess,
+			subtitle: sug.subtitle,
+			type: typeGuess,
+			by: sug.by,
+			year: sug.year,
+			publisher: sug.publisher,
+			place: sug.place,
+			doi: sug.doi,
+			url: sug.url || item.primaryUrl || enrich.url,
+			container: sug.container,
+			volume: sug.volume,
+			issue: sug.issue,
+			pages: sug.pages,
+		}) || '';
+
+	const messagePanel = item.text
+		? `<section class="admin-panel">
+        <h3 class="admin-panel__title">Message</h3>
+        <pre class="block">${escapeHtml(String(item.text))}</pre>
+      </section>`
+		: '';
+
+	const urlsPanel = urlsHtml
+		? `<section class="admin-panel">
+        <h3 class="admin-panel__title">URLs</h3>
+        <p class="research-summary">${urlsHtml}</p>
+      </section>`
+		: '';
+
+	const attsPanel = atts
+		? `<section class="admin-panel">
+        <h3 class="admin-panel__title">Attachments</h3>
+        <ul class="file-list">${atts}</ul>
+      </section>`
+		: '';
+
+	const enrichNote = enriching
+		? `<p class="enrich-note">Enrichment ${escapeHtml(enrichStatus)} — this page refreshes automatically.</p>`
+		: '';
+
+	const headExtra = enriching ? '<meta http-equiv="refresh" content="4"/>' : '';
 
 	return layout({
 		title: String(titleGuess),
 		active: 'inbox',
+		compactHeader: true,
+		headExtra,
 		body: `
 ${flash}
 ${match}
-<p class="research-back"><a href="/research/admin/">Inbox</a></p>
-<p class="research-kicker">
-  <span>${escapeHtml(String(item.status))}</span>
-  <span class="badge">${escapeHtml(String(enrich.status || '—'))}</span>
-  <span>${escapeHtml(String(item.from || ''))}</span>
-  <span>${escapeHtml(collected)}</span>
-</p>
-<h2 class="detail-title">${escapeHtml(String(titleGuess))}</h2>
-${item.text ? `<pre class="block">${escapeHtml(String(item.text))}</pre>` : ''}
-${urls ? `<section class="research-section"><h3 class="research-section__heading">URLs</h3><p class="research-summary">${urls}</p></section>` : ''}
-${atts ? `<section class="research-section"><h3 class="research-section__heading">Attachments</h3><ul class="file-list">${atts}</ul></section>` : ''}
-
-<section class="research-section">
-  <h3 class="research-section__heading">Enrichment</h3>
-  <ul class="file-list">${stageRows || '<li>No stages yet</li>'}</ul>
-  ${prov ? `<p class="research-summary">${prov}</p>` : ''}
-  ${graphHtml}
-  ${enrich.readerExcerpt ? `<details><summary>Reader excerpt</summary><pre class="block">${escapeHtml(String(enrich.readerExcerpt))}</pre></details>` : ''}
-  ${enrich.pdfTextPreview ? `<details><summary>PDF preview</summary><pre class="block">${escapeHtml(String(enrich.pdfTextPreview))}</pre></details>` : ''}
-  <form class="stack" method="post" action="/research/admin/api/enrich" style="margin-top:1rem">
-    <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
-    <label>Primary URL override <input name="primaryUrl" value="${escapeHtml(String(item.primaryUrl || enrich.url || ''))}"/></label>
-    <label><input type="checkbox" name="force" value="1"/> Force re-enrich</label>
-    <label><input type="checkbox" name="forceArchive" value="1"/> Force Wayback again</label>
-    <button type="submit">Re-enrich</button>
-  </form>
-</section>
-
-<div class="actions">
-  <form method="post" action="/research/admin/api/status">
-    <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
-    <input type="hidden" name="status" value="deferred"/>
-    <button type="submit">Defer</button>
-  </form>
-  <form method="post" action="/research/admin/api/status">
-    <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
-    <input type="hidden" name="status" value="discarded"/>
-    <button type="submit">Discard</button>
-  </form>
+<div class="item-top">
+  <p class="research-back"><a href="/research/admin/">&lt; Inbox</a></p>
+  <p class="item-meta" aria-label="Item status">
+    <span class="badge">${escapeHtml(String(item.status))}</span>
+    <span class="${enrichBadgeClass(enrichStatus)}">${escapeHtml(enrichStatus)}</span>
+    <span class="item-meta__sep">·</span>
+    <span>${escapeHtml(String(item.from || ''))}</span>
+    <span class="item-meta__sep">·</span>
+    <span>${escapeHtml(collected)}</span>
+  </p>
+  <div class="item-title-row">
+    <h2 class="detail-title">${escapeHtml(String(titleGuess))}</h2>
+  </div>
+  <div class="item-triage actions">
+    <form method="post" action="/research/admin/api/status">
+      <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
+      <input type="hidden" name="status" value="deferred"/>
+      <button class="btn btn--amber" type="submit">Defer</button>
+    </form>
+    <form method="post" action="/research/admin/api/status" onsubmit="return confirm('Discard this inbox item? It stays in R2 under Discarded.')">
+      <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
+      <input type="hidden" name="status" value="discarded"/>
+      <button class="btn btn--danger" type="submit">Discard</button>
+    </form>
+    <form method="post" action="/research/admin/api/delete" onsubmit="return confirm('Permanently delete this item and all R2 files (email + attachments)? This cannot be undone.')">
+      <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
+      <button class="btn btn--danger" type="submit">Delete permanently</button>
+    </form>
+  </div>
 </div>
 
-<h3 class="promote-heading">Promote to library</h3>
-<form class="stack" method="post" action="/research/admin/api/promote" id="promote-form">
-  <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
-  <label>Title <input name="title" required value="${escapeHtml(String(titleGuess))}"/></label>
-  <label>Slug <input name="slug" required value="${escapeHtml(slugGuess)}" pattern="[a-z0-9\\-]+"/></label>
-  <label>Type
-    <select name="type">
-      ${types.map((t) => `<option value="${t}" ${t === typeGuess ? 'selected' : ''}>${t}</option>`).join('')}
-    </select>
-  </label>
-  <label>URL <input name="url" value="${escapeHtml(String(sug.url || item.primaryUrl || enrich.url || ''))}"/></label>
-  <label>By <input name="by" value="${escapeHtml(String(sug.by || ''))}"/></label>
-  <label>Year <input name="year" value="${escapeHtml(String(sug.year || ''))}"/></label>
-  <label>Status
-    <select name="status">
-      <option value="note" selected>note</option>
-      <option value="developed">developed</option>
-      <option value="core">core</option>
-    </select>
-  </label>
-  <label>Tags (comma-separated) <input name="tags" value="${escapeHtml(tagsVal)}"/></label>
-  <label>Collections (comma-separated) <input name="collections" value="${escapeHtml(colsVal)}"/></label>
-  <label>Related research <input name="relatedResearch" value="${escapeHtml(relatedResearch)}"/></label>
-  <label>Related works <input name="relatedWorks" value="${escapeHtml(relatedWorks)}"/></label>
-  <label>Related writing <input name="relatedWriting" value="${escapeHtml(relatedWriting)}"/></label>
-  <label>Summary <textarea name="summary">${escapeHtml(String(sug.summary || enrich.description || ''))}</textarea></label>
-  <label>Quote <textarea name="quote">${escapeHtml(String(sug.quote || ''))}</textarea></label>
-  <label>Citation <textarea name="citation">${escapeHtml(String(sug.citation || ''))}</textarea></label>
-  <label>Archived URL <input name="archivedUrl" value="${escapeHtml(String(sug.archivedUrl || ''))}"/></label>
-  <label>Body <textarea name="body"></textarea></label>
-  <label>Collected <input name="collected" value="${escapeHtml(collected)}"/></label>
-  <button class="primary" type="submit">Promote (commit to main)</button>
-</form>
+<div class="admin-grid">
+  <div class="admin-col admin-col--source">
+    ${messagePanel}
+    ${urlsPanel}
+    ${attsPanel}
+
+    <section class="admin-panel">
+      <h3 class="admin-panel__title">Enrichment</h3>
+      ${enrichNote}
+      ${stageChips}
+      ${llmFailNote}
+      ${provBadges}
+      ${graphHtml}
+      ${enrich.readerExcerpt ? `<details><summary>Reader excerpt</summary><pre class="block">${escapeHtml(String(enrich.readerExcerpt))}</pre></details>` : ''}
+      ${pdfPreviewHtml}
+      <form class="stack" method="post" action="/research/admin/api/enrich">
+        <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
+        <input type="hidden" name="force" value="1"/>
+        <label>URL to enrich
+          <input name="primaryUrl" value="${escapeHtml(String(item.primaryUrl || enrich.url || ''))}"/>
+          <span class="field-hint">Runs OG, bibliography, PDF text, AI suggestions, and graph hints again.</span>
+        </label>
+        <label class="option-card">
+          <input type="checkbox" name="forceArchive" value="1"/>
+          <span class="option-card__text">
+            <span class="option-card__label">Also refresh Wayback archive</span>
+            <span class="option-card__help">Requests a new Internet Archive snapshot. Off by default if one already exists (Wayback is slow and rate-limited).</span>
+          </span>
+        </label>
+        <div class="enrich-actions">
+          <button class="btn btn--secondary" type="submit">Re-enrich</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="admin-col admin-col--promote">
+    <section class="admin-panel">
+      <h3 class="admin-panel__title">Promote to library</h3>
+      <form class="stack" method="post" action="/research/admin/api/promote" id="promote-form">
+        <input type="hidden" name="id" value="${escapeHtml(String(item.id))}"/>
+        <div class="promote-grid">
+          <label class="span-2">Title
+            <input name="title" required value="${escapeHtml(String(titleGuess))}"/>
+            ${provHint(provenance, 'title')}
+          </label>
+          <label>Slug
+            <input name="slug" required value="${escapeHtml(slugGuess)}" pattern="[a-z0-9\\-]+"/>
+          </label>
+          <label>Type
+            <select name="type">
+              ${types.map((t) => `<option value="${t}" ${t === typeGuess ? 'selected' : ''}>${t}</option>`).join('')}
+            </select>
+            ${provHint(provenance, 'type')}
+          </label>
+          <label class="span-2">URL
+            <input name="url" value="${escapeHtml(String(sug.url || item.primaryUrl || enrich.url || ''))}"/>
+          </label>
+          <label class="span-2">Subtitle (bibliographic)
+            <input name="subtitle" value="${escapeHtml(String(sug.subtitle || ''))}"/>
+          </label>
+          <label>By
+            <input name="by" value="${escapeHtml(String(sug.by || ''))}"/>
+            ${provHint(provenance, 'by')}
+          </label>
+          <label>Year
+            <input name="year" value="${escapeHtml(String(sug.year || ''))}"/>
+            ${provHint(provenance, 'year')}
+          </label>
+          <label>Place
+            <input name="place" value="${escapeHtml(String(sug.place || ''))}"/>
+            ${provHint(provenance, 'place')}
+          </label>
+          <label>Publisher
+            <input name="publisher" value="${escapeHtml(String(sug.publisher || ''))}"/>
+            ${provHint(provenance, 'publisher')}
+          </label>
+          <label class="span-2">DOI
+            <input name="doi" value="${escapeHtml(String(sug.doi || ''))}"/>
+            ${provHint(provenance, 'doi')}
+          </label>
+          <label class="span-2">Container (journal / edited volume)
+            <input name="container" value="${escapeHtml(String(sug.container || ''))}"/>
+            ${provHint(provenance, 'container')}
+          </label>
+          <label>Volume
+            <input name="volume" value="${escapeHtml(String(sug.volume || ''))}"/>
+          </label>
+          <label>Issue
+            <input name="issue" value="${escapeHtml(String(sug.issue || ''))}"/>
+          </label>
+          <label class="span-2">Pages
+            <input name="pages" value="${escapeHtml(String(sug.pages || ''))}"/>
+          </label>
+          <label>Status
+            <select name="status">
+              <option value="note" selected>note</option>
+              <option value="developed">developed</option>
+              <option value="core">core</option>
+            </select>
+          </label>
+          <label>Collected
+            <input name="collected" value="${escapeHtml(collected)}"/>
+          </label>
+          <label class="span-2">Tags
+            <input name="tags" value="${escapeHtml(tagsVal)}"/>
+            ${provHint(provenance, 'tags')}
+          </label>
+          <label class="span-2">Collections
+            <input name="collections" value="${escapeHtml(colsVal)}"/>
+            ${provHint(provenance, 'collections')}
+          </label>
+          <label class="span-2">Related research
+            <input name="relatedResearch" value="${escapeHtml(relatedResearch)}"/>
+          </label>
+          <label class="span-2">Related works
+            <input name="relatedWorks" value="${escapeHtml(relatedWorks)}"/>
+          </label>
+          <label class="span-2">Related writing
+            <input name="relatedWriting" value="${escapeHtml(relatedWriting)}"/>
+          </label>
+          <label class="span-2">Summary
+            <textarea name="summary">${escapeHtml(String(sug.summary || enrich.description || ''))}</textarea>
+            ${provHint(provenance, 'summary')}
+          </label>
+          <label class="span-2">Quote
+            <textarea name="quote">${escapeHtml(String(sug.quote || ''))}</textarea>
+            ${provHint(provenance, 'quote')}
+          </label>
+          <p class="span-2 item-meta">Chicago (auto)${chicagoPreview ? `: <cite>${escapeHtml(chicagoPreview)}</cite>` : ' — fill by / title / publisher (or container) to generate'}</p>
+          <label class="span-2">Citation override (optional — leave blank to auto-generate)
+            <textarea name="citation" placeholder="Leave blank unless the auto Chicago string needs a hand fix"></textarea>
+          </label>
+          <label class="span-2">Archived URL
+            <input name="archivedUrl" value="${escapeHtml(String(sug.archivedUrl || ''))}"/>
+          </label>
+          <label class="span-2">Body
+            <textarea name="body"></textarea>
+          </label>
+        </div>
+        <div class="promote-actions">
+          <button class="btn btn--primary" type="submit">Add to Research</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
 `,
 	});
 }
@@ -519,38 +935,62 @@ export function libraryEditPage(entry, opts = {}) {
 			? `<p class="flash">${escapeHtml(opts.flash)}</p>`
 			: '';
 	const d = entry.data;
+	const chicagoPreview = researchCitation(d) || '';
 	return layout({
 		title: String(d.title || entry.slug),
 		active: 'library',
+		compactHeader: true,
 		body: `
 ${flash}
-<p class="research-back"><a href="/research/admin/library">Library</a></p>
-<p class="research-kicker"><span>${escapeHtml(String(d.type || ''))}</span><span>${escapeHtml(entry.slug)}</span></p>
+<div class="item-top">
+<p class="research-back"><a href="/research/admin/library">&lt; Library</a></p>
+<p class="item-meta">
+  <span class="badge">${escapeHtml(String(d.type || ''))}</span>
+  <span>${escapeHtml(entry.slug)}</span>
+</p>
+<div class="item-title-row">
 <h2 class="detail-title">${escapeHtml(String(d.title || entry.slug))}</h2>
+</div>
+</div>
+<section class="admin-panel" style="max-width:42rem;margin-top:var(--space-m)">
 <form class="stack" method="post" action="/research/admin/api/library/${escapeHtml(entry.slug)}">
   <input type="hidden" name="_method" value="put"/>
-  <label>Title <input name="title" required value="${escapeHtml(String(d.title || ''))}"/></label>
-  <label>Slug <input name="slug" required value="${escapeHtml(entry.slug)}" readonly/></label>
-  <label>Type <input name="type" value="${escapeHtml(String(d.type || 'other'))}"/></label>
-  <label>URL <input name="url" value="${escapeHtml(String(d.url || ''))}"/></label>
-  <label>By <input name="by" value="${escapeHtml(String(d.by || ''))}"/></label>
-  <label>Year <input name="year" value="${escapeHtml(String(d.year || ''))}"/></label>
-  <label>Status <input name="status" value="${escapeHtml(String(d.status || 'note'))}"/></label>
-  <label>Tags <input name="tags" value="${escapeHtml(Array.isArray(d.tags) ? d.tags.join(', ') : '')}"/></label>
-  <label>Collections <input name="collections" value="${escapeHtml(Array.isArray(d.collections) ? d.collections.join(', ') : '')}"/></label>
-  <label>Summary <textarea name="summary">${escapeHtml(String(d.summary || ''))}</textarea></label>
-  <label>Citation <textarea name="citation">${escapeHtml(String(d.citation || ''))}</textarea></label>
-  <label>Body <textarea name="body" style="min-height:10rem">${escapeHtml(entry.body)}</textarea></label>
-  <label>Raw override (optional — if set, saves this instead of form fields)
-    <textarea name="raw" style="min-height:8rem" placeholder="Leave blank to use form"></textarea>
-  </label>
-  <div class="actions">
-    <button class="primary" type="submit">Save (commit)</button>
+  <div class="promote-grid">
+    <label class="span-2">Title <input name="title" required value="${escapeHtml(String(d.title || ''))}"/></label>
+    <label class="span-2">Subtitle <input name="subtitle" value="${escapeHtml(String(d.subtitle || ''))}"/></label>
+    <label>Slug <input name="slug" required value="${escapeHtml(entry.slug)}" readonly/></label>
+    <label>Type <input name="type" value="${escapeHtml(String(d.type || 'other'))}"/></label>
+    <label class="span-2">URL <input name="url" value="${escapeHtml(String(d.url || ''))}"/></label>
+    <label>By <input name="by" value="${escapeHtml(String(d.by || ''))}"/></label>
+    <label>Year <input name="year" value="${escapeHtml(String(d.year || ''))}"/></label>
+    <label>Place <input name="place" value="${escapeHtml(String(d.place || ''))}"/></label>
+    <label>Publisher <input name="publisher" value="${escapeHtml(String(d.publisher || ''))}"/></label>
+    <label class="span-2">DOI <input name="doi" value="${escapeHtml(String(d.doi || ''))}"/></label>
+    <label class="span-2">Container <input name="container" value="${escapeHtml(String(d.container || ''))}"/></label>
+    <label>Volume <input name="volume" value="${escapeHtml(String(d.volume || ''))}"/></label>
+    <label>Issue <input name="issue" value="${escapeHtml(String(d.issue || ''))}"/></label>
+    <label class="span-2">Pages <input name="pages" value="${escapeHtml(String(d.pages || ''))}"/></label>
+    <label class="span-2">Status <input name="status" value="${escapeHtml(String(d.status || 'note'))}"/></label>
+    <label class="span-2">Tags <input name="tags" value="${escapeHtml(Array.isArray(d.tags) ? d.tags.join(', ') : '')}"/></label>
+    <label class="span-2">Collections <input name="collections" value="${escapeHtml(Array.isArray(d.collections) ? d.collections.join(', ') : '')}"/></label>
+    <label class="span-2">Summary <textarea name="summary">${escapeHtml(String(d.summary || ''))}</textarea></label>
+    <p class="span-2 item-meta">Chicago (display)${chicagoPreview ? `: <cite>${escapeHtml(chicagoPreview)}</cite>` : ''}</p>
+    <label class="span-2">Citation override (optional)
+      <textarea name="citation" placeholder="Leave blank to auto-generate">${escapeHtml(String(d.citation || ''))}</textarea>
+    </label>
+    <label class="span-2">Body <textarea name="body" style="min-height:10rem">${escapeHtml(entry.body)}</textarea></label>
+    <label class="span-2">Raw override (optional — if set, saves this instead of form fields)
+      <textarea name="raw" style="min-height:8rem" placeholder="Leave blank to use form"></textarea>
+    </label>
+  </div>
+  <div class="promote-actions actions">
+    <button class="btn btn--primary" type="submit">Save (commit)</button>
   </div>
 </form>
-<form method="post" action="/research/admin/api/library/${escapeHtml(entry.slug)}" onsubmit="return confirm('Delete ${escapeHtml(entry.slug)} from the repo?')">
+</section>
+<form method="post" action="/research/admin/api/library/${escapeHtml(entry.slug)}" onsubmit="return confirm('Delete ${escapeHtml(entry.slug)} from the repo?')" style="margin-top:var(--space-m)">
   <input type="hidden" name="_method" value="delete"/>
-  <button type="submit">Delete from library</button>
+  <button class="btn btn--danger" type="submit">Delete from library</button>
 </form>
 `,
 	});

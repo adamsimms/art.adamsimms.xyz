@@ -4,7 +4,9 @@ slug: hirsch-family-frames
 type: book
 by: Marianne Hirsch
 year: "1997"
-citation: "Hirsch, Marianne. Family Frames: Photography, Narrative, and Postmemory. Harvard University Press, Cambridge, 1997."
+subtitle: Photography, Narrative, and Postmemory
+place: Cambridge, MA
+publisher: Harvard University Press
 status: developed
 collected: 2019-04-01
 tags: [photography, postmemory, family]

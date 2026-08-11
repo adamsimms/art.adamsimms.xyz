@@ -58,6 +58,22 @@ There is no `link` type — use the `url` field on any type.
 
 `private: true` omits the node from the index, `getStaticPaths`, and sitemap. No auth-walled preview in phase 1.
 
+## Citations (Chicago)
+
+Bibliography-form Chicago is **generated** from structured fields for `book` · `essay` · `film` · `archive` · `artwork` · `other`.
+
+| Field | Use |
+| --- | --- |
+| `by` · `title` · `subtitle` · `year` | Core (`subtitle` → Title: Subtitle in Chicago) |
+| `place` · `publisher` | Books / films |
+| `container` · `volume` · `issue` · `pages` | Journal essays |
+| `doi` · `url` | DOI preferred; URL when no print container |
+| `citation` | Optional hand override — omit to auto-generate |
+
+Skip auto-cite for `concept` · `place` · `person` unless you set `citation` yourself.
+
+Keep `&` in real publisher / legal names (see `ampersand-plus.mdc`). Formatter lives in `src/lib/chicago.ts` (site) and `workers/shared/chicago.js` (inbox / admin) — keep them aligned.
+
 ## Attachments
 
 `attachments` point at hosted files on research R2. Binaries never live in git.

@@ -42,6 +42,18 @@ export async function getInboxItem(bucket, id) {
 }
 
 /**
+ * Next open inbox item after an action (newest remaining).
+ * @param {R2Bucket} bucket
+ * @param {string} [exceptId]
+ * @returns {Promise<string | null>}
+ */
+export async function nextInboxItemId(bucket, exceptId) {
+	const items = await listInboxItems(bucket, 'inbox');
+	const next = items.find((i) => i.id !== exceptId);
+	return next?.id || null;
+}
+
+/**
  * @param {R2Bucket} bucket
  * @param {string} prefix
  * @param {Record<string, unknown>} meta
@@ -50,6 +62,88 @@ export async function putMeta(bucket, prefix, meta) {
 	await bucket.put(`${prefix}/meta.json`, JSON.stringify(meta, null, 2), {
 		httpMetadata: { contentType: 'application/json' },
 	});
+}
+
+/**
+ * Permanently delete an inbox item: all R2 objects under its prefix + pointer keys.
+ * Does not touch library markdown or files/<slug>/ copies from a prior promote.
+ * @param {R2Bucket} bucket
+ * @param {Record<string, unknown>} item
+ */
+export async function deleteInboxItem(bucket, item) {
+	const prefix = String(item.prefix || '');
+	if (!prefix.startsWith('inbox/') || prefix.includes('..')) {
+		throw new Error('bad_prefix');
+	}
+
+	/** @type {string[]} */
+	const keys = [];
+	let cursor;
+	do {
+		const listed = await bucket.list({ prefix: `${prefix}/`, cursor, limit: 1000 });
+		for (const o of listed.objects) keys.push(o.key);
+		cursor = listed.truncated ? listed.cursor : undefined;
+	} while (cursor);
+
+	// Also delete the prefix folder marker if any object was stored without trailing slash quirks
+	if (!keys.includes(`${prefix}/meta.json`) && item.metaKey) {
+		keys.push(String(item.metaKey));
+	}
+
+	for (let i = 0; i < keys.length; i += 100) {
+		const chunk = keys.slice(i, i + 100);
+		await Promise.all(chunk.map((key) => bucket.delete(key)));
+	}
+
+	const messageId = String(item.messageId || '').trim();
+	if (messageId) {
+		const midHash = await sha256Hex(messageId.toLowerCase());
+		await bucket.delete(`inbox/by-message-id/${midHash}.json`);
+	}
+
+	const primaryUrl = item.primaryUrl ? String(item.primaryUrl) : '';
+	if (primaryUrl) {
+		const urlHash = await sha256Hex(normalizeUrlLite(primaryUrl));
+		const pointerKey = `inbox/by-url/${urlHash}.json`;
+		const pointer = await bucket.get(pointerKey);
+		if (pointer) {
+			try {
+				const prev = await pointer.json();
+				if (prev.id === item.id) await bucket.delete(pointerKey);
+			} catch {
+				await bucket.delete(pointerKey);
+			}
+		}
+	}
+}
+
+/** @param {string} value */
+async function sha256Hex(value) {
+	const data = new TextEncoder().encode(value);
+	const digest = await crypto.subtle.digest('SHA-256', data);
+	return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** Lightweight normalize for pointer keys (matches inbox worker enough for deletes). */
+function normalizeUrlLite(url) {
+	try {
+		const u = new URL(url.trim());
+		u.hash = '';
+		u.hostname = u.hostname.toLowerCase();
+		for (const key of [...u.searchParams.keys()]) {
+			if (
+				key.toLowerCase().startsWith('utm_') ||
+				['fbclid', 'gclid', 'mc_cid', 'mc_eid'].includes(key.toLowerCase())
+			) {
+				u.searchParams.delete(key);
+			}
+		}
+		let path = u.pathname.replace(/\/+$/, '') || '/';
+		u.pathname = path;
+		return u.toString();
+	} catch {
+		return url.trim();
+	}
 }
 
 /**
