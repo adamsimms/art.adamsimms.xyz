@@ -65,3 +65,6 @@
 /cloudberry/archive/slideshow.php /cloudberry/archive/?play=1 301
 /cloudberry/archive/slider.php /cloudberry/archive/?play=1 301
 /cloudberry/archive/index.php /cloudberry/archive/ 301
+/cloudberry/archive/gallery /cloudberry/archive/gallery/ 308
+/cloudberry/archive/info /cloudberry/archive/info/ 308
+/cloudberry/archive/jam /cloudberry/archive/jam/ 308

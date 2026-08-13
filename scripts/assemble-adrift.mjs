@@ -93,8 +93,8 @@ if (!html.includes('rel="canonical"')) {
 	);
 } else {
 	html = html.replace(
-		/href="https?:\/\/[^"]*adrift[^"]*"/i,
-		`href="${experienceUrl}"`,
+		/<link\s+rel="canonical"\s+href="[^"]*"/i,
+		`<link rel="canonical" href="${experienceUrl}"`,
 	);
 }
 html = html.replace(
