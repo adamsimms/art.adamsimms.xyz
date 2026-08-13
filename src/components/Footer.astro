@@ -28,28 +28,30 @@ const socialLinks = [
 		<BerryMark class="site-footer__berry-lg" animated size={80} />
 	</a>
 	<div class="site-footer__identity">
-		<p class="site-footer__bio">
-			Adam Simms is a Canadian media artist.<br />His work focuses on belonging, displacement, and
-			intangible culture.
-		</p>
-		<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
+		<div class="site-footer__identity-main">
+			<p class="site-footer__bio">
+				Adam Simms is a Canadian media artist.<br />His work focuses on belonging, displacement, and
+				intangible culture.
+			</p>
+			<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
+			<nav aria-label="Links">
+				<ul class="site-footer__tags">
+					{
+						siteLinks.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									aria-current={'current' in link && link.current ? 'page' : undefined}
+								>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+		</div>
 		<NewsletterSignup />
-		<nav aria-label="Links">
-			<ul class="site-footer__tags">
-				{
-					siteLinks.map((link) => (
-						<li>
-							<a
-								href={link.href}
-								aria-current={'current' in link && link.current ? 'page' : undefined}
-							>
-								{link.label}
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
 	</div>
 	<div class="site-footer__bottom">
 		<p class="site-footer__weather" data-pinchard-weather>
