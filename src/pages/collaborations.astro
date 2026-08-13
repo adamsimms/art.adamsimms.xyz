@@ -19,9 +19,22 @@ function galleryImages(slug: string) {
 	if (!fs.existsSync(dir)) return [];
 	return fs
 		.readdirSync(dir)
-		.filter((file) => /\.jpe?g$/i.test(file))
+		.filter((file) => /^\d+\.jpe?g$/i.test(file))
 		.sort()
-		.map((file) => `/collaborations/${slug}/${file}`);
+		.map((file) => {
+			const base = file.replace(/\.jpe?g$/i, '');
+			const full = `/collaborations/${slug}/${file}`;
+			const displayJpg = `/collaborations/${slug}/${base}-960.jpg`;
+			const displayAvif = `/collaborations/${slug}/${base}-960.avif`;
+			const hasDisplay =
+				fs.existsSync(path.join(dir, `${base}-960.jpg`)) &&
+				fs.existsSync(path.join(dir, `${base}-960.avif`));
+			return {
+				full,
+				displayJpg: hasDisplay ? displayJpg : full,
+				displayAvif: hasDisplay ? displayAvif : null,
+			};
+		});
 }
 
 const projects = [
@@ -145,8 +158,9 @@ const projects = [
 								data-collab-gallery
 								data-collab-title={project.title}
 							>
-								{project.images.map((src, index) => {
+								{project.images.map((image, index) => {
 									const alt = `${project.imageAlt}${index === 0 ? '' : ` (${index + 1})`}`;
+									const isLcp = project.slug === 'goose-village' && index === 0;
 									return (
 										<li>
 											<button
@@ -154,14 +168,23 @@ const projects = [
 												class="collaborations__zoom"
 												data-collab-zoom
 												data-index={index}
+												data-full-src={image.full}
 												aria-label={`View larger: ${alt}`}
 											>
-												<img
-													src={src}
-													alt={alt}
-													loading={index === 0 ? 'eager' : 'lazy'}
-													decoding="async"
-												/>
+												<picture>
+													{image.displayAvif ? (
+														<source srcset={image.displayAvif} type="image/avif" />
+													) : null}
+													<img
+														src={image.displayJpg}
+														alt={alt}
+														width="960"
+														height="960"
+														loading={isLcp ? 'eager' : 'lazy'}
+														decoding="async"
+														fetchpriority={isLcp ? 'high' : undefined}
+													/>
+												</picture>
 											</button>
 										</li>
 									);
@@ -271,9 +294,12 @@ const projects = [
 			const buttons = [...gallery.querySelectorAll('[data-collab-zoom]')];
 			slides = buttons
 				.map((btn) => {
+					if (!(btn instanceof HTMLElement)) return null;
 					const img = btn.querySelector('img');
-					if (!(img instanceof HTMLImageElement) || !img.src) return null;
-					return { src: img.currentSrc || img.src, alt: img.alt || '' };
+					if (!(img instanceof HTMLImageElement)) return null;
+					const full = btn.dataset.fullSrc || img.currentSrc || img.src;
+					if (!full) return null;
+					return { src: full, alt: img.alt || '' };
 				})
 				.filter(Boolean);
 			if (!slides.length) return;
