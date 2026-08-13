@@ -64,12 +64,17 @@ const escapeHtml = (s: string) =>
 // UNSUBSCRIBE_LABEL localize the wording (defaults are English).
 function complianceFooter(env: Bindings, unsub: string): string {
   const address = String(env.SENDER_ADDRESS ?? "").trim();
-  const text = String(env.FOOTER_TEXT ?? "").trim() ||
-    `You're receiving this email because you subscribed to ${env.FROM_NAME || "this newsletter"}.`;
+  const custom = String(env.FOOTER_TEXT ?? "").trim();
+  // Default includes a link to the site; FOOTER_TEXT overrides as plain text only
+  // (env vars are escaped — use code for HTML).
+  const site = "https://art.adamsimms.xyz";
+  const textHtml = custom
+    ? escapeHtml(custom)
+    : `You're receiving this because you subscribed to receive updates from: <a href="${site}" style="color:#888">art.adamsimms.xyz</a>.`;
   const label = String(env.UNSUBSCRIBE_LABEL ?? "").trim() || "Unsubscribe";
   return `<hr style="border:none;border-top:1px solid #ddd;margin:28px 0 12px">
     <p style="font-size:12px;line-height:1.6;color:#888">
-      ${escapeHtml(text)}
+      ${textHtml}
       <a href="${unsub}" style="color:#888">${escapeHtml(label)}</a>${address ? `<br>${escapeHtml(address)}` : ""}
     </p>`;
 }

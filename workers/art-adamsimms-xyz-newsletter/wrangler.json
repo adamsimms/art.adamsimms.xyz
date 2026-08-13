@@ -4,11 +4,19 @@
 	"main": "src/index.ts",
 	"compatibility_date": "2025-10-08",
 	"upload_source_maps": true,
-	"observability": { "enabled": true },
+	"observability": {
+		"enabled": true
+	},
 	"workers_dev": true,
 	"routes": [
-		{ "pattern": "art.adamsimms.xyz/newsletter", "zone_name": "adamsimms.xyz" },
-		{ "pattern": "art.adamsimms.xyz/newsletter/*", "zone_name": "adamsimms.xyz" }
+		{
+			"pattern": "art.adamsimms.xyz/newsletter",
+			"zone_name": "adamsimms.xyz"
+		},
+		{
+			"pattern": "art.adamsimms.xyz/newsletter/*",
+			"zone_name": "adamsimms.xyz"
+		}
 	],
 	"d1_databases": [
 		{
@@ -18,7 +26,9 @@
 		}
 	],
 	"triggers": {
-		"crons": ["* * * * *"]
+		"crons": [
+			"* * * * *"
+		]
 	},
 	"vars": {
 		"FROM_NAME": "Adam Simms",
@@ -26,6 +36,7 @@
 		"DOUBLE_OPT_IN": "false",
 		"SEND_BATCH": "40",
 		"PUBLIC_URL": "https://art.adamsimms.xyz/newsletter",
-		"NOTIFY_EMAIL": "hello@adamsimms.xyz"
+		"NOTIFY_EMAIL": "hello@adamsimms.xyz",
+		"SENDER_ADDRESS": "Adam Simms, 288 Rue Richmond, Montreal QC H2J 0C4, Canada"
 	}
 }

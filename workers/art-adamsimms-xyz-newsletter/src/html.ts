@@ -67,14 +67,20 @@ function turnstile(siteKey?: string): string {
     : "";
 }
 
+// Client-side base path: pages live under /newsletter on art.adamsimms.xyz,
+// but at the root on *.workers.dev. Absolute paths like /api/send must include
+// the prefix or they hit Pages (405) instead of this Worker.
+const BASE_JS = `const BASE = location.pathname.startsWith('/newsletter') ? '/newsletter' : '';`;
+
 // Client-side submit handler shared by the hosted and embedded forms.
 // Collects every named input (email, name, extra fields, Turnstile token).
-const SUBMIT_JS = `document.getElementById('f').addEventListener('submit', async (e) => {
+const SUBMIT_JS = `${BASE_JS}
+document.getElementById('f').addEventListener('submit', async (e) => {
   e.preventDefault();
   const m = document.getElementById('m');
   const body = {};
   e.target.querySelectorAll('[name]').forEach((el) => { if (el.name) body[el.name] = el.value; });
-  const r = await fetch('/api/subscribe', { method:'POST',
+  const r = await fetch(BASE + '/api/subscribe', { method:'POST',
     headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
   const j = await r.json().catch(() => ({}));
   m.textContent = r.ok
@@ -171,11 +177,12 @@ export function adminPage(hasSenderAddress: boolean): string {
        </div>
        <div class="msg" id="m"></div>
      </form>`,
-    `async function send(test) {
+    `${BASE_JS}
+     async function send(test) {
        const m = document.getElementById('m'); m.textContent = 'Sending…';
        const body = { subject: subject.value, html: html.value };
        if (test) body.testEmail = document.getElementById('test').value;
-       const r = await fetch('/api/send', { method:'POST',
+       const r = await fetch(BASE + '/api/send', { method:'POST',
          headers:{'Content-Type':'application/json','x-admin-token': token.value}, body: JSON.stringify(body) });
        const j = await r.json().catch(()=>({}));
        m.textContent = !r.ok ? ('Error: ' + (j.error || r.status))
@@ -185,7 +192,11 @@ export function adminPage(hasSenderAddress: boolean): string {
 }
 
 export function messagePage(title: string, body: string): string {
-  return shell(title, `<h1>${title}</h1><p>${body} <a href="/">Home</a></p>`);
+  return shell(
+    title,
+    `<h1>${title}</h1><p>${body} <a href="#" id="home">Home</a></p>`,
+    `${BASE_JS} document.getElementById('home').href = BASE + '/';`,
+  );
 }
 
 // Confirmation step behind the unsubscribe link: a human clicks the button,
@@ -196,8 +207,10 @@ export function unsubscribePage(token: string): string {
     "Unsubscribe",
     `<h1>Unsubscribe</h1>
      <p>Click the button to stop receiving these emails.</p>
-     <form method="post" action="/unsubscribe?t=${encodeURIComponent(token)}">
+     <form id="u" method="post">
        <button>Unsubscribe</button>
      </form>`,
+    `${BASE_JS}
+     document.getElementById('u').action = BASE + '/unsubscribe?t=${encodeURIComponent(token)}';`,
   );
 }
