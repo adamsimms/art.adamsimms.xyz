@@ -38,7 +38,9 @@
     {
       "src": "https://media.adamsimms.xyz/work/pinchards-island/06.avif",
       "fallback": "https://media.adamsimms.xyz/work/pinchards-island/06.jpg",
-      "alt": "Pinchard's Island",
+      "alt": "Memory map of Pinchard’s Island drawn by a former resident",
+      "title": "Memory map",
+      "notes": "Drawn from recollection by a former resident",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041371724-WNZY82X9UZY9JCJZDGZ8/Screenshot+2024-10-04+at+7.28.22%E2%80%AFAM.png"
     },

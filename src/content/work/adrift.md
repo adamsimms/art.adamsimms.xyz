@@ -7,7 +7,7 @@ description: |
 
   When outports were emptied, some families took their houses with them: lifted from their foundations, floated, and towed toward unfamiliar shores. Adrift restages that image as a perpetual crossing, a house lost at sea. A dwelling can be moved, but it cannot carry intact the life that belonged to its original shore.
 
-  Adrift resettles the house a third time, into a virtual space linked by data to the Atlantic it answers to and met through the window of a screen. Real and virtual meet. Near and far collapse. Neither a [resettled](/resettlement) resident nor their home can return to the life left behind.
+  Adrift resettles the house a third time, into a virtual space linked by data to the Atlantic Ocean it answers to. You meet it through a screen: a house still crossing, never arrived. Neither a [resettled](/resettlement) resident nor their home can return to the life left behind.
 cover: "https://media.adamsimms.xyz/work/adrift/poster.avif"
 coverFallback: "https://media.adamsimms.xyz/work/adrift/poster.jpg"
 galleryFile: adrift.json
