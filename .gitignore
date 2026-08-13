@@ -16,6 +16,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.dev.vars
 
 # macOS-specific files
 .DS_Store
@@ -25,6 +26,9 @@ pnpm-debug.log*
 
 # migration image staging (upload to R2 separately)
 migration/staging/
+
+# local media dumps (Photos exports, IG triage) — never commit
+_inbox/
 
 # wrangler local state
 .wrangler/
