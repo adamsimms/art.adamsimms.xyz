@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BerryMark from './BerryMark.astro';
+import NewsletterSignup from './NewsletterSignup.astro';
 
 const year = new Date().getFullYear();
 
@@ -32,6 +33,7 @@ const socialLinks = [
 			intangible culture.
 		</p>
 		<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
+		<NewsletterSignup />
 		<nav aria-label="Links">
 			<ul class="site-footer__tags">
 				{

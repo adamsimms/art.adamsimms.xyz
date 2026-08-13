@@ -1,0 +1,83 @@
+---
+/**
+ * Footer newsletter signup → Cloudflare Worker (pfstr template).
+ * Override with PUBLIC_NEWSLETTER_URL (no trailing slash).
+ */
+const DEFAULT_NEWSLETTER_URL = 'https://art.adamsimms.xyz/newsletter';
+const endpoint = (
+	import.meta.env.PUBLIC_NEWSLETTER_URL || DEFAULT_NEWSLETTER_URL
+).replace(/\/$/, '');
+---
+
+<form class="site-footer__newsletter" data-newsletter-form method="post" action={`${endpoint}/api/subscribe`}>
+	<label class="site-footer__newsletter-label" for="newsletter-email">Newsletter</label>
+	<p class="site-footer__newsletter-hint">Occasional notes on new work + shows.</p>
+	<div class="site-footer__newsletter-row">
+		<input
+			id="newsletter-email"
+			type="email"
+			name="email"
+			required
+			autocomplete="email"
+			placeholder="Email"
+			aria-describedby="newsletter-status"
+		/>
+		<button type="submit">Subscribe</button>
+	</div>
+	<p class="site-footer__newsletter-status" id="newsletter-status" data-newsletter-status hidden></p>
+</form>
+
+<script>
+	function initNewsletterForms() {
+		document.querySelectorAll('[data-newsletter-form]').forEach((node) => {
+			if (!(node instanceof HTMLFormElement)) return;
+			if (node.dataset.enhanced === 'true') return;
+			node.dataset.enhanced = 'true';
+
+			const status = node.querySelector('[data-newsletter-status]');
+			if (!(status instanceof HTMLElement)) return;
+
+			node.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				const button = node.querySelector('button[type="submit"]');
+				if (button instanceof HTMLButtonElement) button.disabled = true;
+				status.hidden = false;
+				status.textContent = 'Subscribing…';
+				status.dataset.state = 'pending';
+
+				try {
+					const emailInput = node.querySelector('input[name="email"]');
+					const email = emailInput instanceof HTMLInputElement ? emailInput.value.trim() : '';
+					const response = await fetch(node.action, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+						body: JSON.stringify({ email }),
+					});
+					const payload = await response.json().catch(() => ({}));
+
+					if (!response.ok) {
+						status.textContent =
+							payload.error === 'failed_captcha'
+								? 'Please complete the verification.'
+								: 'Please check your email address.';
+						status.dataset.state = 'error';
+						return;
+					}
+
+					node.reset();
+					status.textContent = payload.pending
+						? 'Check your inbox to confirm.'
+						: 'Thanks — you’re in.';
+					status.dataset.state = 'success';
+				} catch {
+					status.textContent = 'Unable to subscribe. Try again later.';
+					status.dataset.state = 'error';
+				} finally {
+					if (button instanceof HTMLButtonElement) button.disabled = false;
+				}
+			});
+		});
+	}
+
+	document.addEventListener('astro:page-load', initNewsletterForms);
+</script>

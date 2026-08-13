@@ -19,6 +19,7 @@ Secondary and site-wide links live in the footer: Works, About, CV, Collaboratio
 - **Maps** (`/maps`) — staged / not live yet: routes build, but stay out of the footer and sitemap (`noindex`) until go-live (satellite + trees + resettled + railway 1931 + Natural Resources 1941; Mapbox needs `PUBLIC_MAPBOX_TOKEN`)
 - **Research** (`/research`) — staged / not live yet: content library + detail routes build, but stay out of nav, footer, and sitemap (`noindex`) until go-live. Email capture: `research@adamsimms.xyz` → R2 inbox (see `docs/RESEARCH-INBOX.md`); promote/admin is phase 3.
 - **Collaborations** (`/collaborations`) → footer, not main nav (publication / web work for others + hire CTA)
+- **Newsletter** — quiet footer signup (`NewsletterSignup`) → Worker `art-adamsimms-xyz-newsletter` (D1 list). Needs `PUBLIC_NEWSLETTER_URL`. Do not put newsletter in main nav.
 - Keep the footer quiet — short labels, no link farm
 
 ## Writing

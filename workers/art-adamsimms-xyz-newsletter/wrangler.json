@@ -1,0 +1,31 @@
+{
+	"name": "art-adamsimms-xyz-newsletter",
+	"account_id": "1bf55fc4d05548d7bf541d845d3bcbb3",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-10-08",
+	"upload_source_maps": true,
+	"observability": { "enabled": true },
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "art.adamsimms.xyz/newsletter", "zone_name": "adamsimms.xyz" },
+		{ "pattern": "art.adamsimms.xyz/newsletter/*", "zone_name": "adamsimms.xyz" }
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "art-adamsimms-xyz-newsletter",
+			"database_id": "17987f5b-e50d-480c-97ba-a4d3d203b24f"
+		}
+	],
+	"triggers": {
+		"crons": ["* * * * *"]
+	},
+	"vars": {
+		"FROM_NAME": "Adam Simms",
+		"FROM_EMAIL": "hello@adamsimms.xyz",
+		"DOUBLE_OPT_IN": "false",
+		"SEND_BATCH": "40",
+		"PUBLIC_URL": "https://art.adamsimms.xyz/newsletter",
+		"NOTIFY_EMAIL": "hello@adamsimms.xyz"
+	}
+}

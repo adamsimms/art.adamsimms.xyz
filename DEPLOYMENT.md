@@ -13,6 +13,7 @@
 | Redirect Worker | `pinchards-redirect` → routes on `pinchards.is` / `www` |
 | Redirect Worker | `adamsim-ms-redirect` → routes on `adamsim.ms` / `www` |
 | Email Worker | `art-adamsimms-xyz-research` → `research@adamsimms.xyz` (Email Routing on `adamsimms.xyz`) |
+| Newsletter Worker | `art-adamsimms-xyz-newsletter` → D1 list + `/admin` send (see below) |
 | Research admin Worker | `art-adamsimms-xyz-research-admin` → `art.adamsimms.xyz/research/admin*` (Cloudflare Access) |
 
 ## How production deploys
@@ -32,7 +33,7 @@ Optional: `repository_dispatch` type `cloudberry-archive-rebuild` from `pinchard
    - `media` → R2 public bucket domain
    - `cloudberry-images` / `cloudberry-thumbs` → Cloudberry R2 buckets
 4. Set GitHub Actions secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
-5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`, optional `CLOUDFLARE_ZONE_ID`.
+5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`, `PUBLIC_NEWSLETTER_URL` (newsletter Worker origin), optional `CLOUDFLARE_ZONE_ID`.
 
 ## Media upload
 
@@ -114,3 +115,17 @@ npx wrangler deploy
 ```
 
 Set `TEAM_DOMAIN` + `POLICY_AUD` from the Access application. Details: [workers/art-adamsimms-xyz-research-admin/README.md](workers/art-adamsimms-xyz-research-admin/README.md).
+
+## Newsletter (capture + optional send)
+
+Site footer signup posts to Worker `art-adamsimms-xyz-newsletter` at **`https://art.adamsimms.xyz/newsletter`** (pfstr template; D1 list). Admin: `/newsletter/admin`.
+
+```bash
+cd workers/art-adamsimms-xyz-newsletter
+npm ci
+npx wrangler secret put ADMIN_TOKEN
+npx wrangler secret put RESEND_API_KEY   # after verifying adamsimms.xyz in Resend
+npx wrangler deploy
+```
+
+Set GitHub variable `PUBLIC_NEWSLETTER_URL` to `https://art.adamsimms.xyz/newsletter`. Campaigns use **Resend** (Cloudflare Email Sending is transactional-only). Set `SENDER_ADDRESS` before first send. Checklist: [workers/art-adamsimms-xyz-newsletter/SETUP.md](workers/art-adamsimms-xyz-newsletter/SETUP.md).
