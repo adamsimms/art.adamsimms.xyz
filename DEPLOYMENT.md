@@ -63,13 +63,9 @@ node scripts/perf-media.mjs
 
 ## robots.txt + Cloudflare AI crawlers
 
-`public/robots.txt` lists AI crawler `Disallow` rules in-repo. In the Cloudflare dashboard for `adamsimms.xyz`:
+`public/robots.txt` allows all crawlers (`User-agent: *` / `Allow: /`) and points at the sitemap. No per-bot AI Disallows.
 
-1. Overview → **Manage AI bot access** → open **Manage your robots.txt** (currently “Set your preference to block training…”).
-2. Uncheck **Display Content Signals Policy** (keeps managed AI Disallows, drops the `Content-Signal:` line Lighthouse flags).
-3. Or turn that managed robots preference **off** entirely and rely on the in-repo Disallows.
-
-Keep the in-repo Disallows for GPTBot, Google-Extended, etc. either way.
+In the Cloudflare dashboard for `adamsimms.xyz`, turn **off** managed robots.txt / “Set your preference to block training…” (and **Display Content Signals Policy** if shown). Otherwise Cloudflare can inject AI `Disallow` / `Content-Signal` lines that override the in-repo allow-all policy and may ding Lighthouse SEO.
 
 ## Assembled apps
 
