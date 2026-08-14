@@ -31,4 +31,4 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md). Assemble notes: [docs/CLOUDBERRY-ASSEMBLE.
 
 ## URL structure
 
-Flat work URLs (`/sublime`, `/cloudberry`, …). Archive: `/cloudberry/archive/`. Experiences: `/dory/`, `/adrift/experience/`, `/waves/`.
+Flat work URLs (`/barrens`, `/cloudberry`, …). Archive: `/cloudberry/archive/`. Experiences: `/dory/`, `/adrift/experience/`, `/waves/`.

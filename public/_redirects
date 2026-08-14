@@ -30,7 +30,9 @@
 /newfoundland/ /newfoundland 301
 /pinchards-island/ /pinchards-island 301
 /resettlement/ /resettlement 301
-/sublime/ /sublime 301
+/sublime /barrens 301
+/sublime/ /barrens 301
+/barrens/ /barrens 301
 /washed-up/ /washed-up 301
 /maps/natural-resources/ /maps/natural-resources 301
 /maps/railway/ /maps/railway 301

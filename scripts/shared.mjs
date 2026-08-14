@@ -12,7 +12,7 @@ export const SOURCE_BASE = 'https://adamsim.ms';
 export const MEDIA_BASE = 'https://media.adamsimms.xyz';
 
 export const WORK_SLUGS = [
-	'sublime',
+	'barrens',
 	'washed-up',
 	'from-to',
 	'newfoundland',

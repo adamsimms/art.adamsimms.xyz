@@ -77,7 +77,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Public Art
 
-- [**Sublime**](/sublime) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
+- [**Barrens**](/barrens) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
 - [**À Louer**](https://www.umamontreal.com/alouer/?/projets/simms/) – [*UMA*](https://umamontreal.com/) – <span class="cv-meta">Montreal, Quebec, 2011–2012</span>
 - [**Art for Healing Foundation**](https://www.artforhealingfoundation.org/) – <span class="cv-meta">Montreal, Quebec, 2012</span>
 
@@ -103,13 +103,13 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 - ***Pour ne jamais oublier*** – [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – [*Dînette*](https://dinettemagazineboutique.com) – <span class="cv-meta">2021</span>
 - [**IGNITION 14 art show features Jane Austen, roadside restaurants and hanging logs**](https://www.concordia.ca/news/stories/2018/04/18/ignition-14-art-show-features-jane-austen-roadside-restaurants-and-hanging-logs.html) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">2018</span>
-- **Sublime** – [Issue 14](https://www.riddlefence.com/past-issues/issue-14) – [*Riddle Fence*](https://www.riddlefence.com/) – <span class="cv-meta">2013</span>
+- [**Barrens**](/barrens) – [Issue 14](https://www.riddlefence.com/past-issues/issue-14) – [*Riddle Fence*](https://www.riddlefence.com/) – <span class="cv-meta">2013</span>
 - **Unsettled** – [Issue 12](https://alecc.ca/?page_id=4) – [*The Goose*](https://alecc.ca/) – <span class="cv-meta">2013</span>
 - [**ARTSIDA5**](https://www.journaldemontreal.com/2013/04/18/des-oeuvres-de-kent-monkman-evergon-et-daniel-barkley-mises-aux-encheres) – [*Le Journal de Montréal*](https://www.journaldemontreal.com/) – <span class="cv-meta">2013</span>
 - [**Des photographies géantes dans les commerces vacants**](https://www.radio-canada.ca/nouvelles/arts_et_spectacles/2013/04/02/009-aetd-vitrines-art.shtml) – [*Radio-Canada*](https://ici.radio-canada.ca/) – <span class="cv-meta">2013</span>
 - [**À Louer**](https://www.cielvariable.ca/recent/92/index.php) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/) (CV92) – <span class="cv-meta">2012</span>
-- **Sublime** – [*Headlight Anthology*](https://headlightanthology.com/), Issue 15: ‘LOST, FOUND, and STOLEN’ – <span class="cv-meta">2012</span>
-- **Sublime** – [*Interfold*](http://interfoldmagazine.com/), Spring Issue – <span class="cv-meta">2012</span>
+- [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.com/), Issue 15: ‘LOST, FOUND, and STOLEN’ – <span class="cv-meta">2012</span>
+- [**Barrens**](/barrens) – [*Interfold*](http://interfoldmagazine.com/), Spring Issue – <span class="cv-meta">2012</span>
 - **Photographs jog our memories and our morals** – John Pohl, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2011</span>
 - **Washed-up in a city of loneliness** – Lori Callaghan, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2010</span>
 - **Exhibition Interview: Washed-up** – [*CTV News*](https://www.ctvnews.ca/) – <span class="cv-meta">2010</span>

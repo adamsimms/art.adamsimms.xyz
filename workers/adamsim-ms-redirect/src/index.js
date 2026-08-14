@@ -12,6 +12,7 @@ const RULES = [
 	{ match: /^\/work-with-me\/?$/i, to: () => `${ART}/collaborations` },
 	{ match: /^\/blog(?:\/.*)?$/i, to: () => `${ART}/` },
 	{ match: /^\/new-gallery-1\/?$/i, to: () => `${ART}/works` },
+	{ match: /^\/sublime\/?$/i, to: () => `${ART}/barrens` },
 ];
 
 export default {
