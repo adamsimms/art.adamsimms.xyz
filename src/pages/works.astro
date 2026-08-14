@@ -27,7 +27,7 @@ const orderedWork = work
 	variant="work"
 	footer={false}
 >
-	<section class="work-hover" aria-labelledby="works-heading" data-work-hover>
+	<section class="work-hover" aria-labelledby="works-heading" data-work-hover data-work-reveal>
 		<h1 id="works-heading" class="visually-hidden">Works</h1>
 		<div class="work-hover__stage">
 			<div class="work-hover__backgrounds" data-active="false" aria-hidden="true">
@@ -58,7 +58,7 @@ const orderedWork = work
 			<ul class="work-hover__list">
 				{
 					orderedWork.map((item, index) => (
-						<li>
+						<li style={`--work-i: ${index}`}>
 							<a
 								class="work-hover__link"
 								href={item.href}
