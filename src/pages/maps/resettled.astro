@@ -8,11 +8,11 @@ const description =
 const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=1-gIU1rTeKAwvGmqoiJZefa8p-qc';
 ---
 
-<Base title={title} description={description} variant="cv" noindex>
+<Base title={title} description={description} variant="page" noindex>
 	<article class="maps">
 		<header class="page-header">
 			<h1>Maps</h1>
-			<p class="maps__lead">{description}</p>
+			<p class="maps__lead measure--lede">{description}</p>
 			<MapsNav current="resettled" />
 		</header>
 

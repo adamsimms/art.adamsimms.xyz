@@ -3,7 +3,7 @@ title: CV
 description: Curriculum vitae for Adam Simms — education, teaching, exhibitions, talks, writing, press, and experience.
 ---
 
-<div class="cv-layout">
+<div class="cv-layout layout-split">
 <div class="cv-col">
 
 ## Education

@@ -20,6 +20,36 @@ Hand-written CSS in `global.css` — sparse artist layouts, not a utility framew
 - **Do not** add Tailwind, Open Props, or a layout-component library unless explicitly asked
 - Prefer tightening existing shells/grids over introducing a new grid system
 
+### Shell vs bleed
+
+Composed pages (About, CV, writing, project detail, maps, collaborations, research) use `.layout-shell` + `body--sheet`: gutter `--page-pad`, full viewport width, forced light palette. Header + footer use the same gutter.
+
+**Bleed** (pad 0 on main): homepage and works index. Works index still gets `body--sheet` for the white palette. Full-bleed media (maps canvases, lightboxes, gallery breakouts) can still escape the shell.
+
+### Variants
+
+| Variant | Use |
+|---|---|
+| `home` | Full-bleed hero |
+| `work` | Works index |
+| `writing` | Sticky header + TOC |
+| `page` | About, CV, project detail, maps, collaborations, research, and new composed sections |
+| default | 404 |
+
+A new composed page is `variant="page"` plus a content class. Use `.layout-split` (optional `.layout-split--tight`) for two-column sections. It stacks at **70rem**. Do not force writing’s TOC/figures grid or project intro (`1fr / 2fr`) onto `.layout-split`.
+
+Reading width: `.measure` (`66ch`) or `.measure--lede` (`38rem`).
+
+### Tokens (in `:root`)
+
+| Token | Role |
+|---|---|
+| `--page-pad` | Outer gutter (header, footer, shell mains) |
+| `--measure-prose` | Long reading (`66ch`) |
+| `--measure-lede` | Short intros (`38rem`) |
+| `--split-track` | Two-column track for `.layout-split` |
+| `--split-gap` / `--split-gap-tight` | Split column gaps |
+
 ## Motion
 
 See `animation.mdc` — CSS + Astro view transitions for chrome; GSAP only later for narrative project views.

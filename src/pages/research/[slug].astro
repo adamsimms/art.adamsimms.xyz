@@ -36,7 +36,7 @@ const hasOutbound =
 	related.length > 0 || d.relatedWorks.length > 0 || d.relatedWriting.length > 0;
 ---
 
-<Base title={d.title} description={description} variant="cv" noindex>
+<Base title={d.title} description={description} variant="page" noindex>
 	<article class="research research--detail">
 		<p class="research-back">
 			<a href="/research">Research</a>
@@ -67,7 +67,7 @@ const hasOutbound =
 			)
 		}
 
-		{d.summary && <p class="research-summary">{d.summary}</p>}
+		{d.summary && <p class="research-summary measure--lede">{d.summary}</p>}
 
 		{
 			citation && (
@@ -139,7 +139,7 @@ const hasOutbound =
 			)
 		}
 
-		<div class="research-body prose">
+		<div class="research-body prose measure--lede">
 			<Content />
 		</div>
 

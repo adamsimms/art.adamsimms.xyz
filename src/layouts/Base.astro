@@ -23,7 +23,7 @@ interface Props {
 	imageAlt?: string;
 	ogType?: 'website' | 'article';
 	noindex?: boolean;
-	variant?: 'default' | 'home' | 'work' | 'about' | 'cv' | 'writing';
+	variant?: 'default' | 'home' | 'work' | 'writing' | 'page';
 	/** When false, omit the site footer (e.g. full-viewport works index). */
 	footer?: boolean;
 	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
@@ -86,9 +86,10 @@ const structuredData = [
 
 const isHome = variant === 'home';
 const isWork = variant === 'work';
-const isAbout = variant === 'about';
-const isCv = variant === 'cv';
 const isWriting = variant === 'writing';
+const isPage = variant === 'page';
+const isShell = isWriting || isPage;
+const isSheet = isWork || isShell;
 ---
 
 <!doctype html>
@@ -177,11 +178,11 @@ const isWriting = variant === 'writing';
 			});
 		</script>
 	</head>
-	<body class:list={[isHome && 'body--home', isWork && 'body--work', isAbout && 'body--about', isCv && 'body--cv', isWriting && 'body--writing']}>
+	<body class:list={[isHome && 'body--home', isWork && 'body--work', isWriting && 'body--writing', isPage && 'body--page', isSheet && 'body--sheet']}>
 		{
 			isHome ? (
 				<>
-					<Nav />
+					<Nav logotype />
 					<main class="main--home">
 						<slot />
 					</main>
@@ -193,9 +194,9 @@ const isWriting = variant === 'writing';
 						<main
 							class:list={[
 								isWork && 'main--work',
-								isAbout && 'main--about',
-								isCv && 'main--cv',
 								isWriting && 'main--writing',
+								isPage && 'main--page',
+								isShell && 'layout-shell',
 							]}
 						>
 							<slot />

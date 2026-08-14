@@ -14,11 +14,11 @@ const mapAlt =
 const gazetteerUrl = 'https://publications.gc.ca/site/eng/9.883609/publication.html';
 ---
 
-<Base title={title} description={description} variant="cv" noindex>
+<Base title={title} description={description} variant="page" noindex>
 	<article class="maps">
 		<header class="page-header">
 			<h1>Maps</h1>
-			<p class="maps__lead">{description}</p>
+			<p class="maps__lead measure--lede">{description}</p>
 			<MapsNav current="natural-resources" />
 		</header>
 
@@ -30,7 +30,7 @@ const gazetteerUrl = 'https://publications.gc.ca/site/eng/9.883609/publication.h
 			width={2118}
 			height={2400}
 		>
-			<figcaption class="maps__credit">
+			<figcaption class="maps__credit measure--lede">
 				Newfoundland. Department of Natural Resources.
 				<cite>Newfoundland</cite> [10-mile map]. Under the direction of the Commissioner for
 				Natural Resources. [St. John’s], 1941. Scale 10 miles to 1 inch (approx. 1:633,600).

@@ -23,7 +23,7 @@ const [statementLead, ...statementRest] = statementParagraphs;
 	description={description}
 	image={portrait}
 	imageAlt="Adam Simms"
-	variant="about"
+	variant="page"
 >
 	<article class="about">
 		<h1 class="visually-hidden">{page.data.title}</h1>
@@ -32,10 +32,10 @@ const [statementLead, ...statementRest] = statementParagraphs;
 			statementLead ? (
 				<section class="about-statement">
 					<h2>Artist Statement</h2>
-					<div class="about-statement__grid">
-						<p class="about-statement__lead">{statementLead}</p>
+					<div class="about-statement__grid layout-split layout-split--tight">
+						<p class="about-statement__lead measure">{statementLead}</p>
 						{statementRest.length ? (
-							<div class="about-statement__rest">
+							<div class="about-statement__rest measure">
 								{statementRest.map((paragraph) => (
 									<p>{paragraph}</p>
 								))}
@@ -48,8 +48,8 @@ const [statementLead, ...statementRest] = statementParagraphs;
 
 		<section class="about-bio-section" aria-labelledby="about-bio-heading">
 			<h2 id="about-bio-heading">Biography</h2>
-			<div class="about-bio-grid">
-				<div class="about-bio prose">
+			<div class="about-bio-grid layout-split layout-split--tight">
+				<div class="about-bio prose measure">
 					<Content />
 				</div>
 				<figure class="about-portrait">

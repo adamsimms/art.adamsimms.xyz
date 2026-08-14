@@ -113,12 +113,12 @@ const projects = [
 	description={description}
 	image={ogImage}
 	imageAlt={ogImageAlt}
-	variant="cv"
+	variant="page"
 >
 	<article class="collaborations">
 		<header class="page-header">
 			<h1>{title}</h1>
-			{lead ? <p class="collaborations__lead">{lead}</p> : null}
+			{lead ? <p class="collaborations__lead measure--lede">{lead}</p> : null}
 		</header>
 
 		<ul class="collaborations__list">
@@ -163,29 +163,31 @@ const projects = [
 									const isLcp = project.slug === 'goose-village' && index === 0;
 									return (
 										<li>
-											<button
-												type="button"
-												class="collaborations__zoom"
-												data-collab-zoom
-												data-index={index}
-												data-full-src={image.full}
-												aria-label={`View larger: ${alt}`}
-											>
-												<picture>
-													{image.displayAvif ? (
-														<source srcset={image.displayAvif} type="image/avif" />
-													) : null}
-													<img
-														src={image.displayJpg}
-														alt={alt}
-														width="960"
-														height="960"
-														loading={isLcp ? 'eager' : 'lazy'}
-														decoding="async"
-														fetchpriority={isLcp ? 'high' : undefined}
-													/>
-												</picture>
-											</button>
+											<figure class="collaborations__figure">
+												<button
+													type="button"
+													class="collaborations__zoom"
+													data-collab-zoom
+													data-index={index}
+													data-full-src={image.full}
+													aria-label={`View larger: ${alt}`}
+												>
+													<picture>
+														{image.displayAvif ? (
+															<source srcset={image.displayAvif} type="image/avif" />
+														) : null}
+														<img
+															src={image.displayJpg}
+															alt={alt}
+															width="960"
+															height="960"
+															loading={isLcp ? 'eager' : 'lazy'}
+															decoding="async"
+															fetchpriority={isLcp ? 'high' : undefined}
+														/>
+													</picture>
+												</button>
+											</figure>
 										</li>
 									);
 								})}

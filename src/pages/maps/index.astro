@@ -13,11 +13,11 @@ const view = { lat: 49.1998, lon: -53.4865, zoom: 13.5 };
 const cabinDms = { lat: '49°12′09.14″ N', lon: '53°29′09.11″ W' };
 ---
 
-<Base title={title} description={description} variant="cv" noindex>
+<Base title={title} description={description} variant="page" noindex>
 	<article class="maps">
 		<header class="page-header">
 			<h1>Maps</h1>
-			<p class="maps__lead">{description}</p>
+			<p class="maps__lead measure--lede">{description}</p>
 			<MapsNav current="satellite" />
 		</header>
 
@@ -32,7 +32,7 @@ const cabinDms = { lat: '49°12′09.14″ N', lon: '53°29′09.11″ W' };
 							aria-label={mapLabel}
 						/>
 					</div>
-					<figcaption class="maps__credit">
+					<figcaption class="maps__credit measure--lede">
 						Pinchard’s Island, Bonavista Bay, Newfoundland and Labrador. A resettled outport
 						at the northern edge of the bay, emptied in the early 1950s when its houses were
 						floated to nearby communities. Marker: family cabin <cite>Precious Memories</cite>
@@ -41,7 +41,7 @@ const cabinDms = { lat: '49°12′09.14″ N', lon: '53°29′09.11″ W' };
 					</figcaption>
 				</figure>
 			) : (
-				<p class="maps__missing">
+				<p class="maps__missing measure--lede">
 					Map unavailable. Set <code>PUBLIC_MAPBOX_TOKEN</code> (Mapbox public <code>pk.*</code>{' '}
 					token) and allowlist <code>art.adamsimms.xyz</code> on the token.
 				</p>

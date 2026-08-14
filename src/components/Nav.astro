@@ -1,5 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
+import Logotype from './Logotype.astro';
+
+interface Props {
+	logotype?: boolean;
+}
+
+const { logotype = false } = Astro.props;
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const work = await getCollection('work');
@@ -14,10 +21,16 @@ const links = [
 
 <header class="site-header">
 	<a class="site-title" href="/" aria-label="Adam Simms">
-		<span class="site-title__mark" aria-hidden="true">
-			<span class="site-title__mono">AS</span>
-			<span class="site-title__full">Adam Simms</span>
-		</span>
+		{
+			logotype ? (
+				<Logotype />
+			) : (
+				<span class="site-title__mark" aria-hidden="true">
+					<span class="site-title__mono">AS</span>
+					<span class="site-title__full">Adam Simms</span>
+				</span>
+			)
+		}
 	</a>
 
 	<nav class="site-nav" aria-label="Main">

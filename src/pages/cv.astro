@@ -9,7 +9,7 @@ const { Content } = await render(page);
 const description = metaDescription(page.data.description);
 ---
 
-<Base title={page.data.title} description={description} variant="cv">
+<Base title={page.data.title} description={description} variant="page">
 	<article class="prose cv">
 		<header class="page-header">
 			<h1>{page.data.title}</h1>

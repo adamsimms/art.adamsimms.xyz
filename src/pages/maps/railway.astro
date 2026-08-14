@@ -15,11 +15,11 @@ const lacUrl =
 	'https://recherche-collection-search.bac-lac.gc.ca/eng/Home/Record?IdNumber=3932909&app=fonandcol&ecopy=e010751885-v6';
 ---
 
-<Base title={title} description={description} variant="cv" noindex>
+<Base title={title} description={description} variant="page" noindex>
 	<article class="maps">
 		<header class="page-header">
 			<h1>Maps</h1>
-			<p class="maps__lead">{description}</p>
+			<p class="maps__lead measure--lede">{description}</p>
 			<MapsNav current="railway" />
 		</header>
 
@@ -31,7 +31,7 @@ const lacUrl =
 			width={2388}
 			height={2400}
 		>
-			<figcaption class="maps__credit">
+			<figcaption class="maps__credit measure--lede">
 				Newfoundland Railway. <cite>Map of Newfoundland</cite> [railway and steamship lines].
 				[Newfoundland], ca. 1931. Memorial University of Newfoundland Map Room,
 				G/3436/P7/1931/M3 (call number stamped on sheet). Related later issue:{' '}

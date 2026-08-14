@@ -8,11 +8,11 @@ const description =
 const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=19NfRJjMQjtei3GXok6oK9WOqnsw';
 ---
 
-<Base title={title} description={description} variant="cv" noindex>
+<Base title={title} description={description} variant="page" noindex>
 	<article class="maps">
 		<header class="page-header">
 			<h1>Maps</h1>
-			<p class="maps__lead">{description}</p>
+			<p class="maps__lead measure--lede">{description}</p>
 			<MapsNav current="trees" />
 		</header>
 
@@ -25,7 +25,7 @@ const iframeSrc = 'https://www.google.com/maps/d/u/0/embed?mid=19NfRJjMQjtei3GXo
 					allowfullscreen
 					loading="lazy"></iframe>
 			</div>
-			<figcaption class="maps__credit">
+			<figcaption class="maps__credit measure--lede">
 				This geolocation map represents the 53 black spruce trees I planted on Pinchard’s
 				Island, one for each house floated off during resettlement. Research for the MFA
 				thesis{' '}

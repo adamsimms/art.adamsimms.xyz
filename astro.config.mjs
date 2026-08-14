@@ -25,4 +25,14 @@ export default defineConfig({
 			},
 		}),
 	],
+	vite: {
+		server: {
+			proxy: {
+				'/adrift/api/weather': {
+					target: 'https://art.adamsimms.xyz',
+					changeOrigin: true,
+				},
+			},
+		},
+	},
 });
