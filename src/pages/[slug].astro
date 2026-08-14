@@ -199,7 +199,10 @@ const creativeWorkLd = {
 
 			{
 				bodyStills.length > 0 ? (
-					<div class="project-stills" data-project-body>
+					<div
+						class:list={['project-stills', stillsAfterBody && 'project-stills--reference']}
+						data-project-body
+					>
 						<h2 class="project-stills__title">
 							{stillsAfterBody ? 'Reference' : 'Documentation'}
 						</h2>

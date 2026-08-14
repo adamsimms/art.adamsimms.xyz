@@ -1851,6 +1851,10 @@ body:has(.work-hover) {
 	object-position: center;
 }
 
+.project-stills--reference .stills-thumbs__zoom img {
+	filter: grayscale(1);
+}
+
 /* Mouse only: quiet resting state so docs sit below the work.
    Touch / coarse pointers stay at full opacity (no hover to reveal). */
 @media (hover: hover) and (pointer: fine) {
@@ -1859,8 +1863,18 @@ body:has(.work-hover) {
 		transition: opacity 200ms ease;
 	}
 
+	.project-stills--reference .stills-thumbs__zoom img {
+		transition:
+			opacity 200ms ease,
+			filter 200ms ease;
+	}
+
 	.stills-thumbs__zoom:is(:hover, :focus-visible) img {
 		opacity: 1;
+	}
+
+	.project-stills--reference .stills-thumbs__zoom:is(:hover, :focus-visible) img {
+		filter: none;
 	}
 }
 
