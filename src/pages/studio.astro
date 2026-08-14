@@ -5,17 +5,17 @@ import Base from '../layouts/Base.astro';
 import { getEntry } from 'astro:content';
 import { absoluteUrl, metaDescription } from '../lib/seo';
 
-const page = await getEntry('pages', 'collaborations');
-if (!page) throw new Error('Collaborations page not found');
+const page = await getEntry('pages', 'studio');
+if (!page) throw new Error('Studio page not found');
 
 const title = page.data.title;
 const description = metaDescription(page.data.description);
 const lead = page.data.statement?.trim() || '';
-const ogImage = absoluteUrl('/collaborations/goose-village/01.jpg');
+const ogImage = absoluteUrl('/studio/goose-village/01.jpg');
 const ogImageAlt = 'Goose Village publication designed by Adam Simms';
 
 function galleryImages(slug: string) {
-	const dir = path.join(process.cwd(), 'public/collaborations', slug);
+	const dir = path.join(process.cwd(), 'public/studio', slug);
 	if (!fs.existsSync(dir)) return [];
 	return fs
 		.readdirSync(dir)
@@ -23,9 +23,9 @@ function galleryImages(slug: string) {
 		.sort()
 		.map((file) => {
 			const base = file.replace(/\.jpe?g$/i, '');
-			const full = `/collaborations/${slug}/${file}`;
-			const displayJpg = `/collaborations/${slug}/${base}-960.jpg`;
-			const displayAvif = `/collaborations/${slug}/${base}-960.avif`;
+			const full = `/studio/${slug}/${file}`;
+			const displayJpg = `/studio/${slug}/${base}-960.jpg`;
+			const displayAvif = `/studio/${slug}/${base}-960.avif`;
 			const hasDisplay =
 				fs.existsSync(path.join(dir, `${base}-960.jpg`)) &&
 				fs.existsSync(path.join(dir, `${base}-960.avif`));
@@ -115,31 +115,31 @@ const projects = [
 	imageAlt={ogImageAlt}
 	variant="cv"
 >
-	<article class="collaborations">
+	<article class="studio">
 		<header class="page-header">
 			<h1>{title}</h1>
-			{lead ? <p class="collaborations__lead">{lead}</p> : null}
+			{lead ? <p class="studio__lead">{lead}</p> : null}
 		</header>
 
-		<ul class="collaborations__list">
+		<ul class="studio__list">
 			{
 				projects.map((project) => (
-					<li class="collaborations__item">
-						<div class="collaborations__copy">
-							<h2 class="collaborations__title">{project.title}</h2>
+					<li class="studio__item">
+						<div class="studio__copy">
+							<h2 class="studio__title">{project.title}</h2>
 							{project.author ? (
-								<p class="collaborations__author">{project.author}</p>
+								<p class="studio__author">{project.author}</p>
 							) : null}
-							<p class="collaborations__body">{project.body}</p>
+							<p class="studio__body">{project.body}</p>
 							{project.specs.length ? (
-								<ul class="collaborations__specs">
+								<ul class="studio__specs">
 									{project.specs.map((line) => (
 										<li>{line}</li>
 									))}
 								</ul>
 							) : null}
 							{project.links.length ? (
-								<ul class="collaborations__links">
+								<ul class="studio__links">
 									{project.links.map((link) => (
 										<li>
 											<a href={link.href}>{link.label}</a>
@@ -152,11 +152,11 @@ const projects = [
 						{project.images.length > 0 ? (
 							<ul
 								class:list={[
-									'collaborations__gallery',
-									{ 'collaborations__gallery--website': project.gallery === 'website' },
+									'studio__gallery',
+									{ 'studio__gallery--website': project.gallery === 'website' },
 								]}
-								data-collab-gallery
-								data-collab-title={project.title}
+								data-studio-gallery
+								data-studio-title={project.title}
 							>
 								{project.images.map((image, index) => {
 									const alt = `${project.imageAlt}${index === 0 ? '' : ` (${index + 1})`}`;
@@ -165,8 +165,8 @@ const projects = [
 										<li>
 											<button
 												type="button"
-												class="collaborations__zoom"
-												data-collab-zoom
+												class="studio__zoom"
+												data-studio-zoom
 												data-index={index}
 												data-full-src={image.full}
 												aria-label={`View larger: ${alt}`}
@@ -191,47 +191,47 @@ const projects = [
 								})}
 							</ul>
 						) : (
-							<figure class="collaborations__media collaborations__media--empty" aria-hidden="true" />
+							<figure class="studio__media studio__media--empty" aria-hidden="true" />
 						)}
 					</li>
 				))
 			}
 		</ul>
 
-		<section class="collaborations__hire">
-			<h2 class="collaborations__hire-title">Let’s work together</h2>
-			<p class="collaborations__availability">
+		<section class="studio__hire">
+			<h2 class="studio__hire-title">Let’s work together</h2>
+			<p class="studio__availability">
 				I’m available for artist books, catalogues, exhibition graphics, and websites. If you
-				have a project in mind. Let’s collaborate: <a data-email-mailto href="#">Email</a>.
+				have a project in mind. Get in touch: <a data-email-mailto href="#">Email</a>.
 			</p>
 		</section>
 	</article>
 
-	<dialog class="collab-lightbox" aria-label="Enlarged image">
-		<button type="button" class="collab-lightbox__close" data-collab-lightbox-close aria-label="Close">
+	<dialog class="studio-lightbox" aria-label="Enlarged image">
+		<button type="button" class="studio-lightbox__close" data-studio-lightbox-close aria-label="Close">
 			Close
 		</button>
 		<button
 			type="button"
-			class="collab-lightbox__nav collab-lightbox__nav--prev"
-			data-collab-lightbox-prev
+			class="studio-lightbox__nav studio-lightbox__nav--prev"
+			data-studio-lightbox-prev
 			aria-label="Previous image"
 		>
 			Prev
 		</button>
 		<button
 			type="button"
-			class="collab-lightbox__nav collab-lightbox__nav--next"
-			data-collab-lightbox-next
+			class="studio-lightbox__nav studio-lightbox__nav--next"
+			data-studio-lightbox-next
 			aria-label="Next image"
 		>
 			Next
 		</button>
-		<figure class="collab-lightbox__figure">
-			<img class="collab-lightbox__img" alt="" />
-			<figcaption class="collab-lightbox__caption">
-				<span class="collab-lightbox__title" data-collab-lightbox-title></span>
-				<span class="collab-lightbox__count" data-collab-lightbox-count></span>
+		<figure class="studio-lightbox__figure">
+			<img class="studio-lightbox__img" alt="" />
+			<figcaption class="studio-lightbox__caption">
+				<span class="studio-lightbox__title" data-studio-lightbox-title></span>
+				<span class="studio-lightbox__count" data-studio-lightbox-count></span>
 			</figcaption>
 		</figure>
 	</dialog>
@@ -240,25 +240,25 @@ const projects = [
 <script>
 	import { contactEmail } from '../lib/contact-email';
 
-	function initCollabEmail() {
+	function initStudioEmail() {
 		const address = contactEmail();
-		document.querySelectorAll('.collaborations__hire [data-email-mailto]').forEach((node) => {
+		document.querySelectorAll('.studio__hire [data-email-mailto]').forEach((node) => {
 			if (!(node instanceof HTMLAnchorElement)) return;
 			node.href = `mailto:${address}`;
 			if (!node.hasAttribute('data-keep-label')) node.textContent = address;
 		});
 	}
 
-	function initCollabLightbox() {
-		const dialog = document.querySelector('.collab-lightbox');
+	function initStudioLightbox() {
+		const dialog = document.querySelector('.studio-lightbox');
 		if (!(dialog instanceof HTMLDialogElement)) return;
 
-		const imgEl = dialog.querySelector('.collab-lightbox__img');
-		const titleEl = dialog.querySelector('[data-collab-lightbox-title]');
-		const countEl = dialog.querySelector('[data-collab-lightbox-count]');
-		const closeBtn = dialog.querySelector('[data-collab-lightbox-close]');
-		const prevBtn = dialog.querySelector('[data-collab-lightbox-prev]');
-		const nextBtn = dialog.querySelector('[data-collab-lightbox-next]');
+		const imgEl = dialog.querySelector('.studio-lightbox__img');
+		const titleEl = dialog.querySelector('[data-studio-lightbox-title]');
+		const countEl = dialog.querySelector('[data-studio-lightbox-count]');
+		const closeBtn = dialog.querySelector('[data-studio-lightbox-close]');
+		const prevBtn = dialog.querySelector('[data-studio-lightbox-prev]');
+		const nextBtn = dialog.querySelector('[data-studio-lightbox-next]');
 		if (
 			!(imgEl instanceof HTMLImageElement) ||
 			!(titleEl instanceof HTMLElement) ||
@@ -291,7 +291,7 @@ const projects = [
 
 		const openAt = (gallery, startIndex) => {
 			if (!(gallery instanceof HTMLElement)) return;
-			const buttons = [...gallery.querySelectorAll('[data-collab-zoom]')];
+			const buttons = [...gallery.querySelectorAll('[data-studio-zoom]')];
 			slides = buttons
 				.map((btn) => {
 					if (!(btn instanceof HTMLElement)) return null;
@@ -303,7 +303,7 @@ const projects = [
 				})
 				.filter(Boolean);
 			if (!slides.length) return;
-			title = gallery.dataset.collabTitle || '';
+			title = gallery.dataset.studioTitle || '';
 			index = Math.max(0, Math.min(startIndex, slides.length - 1));
 			render();
 			if (!dialog.open) dialog.showModal();
@@ -351,9 +351,9 @@ const projects = [
 			document.addEventListener('click', (event) => {
 				const target = event.target;
 				if (!(target instanceof Element)) return;
-				const btn = target.closest('[data-collab-zoom]');
+				const btn = target.closest('[data-studio-zoom]');
 				if (!(btn instanceof HTMLButtonElement)) return;
-				const gallery = btn.closest('[data-collab-gallery]');
+				const gallery = btn.closest('[data-studio-gallery]');
 				if (!gallery) return;
 				event.preventDefault();
 				const start = Number(btn.dataset.index || '0');
@@ -362,10 +362,10 @@ const projects = [
 		}
 	}
 
-	function initCollaborations() {
-		initCollabEmail();
-		initCollabLightbox();
+	function initStudio() {
+		initStudioEmail();
+		initStudioLightbox();
 	}
 
-	document.addEventListener('astro:page-load', initCollaborations);
+	document.addEventListener('astro:page-load', initStudio);
 </script>

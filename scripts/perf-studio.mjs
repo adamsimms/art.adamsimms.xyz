@@ -1,8 +1,8 @@
 /**
- * Resize collaboration gallery images for LCP-friendly display.
+ * Resize studio gallery images for LCP-friendly display.
  * Writes beside originals: 01-960.jpg, 01-960.avif (max width 960).
  *
- * Usage: node scripts/perf-collaborations.mjs
+ * Usage: node scripts/perf-studio.mjs
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -11,7 +11,7 @@ import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
-const COLLAB_DIR = path.join(ROOT, 'public', 'collaborations');
+const STUDIO_DIR = path.join(ROOT, 'public', 'studio');
 const MAX_WIDTH = 960;
 
 async function processDir(dir) {
@@ -34,15 +34,15 @@ async function processDir(dir) {
 			fs.stat(srcPath),
 		]);
 		console.log(
-			`  ${path.relative(COLLAB_DIR, srcPath)}: ${(srcStat.size / 1024).toFixed(0)} → jpg ${(jpgStat.size / 1024).toFixed(0)} / avif ${(avifStat.size / 1024).toFixed(0)} KiB`,
+			`  ${path.relative(STUDIO_DIR, srcPath)}: ${(srcStat.size / 1024).toFixed(0)} → jpg ${(jpgStat.size / 1024).toFixed(0)} / avif ${(avifStat.size / 1024).toFixed(0)} KiB`,
 		);
 	}
 }
 
 async function main() {
-	const projects = await fs.readdir(COLLAB_DIR);
+	const projects = await fs.readdir(STUDIO_DIR);
 	for (const project of projects) {
-		const dir = path.join(COLLAB_DIR, project);
+		const dir = path.join(STUDIO_DIR, project);
 		const st = await fs.stat(dir);
 		if (!st.isDirectory()) continue;
 		console.log(project);

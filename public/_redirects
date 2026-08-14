@@ -2,9 +2,12 @@
 /intro / 301
 /work /works 301
 /resume /cv 301
-# Brief /work-with-me alias → collaborations (page lives beside public/collaborations/* assets)
-/work-with-me /collaborations 301
-/work-with-me/ /collaborations 301
+# Brief /work-with-me alias → studio
+/work-with-me /studio 301
+/work-with-me/ /studio 301
+/collaborations /studio 301
+/collaborations/ /studio 301
+/collaborations/* /studio/:splat 301
 /blog / 301
 /blog/* / 301
 
@@ -14,7 +17,7 @@
 
 # Drop trailing slash on portfolio HTML routes (build.format=file)
 /about/ /about 301
-/collaborations/ /collaborations 301
+/studio/ /studio 301
 /cv/ /cv 301
 /works/ /works 301
 /maps/ /maps 301

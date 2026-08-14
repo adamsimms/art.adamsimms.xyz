@@ -29,7 +29,7 @@
     "deploy:preview": "npm run build:full && npx wrangler pages deploy dist --project-name=art-adamsimms-xyz --branch=preview",
     "upload:media": "node scripts/upload-r2.mjs",
     "media:perf": "node scripts/perf-media.mjs",
-    "media:collaborations": "node scripts/perf-collaborations.mjs",
+    "media:studio": "node scripts/perf-studio.mjs",
     "media:cloudberry-view": "node scripts/generate-cloudberry-view.mjs",
     "media:restamp-cache": "node scripts/restamp-r2-cache.mjs"
   },
