@@ -67,7 +67,7 @@ const endpoint = (
 					node.reset();
 					status.textContent = payload.pending
 						? 'Check your inbox to confirm.'
-						: 'Thanks — you’re in.';
+						: 'You’re on the list.';
 					status.dataset.state = 'success';
 				} catch {
 					status.textContent = 'Unable to subscribe. Try again later.';

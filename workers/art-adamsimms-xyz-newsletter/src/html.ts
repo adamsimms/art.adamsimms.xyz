@@ -84,7 +84,7 @@ document.getElementById('f').addEventListener('submit', async (e) => {
     headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
   const j = await r.json().catch(() => ({}));
   m.textContent = r.ok
-    ? (j.pending ? "Almost there — check your inbox to confirm." : "Thanks — you're in!")
+    ? (j.pending ? "Almost there — check your inbox to confirm." : "You're on the list.")
     : j.error === 'failed_captcha' ? "Please complete the verification."
     : j.error === 'missing_field' ? "Please fill in all required fields."
     : "Please check your email address.";
