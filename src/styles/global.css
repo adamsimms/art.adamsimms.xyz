@@ -160,6 +160,19 @@
 	box-sizing: border-box;
 }
 
+::view-transition-group(*) {
+	animation-duration: 0.55s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation-duration: 0s !important;
+	}
+}
+
 body {
 	margin: 0;
 	min-height: 100vh;
@@ -336,20 +349,6 @@ main {
 .site-title__mark {
 	display: inline-grid;
 	grid-template-areas: 'label';
-	/* H: one-shot fade-in */
-	opacity: 0;
-	animation: site-title-in 1s ease forwards;
-	animation-delay: 0.1s;
-}
-
-@keyframes site-title-in {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
 }
 
 /* F: AS out instant, full name fades in (no overlap either way) */
@@ -1013,7 +1012,16 @@ main {
 	letter-spacing: 0.02em;
 	color: #fff;
 	text-decoration: none;
-	transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	opacity: 0;
+	pointer-events: none;
+	transition:
+		opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+		color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-hero--credit-ready .home-hero__credit {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .home-hero__credit:is(:hover, :focus-visible) {
@@ -1026,9 +1034,22 @@ main {
 	}
 }
 
+@media (scripting: none) {
+	.home-hero__credit {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.home-hero__video {
 		display: none;
+	}
+
+	.home-hero__credit {
+		opacity: 1;
+		pointer-events: auto;
+		transition: none;
 	}
 }
 
@@ -1216,11 +1237,6 @@ body:has(.work-hover) {
 
 	.site-title {
 		transition: color 0.15s ease;
-	}
-
-	.site-title__mark {
-		animation: none;
-		opacity: 1;
 	}
 
 	.site-title__mono,
@@ -1503,7 +1519,6 @@ body:has(.work-hover) {
 	padding: 0 2rem 4rem;
 }
 
-.project[data-project-reveal] .project-title,
 .project[data-project-reveal] .project-medium,
 .project[data-project-reveal] [data-project-body] {
 	opacity: 0;
@@ -1514,7 +1529,6 @@ body:has(.work-hover) {
 	opacity: 1;
 }
 
-.project[data-project-reveal][data-ready] .project-title,
 .project[data-project-reveal][data-ready] .project-medium {
 	animation: project-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
 }
@@ -1534,7 +1548,6 @@ body:has(.work-hover) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.project[data-project-reveal] .project-title,
 	.project[data-project-reveal] .project-medium,
 	.project[data-project-reveal] [data-project-body] {
 		opacity: 1;
@@ -1543,7 +1556,6 @@ body:has(.work-hover) {
 }
 
 @media (scripting: none) {
-	.project[data-project-reveal] .project-title,
 	.project[data-project-reveal] .project-medium,
 	.project[data-project-reveal] [data-project-body] {
 		opacity: 1;

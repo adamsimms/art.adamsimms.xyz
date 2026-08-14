@@ -20,7 +20,12 @@ const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 >
 	<section class="home-hero" aria-labelledby="home-heading" data-home-hero>
 		<h1 id="home-heading" class="visually-hidden">Adam Simms</h1>
-		<a class="home-hero__link" href="/light-house" aria-label="Light House, 2020">
+		<a
+			class="home-hero__link"
+			href="/light-house"
+			aria-label="Light House, 2020"
+			transition:name="work-cover-light-house"
+		>
 			<picture>
 				<source
 					type="image/avif"
@@ -61,13 +66,38 @@ const videoSrc1080 = `${mediaBase}/hero-1080.mp4`;
 		(() => {
 			const init = () => {
 				const root = document.querySelector('[data-home-hero]');
-				if (!(root instanceof HTMLElement) || root.dataset.videoInit === '1') return;
+				if (!(root instanceof HTMLElement)) return;
+
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+				if (root.dataset.creditInit !== '1') {
+					root.dataset.creditInit = '1';
+					const revealCredit = () => {
+						root.classList.add('home-hero--credit-ready');
+					};
+					const poster = root.querySelector('.home-hero__poster');
+					if (reduceMotion) {
+						revealCredit();
+					} else if (poster instanceof HTMLImageElement) {
+						const show = () => {
+							requestAnimationFrame(revealCredit);
+						};
+						if (poster.complete && poster.naturalWidth > 0) show();
+						else {
+							poster.addEventListener('load', show, { once: true });
+							poster.addEventListener('error', show, { once: true });
+						}
+					} else {
+						revealCredit();
+					}
+				}
+
+				if (root.dataset.videoInit === '1') return;
 				root.dataset.videoInit = '1';
 
 				const video = root.querySelector('.home-hero__video');
 				if (!(video instanceof HTMLVideoElement)) return;
 
-				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 				const saveData = Boolean(navigator.connection?.saveData);
 				if (reduceMotion || saveData) return;
 

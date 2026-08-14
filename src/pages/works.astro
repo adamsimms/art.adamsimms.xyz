@@ -34,7 +34,11 @@ const orderedWork = work
 				{
 					orderedWork.map((item, index) =>
 						item.cover ? (
-							<div class="work-hover__bg" data-index={String(index)}>
+							<div
+								class="work-hover__bg"
+								data-index={String(index)}
+								data-slug={item.slug}
+							>
 								<picture>
 									<source data-srcset={item.cover} type="image/avif" />
 									<img
@@ -55,7 +59,12 @@ const orderedWork = work
 				{
 					orderedWork.map((item, index) => (
 						<li>
-							<a class="work-hover__link" href={item.href} data-index={String(index)}>
+							<a
+								class="work-hover__link"
+								href={item.href}
+								data-index={String(index)}
+								transition:name={`work-title-${item.slug}`}
+							>
 								{item.title}
 							</a>
 						</li>
@@ -157,6 +166,12 @@ const orderedWork = work
 				}, FADE_MS);
 			};
 
+			const setCoverTransition = (bg, on) => {
+				if (!(bg instanceof HTMLElement)) return;
+				const slug = bg.getAttribute('data-slug');
+				bg.style.viewTransitionName = on && slug ? 'work-cover-' + slug : 'none';
+			};
+
 			const setActive = (index) => {
 				backgrounds.dataset.active = index >= 0 ? 'true' : 'false';
 
@@ -164,8 +179,10 @@ const orderedWork = work
 					if (img.getAttribute('data-index') === String(index)) {
 						ensureLoaded(img);
 						img.setAttribute('data-active', '');
+						setCoverTransition(img, true);
 					} else {
 						img.removeAttribute('data-active');
+						setCoverTransition(img, false);
 					}
 				});
 
@@ -195,6 +212,15 @@ const orderedWork = work
 			};
 
 			links.forEach((link) => {
+				link.addEventListener('pointerdown', () => {
+					clearTimeout(clearTimer);
+					const index = Number(link.getAttribute('data-index'));
+					measure();
+					const rect = link.getBoundingClientRect();
+					setTarget(rect.left + rect.width / 2, rect.top + rect.height / 2);
+					setActive(index);
+				});
+
 				link.addEventListener('pointerenter', (event) => {
 					if (event.pointerType === 'touch') return;
 					clearTimeout(clearTimer);

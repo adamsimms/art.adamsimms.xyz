@@ -126,7 +126,9 @@ const creativeWorkLd = {
 			<div class="project-intro">
 				<div class="project-intro__text">
 					<div class="project-intro__head">
-						<h1 class="project-title">{entry.data.title}</h1>
+						<h1 class="project-title" transition:name={`work-title-${entry.data.slug}`}>
+							{entry.data.title}
+						</h1>
 						{medium ? <p class="project-medium">{medium}</p> : null}
 					</div>
 
@@ -173,7 +175,7 @@ const creativeWorkLd = {
 
 				{
 					heroImages.length > 0 || vimeoId ? (
-						<div data-project-hero>
+						<div data-project-hero transition:name={`work-cover-${entry.data.slug}`}>
 							<WorkGallery
 								images={heroImages}
 								title={entry.data.title}

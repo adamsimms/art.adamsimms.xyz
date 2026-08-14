@@ -8,7 +8,7 @@ alwaysApply: true
 Default motion stack:
 
 - **CSS** transitions/keyframes for UI chrome (nav, title, hovers)
-- **Astro view transitions** (`ClientRouter`, `fade`) for page changes
+- **Astro view transitions** (`ClientRouter`): shared-element morphs (`transition:name` on work cover + title from Works, and home Light House media). No whole-document fade. `main` uses a short fade. Nav stays via `site-header`.
 - Prefer no animation framework for general site chrome
 
 ## Future: site preload
