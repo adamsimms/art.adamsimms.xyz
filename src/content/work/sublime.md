@@ -10,8 +10,8 @@ description: |
   Fog runs through the work. Often read as melancholy, it turns almost playful: clouds echo rock, fog erases the horizon, and wind shows only in the lean of trees. The pictures are thick with texture: snow-laden branches, grassy hills, faceted cliffs, the rippled surface of the sea. Others ask for a longer look, for what sits just beyond the weather.
 
   In some frames I place a figure in the land to play with our relationship to it, seen from behind. Unlike the tiny staffage of Hudson River School canvases, these bodies fit the scale around them. A sweater’s pattern nearly meets the horizon; a camouflage hat takes the palette of the shore. People and place share a footing, briefly. The work opened the questions that followed, and led me into photographing [resettled communities](/resettlement).
-cover: "https://media.adamsimms.xyz/work/sublime/01.avif"
-coverFallback: "https://media.adamsimms.xyz/work/sublime/01.jpg"
+cover: "https://media.adamsimms.xyz/work/sublime/01.avif?v=20260814"
+coverFallback: "https://media.adamsimms.xyz/work/sublime/01.jpg?v=20260814"
 galleryFile: sublime.json
 order: 1
 year: "2010-Ongoing"
