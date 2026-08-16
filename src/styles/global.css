@@ -160,6 +160,28 @@
 	box-sizing: border-box;
 }
 
+::selection {
+	background: color-mix(in srgb, var(--link) 42%, var(--bg));
+	color: var(--text);
+}
+
+::-moz-selection {
+	background: color-mix(in srgb, var(--link) 42%, var(--bg));
+	color: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+	::selection {
+		background: color-mix(in srgb, var(--link) 58%, var(--bg));
+		color: var(--text);
+	}
+
+	::-moz-selection {
+		background: color-mix(in srgb, var(--link) 58%, var(--bg));
+		color: var(--text);
+	}
+}
+
 ::view-transition-group(*) {
 	animation-duration: 0.55s;
 	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -5005,4 +5027,86 @@ body:has(.not-found) {
 
 .research-body > :first-child {
 	margin-top: 0;
+}
+
+/* Site cursor: inverted circle. Yields to + zoom and video play. Fine pointers only. */
+.site-cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	display: none;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: 0;
+	padding: 0;
+	pointer-events: none;
+	mix-blend-mode: difference;
+	opacity: 0;
+	transform: translate(-50%, -50%);
+	transition: opacity 0.12s ease;
+}
+
+.site-cursor.is-visible {
+	opacity: 1;
+}
+
+.site-cursor[data-hide='true'] {
+	opacity: 0;
+	transition: none;
+}
+
+.site-cursor__inner {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: #fff;
+	transform: scale(1);
+	transform-origin: center center;
+	transition: transform 0.28s ease;
+}
+
+.site-cursor[data-hot='true'] .site-cursor__inner {
+	transform: scale(0.55);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.site-cursor {
+		display: block;
+	}
+
+	html[data-site-cursor='on'],
+	html[data-site-cursor='on'] * {
+		cursor: none;
+	}
+
+	html[data-site-cursor='on'] .stills-thumbs__zoom,
+	html[data-site-cursor='on'] .stills-thumbs__zoom *,
+	html[data-site-cursor='on'] .studio__zoom,
+	html[data-site-cursor='on'] .studio__zoom *,
+	html[data-site-cursor='on'] .maps__image-link,
+	html[data-site-cursor='on'] .maps__image-link *,
+	html[data-site-cursor='on'] .writing-figure__zoom,
+	html[data-site-cursor='on'] .writing-figure__zoom * {
+		cursor: var(--cursor-plus);
+	}
+
+	html[data-site-cursor='on'] iframe,
+	html[data-site-cursor='on'] input,
+	html[data-site-cursor='on'] textarea,
+	html[data-site-cursor='on'] select,
+	html[data-site-cursor='on'] [contenteditable='true'] {
+		cursor: auto;
+	}
+
+	html[data-site-cursor='on'] .stills-lightbox__close {
+		cursor: pointer;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.site-cursor,
+	.site-cursor__inner {
+		transition: none;
+	}
 }

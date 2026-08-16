@@ -1,0 +1,126 @@
+<div class="site-cursor" data-site-cursor aria-hidden="true" transition:persist="site-cursor">
+	<div class="site-cursor__inner"></div>
+</div>
+
+<script>
+	const PLUS =
+		'.stills-thumbs__zoom, .studio__zoom, .maps__image-link, .writing-figure__zoom';
+	const TAKEOVER =
+		'.gallery__video-play, .gallery__viewport[data-cursor="true"], .stills-lightbox[data-cursor="true"], .stills-lightbox__close, .work-hover__stage:has(.work-hover__bg[data-active])';
+	const TEXT = 'input, textarea, select, [contenteditable="true"]';
+	const HOT = 'a, button, summary, label, [role="button"], [role="link"]';
+
+	let ac: AbortController | undefined;
+	let raf = 0;
+
+	function finePointer() {
+		return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+	}
+
+	function closest(node: EventTarget | null, selector: string) {
+		return node instanceof Element ? node.closest(selector) : null;
+	}
+
+	function initSiteCursor() {
+		const el = document.querySelector('[data-site-cursor]');
+		if (!(el instanceof HTMLElement)) return;
+
+		ac?.abort();
+		if (raf) cancelAnimationFrame(raf);
+		ac = new AbortController();
+		const { signal } = ac;
+
+		const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+		let tracking = false;
+		let enabled = false;
+
+		const disable = () => {
+			enabled = false;
+			tracking = false;
+			if (raf) cancelAnimationFrame(raf);
+			raf = 0;
+			el.classList.remove('is-visible');
+			el.dataset.hide = 'true';
+			el.dataset.hot = 'false';
+			document.documentElement.removeAttribute('data-site-cursor');
+		};
+
+		const place = () => {
+			el.style.left = `${Math.round(pos.x)}px`;
+			el.style.top = `${Math.round(pos.y)}px`;
+		};
+
+		const tick = () => {
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const accel = reduce ? 1 : 0.28;
+			pos.x += (pos.tx - pos.x) * accel;
+			pos.y += (pos.ty - pos.y) * accel;
+			place();
+			if (tracking) raf = requestAnimationFrame(tick);
+		};
+
+		const readTarget = (x: number, y: number) => {
+			const hit = document.elementFromPoint(x, y);
+			if (closest(hit, PLUS) || closest(hit, TAKEOVER) || closest(hit, TEXT) || closest(hit, 'iframe')) {
+				el.dataset.hide = 'true';
+				el.dataset.hot = 'false';
+				return;
+			}
+			el.dataset.hide = 'false';
+			el.dataset.hot = closest(hit, HOT) ? 'true' : 'false';
+		};
+
+		const onPointerMove = (event: PointerEvent) => {
+			if (event.pointerType && event.pointerType !== 'mouse') {
+				disable();
+				return;
+			}
+			if (!finePointer()) {
+				disable();
+				return;
+			}
+
+			if (!enabled) {
+				enabled = true;
+				document.documentElement.dataset.siteCursor = 'on';
+				pos.x = pos.tx = event.clientX;
+				pos.y = pos.ty = event.clientY;
+				place();
+				el.classList.add('is-visible');
+			}
+
+			pos.tx = event.clientX;
+			pos.ty = event.clientY;
+			readTarget(event.clientX, event.clientY);
+
+			if (!tracking) {
+				tracking = true;
+				if (raf) cancelAnimationFrame(raf);
+				raf = requestAnimationFrame(tick);
+			}
+		};
+
+		const onPointerOut = (event: PointerEvent) => {
+			if (event.relatedTarget) return;
+			tracking = false;
+			el.classList.remove('is-visible');
+		};
+
+		const onPointerOver = () => {
+			if (enabled) el.classList.add('is-visible');
+		};
+
+		document.addEventListener('pointermove', onPointerMove, { signal, passive: true });
+		document.addEventListener('pointerout', onPointerOut, { signal });
+		document.addEventListener('pointerover', onPointerOver, { signal });
+		document.addEventListener('touchstart', disable, { signal, passive: true });
+
+		if (finePointer()) {
+			document.documentElement.dataset.siteCursor = 'on';
+		} else {
+			disable();
+		}
+	}
+
+	document.addEventListener('astro:page-load', initSiteCursor);
+</script>

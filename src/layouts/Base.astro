@@ -2,6 +2,7 @@
 import { ClientRouter, fade } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
+import SiteCursor from '../components/SiteCursor.astro';
 import {
 	DEFAULT_DESCRIPTION,
 	DEFAULT_OG_IMAGE_ALT,
@@ -215,5 +216,6 @@ const isWriting = variant === 'writing';
 				</>
 			)
 		}
+		<SiteCursor />
 	</body>
 </html>
