@@ -11,7 +11,7 @@ npm run build:full
 ```
 
 Output includes `dist/cloudberry/archive/` plus `/maps`, `/maps/trees`, `/maps/resettled`.
-Assemble injects Umami into archive HTML from `analytics.config.json` / `UMAMI_WEBSITE_ID`.
+Assemble injects Umami and Ghostpane into archive HTML from `analytics.config.json`.
 
 Env overrides: `PINCHARDS_REPO_PATH`, `DORY_REPO_PATH`, `ADRIFT_REPO_PATH`, `WAVES_REPO_PATH`.
 
@@ -24,7 +24,8 @@ Env overrides: `PINCHARDS_REPO_PATH`, `DORY_REPO_PATH`, `ADRIFT_REPO_PATH`, `WAV
 | `PUBLIC_MAPBOX_TOKEN` | variable (`vars`) | Mapbox `pk.*` for `/maps` + archive photo map |
 | `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | secrets | Wrangler Pages deploy (+ Workers for pinchards redirect; Zone Cache Purge for optional edge purge) |
 | `CLOUDFLARE_ZONE_ID` | variable (`vars`) | `adamsimms.xyz` zone id for post-deploy archive cache purge |
-| `UMAMI_WEBSITE_ID` | variable (optional if in `analytics.config.json`) | Archive + Astro analytics |
+| `UMAMI_WEBSITE_ID` | variable (optional if in `analytics.config.json`) | Archive + Astro Umami |
+| `GHOSTPANE_SITE_ID` | variable (optional if in `analytics.config.json`) | Archive + Astro Ghostpane |
 
 Add `art.adamsimms.xyz` to the Mapbox token URL restrictions.
 

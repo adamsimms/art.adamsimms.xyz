@@ -86,6 +86,9 @@ const { id = 'contact' } = Astro.props;
 					node.reset();
 					status.textContent = 'Thank you!';
 					status.dataset.state = 'success';
+					if (typeof window.ghostpane === 'function') {
+						window.ghostpane('Contact');
+					}
 				} catch {
 					status.textContent = `Unable to send. Please email ${contactEmail()}.`;
 					status.dataset.state = 'error';

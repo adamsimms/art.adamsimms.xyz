@@ -9,6 +9,7 @@ Photography and art portfolio on Astro 7 / Cloudflare Pages (`art.adamsimms.xyz`
 - R2 (`media.adamsimms.xyz`, Cloudberry image buckets)
 - Pages Functions (Adrift weather, Waves buoy API)
 - Umami analytics (shared with `adamsimms.xyz`)
+- Ghostpane analytics (shared site ID across adamsimms.xyz properties)
 - Assemble-at-deploy for Cloudberry archive + Dory / Adrift / Waves
 
 ## Development

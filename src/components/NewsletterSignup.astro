@@ -69,6 +69,9 @@ const endpoint = (
 						? 'Check your inbox to confirm.'
 						: 'You’re on the list.';
 					status.dataset.state = 'success';
+					if (typeof window.ghostpane === 'function') {
+						window.ghostpane('Signup', { props: { source: 'newsletter' } });
+					}
 				} catch {
 					status.textContent = 'Unable to subscribe. Try again later.';
 					status.dataset.state = 'error';

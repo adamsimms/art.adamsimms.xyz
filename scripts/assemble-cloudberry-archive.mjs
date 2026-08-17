@@ -18,13 +18,11 @@ import {
 	readFileSync,
 	writeFileSync,
 	rmSync,
-	readdirSync,
-	statSync,
 } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { buildUmamiScriptTag, loadAnalyticsConfig } from './analytics.mjs';
+import { injectUmamiIntoHtmlDir } from './assemble-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ART_ROOT = resolve(__dirname, '..');
@@ -35,58 +33,10 @@ const ARCHIVE_DEST = join(ART_ROOT, 'dist', 'cloudberry', 'archive');
 const FRAGMENT = join(ARCHIVE_SRC, '_redirects.fragment');
 const PUBLIC_REDIRECTS = join(ART_ROOT, 'public', '_redirects');
 const DIST_REDIRECTS = join(ART_ROOT, 'dist', '_redirects');
-const UMAMI_MARKER_START = '<!-- umami-analytics:start -->';
-const UMAMI_MARKER_END = '<!-- umami-analytics:end -->';
 
 function fail(msg) {
 	console.error(`assemble-cloudberry-archive: ${msg}`);
 	process.exit(1);
-}
-
-function walkHtmlFiles(dir, out = []) {
-	for (const name of readdirSync(dir)) {
-		const full = join(dir, name);
-		const st = statSync(full);
-		if (st.isDirectory()) {
-			walkHtmlFiles(full, out);
-		} else if (name.endsWith('.html')) {
-			out.push(full);
-		}
-	}
-	return out;
-}
-
-function injectUmamiIntoArchive(archiveDir) {
-	const config = loadAnalyticsConfig(ART_ROOT);
-	const tag = buildUmamiScriptTag(config);
-	if (!tag) {
-		console.warn(
-			'assemble-cloudberry-archive: Umami skipped (set UMAMI_WEBSITE_ID or analytics.config.json)',
-		);
-		return 0;
-	}
-	const snippet = `    ${UMAMI_MARKER_START}\n    ${tag}\n    ${UMAMI_MARKER_END}\n`;
-	let count = 0;
-	for (const file of walkHtmlFiles(archiveDir)) {
-		let html = readFileSync(file, 'utf8');
-		if (html.includes(UMAMI_MARKER_START)) {
-			html = html.replace(
-				new RegExp(
-					`${UMAMI_MARKER_START}[\\s\\S]*?${UMAMI_MARKER_END}\\n?`,
-					'g',
-				),
-				snippet,
-			);
-		} else if (html.includes('</head>')) {
-			html = html.replace('</head>', `${snippet}</head>`);
-		} else {
-			continue;
-		}
-		writeFileSync(file, html);
-		count += 1;
-	}
-	console.log(`Injected Umami into ${count} archive HTML file(s)`);
-	return count;
 }
 
 if (!existsSync(PINCHARDS)) {
@@ -169,7 +119,7 @@ if (existsSync(destFragment)) {
 	rmSync(destFragment);
 }
 
-injectUmamiIntoArchive(ARCHIVE_DEST);
+injectUmamiIntoHtmlDir(ART_ROOT, ARCHIVE_DEST, 'assemble-cloudberry-archive');
 
 if (existsSync(FRAGMENT)) {
 	const fragment = readFileSync(FRAGMENT, 'utf8').trim();

@@ -148,13 +148,18 @@ const isWriting = variant === 'writing';
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		<ClientRouter />
 		<!-- umami-analytics:start -->
-		<script
-			defer
-			src="https://cloud.umami.is/script.js"
-			data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33"
-			data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz"
-			data-do-not-track="true"></script>
+		<script defer src="https://cloud.umami.is/script.js" data-website-id="096c186e-d7b2-4db1-8e73-d85176fdbe33" data-domains="adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz" data-do-not-track="true"></script>
 		<!-- umami-analytics:end -->
+		<script is:inline>
+			window.ghostpane =
+				window.ghostpane ||
+				function () {
+					(window.ghostpane.q = window.ghostpane.q || []).push(arguments);
+				};
+		</script>
+		<!-- ghostpane-analytics:start -->
+		<script defer data-site="wpmizn1o10k1hujsrc437paj" data-outbound data-vitals data-video src="https://analytics.adamsimms.xyz/gp.js"></script>
+		<!-- ghostpane-analytics:end -->
 		<script is:inline>
 			(() => {
 				const trackPage = () => {

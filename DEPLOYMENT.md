@@ -33,7 +33,7 @@ Optional: `repository_dispatch` type `cloudberry-archive-rebuild` from `pinchard
    - `media` → R2 public bucket domain
    - `cloudberry-images` / `cloudberry-thumbs` → Cloudberry R2 buckets
 4. Set GitHub Actions secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
-5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`, `PUBLIC_NEWSLETTER_URL` (newsletter Worker origin), optional `CLOUDFLARE_ZONE_ID`.
+5. Set GitHub variables: `UMAMI_WEBSITE_ID` (same as `adamsimms.xyz`), `PUBLIC_MAPBOX_TOKEN`, `PUBLIC_NEWSLETTER_URL` (newsletter Worker origin), optional `CLOUDFLARE_ZONE_ID`. Ghostpane uses `ghostpaneSiteId` in `analytics.config.json` (same site ID as the other adamsimms.xyz properties).
 
 ## Media upload
 
