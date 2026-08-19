@@ -1,0 +1,16 @@
+---
+description: Confirm Instagram grid order with Adam before any Buffer publish
+alwaysApply: true
+---
+
+# Instagram + Buffer
+
+Never publish to Buffer or Instagram until Adam has **confirmed grid order** in chat. Propose left-to-right (newest on the left), then wait.
+
+Do not infer order from a previous sequence. Do not post "backwards" unless that order is approved.
+
+## After approval
+
+- Publish one post at a time. Wait until Buffer status is `sent` before creating the next.
+- Instagram grid: last `sent` post sits top-left.
+- After a set is live, move the source stills from `_inbox/SELECTED/` to `_inbox/POSTED/`.
