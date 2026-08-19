@@ -42,6 +42,8 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Residencies + Workshops
 
+- [**Silence Awareness Existence**](https://www.arteles.org/sae_residency.html) – [*Arteles Creative Center*](https://www.arteles.org/) – <span class="cv-meta">Hämeenkyrö, Finland, 2027 (upcoming)</span>
+- [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – Arts & Ecology Research Residency – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
 - [**Post Image Cluster**](https://postimage.ca/) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2016–Present</span>
 - **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
 - **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
