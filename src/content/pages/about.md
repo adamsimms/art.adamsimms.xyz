@@ -4,7 +4,7 @@ description: Adam Simms is a Canadian media artist who uses photography, video, 
 statement: |
   I need to connect to Newfoundland. To belong to its landscape. To understand its isolation, its harshness, and its history. I long for this land. To trace its past with my footprints, for it to become a memory on the soles of my feet. I want to be present in places that history has tried to erase. To challenge globalization and its lack of consideration for the local. I am unsettled, and I am resettled.
 
-  I work with photography, video, sound, and microelectronics to ask how place, identity, and intangible culture persist after resettlement, out-migration, and distance. My practice begins from Newfoundland, a North Atlantic island that joined Canada in 1949, and from a position inside and outside that history: I am from the island, and years away have made me an outsider.
+  I work with photography, video, sound, and microelectronics to ask how place, identity, and intangible culture persist after resettlement, out-migration, and distance. My practice begins from Ktaqmkuk / Newfoundland, a North Atlantic island that joined Canada in 1949, and from a position inside and outside that history: I am from the island, and years away have made me an outsider.
 
   A central thread is my grandmother’s resettlement from Pinchard’s Island under mid-century government resettlement and centralization programs. With nothing of the original community left, a core question has shaped my work: how do I represent a place that no longer exists? Earlier projects collapsed distance by transmitting landscape, weather, dialect, and vernacular architectures into other rooms and cities, so presence could be partial and remote.
 
@@ -18,3 +18,5 @@ Much of Adam’s work transmits aspects of the Newfoundland vernacular and lands
 Adam has exhibited across Canada, including at the [*Leonard & Bina Ellen Art Gallery*](https://ellengallery.concordia.ca/), [*Occurrence*](https://occurrence.ca/), and KaVieArt. His work has been published in [*Ciel Variable*](https://cielvariable.ca/), [*Riddle Fence*](https://www.riddlefence.com/), [*The Goose*](https://alecc.ca/), [*Headlight Anthology*](https://headlightanthology.com/), and [*Photographer’s Forum*](https://www.photographersforum.com/).
 
 He received a BFA in Design and an MFA in Studio Arts from [*Concordia University*](https://www.concordia.ca/), and is a member of the [Milieux Post Image Cluster](https://postimage.ca/). He is currently creating an off-grid, networked field rover with a camera system and a language model that writes observational field notes based on fragmentary language.
+
+Adam is based between Tiohtià:ke / Montreal and Ktaqmkuk / Newfoundland.
