@@ -5029,7 +5029,8 @@ body:has(.not-found) {
 	margin-top: 0;
 }
 
-/* Site cursor: inverted circle. Yields to + zoom and video play. Fine pointers only. */
+/* Site cursor: inverted circle. Yields to + zoom and video play. Fine pointers only.
+   Gated by PUBLIC_SITE_CURSOR (see src/lib/flags.ts). */
 .site-cursor {
 	position: fixed;
 	top: 0;
