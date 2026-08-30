@@ -14,7 +14,7 @@ Do not add secondary surfaces (Studio / design-for-hire, Writing go-live, Maps, 
 
 ## Footer
 
-Secondary and site-wide links live in the footer: Works, About, CV, Studio, plus external/professional links (email, GitHub, LinkedIn, Concordia, etc.) as already wired.
+Secondary and site-wide links live in the footer: Works, About, CV, Studio, plus external/professional links (email, Instagram, GitHub, LinkedIn, Concordia, etc.) as already wired.
 
 - **Maps** (`/maps`) — staged / not live yet: routes build, but stay out of the footer and sitemap (`noindex`) until go-live (satellite + trees + resettled + railway 1931 + Natural Resources 1941; Mapbox needs `PUBLIC_MAPBOX_TOKEN`)
 - **Research** (`/research`) — staged / not live yet: content library + detail routes build, but stay out of nav, footer, and sitemap (`noindex`) until go-live. Email capture: `research@adamsimms.xyz` → R2 inbox (see `docs/RESEARCH-INBOX.md`); promote/admin is phase 3.

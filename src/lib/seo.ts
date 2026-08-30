@@ -42,6 +42,7 @@ export const DEFAULT_OG_IMAGE_ALT =
 export const PERSON_IMAGE = `${SITE_URL}/img/about/portrait.jpg`;
 
 export const PERSON_SAME_AS = [
+	'https://www.instagram.com/adamsimms.xyz',
 	'https://github.com/adamsimms',
 	'https://www.linkedin.com/in/adamsimms',
 	'https://www.concordia.ca/faculty/adam-simms.html',
