@@ -703,14 +703,6 @@ main {
 	color: #e8eef4;
 }
 
-.site-footer__newsletter-hint {
-	margin: 0;
-	font-size: var(--step--2);
-	letter-spacing: 0.02em;
-	line-height: var(--leading-tight);
-	color: color-mix(in srgb, #e8eef4 55%, transparent);
-}
-
 .site-footer__newsletter-row {
 	display: flex;
 	flex-wrap: wrap;

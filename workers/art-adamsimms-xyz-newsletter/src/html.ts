@@ -95,7 +95,7 @@ export function signupPage(turnstileSiteKey?: string, privacyUrl?: string): stri
   return shell(
     "Subscribe",
     `<h1>Newsletter</h1>
-     <p>Occasional notes on new work + shows. Unsubscribe anytime.</p>
+     <p>Unsubscribe anytime.</p>
      <form id="f" class="stack">
        <input name="name" type="text" placeholder="Your name (optional)" aria-label="Name">
        <input name="email" type="email" placeholder="you@example.com" required aria-label="Email">
