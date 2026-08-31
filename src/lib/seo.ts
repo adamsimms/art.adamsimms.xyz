@@ -1,3 +1,5 @@
+import { PROFILE_LINKS } from './profiles';
+
 /** Work slugs kept routable but excluded from sitemap / index. */
 export const HIDDEN_WORK_SLUGS = new Set(['from-to', 'washed-up', 'newfoundland']);
 
@@ -41,12 +43,7 @@ export const DEFAULT_OG_IMAGE_ALT =
 /** Portrait used in Person JSON-LD and About OG. */
 export const PERSON_IMAGE = `${SITE_URL}/img/about/portrait.jpg`;
 
-export const PERSON_SAME_AS = [
-	'https://www.instagram.com/adamsimms.xyz',
-	'https://github.com/adamsimms',
-	'https://www.linkedin.com/in/adamsimms',
-	'https://www.concordia.ca/faculty/adam-simms.html',
-] as const;
+export const PERSON_SAME_AS = PROFILE_LINKS.map((link) => link.href);
 
 /** Prefer a raster social image; map AVIF covers to JPG fallbacks when possible. */
 export function socialImageUrl(src?: string | null, fallback?: string | null): string {

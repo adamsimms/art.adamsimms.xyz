@@ -1,6 +1,6 @@
 ---
 description: Main nav vs footer IA and homepage brand treatment
-globs: src/components/Nav.astro,src/components/Footer.astro,src/layouts/Base.astro,src/pages/index.astro,src/pages/**/*.astro
+globs: src/components/Nav.astro,src/components/Footer.astro,src/layouts/Base.astro,src/pages/index.astro,src/pages/**/*.astro,src/content/pages/cv.md
 alwaysApply: false
 ---
 
@@ -21,6 +21,19 @@ Secondary and site-wide links live in the footer: Works, About, CV, Studio, plus
 - **Studio** (`/studio`) → footer, not main nav (publication / web work for others + hire CTA)
 - **Newsletter** — quiet footer signup (`NewsletterSignup`) → Worker `art-adamsimms-xyz-newsletter` (D1 list). Needs `PUBLIC_NEWSLETTER_URL`. Do not put newsletter in main nav.
 - Keep the footer quiet — short labels, no link farm
+
+## CV
+
+The CV is two columns. Instagram, LinkedIn, and GitHub live under **Elsewhere**, after Related Professional Experience in the first column. Email stays in the footer. Teaching stays in the footer and the CV Teaching section.
+
+Punctuation on a CV line. A line is fields. The mark depends on what sits on either side.
+
+- **Comma** stays inside one field. Place (`Montreal, Quebec, 2021`). A bibliographic pair (`John Pohl, The Montreal Gazette` or `Riddle Fence, Issue 14`). A job title (`Artist-in-Residence, Studio Arts`).
+- **Spaced en dash** (` – `) sits between fields. Title – venue – place. Degree – program. Role – person. Role – talk – venue. Work – credit – year.
+- **Parentheses** wrap a subordinate label, not a peer field. Course code (`Digital Photography I (PHOT 331)`). Talk series (`Virtual Identity for Artists (Survival Tactics)`). Status or parent org (`(upcoming)`, `(Atlassian)`).
+- **Unspaced en dash** (`2018–2019`) is a year range inside the date field. Hyphens stay in compound words (`Washed-up`).
+
+The place/date cluster is one field, so it uses commas even though institution, city, and year are different facts. Do not put ` – ` inside that cluster. Do not use ` – ` between two names for the same thing. Do not use `•` or `/` on the CV. List markers are the hairline L.
 
 ## Writing
 

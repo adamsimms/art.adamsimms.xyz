@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BerryMark from './BerryMark.astro';
 import NewsletterSignup from './NewsletterSignup.astro';
+import { PROFILE_LINKS } from '../lib/profiles';
 
 const year = new Date().getFullYear();
 
@@ -16,12 +17,7 @@ const siteLinks = [
 	{ href: '/studio', label: 'Studio', current: current === '/studio' },
 ];
 
-const socialLinks = [
-	{ href: 'https://www.instagram.com/adamsimms.xyz', label: 'Instagram' },
-	{ href: 'https://www.linkedin.com/in/adamsimms', label: 'LinkedIn' },
-	{ href: 'https://www.concordia.ca/faculty/adam-simms.html', label: 'Teaching' },
-	{ href: 'https://github.com/adamsimms', label: 'GitHub' },
-];
+const socialLinks = PROFILE_LINKS;
 ---
 
 <footer class="site-footer">

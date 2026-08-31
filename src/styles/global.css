@@ -2556,11 +2556,11 @@ body:has(.work-hover) {
 	content: '';
 	position: absolute;
 	left: 0.05rem;
-	top: 0.55em;
-	width: 0.28em;
-	height: 0.28em;
-	border-radius: 50%;
-	background: var(--text);
+	top: 0.42em;
+	width: 0.32em;
+	height: 0.32em;
+	border-left: 1px solid var(--text);
+	border-bottom: 1px solid var(--text);
 }
 
 /* Course lists under teaching: quieter nested markers */
@@ -2575,9 +2575,9 @@ body:has(.work-hover) {
 }
 
 .cv p + ul li::before {
-	width: 0.22em;
-	height: 0.22em;
-	background: var(--text);
+	width: 0.24em;
+	height: 0.24em;
+	top: 0.5em;
 }
 
 .cv p {
@@ -2607,7 +2607,7 @@ body:has(.work-hover) {
 }
 
 .cv a:is(:hover, :focus-visible) {
-	color: var(--text);
+	color: var(--link);
 }
 
 .cv a .cv-meta,

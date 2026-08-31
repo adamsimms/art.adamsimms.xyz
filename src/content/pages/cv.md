@@ -8,10 +8,10 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Education
 
-**MFA**, *Studio Arts, Photography*  
+**MFA** – *Studio Arts, Photography*  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2021</span>
 
-**BFA**, *Design Major, Photography Minor*  
+**BFA** – *Design Major, Photography Minor*  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2013</span>
 
 ## Teaching
@@ -19,31 +19,31 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2024–2025</span>
 
-- [Photographic Vision: Theory + Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">• PHOT 300</span>
-- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">• PHOT 331</span>
-- [Digital Photography II](https://syllabi.adamsimms.xyz/phot332/) <span class="cv-meta">• PHOT 332</span>
-- [Advanced Workshop in Photography](https://syllabi.adamsimms.xyz/phot400/) <span class="cv-meta">• PHOT 400</span>
+- [Photographic Vision: Theory + Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">(PHOT 300)</span>
+- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
+- [Digital Photography II](https://syllabi.adamsimms.xyz/phot332/) <span class="cv-meta">(PHOT 332)</span>
+- [Advanced Workshop in Photography](https://syllabi.adamsimms.xyz/phot400/) <span class="cv-meta">(PHOT 400)</span>
 
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2021–2022</span>
 
-- [As Seen on Screens: Cyberspace + Image Economy](https://syllabi.adamsimms.xyz/phot398/) <span class="cv-meta">• PHOT 398</span>
-- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">• PHOT 331</span>
+- [As Seen on Screens: Cyberspace + Image Economy](https://syllabi.adamsimms.xyz/phot398/) <span class="cv-meta">(PHOT 398)</span>
+- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
 
 **Teaching Assistant** – [*Geneviève Cadieux*](https://en.wikipedia.org/wiki/Genevi%C3%A8ve_Cadieux)  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2017</span>
 
-- Advanced Workshop in Photography <span class="cv-meta">• PHOT 400</span>
+- Advanced Workshop in Photography <span class="cv-meta">(PHOT 400)</span>
 
 **Teaching Assistant** – [*Marisa Portolese*](https://www.marisaportolese.com)  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2016</span>
 
-- Photographic Vision: Theory + Practice <span class="cv-meta">• PHOT 300</span>
+- Photographic Vision: Theory + Practice <span class="cv-meta">(PHOT 300)</span>
 
 ## Residencies + Workshops
 
 - [**Silence Awareness Existence**](https://www.arteles.org/sae_residency.html) – [*Arteles Creative Center*](https://www.arteles.org/) – <span class="cv-meta">Hämeenkyrö, Finland, 2027 (upcoming)</span>
-- [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – Arts & Ecology Research Residency – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
+- [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
 - [**Post Image Cluster**](https://postimage.ca/) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2016–Present</span>
 - **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
 - **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
@@ -57,6 +57,12 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 - **Product Designer** – [*Trello*](https://trello.com) (Atlassian) – <span class="cv-meta">New York, New York, 2013–2018</span>
 - **Research Assistant** – [*Marisa Portolese*](https://www.marisaportolese.com) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2012–2014</span>
 - **Senior Designer** – [*Lightspeed*](https://www.lightspeedpos.com) – <span class="cv-meta">Montreal, Quebec, 2007–2013</span>
+
+## Elsewhere
+
+- [Instagram](https://www.instagram.com/adamsimms.xyz)
+- [LinkedIn](https://www.linkedin.com/in/adamsimms)
+- [GitHub](https://github.com/adamsimms)
 
 </div>
 <div class="cv-col">
@@ -92,7 +98,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Talks
 
-- **Guest Lecture** – Virtual Identity for Artists – Survival Tactics – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2026</span>
+- **Guest Lecture** – Virtual Identity for Artists (Survival Tactics) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2026</span>
 - **Artist Talk** – Portraiture + Identity – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2024</span>
 - **Artist Talk** – Photographic Vision: Theory & Practice II – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
 - **Artist Talk** – Advanced Workshop in Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
@@ -103,13 +109,13 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 
 ## Press
 
-- ***Pour ne jamais oublier*** – [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – [*Dînette*](https://dinettemagazineboutique.com) – <span class="cv-meta">2021</span>
+- ***Pour ne jamais oublier*** – [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
 - [**IGNITION 14 art show features Jane Austen, roadside restaurants and hanging logs**](https://www.concordia.ca/news/stories/2018/04/18/ignition-14-art-show-features-jane-austen-roadside-restaurants-and-hanging-logs.html) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">2018</span>
-- [**Barrens**](/barrens) – [Issue 14](https://www.riddlefence.com/past-issues/issue-14) – [*Riddle Fence*](https://www.riddlefence.com/) – <span class="cv-meta">2013</span>
-- **Unsettled** – [Issue 12](https://alecc.ca/?page_id=4) – [*The Goose*](https://alecc.ca/) – <span class="cv-meta">2013</span>
+- [**Barrens**](/barrens) – [*Riddle Fence*](https://www.riddlefence.com/), [Issue 14](https://www.riddlefence.com/past-issues/issue-14) – <span class="cv-meta">2013</span>
+- **Unsettled** – [*The Goose*](https://alecc.ca/), [Issue 12](https://alecc.ca/?page_id=4) – <span class="cv-meta">2013</span>
 - [**ARTSIDA5**](https://www.journaldemontreal.com/2013/04/18/des-oeuvres-de-kent-monkman-evergon-et-daniel-barkley-mises-aux-encheres) – [*Le Journal de Montréal*](https://www.journaldemontreal.com/) – <span class="cv-meta">2013</span>
 - [**Des photographies géantes dans les commerces vacants**](https://www.radio-canada.ca/nouvelles/arts_et_spectacles/2013/04/02/009-aetd-vitrines-art.shtml) – [*Radio-Canada*](https://ici.radio-canada.ca/) – <span class="cv-meta">2013</span>
-- [**À Louer**](https://www.cielvariable.ca/recent/92/index.php) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/) (CV92) – <span class="cv-meta">2012</span>
+- [**À Louer**](https://www.cielvariable.ca/recent/92/index.php) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/), CV92 – <span class="cv-meta">2012</span>
 - [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.com/), Issue 15: ‘LOST, FOUND, and STOLEN’ – <span class="cv-meta">2012</span>
 - [**Barrens**](/barrens) – [*Interfold*](http://interfoldmagazine.com/), Spring Issue – <span class="cv-meta">2012</span>
 - **Photographs jog our memories and our morals** – John Pohl, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2011</span>
