@@ -1,26 +1,26 @@
 {
   "images": [
     {
-      "src": "https://media.adamsimms.xyz/work/adrift/03.avif",
-      "fallback": "https://media.adamsimms.xyz/work/adrift/03.jpg",
+      "src": "https://media.adamsimms.xyz/work/adrift/03.avif?v=20260819",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/03.jpg?v=20260819",
       "alt": "Adrift, two-story yellow house floating on the ocean at dusk",
       "caption": "Film still"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/adrift/04.avif",
-      "fallback": "https://media.adamsimms.xyz/work/adrift/04.jpg",
+      "src": "https://media.adamsimms.xyz/work/adrift/04.avif?v=20260819",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/04.jpg?v=20260819",
       "alt": "Adrift, yellow house on a wooden platform floating on calm water",
       "caption": "Film still"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/adrift/01.avif",
-      "fallback": "https://media.adamsimms.xyz/work/adrift/01.jpg",
+      "src": "https://media.adamsimms.xyz/work/adrift/01.avif?v=20260819",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/01.jpg?v=20260819",
       "alt": "Adrift, single-story yellow cabin floating on the ocean at twilight",
       "caption": "Film still"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/adrift/02.avif",
-      "fallback": "https://media.adamsimms.xyz/work/adrift/02.jpg",
+      "src": "https://media.adamsimms.xyz/work/adrift/02.avif?v=20260819",
+      "fallback": "https://media.adamsimms.xyz/work/adrift/02.jpg?v=20260819",
       "alt": "Adrift, two-story yellow house floating on dark water under a black sky",
       "caption": "Film still"
     },
