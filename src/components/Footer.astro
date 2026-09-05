@@ -21,8 +21,8 @@ const socialLinks = PROFILE_LINKS;
 ---
 
 <footer class="site-footer">
-	<a class="site-footer__hero" href="/" aria-label="Home">
-		<BerryMark class="site-footer__berry-lg" animated size={80} />
+	<a class="site-footer__hero site-footer__hero--top" href="/" aria-label="Home">
+		<BerryMark class="site-footer__berry-lg site-footer__berry-lg--desktop" animated size={80} />
 	</a>
 	<div class="site-footer__identity">
 		<div class="site-footer__identity-main">
@@ -31,30 +31,53 @@ const socialLinks = PROFILE_LINKS;
 				intangible culture.
 			</p>
 			<a class="site-footer__mailto" data-email-mailto href="#">Email</a>
-			<nav aria-label="Links">
-				<ul class="site-footer__tags">
-					{
-						siteLinks.map((link) => (
-							<li>
-								<a
-									href={link.href}
-									aria-current={'current' in link && link.current ? 'page' : undefined}
-								>
-									{link.label}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</nav>
+			<div class="site-footer__link-cols">
+				<nav aria-label="Site">
+					<ul class="site-footer__tags">
+						{
+							siteLinks.map((link) => (
+								<li>
+									<a
+										href={link.href}
+										aria-current={'current' in link && link.current ? 'page' : undefined}
+									>
+										{link.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+				<nav class="site-footer__external" aria-label="External">
+					<ul class="site-footer__tags site-footer__tags--external">
+						{
+							socialLinks.map((link) => (
+								<li>
+									<a href={link.href} target="_blank" rel="noopener noreferrer">
+										{link.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+			</div>
 		</div>
 		<NewsletterSignup />
 	</div>
 	<div class="site-footer__bottom">
-		<p class="site-footer__weather" data-pinchard-weather>
-			<span data-weather-label>Pinchard’s Island</span>
-			<span data-weather-meta>—</span>
-		</p>
+		<div class="site-footer__place">
+			<a class="site-footer__hero site-footer__hero--bottom" href="/" aria-label="Home">
+				<BerryMark class="site-footer__berry-lg site-footer__berry-lg--mobile" animated size={1} flush />
+			</a>
+			<p class="site-footer__weather" data-pinchard-weather>
+				<span data-weather-label>Pinchard’s Island</span>
+				<span class="site-footer__weather-line">
+					<span data-weather-meta>—</span>
+					<span class="site-footer__copy site-footer__copy--inline">© {year}</span>
+				</span>
+			</p>
+		</div>
 		<div class="site-footer__meta">
 			<nav class="site-footer__social" aria-label="Social">
 				{

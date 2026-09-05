@@ -5,16 +5,20 @@ interface Props {
 	animated?: boolean;
 	class?: string;
 	size?: number;
+	/** Crop to the painted lobes (no 12.5% viewBox inset). */
+	flush?: boolean;
 }
 
-const { animated = false, class: className = '', size = 56 } = Astro.props;
+const { animated = false, class: className = '', size = 56, flush = false } = Astro.props;
+const viewBox = flush ? '3 3.28125 18 18' : '0 0 24 24';
 ---
 
 <svg
 	class:list={['berry-mark', animated && 'berry-mark--animated', className]}
 	width={size}
 	height={size}
-	viewBox="0 0 24 24"
+	viewBox={viewBox}
+	preserveAspectRatio="xMinYMid meet"
 	fill="none"
 	aria-hidden="true"
 	focusable="false"
