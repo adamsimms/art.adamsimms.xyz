@@ -21,9 +21,6 @@ const socialLinks = PROFILE_LINKS;
 ---
 
 <footer class="site-footer">
-	<a class="site-footer__hero" href="/" aria-label="Home">
-		<BerryMark class="site-footer__berry-lg" animated size={80} />
-	</a>
 	<div class="site-footer__identity">
 		<div class="site-footer__identity-main">
 			<p class="site-footer__bio">
@@ -51,10 +48,15 @@ const socialLinks = PROFILE_LINKS;
 		<NewsletterSignup />
 	</div>
 	<div class="site-footer__bottom">
-		<p class="site-footer__weather" data-pinchard-weather>
-			<span data-weather-label>Pinchard’s Island</span>
-			<span data-weather-meta>—</span>
-		</p>
+		<div class="site-footer__place">
+			<a class="site-footer__hero" href="/" aria-label="Home">
+				<BerryMark class="site-footer__berry-lg" animated size={80} />
+			</a>
+			<p class="site-footer__weather" data-pinchard-weather>
+				<span data-weather-label>Pinchard’s Island</span>
+				<span data-weather-meta>—</span>
+			</p>
+		</div>
 		<div class="site-footer__meta">
 			<nav class="site-footer__social" aria-label="Social">
 				{

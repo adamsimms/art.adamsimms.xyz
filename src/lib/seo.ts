@@ -18,7 +18,9 @@ export function isStagedPath(pathname: string): boolean {
 		path === '/maps' ||
 		path.startsWith('/maps/') ||
 		path === '/research' ||
-		path.startsWith('/research/')
+		path.startsWith('/research/') ||
+		path === '/outport' ||
+		path.startsWith('/outport/')
 	);
 }
 

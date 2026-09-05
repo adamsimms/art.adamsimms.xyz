@@ -1,0 +1,105 @@
+---
+description: Outport photo journal content model, grid layout, media pipeline, and publishing workflow
+globs: src/content/outport/**,src/pages/outport/**,src/components/Outport*.astro,src/lib/outport.ts,scripts/outport-media.mjs
+alwaysApply: false
+---
+
+# Outport content
+
+Single log at `/outport`. Entries are anchored sections (`/outport#2026-08-30`), not separate pages. Staged: `noindex`, not on Works index, direct URL only.
+
+## Series header
+
+`src/content/outport/series.json` (singleton, not in the content collection):
+
+- `title`, `medium`, `year`, `seoDescription`, `description`
+- `cover` / `coverFallback` / `coverAlt` for header hero, OG, and (at go-live) Works card
+
+Separate from per-post `cover: true` image cells (RSS item images only).
+
+## Entry frontmatter
+
+One file per post: `src/content/outport/<slug>.md`
+
+| Field | Use |
+| --- | --- |
+| `slug` | Anchor id (`YYYY-MM-DD` or `YYYY-MM-DD-a`). Never change once shared. |
+| `date` | Sort order + RSS pub date |
+| `draft` | `true` = dev only; production omits draft entries |
+| `rows` | Grid rows (see below) |
+
+## Grid rules
+
+4 columns per row. Cell `span` values must sum to **4**.
+
+Cell types: `image` · `video` · `text` · `empty` · `space`
+
+- `empty`: occupies a column slot (negative space)
+- `space`: full-row vertical gap (`span: 4`, `size`: `s` · `m` · `l` · `xl` · `2xl` · `3xl`)
+
+Optional on any cell except `space`: media cells use `align: top` or `align: bottom` only (see Text cells for full alignment).
+
+Published posts need exactly one `cover: true` on an **image** cell (RSS + feed image).
+
+Landscape video must be `span` 2 or more.
+
+Optional on image, video, and empty cells: `align: top` (default) or `align: bottom` to pin media to the row baseline when neighbours are taller.
+
+## Text cells
+
+`style` selects typography (default `small`):
+
+| `style` | Use |
+| --- | --- |
+| `title` | Large title (Google Sans Flex; scales with span) |
+| `quote` | Pull quote; optional `attrib` (no side rule) |
+| `micro` | Uppercase label, place/date line |
+| `small` | Body copy; blank lines in `body` split into paragraphs |
+
+Optional surface fields:
+
+| Field | Use |
+| --- | --- |
+| `border` | `true` for a thin light grey border |
+| `background` | CSS colour (e.g. `#f7f7f7`) |
+| `color` | Text colour |
+
+`align` on text cells (default `top-left`; vertical centre is forced in CSS for now):
+
+| Value | Position |
+| --- | --- |
+| `top-left` · `top` · `top-right` | Top row (`top` = top centre) |
+| `left` · `center` · `right` | Middle row |
+| `bottom-left` · `bottom` · `bottom-right` | Bottom row (`bottom` = bottom centre) |
+
+`body` supports inline markdown via `inlineMarkdown` (links only).
+
+All text cells use `min-height` = one column width (`100cqw / span`).
+
+## Image / video metadata
+
+Optional on media cells: `title`, `place`, `date`, `people`, `caption`
+
+Images only: `cover: true` (one per published post)
+
+Video: `src`, `poster`, `width`, `height`, `alt`; optional `audio` bed URL (separate m4a, not mp4 soundtrack)
+
+## Publishing workflow
+
+1. Drop source files in `_inbox/outport/<slug>/`
+2. Describe layout in chat (grid order left-to-right, top-to-bottom)
+3. Run `node scripts/outport-media.mjs <slug>` → R2 URLs + dimensions
+4. Write `src/content/outport/<slug>.md` with `rows` in frontmatter
+5. Preview in dev (`astro dev --background`); drafts visible when `draft: true`
+6. Commit; GitHub Actions deploys Pages
+
+No automatic spacing between entry sections. Use `space` rows to breathe between posts.
+
+## People + consent
+
+Only name people in `people` when they have agreed to appear on the public site.
+
+## Go-live (not yet)
+
+- Remove `noindex` + `isStagedPath` for `/outport`
+- Add `src/content/work/outport.md` + Works card cover in `scripts/perf-media.mjs`

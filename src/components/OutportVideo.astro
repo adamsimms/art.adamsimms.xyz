@@ -1,0 +1,185 @@
+---
+import type { OutportCell } from '../lib/outport';
+
+interface Props {
+	cell: Extract<OutportCell, { type: 'video' }>;
+}
+
+const { cell } = Astro.props;
+const aspect = `${cell.width} / ${cell.height}`;
+---
+
+<figure
+	class="outport-media outport-video"
+	style={`--outport-aspect: ${aspect}`}
+	data-outport-video
+	data-video-src={cell.src}
+	data-audio-src={cell.audio || undefined}
+>
+	<video
+		class="outport-video__el"
+		muted
+		loop
+		playsinline
+		preload="none"
+		poster={cell.poster}
+		aria-label={cell.alt}
+		width={cell.width}
+		height={cell.height}
+	></video>
+	{
+		cell.audio ? (
+			<span class="outport-video__cue" aria-hidden="true">
+				<svg viewBox="0 0 16 16" width="14" height="14" focusable="false">
+					<path
+						fill="currentColor"
+						d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5v4A4.5 4.5 0 0 0 8 14.5 4.5 4.5 0 0 0 12.5 10v-4A4.5 4.5 0 0 0 8 1.5Zm-3 4.5a3 3 0 1 1 6 0v4a3 3 0 1 1-6 0V6Zm1.25 0v4a1.75 1.75 0 1 0 3.5 0v-4a1.75 1.75 0 1 0-3.5 0Z"
+					/>
+				</svg>
+			</span>
+		) : null
+	}
+	{
+		cell.caption ? (
+			<figcaption class="outport-media__caption">{cell.caption}</figcaption>
+		) : null
+	}
+	{
+		cell.people?.length ? (
+			<p class="outport-media__people">{cell.people.join(' · ')}</p>
+		) : null
+	}
+</figure>
+
+<script>
+	const MAX_PLAYING = 2;
+	const players = new Set<HTMLElement>();
+	let audioUnlocked = false;
+	let activeAudio: HTMLAudioElement | null = null;
+
+	function prefersReducedMotion() {
+		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
+
+	function pausePlayer(root: HTMLElement) {
+		const video = root.querySelector('video');
+		const audio = root.querySelector('audio');
+		video?.pause();
+		if (audio) {
+			audio.pause();
+			audio.currentTime = 0;
+		}
+		if (activeAudio === audio) activeAudio = null;
+		players.delete(root);
+	}
+
+	function trimPlayers() {
+		while (players.size > MAX_PLAYING) {
+			const first = players.values().next().value;
+			if (!first) break;
+			pausePlayer(first);
+		}
+	}
+
+	function attachSource(root: HTMLElement) {
+		const video = root.querySelector('video');
+		if (!video || video.dataset.attached === 'true') return;
+		const src = root.getAttribute('data-video-src');
+		if (!src) return;
+		video.src = src;
+		video.dataset.attached = 'true';
+
+		const audioSrc = root.getAttribute('data-audio-src');
+		if (audioSrc && !root.querySelector('audio')) {
+			const audio = document.createElement('audio');
+			audio.src = audioSrc;
+			audio.loop = true;
+			audio.preload = 'none';
+			root.appendChild(audio);
+		}
+	}
+
+	async function playVideo(root: HTMLElement) {
+		if (prefersReducedMotion()) return;
+		attachSource(root);
+		const video = root.querySelector('video');
+		if (!video) return;
+		try {
+			await video.play();
+			players.add(root);
+			trimPlayers();
+		} catch {
+			/* autoplay policy */
+		}
+	}
+
+	function stopAudio() {
+		if (!activeAudio) return;
+		activeAudio.pause();
+		activeAudio.currentTime = 0;
+		activeAudio = null;
+	}
+
+	async function playAudio(root: HTMLElement) {
+		if (!audioUnlocked || prefersReducedMotion()) return;
+		const audio = root.querySelector('audio');
+		if (!audio) return;
+		stopAudio();
+		try {
+			await audio.play();
+			activeAudio = audio;
+		} catch {
+			/* gesture policy */
+		}
+	}
+
+	function setupVideo(root: HTMLElement) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) void playVideo(root);
+					else pausePlayer(root);
+				}
+			},
+			{ threshold: 0.12, rootMargin: '80px 0px' },
+		);
+		observer.observe(root);
+
+		if (!root.hasAttribute('data-audio-src')) return;
+
+		root.addEventListener('pointerenter', () => void playAudio(root));
+		root.addEventListener('pointerleave', stopAudio);
+		root.addEventListener('focusin', () => void playAudio(root));
+		root.addEventListener('focusout', (event) => {
+			if (event.relatedTarget && root.contains(event.relatedTarget as Node)) return;
+			stopAudio();
+		});
+		root.addEventListener('click', () => {
+			if (!audioUnlocked) return;
+			const audio = root.querySelector('audio');
+			if (!audio) return;
+			if (activeAudio === audio && !audio.paused) stopAudio();
+			else void playAudio(root);
+		});
+	}
+
+	function init() {
+		document.querySelectorAll<HTMLElement>('[data-outport-video]').forEach(setupVideo);
+	}
+
+	document.addEventListener(
+		'pointerdown',
+		() => {
+			audioUnlocked = true;
+		},
+		{ once: true },
+	);
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+
+	document.addEventListener('astro:page-load', init);
+</script>

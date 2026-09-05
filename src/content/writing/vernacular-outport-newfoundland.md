@@ -250,6 +250,7 @@ Most of the photographs I selected of animals depict horses being used for trans
 
 <figcaption><a href="#fig-17" class="fig-label">Fig. 17</a>. Brooks, Betty Watt. “The Brooks Children with Friends on Horse Next to Morry’s Stage.” The Rooms Archive, VA 6–26, Newfoundland Tourist Development Board Photograph Collection, ca.1937–8.</figcaption>
 </figure>
+</div>
 
 <figure id="fig-18" class="writing-figure">
 <picture>
@@ -259,7 +260,6 @@ Most of the photographs I selected of animals depict horses being used for trans
 
 <figcaption><a href="#fig-18" class="fig-label">Fig. 18</a>. Unknown. “Flowers Cove.” The Rooms Archive, IGA 24–270, International Grenfell Association Photograph Collection, 1948.</figcaption>
 </figure>
-</div>
 
 Other photos include sheep, foxes, dogs, and cats. In most cases, the photographs show the interaction between the animals and the people who used them, owned them, or simply delighted in them (<a href="#fig-18" class="fig-ref">fig. 18</a>). Overall, they convey the sense that animals were an essential part of daily life in Newfoundland, fulfilling a range of functions.
 
@@ -338,7 +338,9 @@ A significant number of the photographs categorized under the theme of the natur
 
 <figcaption><a href="#fig-25" class="fig-label">Fig. 25</a>. Sears, Fred Coleman. “Woman Working in Vegetable Garden.” The Rooms Archive, VA 92–53, International Grenfell Association Photograph Collection, 1932.</figcaption>
 </figure>
+</div>
 
+<div class="writing-figures">
 <figure id="fig-26" class="writing-figure">
 <picture>
   <source srcset="https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-26.avif" type="image/avif" />
@@ -365,6 +367,7 @@ A significant number of the photographs categorized under the theme of the natur
 
 <figcaption><a href="#fig-28" class="fig-label">Fig. 28</a>. Unknown. “The Victims: Caribou” The Rooms Archive, VA 118–49.6, International Grenfell Association Photograph Collection, 1908.</figcaption>
 </figure>
+</div>
 
 <figure id="fig-29" class="writing-figure">
 <picture>
@@ -374,7 +377,6 @@ A significant number of the photographs categorized under the theme of the natur
 
 <figcaption><a href="#fig-29" class="fig-label">Fig. 29</a>. Unknown. “Fishermen Going Out to Work” The Rooms Archive, IGA 1–468, International Grenfell Association Photograph Collection, before 1949.</figcaption>
 </figure>
-</div>
 
 Indeed, the lifestyle of the people who settled in these communities depended entirely on the sea; fishing was the primary income-generating activity of the residents. Similar to gardening and farming, fishing is represented on both a personal level and a commercial level. The archives include images of all stages of fish processing: washing (<a href="#fig-30" class="fig-ref">fig. 30</a>), spreading fish on flakes to dry (<a href="#fig-31" class="fig-ref">fig. 31</a>), and stacking and sorting dried fish (<a href="#fig-32" class="fig-ref">fig. 32</a>).
 
@@ -405,6 +407,7 @@ Indeed, the lifestyle of the people who settled in these communities depended en
 
 <figcaption><a href="#fig-32" class="fig-label">Fig. 32</a>. Brooks, Betty Watt. “Men Culling Dried Fish.” The Rooms Archive, VA 6–78, Newfoundland Tourist Development Board Photograph Collection, ca. 1938.</figcaption>
 </figure>
+</div>
 
 <figure id="fig-33" class="writing-figure">
 <picture>
@@ -414,7 +417,6 @@ Indeed, the lifestyle of the people who settled in these communities depended en
 
 <figcaption><a href="#fig-33" class="fig-label">Fig. 33</a>. Anderson, Gustav. “Fishermen Mending Nets.” The Rooms Archive, VA 14–136, Newfoundland Tourist Development Board Photograph Collection, ca. 1939.</figcaption>
 </figure>
-</div>
 
 The flakes themselves, wooden drying racks for fish, primarily cod, feature prominently, as do a variety of other tools, structures, and equipment related to the trade, such as nets (<a href="#fig-33" class="fig-ref">fig. 33</a>). While fish flakes were once iconic aspects of the built environment of Newfoundland, the advancement of large fish processing plants, electric storage freezers, and the 1992 fishing moratorium have all but eradicated them from outport communities.
 
@@ -658,7 +660,9 @@ The businesses shown in photographs are those one would expect to find in any to
 
 <figcaption><a href="#fig-55" class="fig-label">Fig. 55</a>. Cochran, Candace. “Josephine Carroll’s Shop.” Outport: The Soul of Newfoundland, 2008.</figcaption>
 </figure>
+</div>
 
+<div class="writing-figures">
 <figure id="fig-56" class="writing-figure">
 <picture>
   <source srcset="https://media.adamsimms.xyz/writing/vernacular-outport-newfoundland/fig-56.avif" type="image/avif" />
@@ -1203,9 +1207,7 @@ This photograph captivates me for several reasons. First, it challenges our conc
 </figure>
 </div>
 
-## Part 5: Conclusion and Next Steps
-
-### Conclusion
+## Part 5: Conclusion
 
 Because I have a strong base of knowledge about many of the topics represented through the photographs in the archives, I was curious about what additional insights I’d gain from this deeper analysis, and how those insights would relate to both my existing and future projects. The broad scope of the photographs, as well as the repetition of certain themes and motifs, led me to several conclusions. Some are new realizations, while others are new questions that developed or existing questions that intensified. The conclusions, discussed in at more length below, relate to the distance of figures in photography, the relationship between oral and photographic history, the development of a visual understanding of resettled communities in their prime, and continued fascination with images of the floating house.
 
@@ -1216,22 +1218,6 @@ Material archives provide the ability to evoke and invoke memory, and probably m
 For years I have travelled to resettled communities to be met with varying degrees of abandonment, from semi-intact structures being reclaimed by the landscape to communities, such as Pinchard’s Island, that have been completely erased. My understanding of these sites is primarily based on the ruins, if any, that have been left behind, and in some cases on oral history from people that once lived in such communities. I had not, however, seen extensive images of what these communities once looked like. Looking through the archive, I saw, for the first time, outport communities in their prime. I particularly noticed the ways in which each community responded to its unique landscape on the rugged coastline of Newfoundland, and that the architecture of homes, tilts, and stages are uniquely tied to place and the regional culture of its people. In some ways, the archive also offered a glimpse into the values in which outport Newfoundlanders lived by: reliance on community for survival, the importance of the home structure, tightly knit families, and dependence upon land and sea for work and resources. The experience of researching the archive has enabled me to develop concrete visuals for places I’ve never seen but only imagined, like the community of Pinchard’s Island at its peak. I can now picture the physical space of outport community life before its Confederation with Canada and before the fish harvesting moratorium.
 
 Discovering the photograph of the house floating in the ocean as a result of the 1929 tsunami was very surreal. At first glance, I assumed it was an image of a home being towed to live out the rest of its life in a new community as a result of a resettlement program. Upon further inspecting the date, description, and type of boat (which was atypical of the type of used to haul resettlement homes), I realized that my original assumption was incorrect and that there had to be another interpretation of the photograph. Further investigation led me to the information about the earthquake and tsunami. For me, as mentioned earlier, this image became a foreshadowing of the floating home that is a visual hallmark of resettlement. While the house in the 1929 photograph obviously became detached from the foundation as the result of a disaster, that is, unintentionally, houses that were towed during resettlement were moved intentionally, or at least as a considered response to a difficult situation. I’m interested in the shift in thinking that resulted in a floating house being perceived as a solution rather than as a catastrophic event. That shift happened as resettled communities were forced to think about the essence of their homeland rather than its physical manifestations. My personal connection to resettlement is through my grandmother, whose house was floated during the family’s resettlement from Pinchard’s Island to Newtown. The decision to bring one’s home on such a move likely came both from financial need (it was cheaper to move a home than to build a new one), and from a desire to mitigate the sense of displacement caused by the relocation. However, my grandmother explained that this goal was not achieved. As she put it, the house, “wasn’t our home anymore. It didn’t fit in its new place: it was meant to be elsewhere.” On a practical level, the house’s architectural characteristics no longer responded to the landscape that once surrounded it. More importantly, it felt lifeless: the family and community activities that surrounded the house were left behind, redefining it simply as an ill-fitting structure rather than a home that was integrated into its physical and cultural setting.
-
-### Next Steps
-
-Based on the insights and questions described above, I have identified three areas of focus for my own research-creation work going forward. First, I plan to use my new understanding of outport communities and traditional home architecture to inform how I will formalize my future thesis project. I will make architectural considerations that are:
-
-1. Responsive to the physical characteristics of the landscape.
-2. Empathetic to past, present and future cultural contexts.
-3. Accessible and relatable to other cultures and experiences for non-Newfoundlanders.
-
-My intentions are not to imitate the past, but to understand it. To speak to a vernacular, not replace it.
-
-Second, I will continue to research the digital archive as well as on-site materials contained in the archives of The Rooms and Memorial University of Newfoundland. Based on the limitations of the digital archive and the absence of more personal moments of vernacular outport photographs, a key component of my research moving forward will be working more deeply within my own family archives as well as the family archives gathered from the participants in my research-creation practice.
-
-Third, I want to further understand the significant influence and importance of Indigenous communities, people, and culture in Newfoundland history, and to develop a strategy for connecting with my personal Mi’kimaq heritage. These approaches will enable me to contextually address my concerns with how Indigenous peoples are represented and problematically categorized as a “type” or “other” in the Newfoundland photographic archive.
-
-While I’m not certain what how these areas of focus will manifest themselves in my work, it’s clear to me that my research in the Newfoundland archives will have a lasting impact. It has further developed my visual vocabulary of the Newfoundland vernacular, and it has given me the momentum I need to begin exploring topics with which I had not yet fully engaged.
 
 
 ## Works Cited

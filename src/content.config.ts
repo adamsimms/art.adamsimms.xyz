@@ -139,4 +139,100 @@ const research = defineCollection({
 	}),
 });
 
-export const collections = { work, blog, pages, writing, research };
+const outportTextStyle = z.enum(['title', 'quote', 'micro', 'small']);
+const outportSpaceSize = z.enum(['s', 'm', 'l', 'xl', '2xl', '3xl']);
+const outportRowAlign = z.enum(['top', 'bottom']).optional();
+const outportTextAlign = z
+	.enum([
+		'top-left',
+		'top',
+		'top-right',
+		'left',
+		'center',
+		'right',
+		'bottom-left',
+		'bottom',
+		'bottom-right',
+	])
+	.optional();
+
+const outportTextCell = z.object({
+	type: z.literal('text'),
+	span: z.number().int().min(1).max(4),
+	style: outportTextStyle.default('small'),
+	body: z.string(),
+	attrib: z.string().optional(),
+	align: outportTextAlign,
+	border: z.boolean().optional(),
+	background: z.string().optional(),
+	color: z.string().optional(),
+});
+
+const outportImageCell = z.object({
+	type: z.literal('image'),
+	span: z.number().int().min(1).max(4),
+	src: z.string(),
+	fallback: z.string(),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	alt: z.string(),
+	title: z.string().optional(),
+	place: z.string().optional(),
+	date: z.string().optional(),
+	people: z.array(z.string()).optional(),
+	cover: z.boolean().optional(),
+	caption: z.string().optional(),
+	align: outportRowAlign,
+});
+
+const outportVideoCell = z.object({
+	type: z.literal('video'),
+	span: z.number().int().min(1).max(4),
+	src: z.string(),
+	poster: z.string(),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	alt: z.string(),
+	place: z.string().optional(),
+	date: z.string().optional(),
+	people: z.array(z.string()).optional(),
+	audio: z.string().optional(),
+	caption: z.string().optional(),
+	align: outportRowAlign,
+});
+
+const outportEmptyCell = z.object({
+	type: z.literal('empty'),
+	span: z.number().int().min(1).max(4),
+	align: outportRowAlign,
+});
+
+const outportSpaceCell = z.object({
+	type: z.literal('space'),
+	span: z.literal(4),
+	size: outportSpaceSize,
+});
+
+const outportCell = z.discriminatedUnion('type', [
+	outportTextCell,
+	outportImageCell,
+	outportVideoCell,
+	outportEmptyCell,
+	outportSpaceCell,
+]);
+
+const outport = defineCollection({
+	loader: glob({ base: './src/content/outport', pattern: '*.md' }),
+	schema: z.object({
+		slug: z.string(),
+		date: z.coerce.date(),
+		draft: z.boolean().default(false),
+		rows: z.array(
+			z.object({
+				cells: z.array(outportCell).min(1),
+			}),
+		),
+	}),
+});
+
+export const collections = { work, blog, pages, writing, research, outport };

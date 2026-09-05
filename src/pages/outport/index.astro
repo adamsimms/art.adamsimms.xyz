@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import OutportGrid from '../../components/OutportGrid.astro';
+import seriesData from '../../content/outport/series.json';
+import { getOutportEntries } from '../../lib/outport';
+import {
+	absoluteUrl,
+	metaDescription,
+	socialImageUrl,
+} from '../../lib/seo';
+import { inlineMarkdown, stripInlineMarkdown } from '../../lib/inlineMarkdown';
+import type { OutportSeries } from '../../lib/outport';
+
+const series = seriesData as OutportSeries;
+const includeDrafts = import.meta.env.DEV;
+const entries = await getOutportEntries(includeDrafts);
+
+const pageDescription = metaDescription(
+	series.seoDescription,
+	series.description ? stripInlineMarkdown(series.description) : undefined,
+);
+const pageImage = socialImageUrl(series.cover, series.coverFallback);
+const statementParagraphs = series.description
+	? series.description.trim().split(/\n\n+/).filter(Boolean)
+	: [];
+const pageImageAlt = series.coverAlt?.trim() || `${series.title} by Adam Simms`;
+
+const collectionLd = {
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: series.title,
+	description: pageDescription,
+	url: absoluteUrl('/outport'),
+	...(pageImage ? { image: pageImage } : {}),
+};
+---
+
+<Base
+	title={series.title}
+	description={pageDescription}
+	image={pageImage}
+	imageAlt={pageImageAlt}
+	variant="outport"
+	noindex={true}
+	feedAlternate={absoluteUrl('/outport/feed.xml')}
+	jsonLd={collectionLd}
+>
+	<article class="project outport" data-project-reveal>
+		<header class="project-header">
+			<div class="project-intro">
+				<div class="project-intro__text">
+					<div class="project-intro__head">
+						<h1 class="project-title">{series.title}</h1>
+						{series.medium ? <p class="project-medium">{series.medium}</p> : null}
+					</div>
+
+					<div class="project-intro__copy" data-project-body>
+						{series.year ? (
+							<p class="project-meta">
+								<span>{series.year}</span>
+							</p>
+						) : null}
+
+						{statementParagraphs.map((paragraph) => (
+							<p class="project-lead" set:html={inlineMarkdown(paragraph)} />
+						))}
+					</div>
+				</div>
+
+				{
+					series.cover ? (
+						<div class="project-hero" data-project-hero>
+							<picture>
+								<source srcset={series.cover} type="image/avif" />
+								<img
+									src={series.coverFallback || series.cover}
+									alt={pageImageAlt}
+									width="2000"
+									height="1333"
+									loading="eager"
+									decoding="async"
+								/>
+							</picture>
+						</div>
+					) : null
+				}
+			</div>
+		</header>
+
+		<div class="outport-entries">
+			{
+				entries.map((entry, entryIndex) => (
+					<section id={entry.data.slug} class="outport-entry">
+						<OutportGrid rows={entry.data.rows} eagerImage={entryIndex === 0 && !series.cover} />
+					</section>
+				))
+			}
+		</div>
+	</article>
+</Base>

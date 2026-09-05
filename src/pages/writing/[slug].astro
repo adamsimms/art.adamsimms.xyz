@@ -25,7 +25,7 @@ const toc = headings.filter((h) => {
 	if (h.slug === 'footnote-label' || /^footnotes$/i.test(h.text)) return false;
 	if (h.depth === 2) return true;
 	if (h.depth === 3) {
-		return /^(Relationship|Methodology|Description|Settlement|Resettlement|The Natural World|Outport Communities|Architecture|People|The Outport Newfoundland House|The Representation|The Floating Home|Conclusion|Next Steps)/i.test(
+		return /^(Relationship|Methodology|Description|Settlement|Resettlement|The Natural World|Outport Communities|Architecture|People|The Outport Newfoundland House|The Representation|The Floating Home)/i.test(
 			h.text,
 		);
 	}
@@ -136,6 +136,74 @@ const articleLd = {
 			</header>
 			<Content />
 		</article>
+		<script is:inline>
+			(function () {
+				var article = document.querySelector('article.writing');
+				if (!article || article.querySelector(':scope > .writing-section')) return;
+				function isHeading(el) {
+					return el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4';
+				}
+				function isFig(el) {
+					return (
+						(el.matches('figure.writing-figure') && !el.matches('.writing-figure--lead')) ||
+						el.matches('.writing-figures')
+					);
+				}
+				function isPass(el) {
+					return (
+						el.matches('.page-header') ||
+						el.matches('.writing-figure--lead') ||
+						el.matches('section[data-footnotes], section.footnotes')
+					);
+				}
+				function wrap(textEls, figEls) {
+					if (!textEls.length && !figEls.length) return null;
+					var section = document.createElement('section');
+					section.className = 'writing-section';
+					var textCol = document.createElement('div');
+					textCol.className = 'writing-section__text';
+					for (var i = 0; i < textEls.length; i++) textCol.append(textEls[i]);
+					section.append(textCol);
+					if (figEls.length) {
+						var figCol = document.createElement('div');
+						figCol.className = 'writing-section__figures';
+						for (var j = 0; j < figEls.length; j++) figCol.append(figEls[j]);
+						section.append(figCol);
+					}
+					return section;
+				}
+				var nodes = Array.prototype.slice.call(article.children);
+				var out = [];
+				var text = [];
+				var figures = [];
+				function flush() {
+					var section = wrap(text, figures);
+					if (section) out.push(section);
+					text = [];
+					figures = [];
+				}
+				for (var k = 0; k < nodes.length; k++) {
+					var el = nodes[k];
+					if (isPass(el)) {
+						flush();
+						out.push(el);
+						continue;
+					}
+					if (isHeading(el)) {
+						flush();
+						text.push(el);
+						continue;
+					}
+					if (isFig(el)) {
+						figures.push(el);
+						continue;
+					}
+					text.push(el);
+				}
+				flush();
+				article.replaceChildren.apply(article, out);
+			})();
+		</script>
 	</div>
 
 	<dialog class="writing-lightbox" aria-label="Enlarged figure">
@@ -250,7 +318,7 @@ const articleLd = {
 		/** Lock each body figure’s box to the rendered image width so captions wrap with it. */
 		function initWritingFigureWidths() {
 			const figures = document.querySelectorAll(
-				'.writing.prose > .writing-figure:not(.writing-figure--lead), .writing.prose > .writing-figures > .writing-figure',
+				'.writing.prose .writing-figure:not(.writing-figure--lead)',
 			);
 
 			for (const fig of figures) {
@@ -337,7 +405,69 @@ const articleLd = {
 			}
 		}
 
+		function groupWritingSections() {
+			const article = document.querySelector('article.writing');
+			if (!(article instanceof HTMLElement)) return;
+			if (article.querySelector(':scope > .writing-section')) return;
+
+			const isHeading = (el) => el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4';
+			const isFig = (el) =>
+				(el.matches('figure.writing-figure') && !el.matches('.writing-figure--lead')) ||
+				el.matches('.writing-figures');
+			const isPass = (el) =>
+				el.matches('.page-header') ||
+				el.matches('.writing-figure--lead') ||
+				el.matches('section[data-footnotes], section.footnotes');
+			const wrap = (textEls, figEls) => {
+				if (!textEls.length && !figEls.length) return null;
+				const section = document.createElement('section');
+				section.className = 'writing-section';
+				const textCol = document.createElement('div');
+				textCol.className = 'writing-section__text';
+				textCol.append(...textEls);
+				section.append(textCol);
+				if (figEls.length) {
+					const figCol = document.createElement('div');
+					figCol.className = 'writing-section__figures';
+					figCol.append(...figEls);
+					section.append(figCol);
+				}
+				return section;
+			};
+
+			const out = [];
+			let text = [];
+			let figures = [];
+			const flush = () => {
+				const section = wrap(text, figures);
+				if (section) out.push(section);
+				text = [];
+				figures = [];
+			};
+
+			for (const el of [...article.children]) {
+				if (isPass(el)) {
+					flush();
+					out.push(el);
+					continue;
+				}
+				if (isHeading(el)) {
+					flush();
+					text.push(el);
+					continue;
+				}
+				if (isFig(el)) {
+					figures.push(el);
+					continue;
+				}
+				text.push(el);
+			}
+			flush();
+			article.replaceChildren(...out);
+		}
+
 		function initWritingPage() {
+			groupWritingSections();
 			initWritingTocSpy();
 			initWritingFigureWidths();
 			initWritingLightbox();
