@@ -510,7 +510,6 @@ main {
 	text-decoration: none;
 }
 
-.site-footer__hero--bottom,
 .site-footer__external {
 	display: none;
 }
@@ -675,10 +674,6 @@ main {
 	height: auto;
 	max-height: 8vh;
 	transform: translate(-12.5%, -12.5%);
-}
-
-.site-footer__berry-lg--mobile {
-	display: none;
 }
 
 .site-footer .berry-mark__lobe {
@@ -1017,11 +1012,12 @@ main {
 		margin: 0;
 	}
 
-	.site-footer__hero--top,
-	.site-footer__hero--top.site-footer__hero,
 	.site-footer__berry-lg--desktop,
 	.site-footer__berry-lg--desktop.berry-mark {
-		display: none;
+		width: min(14vw, 2.75rem);
+		height: auto;
+		max-height: 5vh;
+		transform: none;
 	}
 
 	.site-footer__external {
@@ -1036,39 +1032,12 @@ main {
 	}
 
 	.site-footer__place {
-		align-items: stretch;
-		gap: 0.45rem;
 		width: 100%;
-	}
-
-	.site-footer__hero--bottom,
-	.site-footer__hero--bottom.site-footer__hero {
-		display: flex;
-		position: relative;
-		align-self: stretch;
-		aspect-ratio: 1;
-		width: auto;
-		height: auto;
-		min-width: 0;
-		min-height: 0;
-	}
-
-	.site-footer__berry-lg--mobile,
-	.site-footer__berry-lg--mobile.berry-mark {
-		display: block;
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		max-height: 100%;
-		margin: 0;
-		padding: 0;
-		transform: none;
 	}
 
 	.site-footer__weather {
-		align-self: flex-start;
 		align-items: stretch;
+		width: 100%;
 	}
 
 	.site-footer__weather-line {
