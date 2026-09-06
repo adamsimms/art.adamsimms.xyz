@@ -42,8 +42,8 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Juries
 
-- **Jury Member** – Claudine and Stephen Bronfman Fellowship in Contemporary Art – [*Concordia University*](https://www.concordia.ca/finearts/funding-awards/bronfman-fellowship.html) – <span class="cv-meta">Montreal, Quebec, 2025</span>
-- **Jury Member** – Roloff Beny Foundation Fellowship in Photography – [*Concordia University*](https://www.concordia.ca/finearts.html) – <span class="cv-meta">Montreal, Quebec, 2025</span>
+- [**Claudine and Stephen Bronfman Fellowship in Contemporary Art**](https://www.concordia.ca/finearts/funding-awards/bronfman-fellowship.html) – <span class="cv-meta">2025</span>
+- **Roloff Beny Foundation Fellowship in Photography** – <span class="cv-meta">2025</span>
 
 ## Residencies + Workshops
 
