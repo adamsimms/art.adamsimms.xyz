@@ -1,6 +1,6 @@
 ---
 title: CV
-description: Curriculum vitae for Adam Simms — education, teaching, exhibitions, talks, writing, press, and experience.
+description: Curriculum vitae for Adam Simms — education, teaching, juries, exhibitions, talks, writing, press, and experience.
 ---
 
 <div class="cv-layout">
@@ -39,6 +39,11 @@ description: Curriculum vitae for Adam Simms — education, teaching, exhibition
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2016</span>
 
 - Photographic Vision: Theory + Practice <span class="cv-meta">(PHOT 300)</span>
+
+## Juries
+
+- **Jury Member** – Claudine and Stephen Bronfman Fellowship in Contemporary Art – [*Concordia University*](https://www.concordia.ca/finearts/funding-awards/bronfman-fellowship.html) – <span class="cv-meta">Montreal, Quebec, 2025</span>
+- **Jury Member** – Roloff Beny Foundation Fellowship in Photography – [*Concordia University*](https://www.concordia.ca/finearts.html) – <span class="cv-meta">Montreal, Quebec, 2025</span>
 
 ## Residencies + Workshops
 
