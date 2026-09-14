@@ -76,6 +76,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 - **Pinchard’s Island** – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
 - [**IGNITION 14**](https://archive.org/details/2018-06-02-ignition-14-final-report) – [*Leonard & Bina Ellen Art Gallery*](https://ellengallery.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2018</span>
+- [**Maureen II**](https://mfaconcordia.tumblr.com/post/160350506157) – Concordia’s MFA Department of Studio Arts Exhibition – *Ancienne École des beaux-arts de Montréal* – <span class="cv-meta">Montreal, Quebec, May 18–21, 2017</span>
 - [**Les Inéluctables**](https://occurrence.ca/les-ineluctables/les-ineluctables-adam-simms) – [*Occurrence*](https://occurrence.ca/) – <span class="cv-meta">Montreal, Quebec, 2017</span>
 - **ARTSIDA7** – [*Musée d’art contemporain de Montréal*](https://macm.org/) – <span class="cv-meta">Montreal, Quebec, 2017</span>
 - **ARTSIDA6** – *Galerie D* – <span class="cv-meta">Montreal, Quebec, 2015</span>
