@@ -115,14 +115,14 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Press
 
-- ***Pour ne jamais oublier*** – [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
+- [**Pour ne jamais oublier**](https://media.adamsimms.xyz/press/dinette-020-pour-ne-jamais-oublier.pdf) – [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
 - [**IGNITION 14 art show features Jane Austen, roadside restaurants and hanging logs**](https://www.concordia.ca/news/stories/2018/04/18/ignition-14-art-show-features-jane-austen-roadside-restaurants-and-hanging-logs.html) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">2018</span>
-- [**Barrens**](/barrens) – [*Riddle Fence*](https://www.riddlefence.com/), [Issue 14](https://www.riddlefence.com/past-issues/issue-14) – <span class="cv-meta">2013</span>
-- **Unsettled** – [*The Goose*](https://alecc.ca/), [Issue 12](https://alecc.ca/?page_id=4) – <span class="cv-meta">2013</span>
+- [**Barrens**](/barrens) – [*Riddle Fence*](https://riddlefence.com/), [Issue 14](https://riddlefence.com/issues/issue-14/) – <span class="cv-meta">2013</span>
+- [**Unsettled**](https://media.adamsimms.xyz/press/goose-12-unsettled.pdf) – [*The Goose*](https://alecc.ca/), [Issue 12](https://alecc.ca/uploads/goose/The%20Goose%202013%20Double%20Issue%2012_13.pdf) – <span class="cv-meta">2013</span>
 - [**ARTSIDA5**](https://www.journaldemontreal.com/2013/04/18/des-oeuvres-de-kent-monkman-evergon-et-daniel-barkley-mises-aux-encheres) – [*Le Journal de Montréal*](https://www.journaldemontreal.com/) – <span class="cv-meta">2013</span>
 - [**Des photographies géantes dans les commerces vacants**](https://www.radio-canada.ca/nouvelles/arts_et_spectacles/2013/04/02/009-aetd-vitrines-art.shtml) – [*Radio-Canada*](https://ici.radio-canada.ca/) – <span class="cv-meta">2013</span>
-- [**À Louer**](https://www.cielvariable.ca/recent/92/index.php) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/), CV92 – <span class="cv-meta">2012</span>
-- [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.com/), Issue 15: ‘LOST, FOUND, and STOLEN’ – <span class="cv-meta">2012</span>
+- [**À Louer**](https://media.adamsimms.xyz/press/ciel-variable-92-a-louer.pdf) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/), CV92 – <span class="cv-meta">2012</span>
+- [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.ca/), [Issue 15: ‘LOST, FOUND, and STOLEN’](https://headlightanthology.ca/archive/n15/) – <span class="cv-meta">2012</span>
 - [**Barrens**](/barrens) – [*Interfold*](http://interfoldmagazine.com/), Spring Issue – <span class="cv-meta">2012</span>
 - **Photographs jog our memories and our morals** – John Pohl, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2011</span>
 - **Washed-up in a city of loneliness** – Lori Callaghan, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2010</span>
@@ -130,7 +130,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - [**Urban Driftwood**](http://www.myvirtualpaper.com/doc/Mirror/mir_050810_opt/2010080403/42.html#42) – Stacey DeWolfe, *The Montreal Mirror* – <span class="cv-meta">2010</span>
 - [**Washed-up: desolation meets the male nude**](https://www.nightlife.ca/2010/08/11/washed-desolation-meets-male-nude-photographic-exhibit) – [*Montreal Nightlife*](https://www.nightlife.ca/) – <span class="cv-meta">2010</span>
 - [**Snapping success**](https://www.thenorwester.ca/News/2011-02-10/article-2214373/Snapping-success/1) – Clyde Follett, [*The Nor’wester*](https://www.thenorwester.ca/) – <span class="cv-meta">2010</span>
-- **Washed-up** – Hector Cartier, [*Fugues*](https://www.fugues.com/) – <span class="cv-meta">2010</span>
+- [**Washed-up**](https://media.adamsimms.xyz/press/fugues-2010-washed-up.pdf) – Hector Cartier, [*Fugues*](https://www.fugues.com/) – <span class="cv-meta">2010</span>
 
 </div>
 </div>
