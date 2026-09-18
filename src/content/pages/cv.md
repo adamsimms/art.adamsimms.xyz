@@ -45,14 +45,12 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - [**Claudine and Stephen Bronfman Fellowship in Contemporary Art**](https://www.concordia.ca/finearts/funding-awards/bronfman-fellowship.html) – <span class="cv-meta">2025</span>
 - **Roloff Beny Foundation Fellowship in Photography** – <span class="cv-meta">2025</span>
 
-## Residencies + Workshops
+## Awards
 
-- [**Silence Awareness Existence**](https://www.arteles.org/sae_residency.html) – [*Arteles Creative Center*](https://www.arteles.org/) – <span class="cv-meta">Hämeenkyrö, Finland, 2027 (upcoming)</span>
-- [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
-- [**Post Image Cluster**](https://postimage.ca/) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2016–Present</span>
-- **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
-- **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
-- **Le Mois de la Photo Portfolio Review** – <span class="cv-meta">Montreal, Quebec, 2011</span>
+- **Concordia Merit Scholarship** – [*Concordia University*](https://www.concordia.ca/finearts.html) – <span class="cv-meta">Faculty of Fine Arts, 2016</span>
+- **Flash Forward Emerging Photographers** – [*Magenta Foundation*](https://www.magentafoundation.org/flash-forward/) – <span class="cv-meta">2013</span>
+- **Best of College Photography Finalist** – [*Photographer’s Forum*](https://www.pfmagazine.net/2011/photography-annuals/best-of-college-photography-2011/) – <span class="cv-meta">2011</span>
+- **Canadian Millennium Scholarship** – [*Canada Millennium Scholarship Foundation*](https://en.wikipedia.org/wiki/Canada_Millennium_Scholarship) – <span class="cv-meta">2007–2009</span>
 
 ## Related Professional Experience
 
@@ -95,17 +93,19 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - [**À Louer**](https://media.adamsimms.xyz/press/uma-alouer-sublime.pdf) – [*UMA*](https://umamontreal.com/) – <span class="cv-meta">Montreal, Quebec, 2011–2012</span>
 - [**Art for Healing Foundation**](https://www.artforhealingfoundation.org/) – <span class="cv-meta">Montreal, Quebec, 2012</span>
 
-## Awards
+## Residencies + Workshops
 
-- **Concordia Merit Scholarship** – [*Concordia University*](https://www.concordia.ca/finearts.html) – <span class="cv-meta">Faculty of Fine Arts, 2016</span>
-- **Flash Forward Emerging Photographers** – [*Magenta Foundation*](https://www.magentafoundation.org/flash-forward/) – <span class="cv-meta">2013</span>
-- **Best of College Photography Finalist** – [*Photographer’s Forum*](https://web.archive.org/web/20190706173754/http://photographersforum.com/) – <span class="cv-meta">2011</span>
-- **Canadian Millennium Scholarship** – [*Canada Millennium Scholarship Foundation*](https://en.wikipedia.org/wiki/Canada_Millennium_Scholarship) – <span class="cv-meta">2007–2009</span>
+- [**Silence Awareness Existence**](https://www.arteles.org/sae_residency.html) – [*Arteles Creative Center*](https://www.arteles.org/) – <span class="cv-meta">Hämeenkyrö, Finland, 2027 (upcoming)</span>
+- [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
+- [**Post Image Cluster**](https://postimage.ca/) – [*Milieux Institute for Arts, Culture and Technology*](https://milieux.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2016–Present</span>
+- **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
+- **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
+- **Le Mois de la Photo Portfolio Review** – <span class="cv-meta">Montreal, Quebec, 2011</span>
 
 ## Talks
 
 - **Guest Lecture** – Virtual Identity for Artists (Survival Tactics) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2026</span>
-- **Artist Talk** – Portraiture + Identity – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2024</span>
+- **Artist Talk** – Portraiture & Identity – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2024</span>
 - **Artist Talk** – Photographic Vision: Theory & Practice II – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
 - **Artist Talk** – Advanced Workshop in Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
 
