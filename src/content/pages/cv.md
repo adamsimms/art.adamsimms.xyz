@@ -4,7 +4,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 ---
 
 <div class="cv-layout">
-<div class="cv-col">
+<div class="cv-col cv-col--credentials">
 
 ## Education
 
@@ -61,14 +61,8 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - **Research Assistant** – [*Marisa Portolese*](https://www.marisaportolese.com) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2012–2014</span>
 - **Senior Designer** – [*Lightspeed*](https://www.lightspeedpos.com) – <span class="cv-meta">Montreal, Quebec, 2007–2013</span>
 
-## Elsewhere
-
-- [Instagram](https://www.instagram.com/adamsimms.xyz)
-- [LinkedIn](https://www.linkedin.com/in/adamsimms)
-- [GitHub](https://github.com/adamsimms)
-
 </div>
-<div class="cv-col">
+<div class="cv-col cv-col--practice">
 
 ## Exhibitions
 
@@ -132,6 +126,15 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - **Snapping success** – Clyde Follett, [*The Nor’wester*](https://www.thenorwester.ca/) – <span class="cv-meta">2010</span>
 - [**Washed up**](https://media.adamsimms.xyz/press/norwester-2010-09-02-washed-up.pdf) – Rudy Norman, [*The Nor’wester*](https://www.thenorwester.ca/) – <span class="cv-meta">2010</span>
 - [**Washed-up**](https://media.adamsimms.xyz/press/fugues-2010-washed-up.pdf) – Hector Cartier, [*Fugues*](https://www.fugues.com/) – <span class="cv-meta">2010</span>
+
+</div>
+<div class="cv-elsewhere">
+
+## Elsewhere
+
+- [Instagram](https://www.instagram.com/adamsimms.xyz)
+- [LinkedIn](https://www.linkedin.com/in/adamsimms)
+- [GitHub](https://github.com/adamsimms)
 
 </div>
 </div>

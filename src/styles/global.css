@@ -2651,6 +2651,21 @@ body:has(.work-hover) {
 	align-items: start;
 }
 
+.cv-col--credentials {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.cv-col--practice {
+	grid-column: 2;
+	grid-row: 1 / span 2;
+}
+
+.cv-elsewhere {
+	grid-column: 1;
+	grid-row: 2;
+}
+
 .cv-col > :first-child {
 	margin-top: 0;
 }
@@ -2751,6 +2766,13 @@ body:has(.work-hover) {
 	.cv-layout {
 		grid-template-columns: 1fr;
 		row-gap: 0;
+	}
+
+	.cv-col--credentials,
+	.cv-col--practice,
+	.cv-elsewhere {
+		grid-column: auto;
+		grid-row: auto;
 	}
 
 	.cv-col + .cv-col > h2:first-child {
