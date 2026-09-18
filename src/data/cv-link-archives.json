@@ -78,6 +78,14 @@
 			"url": "https://www.linkedin.com/in/adamsimms",
 			"skip": "social-login-wall"
 		},
+		"https://www.linkedin.com/in/arianebilodeau/": {
+			"url": "https://www.linkedin.com/in/arianebilodeau/",
+			"skip": "social-login-wall"
+		},
+		"https://www.linkedin.com/in/cecilia-keating": {
+			"url": "https://www.linkedin.com/in/cecilia-keating",
+			"skip": "social-login-wall"
+		},
 		"https://github.com/adamsimms": {
 			"url": "https://github.com/adamsimms",
 			"wayback": "http://web.archive.org/web/20260801022744/https://github.com/adamsimms",
@@ -243,6 +251,14 @@
 			"url": "https://montrealgazette.com/",
 			"wayback": "http://web.archive.org/web/20260912173748/https://montrealgazette.com/",
 			"saved": "2026-09-17"
+		},
+		"https://montrealgazette.com/author/john-pohl/": {
+			"url": "https://montrealgazette.com/author/john-pohl/",
+			"saved": "2026-09-18"
+		},
+		"https://cmagazine.com/contributors/stacey-dewolfe": {
+			"url": "https://cmagazine.com/contributors/stacey-dewolfe",
+			"saved": "2026-09-18"
 		},
 		"https://www.ctvnews.ca/": {
 			"url": "https://www.ctvnews.ca/",

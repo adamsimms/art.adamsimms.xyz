@@ -70,7 +70,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Solo Exhibitions
 
-- [**Pinchard’s Island**](/pinchards-island) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
+- [**Pinchard’s Island**](/pinchards-island) – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021 (MFA thesis exhibition)</span>
 - [**Washed-up**](/washed-up) – *KaVieArt* – <span class="cv-meta">Montreal, Quebec, 2010</span>
 
 ## Group Exhibitions
@@ -78,14 +78,14 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - [**IGNITION 14**](https://archive.org/details/2018-06-02-ignition-14-final-report) – [*Leonard & Bina Ellen Art Gallery*](https://ellengallery.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2018</span>
 - [**Maureen II**](https://mfaconcordia.tumblr.com/post/160350506157) – *Ancienne École des beaux-arts de Montréal* – <span class="cv-meta">Montreal, Quebec, 2017</span>
 - [**Les Inéluctables**](https://occurrence.ca/les-ineluctables/les-ineluctables-adam-simms) – [*Occurrence*](https://occurrence.ca/) – <span class="cv-meta">Montreal, Quebec, 2017</span>
-- **ARTSIDA7** – *Galerie D* – <span class="cv-meta">Montreal, Quebec, 2017</span>
-- **ARTSIDA6** – *Galerie D* – <span class="cv-meta">Montreal, Quebec, 2015</span>
+- **ARTSIDA7** – *Galerie D* – <span class="cv-meta">Montreal, Quebec, 2017 (auction, [*Musée d’art contemporain de Montréal*](https://macm.org/))</span>
+- **ARTSIDA6** – *Galerie D* – <span class="cv-meta">Montreal, Quebec, 2015 (auction, Espace Réunion)</span>
 - [**Festival des Promenades Photographiques**](https://promenadesphotographiques.com/) – <span class="cv-meta">Vendôme, France, 2013</span>
-- **ARTSIDA5** – *Galerie Dentaire* – <span class="cv-meta">Montreal, Quebec, 2013</span>
+- **ARTSIDA5** – *Galerie Dentaire* – <span class="cv-meta">Montreal, Quebec, 2013 (auction, [*Musée d’art contemporain de Montréal*](https://macm.org/))</span>
 - **Dénouement** – [*VAV Gallery*](https://www.vavgallery.ca/) – <span class="cv-meta">Montreal, Quebec, 2013</span>
 - [**Latency**](https://www.vavgallery.ca/archive/2012/#latency) – [*VAV Gallery*](https://www.vavgallery.ca/) – <span class="cv-meta">Montreal, Quebec, 2012</span>
 - **Conclusions** – [*Eastern Bloc*](https://easternbloc.ca/) – <span class="cv-meta">Montreal, Quebec, 2012</span>
-- **ARTSIDA4** – *Galerie Dentaire* – <span class="cv-meta">Montreal, Quebec, 2012</span>
+- **ARTSIDA4** – *Galerie Dentaire* – <span class="cv-meta">Montreal, Quebec, 2012 (auction, [*Musée d’art contemporain de Montréal*](https://macm.org/))</span>
 - [**Defaced**](https://artmattersfestival.org/2011) – [*Art Matters Festival*](https://artmattersfestival.org/) – <span class="cv-meta">Montreal, Quebec, 2011</span>
 
 ## Public Art
@@ -98,8 +98,9 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 - [**Silence Awareness Existence**](https://www.arteles.org/sae_residency.html) – [*Arteles Creative Center*](https://www.arteles.org/) – <span class="cv-meta">Hämeenkyrö, Finland, 2027 (upcoming)</span>
 - [**La Wayaka Current: Desert 23°S**](https://www.lawayakacurrent.com/desert) – <span class="cv-meta">Atacama, Chile, 2026 (upcoming)</span>
-- **Self-Directed Research + Creation Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
-- **Wilderness + Conservation Photography Workshop** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
+- **Self-Directed Residencies** – <span class="cv-meta">Pinchard’s Island, Newfoundland, 2015–2022</span>
+- **Wilderness + Conservation Photography** – [*The Banff Centre*](https://www.banffcentre.ca/) – <span class="cv-meta">Banff, Alberta, 2012</span>
+- **Le Mois de la Photo Portfolio Review** – <span class="cv-meta">Montreal, Quebec, 2011</span>
 
 ## Talks
 
@@ -107,7 +108,6 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 - **Artist Talk** – Portraiture & Identity – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2024</span>
 - **Artist Talk** – Photographic Vision: Theory & Practice II – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2021</span>
 - **Artist Talk** – Advanced Workshop in Photography – [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">Montreal, Quebec, 2020</span>
-- **Le Mois de la Photo Portfolio Review** – <span class="cv-meta">Montreal, Quebec, 2011</span>
 
 ## Writing
 
@@ -115,7 +115,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Bibliography
 
-- [**Pour ne jamais oublier**](https://media.adamsimms.xyz/press/dinette-020-pour-ne-jamais-oublier.pdf) – Ariane Bilodeau, [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
+- [**Pour ne jamais oublier**](https://media.adamsimms.xyz/press/dinette-020-pour-ne-jamais-oublier.pdf) – [*Ariane Bilodeau*](https://www.linkedin.com/in/arianebilodeau/), [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
 - [**Barrens**](/barrens) – [*Riddle Fence*](https://riddlefence.com/), [Issue 14](https://riddlefence.com/issues/issue-14/) – <span class="cv-meta">2013</span>
 - [**Unsettled**](https://media.adamsimms.xyz/press/goose-12-unsettled.pdf) – [*The Goose*](https://alecc.ca/), [Issue 12](https://alecc.ca/uploads/goose/The%20Goose%202013%20Double%20Issue%2012_13.pdf) – <span class="cv-meta">2013</span>
 - [**À Louer**](https://media.adamsimms.xyz/press/ciel-variable-92-a-louer.pdf) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/), CV92 – <span class="cv-meta">2012</span>
@@ -124,13 +124,13 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Press
 
-- [**IGNITION 14 art show features Jane Austen, roadside restaurants and hanging logs**](https://www.concordia.ca/news/stories/2018/04/18/ignition-14-art-show-features-jane-austen-roadside-restaurants-and-hanging-logs.html) – Cecilia Keating, [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">2018</span>
+- [**IGNITION 14 art show features Jane Austen, roadside restaurants and hanging logs**](https://www.concordia.ca/news/stories/2018/04/18/ignition-14-art-show-features-jane-austen-roadside-restaurants-and-hanging-logs.html) – [*Cecilia Keating*](https://www.linkedin.com/in/cecilia-keating), [*Concordia University*](https://www.concordia.ca/) – <span class="cv-meta">2018</span>
 - [**ARTSIDA5**](https://www.journaldemontreal.com/2013/04/18/des-oeuvres-de-kent-monkman-evergon-et-daniel-barkley-mises-aux-encheres) – [*Le Journal de Montréal*](https://www.journaldemontreal.com/) – <span class="cv-meta">2013</span>
 - [**Des photographies géantes dans les commerces vacants**](https://www.radio-canada.ca/nouvelles/arts_et_spectacles/2013/04/02/009-aetd-vitrines-art.shtml) – [*Radio-Canada*](https://ici.radio-canada.ca/) – <span class="cv-meta">2013</span>
-- **Photographs jog our memories and our morals** – John Pohl, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2011</span>
+- **Photographs jog our memories and our morals** – [*John Pohl*](https://montrealgazette.com/author/john-pohl/), [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2011</span>
 - [**Washed-up in a city of loneliness**](https://media.adamsimms.xyz/press/gazette-2010-09-04-washed-up-in-a-city-of-loneliness.pdf) – Lori Callaghan, [*The Montreal Gazette*](https://montrealgazette.com/) – <span class="cv-meta">2010</span>
 - **Exhibition Interview: Washed-up** – [*CTV News*](https://www.ctvnews.ca/) – <span class="cv-meta">2010</span>
-- [**Urban Driftwood**](https://media.adamsimms.xyz/press/mirror-2010-urban-driftwood.pdf) – Stacey DeWolfe, *The Montreal Mirror* – <span class="cv-meta">2010</span>
+- [**Urban Driftwood**](https://media.adamsimms.xyz/press/mirror-2010-urban-driftwood.pdf) – [*Stacey DeWolfe*](https://cmagazine.com/contributors/stacey-dewolfe), *The Montreal Mirror* – <span class="cv-meta">2010</span>
 - [**Washed-up: desolation meets the male nude**](https://www.nightlife.ca/2010/08/11/washed-desolation-meets-male-nude-photographic-exhibit) – [*Montreal Nightlife*](https://www.nightlife.ca/) – <span class="cv-meta">2010</span>
 - **Snapping success** – Clyde Follett, [*The Nor’wester*](https://www.thenorwester.ca/) – <span class="cv-meta">2010</span>
 - [**Washed up**](https://media.adamsimms.xyz/press/norwester-2010-09-02-washed-up.pdf) – Rudy Norman, [*The Nor’wester*](https://www.thenorwester.ca/) – <span class="cv-meta">2010</span>
