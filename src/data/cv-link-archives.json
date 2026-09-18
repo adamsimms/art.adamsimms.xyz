@@ -254,11 +254,14 @@
 		},
 		"https://montrealgazette.com/author/john-pohl/": {
 			"url": "https://montrealgazette.com/author/john-pohl/",
-			"saved": "2026-09-18"
+			"saved": "2026-09-18",
+			"wayback": null,
+			"error": "no-snapshot"
 		},
 		"https://cmagazine.com/contributors/stacey-dewolfe": {
 			"url": "https://cmagazine.com/contributors/stacey-dewolfe",
-			"saved": "2026-09-18"
+			"saved": "2026-09-18",
+			"error": "fetch failed"
 		},
 		"https://www.ctvnews.ca/": {
 			"url": "https://www.ctvnews.ca/",
