@@ -115,12 +115,12 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 ## Bibliography
 
-- [**Pour ne jamais oublier**](https://media.adamsimms.xyz/press/dinette-020-pour-ne-jamais-oublier.pdf) – [*Ariane Bilodeau*](https://www.linkedin.com/in/arianebilodeau/), [*Dînette*](https://dinettemagazineboutique.com), [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
-- [**Barrens**](/barrens) – [*Riddle Fence*](https://riddlefence.com/), [Issue 14](https://riddlefence.com/issues/issue-14/) – <span class="cv-meta">2013</span>
-- [**Unsettled**](https://media.adamsimms.xyz/press/goose-12-unsettled.pdf) – [*The Goose*](https://alecc.ca/), [Issue 12](https://alecc.ca/uploads/goose/The%20Goose%202013%20Double%20Issue%2012_13.pdf) – <span class="cv-meta">2013</span>
-- [**À Louer**](https://media.adamsimms.xyz/press/ciel-variable-92-a-louer.pdf) – James D. Campbell, [*Ciel Variable*](https://cielvariable.ca/), CV92 – <span class="cv-meta">2012</span>
-- [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.ca/), [Issue 15: ‘LOST, FOUND, and STOLEN’](https://headlightanthology.ca/archive/n15/) – <span class="cv-meta">2012</span>
-- [**Barrens**](/barrens) – [*Interfold*](https://web.archive.org/web/20120118211821/http://www.interfoldmagazine.com/), Spring Issue – <span class="cv-meta">2012</span>
+- [**Pour ne jamais oublier**](https://media.adamsimms.xyz/press/dinette-020-pour-ne-jamais-oublier.pdf) – [*Ariane Bilodeau*](https://www.linkedin.com/in/arianebilodeau/), [*Dînette*](https://dinettemagazineboutique.com), Bromont, [Issue 020: Trésor](https://dinettemagazineboutique.com/products/020-tresor) – <span class="cv-meta">2021</span>
+- [**Barrens**](/barrens) – [*Riddle Fence*](https://riddlefence.com/), St. John’s, [Issue 14](https://riddlefence.com/issues/issue-14/) – <span class="cv-meta">2013</span>
+- [**Unsettled**](https://media.adamsimms.xyz/press/goose-12-unsettled.pdf) – [*The Goose*](https://alecc.ca/), Waterloo, [Issue 12](https://alecc.ca/uploads/goose/The%20Goose%202013%20Double%20Issue%2012_13.pdf) – <span class="cv-meta">2013</span>
+- [**À Louer**](https://media.adamsimms.xyz/press/ciel-variable-92-a-louer.pdf) – James D. Campbell, [*Ciel variable*](https://cielvariable.ca/), Montréal, CV92 – <span class="cv-meta">2012</span>
+- [**Barrens**](/barrens) – [*Headlight Anthology*](https://headlightanthology.ca/), Montréal, [Issue 15: ‘LOST, FOUND, and STOLEN’](https://headlightanthology.ca/archive/n15/) – <span class="cv-meta">2012</span>
+- [**Barrens**](/barrens) – [*Interfold*](https://web.archive.org/web/20120118211821/http://www.interfoldmagazine.com/), Montréal, Spring Issue – <span class="cv-meta">2012</span>
 
 ## Press
 

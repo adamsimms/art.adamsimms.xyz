@@ -30,7 +30,7 @@ Print: hide site header, footer, and cursor. Keep two columns. Show `hello@adams
 
 Punctuation on a CV line. A line is fields. The mark depends on what sits on either side.
 
-- **Comma** stays inside one field. Place (`Montreal, Quebec, 2021`). A bibliographic pair (`John Pohl, The Montreal Gazette` or `Riddle Fence, Issue 14`). A job title (`Artist-in-Residence, Studio Arts`).
+- **Comma** stays inside one field. Place (`Montreal, Quebec, 2021`). A bibliographic cluster (`Riddle Fence, St. John’s, Issue 14` or `James D. Campbell, Ciel variable, Montréal, CV92`). A job title (`Artist-in-Residence, Studio Arts`). Bibliography lines always include the publication city.
 - **Spaced en dash** (` – `) sits between fields. Title – venue – place. Degree – program. Role – person. Role – talk – venue. Work – credit – year.
 - **Parentheses** wrap a subordinate label, not a peer field. Course code (`Digital Photography I (PHOT 331)`). Talk series (`Virtual Identity for Artists (Survival Tactics)`). Status or parent org (`(upcoming)`, `(Atlassian)`).
 - **Unspaced en dash** (`2018–2019`) is a year range inside the date field. Hyphens stay in compound words (`Washed-up`).
