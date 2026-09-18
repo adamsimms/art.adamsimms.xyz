@@ -1,0 +1,52 @@
+name: CV link check
+
+on:
+  schedule:
+    - cron: '0 15 * * 1'
+  push:
+    branches:
+      - main
+    paths:
+      - src/content/pages/cv.md
+      - src/data/cv-link-archives.json
+      - scripts/cv-links.mjs
+  pull_request:
+    paths:
+      - src/content/pages/cv.md
+      - src/data/cv-link-archives.json
+      - scripts/cv-links.mjs
+  workflow_dispatch:
+
+jobs:
+  cv-links:
+    name: Archive + check CV links
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Save new URLs to Wayback
+        if: github.event_name != 'schedule'
+        run: node scripts/cv-links.mjs archive
+      - name: Commit sidecar if Wayback records changed
+        if: github.event_name != 'schedule'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/data/cv-link-archives.json
+          if git diff --staged --quiet; then
+            echo 'sidecar unchanged'
+          else
+            git commit -m "$(cat <<'EOF'
+          Record Wayback snapshots for new CV links.
+
+          EOF
+          )"
+            git push
+          fi
+      - run: node scripts/cv-links.mjs check
