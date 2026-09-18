@@ -261,7 +261,8 @@
 		"https://cmagazine.com/contributors/stacey-dewolfe": {
 			"url": "https://cmagazine.com/contributors/stacey-dewolfe",
 			"saved": "2026-09-18",
-			"error": "fetch failed"
+			"error": "no-snapshot",
+			"wayback": null
 		},
 		"https://www.ctvnews.ca/": {
 			"url": "https://www.ctvnews.ca/",
