@@ -177,8 +177,12 @@ async function cmdCheck() {
 	const missing = urls.filter((url) => !data.records?.[url]);
 	let dead = 0;
 	for (const url of urls) {
-		const result = await fetchStatus(url);
 		const rec = data.records?.[url];
+		if (SKIP_ARCHIVE_HOSTS.has(new URL(url).hostname) || rec?.skip) {
+			console.log(`skip\t${url}`);
+			continue;
+		}
+		const result = await fetchStatus(url);
 		const row = `${result.status || result.error}\t${url}`;
 		if (result.status === 404 || result.status === 410) {
 			dead += 1;
@@ -189,7 +193,8 @@ async function cmdCheck() {
 			!result.ok &&
 			result.status !== 401 &&
 			result.status !== 403 &&
-			result.status !== 429
+			result.status !== 429 &&
+			result.status !== 999
 		) {
 			dead += 1;
 			console.log(`DEAD\t${row}${rec?.wayback ? `\t${rec.wayback}` : ''}`);
