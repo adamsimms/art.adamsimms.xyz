@@ -255,14 +255,12 @@
 		"https://montrealgazette.com/author/john-pohl/": {
 			"url": "https://montrealgazette.com/author/john-pohl/",
 			"saved": "2026-09-18",
-			"wayback": null,
-			"error": "no-snapshot"
+			"wayback": "http://web.archive.org/web/20260918141428/https://montrealgazette.com/author/john-pohl/"
 		},
 		"https://cmagazine.com/contributors/stacey-dewolfe": {
 			"url": "https://cmagazine.com/contributors/stacey-dewolfe",
 			"saved": "2026-09-18",
-			"error": "no-snapshot",
-			"wayback": null
+			"wayback": "http://web.archive.org/web/20240303064315/https://cmagazine.com/contributors/stacey-dewolfe"
 		},
 		"https://www.ctvnews.ca/": {
 			"url": "https://www.ctvnews.ca/",
