@@ -180,12 +180,19 @@ async function cmdCheck() {
 		const result = await fetchStatus(url);
 		const rec = data.records?.[url];
 		const row = `${result.status || result.error}\t${url}`;
-		if (result.status === 404 || result.status === 410 || result.status === 0) {
+		if (result.status === 404 || result.status === 410) {
 			dead += 1;
 			console.log(`DEAD\t${row}${rec?.wayback ? `\t${rec.wayback}` : ''}`);
-		} else if (!result.ok && result.status !== 401 && result.status !== 403 && result.status !== 429) {
+		} else if (result.status === 0 && rec?.wayback) {
+			console.log(`warn\t${row}\t${rec.wayback}`);
+		} else if (
+			!result.ok &&
+			result.status !== 401 &&
+			result.status !== 403 &&
+			result.status !== 429
+		) {
 			dead += 1;
-			console.log(`DEAD\t${row}`);
+			console.log(`DEAD\t${row}${rec?.wayback ? `\t${rec.wayback}` : ''}`);
 		} else {
 			console.log(`ok\t${row}`);
 		}

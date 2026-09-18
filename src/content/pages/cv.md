@@ -99,7 +99,7 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 
 - **Concordia Merit Scholarship** – [*Concordia University*](https://www.concordia.ca/finearts.html) – <span class="cv-meta">Faculty of Fine Arts, 2016</span>
 - **Flash Forward Emerging Photographers** – [*Magenta Foundation*](https://www.magentafoundation.org/flash-forward/) – <span class="cv-meta">2013</span>
-- **Best of College Photography Finalist** – [*Photographer’s Forum*](https://www.photographersforum.com/) – <span class="cv-meta">2011</span>
+- **Best of College Photography Finalist** – [*Photographer’s Forum*](https://web.archive.org/web/20190706173754/http://photographersforum.com/) – <span class="cv-meta">2011</span>
 - **Canadian Millennium Scholarship** – [*Canada Millennium Scholarship Foundation*](https://en.wikipedia.org/wiki/Canada_Millennium_Scholarship) – <span class="cv-meta">2007–2009</span>
 
 ## Talks
