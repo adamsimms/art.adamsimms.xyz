@@ -2780,6 +2780,61 @@ body:has(.work-hover) {
 	}
 }
 
+.cv-print-contact {
+	display: none;
+}
+
+@media print {
+	.body--cv .site-header,
+	.body--cv .site-footer,
+	.body--cv .site-cursor {
+		display: none !important;
+	}
+
+	.body--cv .site-sheet {
+		display: block;
+		min-height: 0;
+	}
+
+	.body--cv .main--cv {
+		padding: 0;
+	}
+
+	.body--cv .cv-print-contact {
+		display: block;
+		margin: 0.35rem 0 0;
+		color: var(--muted);
+	}
+
+	.body--cv .cv-layout {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		column-gap: 2.5rem;
+	}
+
+	.body--cv .cv-col--credentials {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.body--cv .cv-col--practice {
+		grid-column: 2;
+		grid-row: 1 / span 2;
+	}
+
+	.body--cv .cv-elsewhere {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	.body--cv .cv h2 {
+		break-after: avoid;
+	}
+
+	.body--cv .cv li {
+		break-inside: avoid;
+	}
+}
+
 /* Maps: same shell as CV / Studio */
 .maps {
 	max-width: none;
