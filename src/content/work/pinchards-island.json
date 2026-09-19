@@ -22,8 +22,8 @@
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728040980459-L4RHXI0LUTSY31GI2OQN/image-asset.png"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/04.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/04.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/04.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/04.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793500077-BJKR0VSM6HPXIN55BCTH/03_adam_simms_explorers.jpg"
@@ -66,8 +66,8 @@
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041389109-31Z7TZIV335C8ON5K1G1/Screenshot+2024-10-04+at+7.29.06%E2%80%AFAM.png"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/10.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/10.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/10.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/10.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793513098-ZJGN00R8AS1MQ0UDSN0I/10_adam_simms_sisters.jpg"
@@ -87,36 +87,36 @@
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1728041162636-Y8F3GDT7IHWCH3QU26WC/bob-man-cabin+copy.png"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/13.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/13.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/13.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/13.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793499354-5WU0TXWWRLRMO937OX8F/02_adam_simms_daisy.jpg"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/14.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/14.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/14.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/14.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793498960-PY9GY0V3T7RQ3DGJ3K7E/01_adam_simms_archipelago.jpg"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/15.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/15.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/15.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/15.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793501700-CRCYWDWWTDDCEWSM8QUA/05_adam_simms_island.jpg"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/16.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/16.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/16.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/16.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793501667-OYLHW9EFLJ040YTBE4Z2/06_adam_simms_houses.jpg"
     },
     {
-      "src": "https://media.adamsimms.xyz/work/pinchards-island/17.avif",
-      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/17.jpg",
+      "src": "https://media.adamsimms.xyz/work/pinchards-island/17.avif?v=2500",
+      "fallback": "https://media.adamsimms.xyz/work/pinchards-island/17.jpg?v=2500",
       "alt": "Pinchard's Island",
       "caption": "",
       "sourceUrl": "https://images.squarespace-cdn.com/content/v1/50e5fc10e4b0291e3b9b75c6/1485793513063-TA1GZZBLFX6EU71TKKF2/09_adam_simms_doris.jpg"
