@@ -2682,6 +2682,10 @@ body:has(.work-hover) {
 	margin-top: 0;
 }
 
+.cv-elsewhere > h2:first-child {
+	margin-top: var(--space-3xl);
+}
+
 .cv ul {
 	margin: 0 0 0;
 	padding: 0;
@@ -2775,7 +2779,8 @@ body:has(.work-hover) {
 		grid-row: auto;
 	}
 
-	.cv-col + .cv-col > h2:first-child {
+	.cv-col + .cv-col > h2:first-child,
+	.cv-col + .cv-elsewhere > h2:first-child {
 		margin-top: var(--space-xl);
 	}
 }
