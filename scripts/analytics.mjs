@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export const UMAMI_SCRIPT_URL = 'https://cloud.umami.is/script.js';
-export const UMAMI_DOMAINS = 'adamsimms.xyz,syllabi.adamsimms.xyz,art.adamsimms.xyz';
+export const UMAMI_DOMAINS = 'adamsimms.xyz,teaching.adamsimms.xyz,art.adamsimms.xyz';
 export const GHOSTPANE_SCRIPT_URL = 'https://analytics.adamsimms.xyz/gp.js';
 export const GHOSTPANE_MARKER_START = '<!-- ghostpane-analytics:start -->';
 export const GHOSTPANE_MARKER_END = '<!-- ghostpane-analytics:end -->';

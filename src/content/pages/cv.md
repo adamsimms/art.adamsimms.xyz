@@ -19,16 +19,16 @@ description: Curriculum vitae for Adam Simms — education, teaching, juries, ex
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2024–2025</span>
 
-- [Photographic Vision: Theory + Practice II](https://syllabi.adamsimms.xyz/phot300/) <span class="cv-meta">(PHOT 300)</span>
-- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
-- [Digital Photography II](https://syllabi.adamsimms.xyz/phot332/) <span class="cv-meta">(PHOT 332)</span>
-- [Advanced Workshop in Photography](https://syllabi.adamsimms.xyz/phot400/) <span class="cv-meta">(PHOT 400)</span>
+- [Photographic Vision: Theory + Practice II](https://teaching.adamsimms.xyz/phot300/) <span class="cv-meta">(PHOT 300)</span>
+- [Digital Photography I](https://teaching.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
+- [Digital Photography II](https://teaching.adamsimms.xyz/phot332/) <span class="cv-meta">(PHOT 332)</span>
+- [Advanced Workshop in Photography](https://teaching.adamsimms.xyz/phot400/) <span class="cv-meta">(PHOT 400)</span>
 
 **Artist-in-Residence, Studio Arts**  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2021–2022</span>
 
-- [As Seen on Screens: Cyberspace + Image Economy](https://syllabi.adamsimms.xyz/phot398/) <span class="cv-meta">(PHOT 398)</span>
-- [Digital Photography I](https://syllabi.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
+- [As Seen on Screens: Cyberspace + Image Economy](https://teaching.adamsimms.xyz/phot398/) <span class="cv-meta">(PHOT 398)</span>
+- [Digital Photography I](https://teaching.adamsimms.xyz/phot331/) <span class="cv-meta">(PHOT 331)</span>
 
 **Teaching Assistant** – [*Geneviève Cadieux*](https://en.wikipedia.org/wiki/Genevi%C3%A8ve_Cadieux)  
 <span class="cv-meta">Concordia University, Montreal, Quebec, 2017</span>
