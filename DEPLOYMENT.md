@@ -22,7 +22,7 @@
 
 Do **not** enable Cloudflare Pages “Git integration” auto-builds. A dashboard build runs bare `npm run build` without assembling `/cloudberry/archive` and will overwrite a good deploy.
 
-Optional: `repository_dispatch` type `cloudberry-archive-rebuild` from `pinchards.is` (requires `ART_DISPATCH_TOKEN` there).
+A push to `pinchards.is` that changes the archive also pushes a commit here (deploy key `ART_DEPLOY_KEY` on that repo). This workflow then runs from that push.
 
 ## Initial setup
 

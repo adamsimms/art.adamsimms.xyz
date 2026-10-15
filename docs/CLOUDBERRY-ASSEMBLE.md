@@ -33,13 +33,13 @@ Add `art.adamsimms.xyz` to the Mapbox token URL restrictions.
 
 | Name | Type | Purpose |
 |------|------|---------|
-| `ART_DISPATCH_TOKEN` | secret | Fine-grained PAT with **Actions: write** on `adamsimms/art.adamsimms.xyz` so archive changes can `repository_dispatch` a Pages rebuild |
+| `ART_DEPLOY_KEY` | secret | Private half of a write deploy key on `adamsimms/art.adamsimms.xyz`. Archive pushes use it to land a commit here, which starts the Pages workflow. |
 
 ## CI
 
 1. Art deploy workflow checks out sibling repos, builds/assembles Cloudberry + siblings into `dist`, deploys Pages, purges selected edge keys.
-2. Triggers: push to art `main`, `workflow_dispatch`, and `repository_dispatch` type `cloudberry-archive-rebuild`.
-3. Pinchards workflow `.github/workflows/trigger-art-rebuild.yml` emits that dispatch when archive-affecting paths land on `main`.
+2. Triggers: push to art `main`, and `workflow_dispatch`.
+3. Pinchards workflow `.github/workflows/trigger-art-rebuild.yml` pushes a commit to this repo when archive-affecting paths land on `main`. That push is the rebuild trigger.
 
 **Important:** Only **GitHub Actions / Wrangler** should publish this Pages project. Cloudflare dashboard Git auto-builds must stay **disabled**.
 
