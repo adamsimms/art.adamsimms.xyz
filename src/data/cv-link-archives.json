@@ -215,7 +215,7 @@
 			"url": "https://www.journaldemontreal.com/2013/04/18/des-oeuvres-de-kent-monkman-evergon-et-daniel-barkley-mises-aux-encheres",
 			"wayback": null,
 			"saved": "2026-10-12",
-			"error": "no-snapshot"
+			"error": "This operation was aborted"
 		},
 		"https://www.journaldemontreal.com/": {
 			"url": "https://www.journaldemontreal.com/",
@@ -293,5 +293,5 @@
 			"saved": "2026-09-17"
 		}
 	},
-	"updated": "2026-10-12"
+	"updated": "2026-10-15"
 }
