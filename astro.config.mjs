@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { isExcludedFromSitemap } from './src/lib/seo.ts';
+import { isExcludedFromSitemap, SITEMAP_EXTRA_URLS } from './src/lib/seo.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +15,7 @@ export default defineConfig({
 	},
 	integrations: [
 		sitemap({
+			customPages: SITEMAP_EXTRA_URLS,
 			filter: (page) => {
 				try {
 					const path = new URL(page).pathname.replace(/\/$/, '') || '/';

@@ -9,7 +9,7 @@
  *   node scripts/assemble-dreamberry.mjs
  *   npm run assemble:dreamberry
  */
-import { cpSync, existsSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -47,6 +47,35 @@ rmSync(DEST, { recursive: true, force: true });
 ensureDir(DEST);
 
 cpSync(SRC, DEST, { recursive: true });
+injectDreamberrySeo(DEST);
 
 injectUmamiIntoHtmlDir(ART_ROOT, DEST, 'assemble-dreamberry');
 console.log(`Assembled Dreamberry → ${DEST}`);
+
+/** Portfolio pages ship without a canonical. Pin each one to its public URL. */
+function injectDreamberrySeo(dest) {
+	const pages = {
+		'index.html': 'https://art.adamsimms.xyz/dreamberry/',
+		'window/index.html': 'https://art.adamsimms.xyz/dreamberry/window/',
+		'info/index.html': 'https://art.adamsimms.xyz/dreamberry/info/',
+	};
+
+	for (const [rel, canonical] of Object.entries(pages)) {
+		const file = join(dest, rel);
+		if (!existsSync(file)) continue;
+		let html = readFileSync(file, 'utf8');
+		if (!html.includes('rel="canonical"')) {
+			html = html.replace(
+				'</head>',
+				`    <link rel="canonical" href="${canonical}" />\n  </head>`,
+			);
+		}
+		if (!/name=["']robots["']/i.test(html)) {
+			html = html.replace(
+				'</head>',
+				`    <meta name="robots" content="index, follow" />\n  </head>`,
+			);
+		}
+		writeFileSync(file, html);
+	}
+}

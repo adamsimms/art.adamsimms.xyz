@@ -30,6 +30,19 @@ export function isExcludedFromSitemap(pathname: string): boolean {
 
 export const SITE_NAME = 'Adam Simms';
 export const SITE_URL = 'https://art.adamsimms.xyz';
+
+/**
+ * Public installations assembled into dist after the Astro build.
+ * They are indexable and have their own canonicals, but they are not Astro routes.
+ */
+export const SITEMAP_EXTRA_URLS = [
+	`${SITE_URL}/dory/`,
+	`${SITE_URL}/waves/`,
+	`${SITE_URL}/adrift/experience/`,
+	`${SITE_URL}/dreamberry/`,
+	`${SITE_URL}/dreamberry/window/`,
+	`${SITE_URL}/dreamberry/info/`,
+];
 export const DEFAULT_DESCRIPTION =
 	'Canadian media artist Adam Simms: photography, video, and installation on belonging, displacement, and Newfoundland resettlement.';
 /**
