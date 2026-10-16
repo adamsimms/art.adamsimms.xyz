@@ -7,7 +7,8 @@
  *   node scripts/generate-cloudberry-view.mjs --limit=20
  *   node scripts/generate-cloudberry-view.mjs --concurrency=4
  *
- * Catalog: ../pinchards.is/data/catalog.json (or PINCHARDS_REPO_PATH).
+ * Catalog: ../cloudberry-archive/data/catalog.json
+ * (or CLOUDBERRY_ARCHIVE_REPO_PATH / PINCHARDS_REPO_PATH).
  */
 import fs from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -21,8 +22,10 @@ import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ART_ROOT = path.resolve(__dirname, '..');
-const PINCHARDS =
-	process.env.PINCHARDS_REPO_PATH || path.resolve(ART_ROOT, '../pinchards.is');
+const ARCHIVE_REPO =
+	process.env.CLOUDBERRY_ARCHIVE_REPO_PATH ||
+	process.env.PINCHARDS_REPO_PATH ||
+	path.resolve(ART_ROOT, '../cloudberry-archive');
 const CDN_FULL = 'https://cloudberry-images.adamsimms.xyz/';
 const BUCKET = 'art-adamsimms-xyz-cloudberry-images';
 const VIEW_PREFIX = 'view/';
@@ -37,7 +40,7 @@ const CONCURRENCY = Math.max(1, Number(concurrencyArg?.split('=')[1] || 4));
 const SKIP_EXISTING = !args.includes('--force');
 
 async function loadFilenames() {
-	const catalogPath = path.join(PINCHARDS, 'data', 'catalog.json');
+	const catalogPath = path.join(ARCHIVE_REPO, 'data', 'catalog.json');
 	const raw = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
 	const photos = Array.isArray(raw.photos) ? raw.photos : [];
 	return photos.map((p) => String(p.filename || p.file || '')).filter(Boolean);

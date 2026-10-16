@@ -28,6 +28,6 @@ Canonical archive: `https://art.adamsimms.xyz/cloudberry/archive/`
 | Check | Expect |
 |-------|--------|
 | Pages Git auto-build | Disabled — only GHA/Wrangler deploys |
-| pinchards → art | Archive push lands a commit here via deploy key `ART_DEPLOY_KEY`, which starts this workflow |
+| cloudberry-archive → art | Archive push lands a commit here via deploy key `ART_DEPLOY_KEY`, which starts this workflow |
 | Art push / dispatch | Workflow builds archive + assembles + deploys |
 | pinchards.is | Worker redirects → art paths (see [PHASE5-CUTOVER.md](./PHASE5-CUTOVER.md)) |

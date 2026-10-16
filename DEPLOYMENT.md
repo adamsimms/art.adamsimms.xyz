@@ -10,7 +10,7 @@
 | R2 bucket (portfolio) | `art-adamsimms-xyz` → `media.adamsimms.xyz` |
 | R2 buckets (Cloudberry) | `art-adamsimms-xyz-cloudberry-images` / `-thumbs` → `cloudberry-*.adamsimms.xyz` |
 | R2 bucket (research inbox) | `art-adamsimms-xyz-research` (private; email capture) |
-| Redirect Worker | `pinchards-redirect` → routes on `pinchards.is` / `www` |
+| Redirect Worker | `pinchards-redirect` → retired `pinchards.is` / `www` (keep until domain expires) |
 | Redirect Worker | `adamsim-ms-redirect` → routes on `adamsim.ms` / `www` |
 | Email Worker | `art-adamsimms-xyz-research` → `research@adamsimms.xyz` (Email Routing on `adamsimms.xyz`) |
 | Newsletter Worker | `art-adamsimms-xyz-newsletter` → D1 list + `/admin` send (see below) |
@@ -22,7 +22,7 @@
 
 Do **not** enable Cloudflare Pages “Git integration” auto-builds. A dashboard build runs bare `npm run build` without assembling `/cloudberry/archive` and will overwrite a good deploy.
 
-A push to `pinchards.is` that changes the archive also pushes a commit here (deploy key `ART_DEPLOY_KEY` on that repo). This workflow then runs from that push.
+A push to `cloudberry-archive` that changes the archive also pushes a commit here (deploy key `ART_DEPLOY_KEY` on that repo). This workflow then runs from that push.
 
 ## Initial setup
 
@@ -73,7 +73,7 @@ In the Cloudflare dashboard for `adamsimms.xyz`, turn **off** managed robots.txt
 
 | Path | Source |
 |------|--------|
-| `/cloudberry/archive/` | `adamsimms/pinchards.is` static archive |
+| `/cloudberry/archive/` | `adamsimms/cloudberry-archive` static archive |
 | `/dory/` | `adamsimms/dory` |
 | `/adrift/experience/` | `adamsimms/adrift` (+ `/adrift/api/weather` Function) |
 | `/waves/` | `adamsimms/waves` (+ `/waves/call-api`, `/waves/health` Functions) |
@@ -85,7 +85,7 @@ See [docs/CLOUDBERRY-ASSEMBLE.md](docs/CLOUDBERRY-ASSEMBLE.md), [docs/PHASE4-SIB
 
 **In-repo** (`public/_redirects`): portfolio aliases, trailing-slash mounts, legacy archive path aliases.
 
-**pinchards.is**: Worker `pinchards-redirect` (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md)). Keep `pinchards.is` / `www` DNS proxied.
+**pinchards.is** (retired domain, keep until expiry): Worker `pinchards-redirect` (see [docs/PHASE5-CUTOVER.md](docs/PHASE5-CUTOVER.md)). Keep `pinchards.is` / `www` DNS proxied so old citations still 301 to art.
 
 **adamsim.ms**: Worker `adamsim-ms-redirect` — 301s apex/`www` to `art.adamsimms.xyz` (path aliases match `public/_redirects`). Keep `adamsim.ms` / `www` DNS **proxied**; Squarespace origin records can stay until you cancel the subscription.
 

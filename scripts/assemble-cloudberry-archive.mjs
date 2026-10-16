@@ -2,7 +2,8 @@
 /**
  * Assemble the Cloudberry static archive into art Pages dist.
  *
- * Expects pinchards.is at ../pinchards.is (local) or PINCHARDS_REPO_PATH.
+ * Expects cloudberry-archive at ../cloudberry-archive (local), or
+ * CLOUDBERRY_ARCHIVE_REPO_PATH / PINCHARDS_REPO_PATH.
  * Builds dist-archive if missing (requires PHP), then copies into
  * dist/cloudberry/archive/ and merges redirect fragment into public/_redirects.
  *
@@ -26,9 +27,11 @@ import { injectUmamiIntoHtmlDir } from './assemble-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ART_ROOT = resolve(__dirname, '..');
-const PINCHARDS =
-	process.env.PINCHARDS_REPO_PATH || resolve(ART_ROOT, '../pinchards.is');
-const ARCHIVE_SRC = join(PINCHARDS, 'dist-archive');
+const ARCHIVE_REPO =
+	process.env.CLOUDBERRY_ARCHIVE_REPO_PATH ||
+	process.env.PINCHARDS_REPO_PATH ||
+	resolve(ART_ROOT, '../cloudberry-archive');
+const ARCHIVE_SRC = join(ARCHIVE_REPO, 'dist-archive');
 const ARCHIVE_DEST = join(ART_ROOT, 'dist', 'cloudberry', 'archive');
 const FRAGMENT = join(ARCHIVE_SRC, '_redirects.fragment');
 const PUBLIC_REDIRECTS = join(ART_ROOT, 'public', '_redirects');
@@ -39,41 +42,41 @@ function fail(msg) {
 	process.exit(1);
 }
 
-if (!existsSync(PINCHARDS)) {
-	fail(`pinchards repo not found at ${PINCHARDS}`);
+if (!existsSync(ARCHIVE_REPO)) {
+	fail(`cloudberry-archive repo not found at ${ARCHIVE_REPO}`);
 }
 
-function ensurePinchardsVendor() {
-	const bootstrap = join(PINCHARDS, 'vendor/bootstrap/css/bootstrap.css');
-	const gsap = join(PINCHARDS, 'vendor/gsap/gsap.min.js');
+function ensureArchiveVendor() {
+	const bootstrap = join(ARCHIVE_REPO, 'vendor/bootstrap/css/bootstrap.css');
+	const gsap = join(ARCHIVE_REPO, 'vendor/gsap/gsap.min.js');
 	if (existsSync(bootstrap) && existsSync(gsap)) {
 		return;
 	}
 	console.log(
-		'assemble-cloudberry-archive: pinchards vendor/ missing — npm ci && npm run vendor:frontend…',
+		'assemble-cloudberry-archive: vendor/ missing — npm ci && npm run vendor:frontend…',
 	);
 	const npmCi = spawnSync('npm', ['ci'], {
-		cwd: PINCHARDS,
+		cwd: ARCHIVE_REPO,
 		stdio: 'inherit',
 		env: process.env,
 	});
 	if (npmCi.status !== 0) {
-		fail('npm ci failed in pinchards repo (needed for Bootstrap/GSAP)');
+		fail('npm ci failed in cloudberry-archive (needed for Bootstrap/GSAP)');
 	}
 	const vendor = spawnSync('npm', ['run', 'vendor:frontend'], {
-		cwd: PINCHARDS,
+		cwd: ARCHIVE_REPO,
 		stdio: 'inherit',
 		env: process.env,
 	});
 	if (vendor.status !== 0) {
-		fail('npm run vendor:frontend failed in pinchards repo');
+		fail('npm run vendor:frontend failed in cloudberry-archive');
 	}
 	if (!existsSync(bootstrap) || !existsSync(gsap)) {
 		fail('vendor assets still missing after vendor:frontend');
 	}
 }
 
-ensurePinchardsVendor();
+ensureArchiveVendor();
 
 const archiveHasVendor =
 	existsSync(join(ARCHIVE_SRC, 'vendor/bootstrap/css/bootstrap.css')) &&
@@ -91,7 +94,7 @@ if (!existsSync(join(ARCHIVE_SRC, 'index.html')) || !archiveHasVendor) {
 		);
 	}
 	const build = spawnSync('php', ['scripts/build-static-archive.php'], {
-		cwd: PINCHARDS,
+		cwd: ARCHIVE_REPO,
 		stdio: 'inherit',
 		env: process.env,
 	});

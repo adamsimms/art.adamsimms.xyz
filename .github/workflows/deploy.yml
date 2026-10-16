@@ -23,11 +23,11 @@ jobs:
       - name: Checkout art site
         uses: actions/checkout@v4
 
-      - name: Checkout Cloudberry / pinchards repo
+      - name: Checkout Cloudberry archive repo
         uses: actions/checkout@v4
         with:
-          repository: adamsimms/pinchards.is
-          path: .pinchards
+          repository: adamsimms/cloudberry-archive
+          path: .cloudberry-archive
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout Dory
@@ -83,7 +83,7 @@ jobs:
 
       - name: Assemble Cloudberry + siblings into dist
         run: |
-          PINCHARDS_REPO_PATH="$GITHUB_WORKSPACE/.pinchards" \
+          CLOUDBERRY_ARCHIVE_REPO_PATH="$GITHUB_WORKSPACE/.cloudberry-archive" \
           DORY_REPO_PATH="$GITHUB_WORKSPACE/.dory" \
           ADRIFT_REPO_PATH="$GITHUB_WORKSPACE/.adrift" \
           WAVES_REPO_PATH="$GITHUB_WORKSPACE/.waves" \
