@@ -44,12 +44,12 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.1.0",
+    "astro": "^7.2.8",
     "cheerio": "^1.2.0",
     "sharp": "^0.35.3"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
-    "wrangler": "^4.110.0"
+    "wrangler": "^4.150.0"
   }
 }
