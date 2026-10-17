@@ -281,7 +281,15 @@ async function turnstileOk(env: Bindings, secret: string, token: string, ip?: st
     .split(",")
     .map((h) => h.trim())
     .filter(Boolean);
-  return hostnames.length === 0 || hostnames.includes(String(data.hostname ?? ""));
+  if (hostnames.length && !hostnames.includes(String(data.hostname ?? ""))) return false;
+
+  // Siteverify does not reliably reject a reused token, so record each one.
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+  const hash = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const fresh = await env.DB.prepare(
+    `INSERT INTO turnstile_tokens (hash) VALUES (?1) ON CONFLICT(hash) DO NOTHING RETURNING hash`,
+  ).bind(hash).first();
+  return fresh !== null;
 }
 
 // Confirmation email for double opt-in. CONFIRM_SUBJECT and CONFIRM_HTML
@@ -563,6 +571,9 @@ export default {
 		// a 15-minute cadence within it.
 		if (new Date(controller.scheduledTime).getUTCMinutes() % 15 === 0) {
 			await runAutoSend(env);
+			await env.DB.prepare(
+				`DELETE FROM turnstile_tokens WHERE created_at < datetime('now', '-1 hour')`,
+			).run();
 		}
 		await drainOutbox(env);
 	},
