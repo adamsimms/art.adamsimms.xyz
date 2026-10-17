@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-17T16:03:46.270Z",
+        "reason": "agent: Inter is the site's existing self-hosted face (versioned woff2 subsets in global.css), pre-dating this change; not user-confirmed"
+      }
+    ]
+  }
+}

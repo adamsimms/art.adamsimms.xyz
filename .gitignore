@@ -36,3 +36,5 @@ _inbox/
 
 # wrangler local state
 .wrangler/
+
+.impeccable/hook.cache.json
