@@ -37,6 +37,8 @@
 		"SEND_BATCH": "40",
 		"PUBLIC_URL": "https://art.adamsimms.xyz/newsletter",
 		"NOTIFY_EMAIL": "hello@adamsimms.xyz",
+		"TURNSTILE_SITE_KEY": "0x4AAAAAAFZZWzAOqKSLz41Y",
+		"TURNSTILE_HOSTNAMES": "art.adamsimms.xyz",
 		"SENDER_ADDRESS": "Adam Simms, 288 Rue Richmond, Montreal QC H2J 0C4, Canada"
 	}
 }

@@ -62,10 +62,15 @@ function privacyLine(url?: string): string {
 // Turnstile widget markup + loader, rendered only when a site key is set.
 function turnstile(siteKey?: string): string {
   return siteKey
-    ? `<div class="cf-turnstile" data-sitekey="${siteKey}" style="margin-top:14px"></div>
+    ? `<div class="cf-turnstile" data-sitekey="${siteKey}" data-action="signup" style="margin-top:14px"></div>
        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>`
     : "";
 }
+
+// Honeypot input, hidden from people and assistive tech. The subscribe
+// endpoint silently drops any submission that fills it in.
+const HONEYPOT = `<input name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"
+       style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">`;
 
 // Client-side base path: pages live under /newsletter on art.adamsimms.xyz,
 // but at the root on *.workers.dev. Absolute paths like /api/send must include
@@ -89,6 +94,7 @@ document.getElementById('f').addEventListener('submit', async (e) => {
     : j.error === 'missing_field' ? "Please fill in all required fields."
     : "Please check your email address.";
   if (r.ok && !j.pending) e.target.reset();
+  if (window.turnstile) window.turnstile.reset();
 });`;
 
 export function signupPage(turnstileSiteKey?: string, privacyUrl?: string): string {
@@ -100,6 +106,7 @@ export function signupPage(turnstileSiteKey?: string, privacyUrl?: string): stri
        <input name="name" type="text" placeholder="Your name (optional)" aria-label="Name">
        <input name="email" type="email" placeholder="you@example.com" required aria-label="Email">
        ${fieldInputs()}
+       ${HONEYPOT}
        ${turnstile(turnstileSiteKey)}
        <button>Subscribe</button>
        <div class="msg" id="m"></div>
@@ -141,6 +148,7 @@ export function embedPage(turnstileSiteKey?: string, privacyUrl?: string): strin
     <input name="name" type="text" placeholder="Your name (optional)" aria-label="Name">
     <input name="email" type="email" placeholder="you@example.com" required aria-label="Email">
     ${fieldInputs()}
+    ${HONEYPOT}
     ${turnstile(turnstileSiteKey)}
     <button>Subscribe</button>
     <div class="msg" id="m"></div>

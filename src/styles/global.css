@@ -794,6 +794,18 @@ main {
 	cursor: wait;
 }
 
+.site-footer__newsletter-trap {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.site-footer__newsletter-challenge:empty {
+	display: none;
+}
+
 .site-footer__newsletter-status {
 	margin: 0.15rem 0 0;
 	font-size: var(--step--2);

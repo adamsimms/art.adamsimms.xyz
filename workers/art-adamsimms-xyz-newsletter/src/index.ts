@@ -14,6 +14,7 @@ type Bindings = {
   DOUBLE_OPT_IN?: string;
   TURNSTILE_SITE_KEY?: string;
   TURNSTILE_SECRET_KEY?: string;
+  TURNSTILE_HOSTNAMES?: string;
   RSS_AUTOSEND?: string;
   RSS_FEED_URL?: string;
   PUBLIC_URL?: string;
@@ -252,9 +253,14 @@ async function drainOutbox(env: Bindings): Promise<void> {
   if (stmts.length) await env.DB.batch(stmts);
 }
 
+// Every signup form renders its Turnstile widget with this action.
+const TURNSTILE_ACTION = "signup";
+
 // Verify a Cloudflare Turnstile token server-side. Only enforced when a secret
-// is configured; otherwise signups pass through (feature is opt-in).
-async function turnstileOk(secret: string, token: string, ip?: string): Promise<boolean> {
+// is configured; otherwise signups pass through (feature is opt-in). When
+// TURNSTILE_HOSTNAMES is set, the token must come from one of those hostnames.
+async function turnstileOk(env: Bindings, secret: string, token: string, ip?: string): Promise<boolean> {
+  if (!token || token.length > 2048) return false;
   const form = new FormData();
   form.append("secret", secret);
   form.append("response", token);
@@ -262,10 +268,20 @@ async function turnstileOk(secret: string, token: string, ip?: string): Promise<
   const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
     body: form,
+    signal: AbortSignal.timeout(10_000),
   }).catch(() => null);
-  if (!res) return false;
-  const data = (await res.json().catch(() => ({}))) as { success?: boolean };
-  return data.success === true;
+  if (!res?.ok) return false;
+  const data = (await res.json().catch(() => ({}))) as {
+    success?: boolean;
+    action?: string;
+    hostname?: string;
+  };
+  if (data.success !== true || data.action !== TURNSTILE_ACTION) return false;
+  const hostnames = String(env.TURNSTILE_HOSTNAMES ?? "")
+    .split(",")
+    .map((h) => h.trim())
+    .filter(Boolean);
+  return hostnames.length === 0 || hostnames.includes(String(data.hostname ?? ""));
 }
 
 // Confirmation email for double opt-in. CONFIRM_SUBJECT and CONFIRM_HTML
@@ -322,6 +338,9 @@ app.use("/api/subscribe", cors());
 // --- Public: subscribe (single or double opt-in, per DOUBLE_OPT_IN) ---
 app.post("/api/subscribe", async (c) => {
   const p = await readParams(c);
+  // Honeypot: the "website" input is hidden from people, so a value means a
+  // bot filled in every field. Answer like a success so it doesn't retry.
+  if (String(p.website ?? "").trim()) return c.json({ ok: true });
   const email = String(p.email ?? "").trim().toLowerCase();
   const name = String(p.name ?? "").trim().slice(0, 100);
   if (!EMAIL_RE.test(email) || email.length > 254) {
@@ -340,7 +359,7 @@ app.post("/api/subscribe", async (c) => {
   // Bot protection (only when Turnstile is configured).
   if (c.env.TURNSTILE_SECRET_KEY) {
     const token = String(p["cf-turnstile-response"] ?? p.token ?? "");
-    const ok = await turnstileOk(c.env.TURNSTILE_SECRET_KEY, token, c.req.header("CF-Connecting-IP"));
+    const ok = await turnstileOk(c.env, c.env.TURNSTILE_SECRET_KEY, token, c.req.header("CF-Connecting-IP"));
     if (!ok) return c.json({ ok: false, error: "failed_captcha" }, 400);
   }
 
