@@ -38,3 +38,6 @@ _inbox/
 .wrangler/
 
 .impeccable/hook.cache.json
+
+# Private application packets (contain home address)
+applications/
