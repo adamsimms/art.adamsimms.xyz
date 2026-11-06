@@ -488,6 +488,147 @@ main {
 	}
 }
 
+/* Header height plus breathing room, for pages where the header floats */
+:root {
+	--site-header-clearance: 5.75rem;
+}
+
+@media (max-width: 40rem) {
+	:root {
+		--site-header-clearance: 4.5rem;
+	}
+}
+
+/* Phone menu: at phone widths (same 40rem breakpoint as the rest of the
+   site) the nav collapses to AS (left) and MENU (right). */
+.site-menu-toggle {
+	display: none;
+}
+
+.site-menu[hidden] {
+	display: none;
+}
+
+html[data-site-menu-open] {
+	overflow: hidden;
+}
+
+@media (max-width: 40rem) {
+	.site-nav {
+		display: none;
+	}
+
+	.site-title {
+		position: relative;
+		z-index: 1;
+	}
+
+	.site-menu-toggle {
+		position: relative;
+		z-index: 1;
+		display: inline-grid;
+		grid-template-areas: 'label';
+		justify-items: end;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: none;
+		font-family: var(--font-display);
+		font-size: var(--type-nav);
+		font-weight: 600;
+		font-optical-sizing: auto;
+		line-height: inherit;
+		letter-spacing: var(--tracking-nav);
+		text-transform: uppercase;
+		color: inherit;
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	/* Expand tap target without shifting layout */
+	.site-menu-toggle::before {
+		content: '';
+		position: absolute;
+		inset: -0.7rem -0.45rem;
+	}
+
+	.site-menu-toggle:focus-visible {
+		outline: 2px solid var(--hover);
+		outline-offset: 0.35rem;
+	}
+
+	.site-menu-toggle__open,
+	.site-menu-toggle__close {
+		grid-area: label;
+	}
+
+	.site-menu-toggle__close,
+	.site-menu-toggle[aria-expanded='true'] .site-menu-toggle__open {
+		visibility: hidden;
+	}
+
+	.site-menu-toggle[aria-expanded='true'] .site-menu-toggle__close {
+		visibility: visible;
+	}
+
+	.site-menu {
+		position: fixed;
+		inset: 0;
+		z-index: 0;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 5rem 1.25rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem));
+		background: #fff;
+		color: #1a1a1a;
+	}
+
+	/* Menu is always white: header text goes dark while it is open,
+	   including over the home hero and in dark mode */
+	body .site-header[data-menu-open],
+	body .site-header[data-menu-open] a {
+		color: #1a1a1a;
+	}
+
+	.site-menu__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		text-align: center;
+	}
+
+	.site-menu__list--pages {
+		margin-top: 2.5rem;
+	}
+
+	.site-menu a {
+		position: relative;
+		font-family: var(--font-display);
+		font-size: var(--type-nav);
+		font-weight: 600;
+		font-optical-sizing: auto;
+		letter-spacing: var(--tracking-nav);
+		text-decoration: none;
+		text-transform: uppercase;
+		color: inherit;
+	}
+
+	.site-menu a::before {
+		content: '';
+		position: absolute;
+		inset: -0.45rem -0.45rem;
+	}
+
+	.site-menu a[aria-current='page'] {
+		text-decoration-line: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.35em;
+	}
+}
+
 .site-footer {
 	display: flex;
 	flex-direction: column;
@@ -1295,7 +1436,9 @@ body:has(.work-hover) {
 	box-sizing: border-box;
 	height: 100%;
 	min-height: 0;
-	padding: 2rem 1.5rem;
+	/* The header floats over this page: keep the list clear of it on short
+	   screens. Equal top and bottom padding keeps the list centred. */
+	padding: var(--site-header-clearance) 1.5rem;
 	overflow-x: visible;
 	overflow-y: auto;
 }

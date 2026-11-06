@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { isHiddenWorkSlug } from '../lib/seo';
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const work = await getCollection('work');
@@ -10,9 +11,20 @@ const links = [
 	{ href: '/about', label: 'About', current: current === '/about' },
 	{ href: '/cv', label: 'CV', current: current === '/cv' },
 ];
+
+// Small-screen menu: every work (same order as /works), then About and CV
+const menuWorks = work
+	.filter((entry) => !isHiddenWorkSlug(entry.data.slug))
+	.sort((a, b) => b.data.order - a.data.order)
+	.map((entry) => ({
+		href: `/${entry.data.slug}`,
+		label: entry.data.title,
+		current: current === `/${entry.data.slug}`,
+	}));
+const menuPages = links.filter((link) => link.href !== '/works');
 ---
 
-<header class="site-header" transition:name="site-header">
+<header class="site-header" transition:name="site-header" data-site-header>
 	<a class="site-title" href="/" aria-label="Adam Simms">
 		<span class="site-title__mark" aria-hidden="true">
 			<span class="site-title__mono">AS</span>
@@ -33,4 +45,85 @@ const links = [
 			}
 		</ul>
 	</nav>
+
+	<button
+		class="site-menu-toggle"
+		type="button"
+		aria-expanded="false"
+		aria-controls="site-menu"
+		data-site-menu-toggle
+	>
+		<span class="site-menu-toggle__open">Menu</span>
+		<span class="site-menu-toggle__close" aria-hidden="true">Close</span>
+	</button>
+
+	<nav class="site-menu" id="site-menu" aria-label="Menu" hidden data-site-menu>
+		<ul class="site-menu__list">
+			{
+				menuWorks.map((link) => (
+					<li>
+						<a href={link.href} aria-current={link.current ? 'page' : undefined}>
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<ul class="site-menu__list site-menu__list--pages">
+			{
+				menuPages.map((link) => (
+					<li>
+						<a href={link.href} aria-current={link.current ? 'page' : undefined}>
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
 </header>
+
+<script>
+	// Small-screen menu. The header is re-rendered on every ClientRouter
+	// navigation, so bind on each page load and tear down before the swap.
+	const SMALL = '(max-width: 40rem)';
+
+	document.addEventListener('astro:page-load', () => {
+		const header = document.querySelector('[data-site-header]');
+		const toggle = document.querySelector('[data-site-menu-toggle]');
+		const menu = document.querySelector('[data-site-menu]');
+		if (!(header instanceof HTMLElement)) return;
+		if (!(toggle instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+		const controller = new AbortController();
+		const { signal } = controller;
+		const small = window.matchMedia(SMALL);
+
+		const setOpen = (open: boolean) => {
+			toggle.setAttribute('aria-expanded', String(open));
+			header.toggleAttribute('data-menu-open', open);
+			document.documentElement.toggleAttribute('data-site-menu-open', open);
+			menu.hidden = !open;
+		};
+
+		toggle.addEventListener('click', () => {
+			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+		}, { signal });
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key !== 'Escape' || toggle.getAttribute('aria-expanded') !== 'true') return;
+			setOpen(false);
+			toggle.focus();
+		}, { signal });
+
+		// Rotating or resizing out of the small layout closes the menu
+		small.addEventListener('change', (event) => {
+			if (!event.matches) setOpen(false);
+		}, { signal });
+
+		document.addEventListener('astro:before-swap', () => {
+			document.documentElement.removeAttribute('data-site-menu-open');
+			controller.abort();
+		}, { signal, once: true });
+	});
+</script>
